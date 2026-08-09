@@ -105,6 +105,14 @@ Prima dell'installazione viene creata una copia in `portable-data/backups`; sono
 
 A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
 
+Quando trova una nuova versione, l'avviso contiene **Aggiorna ora**: l'app crea il backup, scarica e verifica il pacchetto, installa la release, riavvia il server locale e ricarica automaticamente la pagina. I file esterni con doppio clic restano disponibili come procedura alternativa.
+
+## Utenti e percorsi personali
+
+La gestione degli account si trova in **Impostazioni > Utenti e statistiche**. Da questa sezione l'amministratore crea, disattiva e riattiva gli utenti e vede un riepilogo delle attività.
+
+Ogni account conserva in modo indipendente domande svolte, stato “La so / Da ripetere / Non la so”, quiz non risposti, rotazioni, punteggi e storico delle simulazioni. Quando un utente accede vede soltanto il proprio percorso e le proprie statistiche.
+
 Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il file **Aggiorna** oppure fai prima un backup dall'app.
 
 ## Installazione come app

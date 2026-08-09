@@ -13,6 +13,13 @@ impostazioni e rotazione dei quiz vengono quindi conservati.
 
 L'app controlla automaticamente le nuove versioni a ogni accesso. Puoi anche
 usare il pulsante Aggiornamenti dopo il login per controllare manualmente.
+Quando trova una nuova release, premi Aggiorna ora: crea il backup, installa,
+riavvia l'app e ricarica la pagina automaticamente.
+
+GESTIONE UTENTI
+Gli account si gestiscono in Impostazioni > Utenti e statistiche.
+Ogni utente mantiene separati percorso di studio, progressi, punteggi,
+rotazione delle domande e storico delle simulazioni.
 
 Se Python 3 non è presente, l'avviatore chiede conferma e installa la versione ufficiale.
 Su macOS viene richiesta la password dell'amministratore.

@@ -4,8 +4,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import os
 import shutil
+import subprocess
 import sys
 import tempfile
 import time
@@ -104,7 +107,7 @@ def install_package(package_root: Path) -> None:
                     raise
 
 
-def latest_release() -> tuple[str, str]:
+def latest_release() -> tuple[str, str, str]:
     with urllib.request.urlopen(request(LATEST_API), timeout=30) as response:
         release = json.load(response)
     tag = str(release.get("tag_name") or "").strip()
@@ -114,28 +117,47 @@ def latest_release() -> tuple[str, str]:
     )
     if not tag or not asset or not asset.get("browser_download_url"):
         raise RuntimeError("La release più recente non contiene il pacchetto portatile.")
-    return tag, str(asset["browser_download_url"])
+    return tag, str(asset["browser_download_url"]), str(asset.get("digest") or "")
 
 
-def download(url: str, destination: Path) -> None:
+def download(url: str, destination: Path, expected_digest: str = "") -> None:
     print("Scaricamento dell'aggiornamento in corso…")
     with urllib.request.urlopen(request(url), timeout=120) as response, destination.open("wb") as output:
         shutil.copyfileobj(response, output)
+    if expected_digest.startswith("sha256:"):
+        actual = hashlib.sha256(destination.read_bytes()).hexdigest()
+        expected = expected_digest.split(":", 1)[1].lower()
+        if actual.lower() != expected:
+            raise RuntimeError("La verifica di integrità del pacchetto non è riuscita.")
 
 
-def update(package: Path | None, force: bool) -> None:
+def restart_local_app() -> None:
+    environment = os.environ.copy()
+    environment["QUIZ_NO_BROWSER"] = "1"
+    subprocess.Popen(
+        [sys.executable, str(ROOT / "portable_server.py")],
+        cwd=str(ROOT),
+        env=environment,
+    )
+    print("App riavviata. La pagina aperta si ricaricherà automaticamente.")
+
+
+def update(package: Path | None, force: bool, no_stop: bool, restart: bool) -> None:
     installed = current_version()
     if package is None:
-        tag, url = latest_release()
+        tag, url, digest = latest_release()
         latest = tag.removeprefix("v")
         print(f"Versione installata: {installed} · ultima disponibile: {latest}")
         if installed == latest and not force:
             print("Quiz 400 VVF 2026 è già aggiornato.")
+            if restart:
+                restart_local_app()
             return
     else:
-        tag, url = "pacchetto locale", ""
+        tag, url, digest = "pacchetto locale", "", ""
 
-    stop_local_app()
+    if not no_stop:
+        stop_local_app()
     backup_state()
     DATA_DIR.mkdir(exist_ok=True)
 
@@ -143,7 +165,7 @@ def update(package: Path | None, force: bool) -> None:
         temp_dir = Path(temporary)
         archive = temp_dir / ASSET_NAME
         if package is None:
-            download(url, archive)
+            download(url, archive, digest)
         else:
             shutil.copy2(package.resolve(), archive)
         package_root = safe_extract(archive, temp_dir / "estratto")
@@ -158,16 +180,21 @@ def update(package: Path | None, force: bool) -> None:
         json.dumps(info, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     print("Aggiornamento completato. Utenti, progressi e statistiche sono stati conservati.")
-    print("Ora puoi riavviare l'app con il normale file di avvio.")
+    if restart:
+        restart_local_app()
+    else:
+        print("Ora puoi riavviare l'app con il normale file di avvio.")
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--package", type=Path, help="Pacchetto ZIP locale, usato per verifica o ripristino")
     parser.add_argument("--force", action="store_true", help="Reinstalla anche se la versione è già aggiornata")
+    parser.add_argument("--no-stop", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--restart", action="store_true", help=argparse.SUPPRESS)
     args = parser.parse_args()
     try:
-        update(args.package, args.force)
+        update(args.package, args.force, args.no_stop, args.restart)
         return 0
     except (OSError, RuntimeError, urllib.error.URLError, zipfile.BadZipFile) as error:
         print(f"Aggiornamento non riuscito: {error}", file=sys.stderr)

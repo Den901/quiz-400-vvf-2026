@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 import json
 import os
+import subprocess
+import sys
 import threading
+import time
 import urllib.error
 import urllib.request
 import webbrowser
@@ -86,6 +89,55 @@ class Handler(SimpleHTTPRequestHandler):
         super().do_GET()
 
     def do_POST(self):
+        if self.path.split("?", 1)[0] == "/api/update-start":
+            try:
+                status = update_status()
+                if not status["updateAvailable"]:
+                    payload = json.dumps(
+                        {"status": "current", **status}, ensure_ascii=False
+                    ).encode("utf-8")
+                    self.send_response(409)
+                    self.send_header("Content-Type", "application/json; charset=utf-8")
+                    self.send_header("Content-Length", str(len(payload)))
+                    self.end_headers()
+                    self.wfile.write(payload)
+                    return
+                payload = json.dumps(
+                    {"status": "starting", **status}, ensure_ascii=False
+                ).encode("utf-8")
+                self.send_response(202)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Cache-Control", "no-store")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+                self.wfile.flush()
+
+                def launch_updater():
+                    time.sleep(0.4)
+                    self.server.shutdown()
+                    command = [
+                        sys.executable,
+                        str(ROOT / "update_quiz.py"),
+                        "--no-stop",
+                        "--restart",
+                    ]
+                    options = {"cwd": str(ROOT)}
+                    if os.name == "nt":
+                        options["creationflags"] = subprocess.CREATE_NEW_CONSOLE
+                    else:
+                        options["start_new_session"] = True
+                    subprocess.Popen(command, **options)
+
+                threading.Thread(target=launch_updater, daemon=False).start()
+            except (OSError, ValueError, urllib.error.URLError, json.JSONDecodeError) as error:
+                payload = json.dumps({"error": str(error)}, ensure_ascii=False).encode("utf-8")
+                self.send_response(503)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(payload)))
+                self.end_headers()
+                self.wfile.write(payload)
+            return
         if self.path.split("?", 1)[0] == "/api/shutdown":
             self.send_response(204)
             self.end_headers()
@@ -111,6 +163,7 @@ class Handler(SimpleHTTPRequestHandler):
 if __name__ == "__main__":
     os.chdir(ROOT)
     server = ThreadingHTTPServer((HOST, PORT), Handler)
-    threading.Timer(0.8, lambda: webbrowser.open(f"http://{HOST}:{PORT}/")).start()
+    if not os.environ.get("QUIZ_NO_BROWSER"):
+        threading.Timer(0.8, lambda: webbrowser.open(f"http://{HOST}:{PORT}/")).start()
     print("Quiz 400 VVF 2026 avviato. Lascia aperta questa finestra; Ctrl+C per chiudere.")
     server.serve_forever()

@@ -1,4 +1,4 @@
-const CACHE='quiz400vvf-v18';
+const CACHE='quiz400vvf-v19';
 const ASSETS=['./','./index.html','./styles.css','./styles-extra.css','./styles-guided.css','./styles-official.css','./app.js','./data.js','./quiz-dataset.json','./manifest.webmanifest','./logo-vvf.png'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(async c=>{await c.addAll(ASSETS);try{const list=await fetch('./quiz-images.json').then(r=>r.json());await c.addAll(['./quiz-images.json',...list])}catch{}}).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

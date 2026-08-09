@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.2 - 2026-08-09
+
+- Aggiunto il pulsante `Aggiorna ora` direttamente nell'avviso dell'app.
+- L'aggiornamento crea il backup, installa la release, riavvia il server locale e ricarica automaticamente la pagina.
+- Il controllo aggiornamenti è ora visibile a ogni login, anche quando l'app è già aggiornata o la rete non è disponibile.
+- Aggiunta la verifica SHA-256 del pacchetto scaricato da GitHub.
+- Spostata la gestione degli utenti dentro Impostazioni.
+- Ogni account mostra un riepilogo del proprio percorso separato: domande svolte, conosciute e simulazioni.
+- Confermata la separazione per utente di progressi, statistiche, storico, rotazioni e classificazione dei quesiti.
+
 ## 1.1.1 - 2026-08-09
 
 - Le nuove prove sono mescolate usando data e ora correnti, utente e contatore progressivo.
