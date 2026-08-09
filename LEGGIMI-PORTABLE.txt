@@ -3,6 +3,17 @@ QUIZ 400 VVF 2026 - VERSIONE PORTATILE
 Windows: doppio clic su Avvia-Quiz-400-VVF-2026-Windows.bat
 macOS: doppio clic su Avvia-Quiz-400-VVF-2026-macOS.command
 
+AGGIORNAMENTI SENZA PERDERE I DATI
+Windows: doppio clic su Aggiorna-Quiz-400-VVF-2026-Windows.bat
+macOS: doppio clic su Aggiorna-Quiz-400-VVF-2026-macOS.command
+
+L'aggiornamento scarica l'ultima release GitHub, crea un backup automatico e
+non sostituisce mai la cartella portable-data. Utenti, progressi, statistiche,
+impostazioni e rotazione dei quiz vengono quindi conservati.
+
+L'app controlla automaticamente le nuove versioni a ogni accesso. Puoi anche
+usare il pulsante Aggiornamenti dopo il login per controllare manualmente.
+
 Se Python 3 non è presente, l'avviatore chiede conferma e installa la versione ufficiale.
 Su macOS viene richiesta la password dell'amministratore.
 
@@ -11,6 +22,10 @@ Per terminare usa il pulsante Chiudi app nell'intestazione.
 
 I dati, comprese le impostazioni delle prove da 40, vengono salvati in
 portable-data/fuocoquiz-state.json. Per trasferire tutto copia l'intera cartella.
+
+Le simulazioni e le prove guidate usano data e ora per mescolare i quesiti.
+La rotazione salvata evita di riproporre le stesse domande fino al completamento
+del ciclo della materia, anche dopo la chiusura e il riavvio dell'app.
 
 Su macOS, al primo avvio potrebbe essere necessario fare clic destro sul file .command,
 scegliere Apri e confermare. Se richiesto, eseguire nel Terminale:

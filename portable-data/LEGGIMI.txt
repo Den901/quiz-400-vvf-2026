@@ -1,3 +1,5 @@
 In questa cartella Quiz 400 VVF 2026 crea automaticamente fuocoquiz-state.json.
 Il file contiene utenti, progressi, statistiche, impostazioni e dataset importati.
+La sottocartella backups contiene le copie automatiche create prima degli aggiornamenti.
+Il programma Aggiorna non sostituisce né elimina questa cartella.
 Per trasferire tutto su un altro computer, copia l'intera cartella dell'app.

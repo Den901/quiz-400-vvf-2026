@@ -4,6 +4,7 @@ tmp/
 __pycache__/
 *.pyc
 portable-data/*.json
+portable-data/backups/
 Guida-FuocoQuiz.pdf
 Avvia-FuocoQuiz-Windows.bat
 Avvia-FuocoQuiz-macOS.command

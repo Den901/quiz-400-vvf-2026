@@ -54,6 +54,8 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 ### Simulazione a tempo
 
 - 40 domande in 40 minuti;
+- estrazione basata su data e ora correnti, diversa a ogni nuova prova;
+- rotazione persistente che evita di riproporre le domande già estratte finché la materia non completa il proprio ciclo;
 - +1 punto per ogni risposta corretta;
 - -0,33 punti per ogni risposta errata;
 - 0 punti per ogni risposta non data;
@@ -67,6 +69,8 @@ Le spiegazioni vengono presentate con paragrafi, elenchi, accenti e simboli ripu
 ## Progressi e ripasso
 
 La pagina Progressi mostra quante domande sono state svolte e la situazione per materia. I filtri permettono di esercitarsi solo sulle domande da ripetere, non conosciute o mai risposte. Lo storico conserva i risultati delle ultime simulazioni.
+
+La rotazione dei quesiti viene salvata nel profilo. Se chiudi l'app o il portale durante una prova, la successiva estrazione prosegue con domande nuove. Il percorso completo per argomento resta invece intenzionalmente nell'ordine originale.
 
 ## Dove vengono salvati i dati
 
@@ -87,6 +91,21 @@ Un amministratore può aprire **Impostazioni prove > Backup e ripristino**:
 - dopo il ripristino l'app viene ricaricata automaticamente.
 
 Conserva i backup in un luogo protetto: pur non contenendo password in chiaro, includono account e dati di studio.
+
+## Aggiornare senza perdere i dati
+
+Chiudi la prova in corso, quindi usa il file adatto al computer:
+
+- Windows: doppio clic su `Aggiorna-Quiz-400-VVF-2026-Windows.bat`;
+- macOS: doppio clic su `Aggiorna-Quiz-400-VVF-2026-macOS.command`.
+
+Il programma controlla l'ultima release pubblicata su GitHub, arresta in sicurezza l'eventuale app locale ancora aperta, crea un backup automatico e installa i nuovi file. La cartella `portable-data` viene esclusa dall'aggiornamento: account, password sotto forma di hash, progressi, statistiche, rotazione dei quiz e impostazioni restano conservati.
+
+Prima dell'installazione viene creata una copia in `portable-data/backups`; sono mantenuti automaticamente gli ultimi dieci backup. Al termine riavvia l'app con il normale file di avvio.
+
+A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
+
+Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il file **Aggiorna** oppure fai prima un backup dall'app.
 
 ## Installazione come app
 

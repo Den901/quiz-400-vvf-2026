@@ -2,6 +2,8 @@
 import json
 import os
 import threading
+import urllib.error
+import urllib.request
 import webbrowser
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
@@ -9,7 +11,45 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 DATA_DIR = ROOT / "portable-data"
 STATE_FILE = DATA_DIR / "fuocoquiz-state.json"
+VERSION_FILE = ROOT / "version.json"
+LATEST_RELEASE_API = "https://api.github.com/repos/Den901/quiz-400-vvf-2026/releases/latest"
 HOST, PORT = "127.0.0.1", 4190
+
+
+def version_parts(value):
+    try:
+        return tuple(int(part) for part in str(value).lstrip("v").split("."))
+    except ValueError:
+        return (0,)
+
+
+def installed_version():
+    try:
+        return str(json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"])
+    except (FileNotFoundError, KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return "0.0.0"
+
+
+def update_status():
+    request = urllib.request.Request(
+        LATEST_RELEASE_API,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "Quiz-400-VVF-2026",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+    with urllib.request.urlopen(request, timeout=12) as response:
+        release = json.load(response)
+    current = installed_version()
+    latest = str(release.get("tag_name") or "0.0.0").lstrip("v")
+    return {
+        "currentVersion": current,
+        "latestVersion": latest,
+        "updateAvailable": version_parts(latest) > version_parts(current),
+        "releaseUrl": release.get("html_url", ""),
+        "publishedAt": release.get("published_at", ""),
+    }
 
 class Handler(SimpleHTTPRequestHandler):
     def translate_path(self, path):
@@ -18,6 +58,20 @@ class Handler(SimpleHTTPRequestHandler):
         return str(ROOT / relative)
 
     def do_GET(self):
+        if self.path.split("?", 1)[0] == "/api/update-check":
+            try:
+                payload = json.dumps(update_status(), ensure_ascii=False).encode("utf-8")
+                status = 200
+            except (OSError, ValueError, urllib.error.URLError, json.JSONDecodeError) as error:
+                payload = json.dumps({"error": str(error)}, ensure_ascii=False).encode("utf-8")
+                status = 503
+            self.send_response(status)
+            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("Content-Length", str(len(payload)))
+            self.end_headers()
+            self.wfile.write(payload)
+            return
         if self.path.split("?", 1)[0] == "/api/state":
             try:
                 payload = STATE_FILE.read_bytes()

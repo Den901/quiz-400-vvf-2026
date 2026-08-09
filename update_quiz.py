@@ -1,0 +1,179 @@
+#!/usr/bin/env python3
+"""Aggiorna Quiz 400 VVF 2026 preservando tutti i dati portatili."""
+
+from __future__ import annotations
+
+import argparse
+import json
+import shutil
+import sys
+import tempfile
+import time
+import urllib.error
+import urllib.request
+import zipfile
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent
+DATA_DIR = ROOT / "portable-data"
+STATE_FILE = DATA_DIR / "fuocoquiz-state.json"
+BACKUP_DIR = DATA_DIR / "backups"
+VERSION_FILE = ROOT / "version.json"
+REPOSITORY = "Den901/quiz-400-vvf-2026"
+ASSET_NAME = "Quiz-400-VVF-2026-Portable.zip"
+LATEST_API = f"https://api.github.com/repos/{REPOSITORY}/releases/latest"
+PROTECTED_NAMES = {"portable-data", ".git", "outputs", "work", "tmp"}
+
+
+def request(url: str) -> urllib.request.Request:
+    return urllib.request.Request(
+        url,
+        headers={
+            "Accept": "application/vnd.github+json",
+            "User-Agent": "Quiz-400-VVF-2026-Updater",
+            "X-GitHub-Api-Version": "2022-11-28",
+        },
+    )
+
+
+def current_version() -> str:
+    try:
+        return str(json.loads(VERSION_FILE.read_text(encoding="utf-8"))["version"])
+    except (FileNotFoundError, KeyError, TypeError, ValueError, json.JSONDecodeError):
+        return "sconosciuta"
+
+
+def stop_local_app() -> None:
+    endpoint = "http://127.0.0.1:4190/api/shutdown"
+    try:
+        urllib.request.urlopen(
+            urllib.request.Request(endpoint, method="POST"), timeout=3
+        ).read()
+        print("App locale arrestata in modo sicuro.")
+        time.sleep(1)
+    except (urllib.error.URLError, TimeoutError):
+        pass
+
+
+def backup_state() -> Path | None:
+    if not STATE_FILE.exists():
+        print("Nessun archivio dati esistente: non è necessario creare il backup.")
+        return None
+    BACKUP_DIR.mkdir(parents=True, exist_ok=True)
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    destination = BACKUP_DIR / f"fuocoquiz-state-pre-update-{stamp}.json"
+    shutil.copy2(STATE_FILE, destination)
+    old_backups = sorted(BACKUP_DIR.glob("fuocoquiz-state-pre-update-*.json"))
+    for old in old_backups[:-10]:
+        old.unlink(missing_ok=True)
+    print(f"Backup automatico creato: {destination.relative_to(ROOT)}")
+    return destination
+
+
+def safe_extract(archive: Path, destination: Path) -> Path:
+    destination_resolved = destination.resolve()
+    with zipfile.ZipFile(archive) as package:
+        for member in package.infolist():
+            target = (destination / member.filename).resolve()
+            if target != destination_resolved and destination_resolved not in target.parents:
+                raise RuntimeError("Il pacchetto contiene un percorso non sicuro.")
+        package.extractall(destination)
+    children = [item for item in destination.iterdir() if item.name != "__MACOSX"]
+    if len(children) == 1 and children[0].is_dir():
+        return children[0]
+    return destination
+
+
+def install_package(package_root: Path) -> None:
+    if not (package_root / "app.js").exists() or not (package_root / "portable_server.py").exists():
+        raise RuntimeError("Il pacchetto scaricato non contiene un'app valida.")
+    for source in package_root.iterdir():
+        if source.name in PROTECTED_NAMES:
+            continue
+        destination = ROOT / source.name
+        if source.is_dir():
+            shutil.copytree(source, destination, dirs_exist_ok=True)
+        else:
+            try:
+                shutil.copy2(source, destination)
+            except PermissionError:
+                if source.name.startswith("Aggiorna-Quiz-400-VVF-2026-"):
+                    print(f"File di avvio in uso, conservato: {source.name}")
+                else:
+                    raise
+
+
+def latest_release() -> tuple[str, str]:
+    with urllib.request.urlopen(request(LATEST_API), timeout=30) as response:
+        release = json.load(response)
+    tag = str(release.get("tag_name") or "").strip()
+    asset = next(
+        (item for item in release.get("assets", []) if item.get("name") == ASSET_NAME),
+        None,
+    )
+    if not tag or not asset or not asset.get("browser_download_url"):
+        raise RuntimeError("La release più recente non contiene il pacchetto portatile.")
+    return tag, str(asset["browser_download_url"])
+
+
+def download(url: str, destination: Path) -> None:
+    print("Scaricamento dell'aggiornamento in corso…")
+    with urllib.request.urlopen(request(url), timeout=120) as response, destination.open("wb") as output:
+        shutil.copyfileobj(response, output)
+
+
+def update(package: Path | None, force: bool) -> None:
+    installed = current_version()
+    if package is None:
+        tag, url = latest_release()
+        latest = tag.removeprefix("v")
+        print(f"Versione installata: {installed} · ultima disponibile: {latest}")
+        if installed == latest and not force:
+            print("Quiz 400 VVF 2026 è già aggiornato.")
+            return
+    else:
+        tag, url = "pacchetto locale", ""
+
+    stop_local_app()
+    backup_state()
+    DATA_DIR.mkdir(exist_ok=True)
+
+    with tempfile.TemporaryDirectory(prefix="quiz400vvf-update-") as temporary:
+        temp_dir = Path(temporary)
+        archive = temp_dir / ASSET_NAME
+        if package is None:
+            download(url, archive)
+        else:
+            shutil.copy2(package.resolve(), archive)
+        package_root = safe_extract(archive, temp_dir / "estratto")
+        install_package(package_root)
+
+    info = {
+        "updatedAt": datetime.now().astimezone().isoformat(),
+        "release": tag,
+        "previousVersion": installed,
+    }
+    (DATA_DIR / "ultimo-aggiornamento.json").write_text(
+        json.dumps(info, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print("Aggiornamento completato. Utenti, progressi e statistiche sono stati conservati.")
+    print("Ora puoi riavviare l'app con il normale file di avvio.")
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--package", type=Path, help="Pacchetto ZIP locale, usato per verifica o ripristino")
+    parser.add_argument("--force", action="store_true", help="Reinstalla anche se la versione è già aggiornata")
+    args = parser.parse_args()
+    try:
+        update(args.package, args.force)
+        return 0
+    except (OSError, RuntimeError, urllib.error.URLError, zipfile.BadZipFile) as error:
+        print(f"Aggiornamento non riuscito: {error}", file=sys.stderr)
+        print("I dati originali non sono stati eliminati.", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
