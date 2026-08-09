@@ -1,0 +1,10 @@
+outputs/
+work/
+tmp/
+__pycache__/
+*.pyc
+portable-data/*.json
+Guida-FuocoQuiz.pdf
+Avvia-FuocoQuiz-Windows.bat
+Avvia-FuocoQuiz-macOS.command
+icon.svg

@@ -1,0 +1,3 @@
+In questa cartella Quiz 400 VVF 2026 crea automaticamente fuocoquiz-state.json.
+Il file contiene utenti, progressi, statistiche, impostazioni e dataset importati.
+Per trasferire tutto su un altro computer, copia l'intera cartella dell'app.

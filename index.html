@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#b42318" />
+  <meta name="description" content="Quiz 400 VVF 2026 - PWA offline per esercitarsi ai quiz Vigili del Fuoco" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="logo-vvf.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles-extra.css" />
+  <link rel="stylesheet" href="styles-guided.css" />
+  <link rel="stylesheet" href="styles-official.css" />
+  <title>Quiz 400 VVF 2026</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Quiz 400 VVF 2026, home"><span class="brand-logo"><img src="logo-vvf.png" alt=""></span><span>Quiz 400 VVF 2026</span></a>
+    <button id="installBtn" class="ghost hidden">Installa</button>
+  </header>
+  <main id="app" tabindex="-1"></main>
+  <nav class="bottom-nav" aria-label="Navigazione principale">
+    <a href="#home" data-route="home"><span>⌂</span>Home</a>
+    <a href="#categories" data-route="categories"><span>▦</span>Quiz</a>
+    <a href="#stats" data-route="stats"><span>↗</span>Statistiche</a>
+    <a href="#simulation" data-route="simulation"><span>◷</span>Simulazione</a>
+    <a href="#data" data-route="data"><span>⇅</span>Dati</a>
+  </nav>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

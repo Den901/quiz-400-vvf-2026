@@ -1,0 +1,6 @@
+{
+  "name": "fuoco-quiz-pwa",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": { "start": "npx --yes serve . -l 4173" }
+}

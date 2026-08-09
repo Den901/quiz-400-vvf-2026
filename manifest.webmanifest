@@ -1,0 +1,10 @@
+{
+  "name": "Quiz 400 VVF 2026",
+  "short_name": "Quiz 400 VVF",
+  "description": "Quiz Vigili del Fuoco organizzati per materia, con correzione e statistiche.",
+  "start_url": "./#home",
+  "display": "standalone",
+  "background_color": "#f7f4ef",
+  "theme_color": "#b42318",
+  "icons": [{ "src": "logo-vvf.png", "sizes": "1920x1280", "type": "image/png", "purpose": "any" }]
+}

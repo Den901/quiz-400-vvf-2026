@@ -1,0 +1,17 @@
+QUIZ 400 VVF 2026 - VERSIONE PORTATILE
+
+Windows: doppio clic su Avvia-Quiz-400-VVF-2026-Windows.bat
+macOS: doppio clic su Avvia-Quiz-400-VVF-2026-macOS.command
+
+Se Python 3 non è presente, l'avviatore chiede conferma e installa la versione ufficiale.
+Su macOS viene richiesta la password dell'amministratore.
+
+L'app apre il browser all'indirizzo http://127.0.0.1:4190/.
+Per terminare usa il pulsante Chiudi app nell'intestazione.
+
+I dati, comprese le impostazioni delle prove da 40, vengono salvati in
+portable-data/fuocoquiz-state.json. Per trasferire tutto copia l'intera cartella.
+
+Su macOS, al primo avvio potrebbe essere necessario fare clic destro sul file .command,
+scegliere Apri e confermare. Se richiesto, eseguire nel Terminale:
+chmod +x Avvia-Quiz-400-VVF-2026-macOS.command
