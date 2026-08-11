@@ -47,7 +47,9 @@ Per alcuni quesiti di Insiemi la fonte non fornisce una spiegazione testuale: ve
 
 ### Configurazione delle prove da 40
 
-Un amministratore può aprire **Amministrazione > Impostazioni prove da 40** oppure usare **Modifica composizione** nella pagina Simulazione. Per ogni materia può impostare da 0 a 40 domande: inserendo 0 la materia viene esclusa. Il totale deve restare esattamente 40. La configurazione viene applicata sia alla prova guidata sia alla simulazione a tempo e viene salvata nella cartella portatile.
+Un amministratore può definire nelle **Impostazioni** la composizione predefinita. Per ogni materia può impostare da 0 a 40 domande: inserendo 0 la materia viene esclusa. Il totale deve restare esattamente 40.
+
+Nella pagina **Simulazione**, ogni utente può inoltre salvare più configurazioni personali con un nome, per esempio “Prova ufficiale” o “Ripasso logica”. Una configurazione può essere richiamata, aggiornata o eliminata senza reinserire ogni volta le quantità. Le preferenze sono separate per account, si applicano sia alla prova guidata sia alla simulazione a tempo e sono incluse nei backup.
 
 Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Logica, 1 Insiemi, 6 Fisica, 6 Chimica, 4 Informatica e 4 Inglese.
 
@@ -63,9 +65,12 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 - -0,33 punti per ogni risposta errata;
 - 0 punti per ogni risposta non data;
 - navigazione avanti e indietro;
+- panoramica orizzontale con 40 pallini numerati: risposta data, non fatta e domanda attuale;
+- salto diretto a qualsiasi domanda toccando il relativo pallino;
+- conferma obbligatoria prima della consegna alla domanda 40, con conteggio delle risposte mancanti;
 - correzione completa alla fine, con risposte corrette, errate e non date.
 
-Anche la prova guidata da 40 domande usa lo stesso cronometro di 40 minuti e termina automaticamente allo scadere. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
+Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
 
 Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e spiegazione disponibile.
 
