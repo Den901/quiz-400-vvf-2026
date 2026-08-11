@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0 - 2026-08-11
+
+- Aggiunto il pacchetto Windows con `Quiz-400-VVF-2026.exe`, utilizzabile senza installare Python.
+- Aggiunto `Aggiorna-Quiz-400-VVF-2026.exe` per aggiornare con doppio clic e conservare tutti i dati.
+- Incorporato negli eseguibili il logo VVF fornito per il progetto.
+- L'aggiornamento avviato dalla versione EXE scarica automaticamente il pacchetto Windows corretto.
+- Impedito l'avvio simultaneo di più copie dell'EXE sulla stessa porta locale.
+- Adattato il server alla modalità grafica senza finestra del terminale.
+- Account, progressi, statistiche, configurazioni e backup continuano a essere salvati in `portable-data` accanto all'app.
+- Mantenuti gli avviatori portatili tradizionali per Windows e macOS.
+
 ## 1.1.6 - 2026-08-11
 
 - Aggiunto `Termina prova` dalla domanda 1 alla 39, sempre con conferma e conteggio delle risposte mancanti.

@@ -2,10 +2,18 @@
 
 Applicazione portatile e PWA installabile per esercitarsi sui quiz del concorso Vigili del Fuoco. Funziona su Windows e macOS, si adatta a telefono, tablet e desktop e conserva utenti, progressi, configurazione e statistiche nella cartella dell'app.
 
-## Avvio rapido
+## Windows: versione EXE senza Python
+
+Scarica `Quiz-400-VVF-2026-Windows-EXE.zip`, estrai completamente lo ZIP e fai doppio clic su `Quiz-400-VVF-2026.exe`. Non è necessario installare Python. L'eseguibile usa come icona il logo VVF fornito per il progetto.
+
+Tieni insieme tutti i file estratti: l'app salva account, progressi e statistiche nella cartella `portable-data` accanto all'EXE. Per l'aggiornamento manuale puoi fare doppio clic su `Aggiorna-Quiz-400-VVF-2026.exe`; gli aggiornamenti avviati dall'app selezionano automaticamente lo stesso pacchetto Windows e non sostituiscono i dati.
+
+Gli EXE non sono firmati con un certificato commerciale. Al primo avvio Windows SmartScreen può mostrare un avviso: verifica di aver scaricato il file dalla release GitHub del progetto, quindi scegli **Ulteriori informazioni > Esegui comunque**.
+
+## Avvio portatile Windows e macOS
 
 1. Estrai completamente il file ZIP in una cartella normale.
-2. Su Windows fai doppio clic su `Avvia-Quiz-400-VVF-2026-Windows.bat`.
+2. Su Windows, in alternativa all'EXE, fai doppio clic su `Avvia-Quiz-400-VVF-2026-Windows.bat`.
 3. Su macOS fai doppio clic su `Avvia-Quiz-400-VVF-2026-macOS.command`.
 4. Lascia aperta la finestra di avvio mentre usi l'app.
 
@@ -13,7 +21,7 @@ Per terminare correttamente usa il pulsante **Chiudi app** nell'intestazione: sp
 
 Quiz 400 VVF 2026 si apre automaticamente nel browser all'indirizzo locale `http://127.0.0.1:4190/`.
 
-Se Python 3 non è presente, l'avviatore chiede il consenso prima di scaricare e installare la versione ufficiale. Windows usa Winget quando disponibile; macOS richiede la password di amministratore.
+Questi avviatori tradizionali usano Python 3. Se non è presente, chiedono il consenso prima di scaricare e installare la versione ufficiale. Windows usa Winget quando disponibile; macOS richiede la password di amministratore. Il pacchetto EXE per Windows non richiede Python.
 
 ## Primo accesso
 
@@ -108,6 +116,7 @@ Conserva i backup in un luogo protetto: pur non contenendo password in chiaro, i
 
 Chiudi la prova in corso, quindi usa il file adatto al computer:
 
+- Windows EXE: doppio clic su `Aggiorna-Quiz-400-VVF-2026.exe`;
 - Windows: doppio clic su `Aggiorna-Quiz-400-VVF-2026-Windows.bat`;
 - macOS: doppio clic su `Aggiorna-Quiz-400-VVF-2026-macOS.command`.
 
@@ -125,7 +134,7 @@ La gestione degli account si trova in **Impostazioni > Utenti e statistiche**. D
 
 Ogni account conserva in modo indipendente domande svolte, stato “La so / Da ripetere / Non la so”, quiz non risposti, rotazioni, punteggi e storico delle simulazioni. Quando un utente accede vede soltanto il proprio percorso e le proprie statistiche.
 
-Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il file **Aggiorna** oppure fai prima un backup dall'app.
+Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il file **Aggiorna** adatto alla tua versione oppure fai prima un backup dall'app.
 
 ## Installazione come app
 
@@ -136,7 +145,7 @@ Dal browser puoi scegliere **Installa app** per aggiungere Quiz 400 VVF 2026 all
 - **La pagina non si apre:** verifica che la finestra di avvio sia ancora aperta e visita `http://127.0.0.1:4190/`.
 - **La porta è occupata:** chiudi eventuali altre copie dell'app e riavvia.
 - **macOS blocca il file:** fai clic destro su `Avvia-Quiz-400-VVF-2026-macOS.command`, scegli **Apri** e conferma. Se necessario esegui `chmod +x Avvia-Quiz-400-VVF-2026-macOS.command` nel Terminale.
-- **Windows mostra un avviso:** verifica che il pacchetto provenga dalla fonte da cui lo hai ricevuto, quindi scegli l'opzione per eseguirlo.
+- **Windows mostra un avviso SmartScreen:** gli EXE non sono firmati digitalmente; verifica che il pacchetto provenga dalla release GitHub del progetto, quindi scegli **Ulteriori informazioni > Esegui comunque**.
 - **I progressi non compaiono:** controlla di aver avviato la stessa cartella e di non aver eliminato `portable-data`.
 
 ## Dataset e uso autorizzato
@@ -148,3 +157,7 @@ Il pacchetto include 11.070 quesiti e 274 diagrammi. La sessione Chrome e le cre
 Questa versione è pensata per uso locale e portatile. Il server ascolta soltanto sul computer (`127.0.0.1`) e non espone l'app alla rete. Per un servizio pubblico multiutente servono un backend protetto, database, recupero password, backup centralizzati e informativa privacy.
 
 Consulta anche `Guida-Quiz-400-VVF-2026.pdf` per la guida completa impaginata.
+
+## Creazione degli EXE
+
+Per rigenerare entrambi gli eseguibili su Windows esegui `build-windows-exe.ps1`. Lo script crea un ambiente di compilazione separato, incorpora `logo-vvf.png` come icona e deposita i file in `outputs/windows-exe-dist`. Gli eseguibili compilati non vengono aggiunti al repository: sono distribuiti nel pacchetto Windows delle release.

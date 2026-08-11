@@ -1,9 +1,19 @@
 QUIZ 400 VVF 2026 - VERSIONE PORTATILE
 
+WINDOWS SENZA PYTHON
+Estrai completamente Quiz-400-VVF-2026-Windows-EXE.zip e fai doppio clic su
+Quiz-400-VVF-2026.exe. Per aggiornare manualmente usa
+Aggiorna-Quiz-400-VVF-2026.exe. Il logo VVF fornito è incorporato come icona.
+Gli EXE non sono firmati digitalmente: se SmartScreen compare, verifica che il
+file provenga dalla release GitHub del progetto, poi scegli Ulteriori informazioni
+e quindi Esegui comunque.
+
+VERSIONE TRADIZIONALE WINDOWS/MACOS
 Windows: doppio clic su Avvia-Quiz-400-VVF-2026-Windows.bat
 macOS: doppio clic su Avvia-Quiz-400-VVF-2026-macOS.command
 
 AGGIORNAMENTI SENZA PERDERE I DATI
+Windows EXE: doppio clic su Aggiorna-Quiz-400-VVF-2026.exe
 Windows: doppio clic su Aggiorna-Quiz-400-VVF-2026-Windows.bat
 macOS: doppio clic su Aggiorna-Quiz-400-VVF-2026-macOS.command
 
@@ -23,7 +33,8 @@ Gli account si gestiscono in Impostazioni > Utenti e statistiche.
 Ogni utente mantiene separati percorso di studio, progressi, punteggi,
 rotazione delle domande e storico delle simulazioni.
 
-Se Python 3 non è presente, l'avviatore chiede conferma e installa la versione ufficiale.
+Gli EXE Windows non richiedono Python. Gli avviatori .bat e .command continuano
+a usare Python 3 e, se non è presente, chiedono conferma prima di installarlo.
 Su macOS viene richiesta la password dell'amministratore.
 
 L'app apre il browser all'indirizzo http://127.0.0.1:4190/.
