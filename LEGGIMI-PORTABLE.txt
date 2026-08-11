@@ -34,6 +34,12 @@ Le simulazioni e le prove guidate usano data e ora per mescolare i quesiti.
 La rotazione salvata evita di riproporre le stesse domande fino al completamento
 del ciclo della materia, anche dopo la chiusura e il riavvio dell'app.
 
+CRONOMETRO DELLE PROVE DA 40
+La simulazione e la prova guidata da 40 mostrano un cronometro da 40:00.
+A 00:00 la prova termina automaticamente e le domande rimaste diventano
+non risposte. Se aggiorni la pagina, la prova riprende con il tempo realmente
+rimasto; il cronometro non riparte da capo.
+
 Su macOS, al primo avvio potrebbe essere necessario fare clic destro sul file .command,
 scegliere Apri e confermare. Se richiesto, eseguire nel Terminale:
 chmod +x Avvia-Quiz-400-VVF-2026-macOS.command
