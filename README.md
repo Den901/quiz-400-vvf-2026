@@ -56,7 +56,7 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 ### Simulazione a tempo
 
 - 40 domande in 40 minuti;
-- cronometro grande e sempre visibile, da 40:00 a 00:00;
+- cronometro compatto e allineato a destra, da 40:00 a 00:00, senza sovrapporsi ai contenuti durante lo scorrimento;
 - consegna automatica allo scadere, con i quesiti rimanenti conteggiati come non risposti;
 - ripresa della prova e del tempo effettivamente rimasto dopo un aggiornamento della pagina;
 - estrazione basata su data e ora correnti, diversa a ogni nuova prova;
@@ -70,7 +70,7 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 - conferma obbligatoria prima della consegna alla domanda 40, con conteggio delle risposte mancanti;
 - correzione completa alla fine, con risposte corrette, errate e non date.
 
-Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
+Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Il cronometro è allineato a destra, scorre normalmente senza coprire i contenuti e cambia colore con il tempo rimanente: verde, giallo, arancione e rosso lampeggiante negli ultimi 10 minuti. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
 
 Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e spiegazione disponibile.
 
@@ -113,9 +113,9 @@ Il programma controlla l'ultima release pubblicata su GitHub, arresta in sicurez
 
 Prima dell'installazione viene creata una copia in `portable-data/backups`; sono mantenuti automaticamente gli ultimi dieci backup. Al termine riavvia l'app con il normale file di avvio.
 
-A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
+A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il controllo viene ripetuto ogni 15 minuti mentre l'app resta aperta e quando torni alla finestra dopo averla lasciata in secondo piano. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
 
-Quando trova una nuova versione, l'avviso contiene **Aggiorna ora**: l'app crea il backup, scarica e verifica il pacchetto, installa la release, riavvia il server locale e ricarica automaticamente la pagina. I file esterni con doppio clic restano disponibili come procedura alternativa.
+Quando trova una nuova versione, compare un popup con **Aggiorna ora** e **Più tardi**. Scegliendo l'aggiornamento, l'app crea il backup, scarica e verifica il pacchetto, installa la release, riavvia il server locale e ricarica automaticamente la pagina. I file esterni con doppio clic restano disponibili come procedura alternativa.
 
 ## Utenti e percorsi personali
 
