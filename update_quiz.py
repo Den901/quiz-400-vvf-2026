@@ -18,15 +18,26 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+FROZEN = bool(getattr(sys, "frozen", False))
+ROOT = (
+    Path(sys.executable).resolve().parent
+    if FROZEN
+    else Path(__file__).resolve().parent
+)
 DATA_DIR = ROOT / "portable-data"
 STATE_FILE = DATA_DIR / "fuocoquiz-state.json"
 BACKUP_DIR = DATA_DIR / "backups"
 VERSION_FILE = ROOT / "version.json"
 REPOSITORY = "Den901/quiz-400-vvf-2026"
-ASSET_NAME = "Quiz-400-VVF-2026-Portable.zip"
+ASSET_NAME = (
+    "Quiz-400-VVF-2026-Windows-EXE.zip"
+    if FROZEN
+    else "Quiz-400-VVF-2026-Portable.zip"
+)
 LATEST_API = f"https://api.github.com/repos/{REPOSITORY}/releases/latest"
 PROTECTED_NAMES = {"portable-data", ".git", "outputs", "work", "tmp"}
+if FROZEN:
+    PROTECTED_NAMES.add(Path(sys.executable).name)
 
 
 def request(url: str) -> urllib.request.Request:
@@ -98,13 +109,17 @@ def install_package(package_root: Path) -> None:
         if source.is_dir():
             shutil.copytree(source, destination, dirs_exist_ok=True)
         else:
-            try:
-                shutil.copy2(source, destination)
-            except PermissionError:
-                if source.name.startswith("Aggiorna-Quiz-400-VVF-2026-"):
-                    print(f"File di avvio in uso, conservato: {source.name}")
-                else:
-                    raise
+            for attempt in range(20):
+                try:
+                    shutil.copy2(source, destination)
+                    break
+                except PermissionError:
+                    if source.name.startswith("Aggiorna-Quiz-400-VVF-2026-"):
+                        print(f"File di aggiornamento in uso, conservato: {source.name}")
+                        break
+                    if attempt == 19:
+                        raise
+                    time.sleep(0.25)
 
 
 def latest_release() -> tuple[str, str, str]:
@@ -116,7 +131,7 @@ def latest_release() -> tuple[str, str, str]:
         None,
     )
     if not tag or not asset or not asset.get("browser_download_url"):
-        raise RuntimeError("La release più recente non contiene il pacchetto portatile.")
+        raise RuntimeError(f"La release più recente non contiene {ASSET_NAME}.")
     return tag, str(asset["browser_download_url"]), str(asset.get("digest") or "")
 
 
@@ -134,12 +149,26 @@ def download(url: str, destination: Path, expected_digest: str = "") -> None:
 def restart_local_app() -> None:
     environment = os.environ.copy()
     environment["QUIZ_NO_BROWSER"] = "1"
-    subprocess.Popen(
-        [sys.executable, str(ROOT / "portable_server.py")],
-        cwd=str(ROOT),
-        env=environment,
+    command = (
+        [str(ROOT / "Quiz-400-VVF-2026.exe")]
+        if FROZEN
+        else [sys.executable, str(ROOT / "portable_server.py")]
     )
+    subprocess.Popen(command, cwd=str(ROOT), env=environment)
     print("App riavviata. La pagina aperta si ricaricherà automaticamente.")
+
+
+def wait_for_process(process_id: int | None) -> None:
+    if not process_id:
+        return
+    deadline = time.time() + 30
+    while time.time() < deadline:
+        try:
+            os.kill(process_id, 0)
+        except OSError:
+            return
+        time.sleep(0.25)
+    raise RuntimeError("L'app non si è chiusa in tempo per l'aggiornamento.")
 
 
 def update(package: Path | None, force: bool, no_stop: bool, restart: bool) -> None:
@@ -192,9 +221,11 @@ def main() -> int:
     parser.add_argument("--force", action="store_true", help="Reinstalla anche se la versione è già aggiornata")
     parser.add_argument("--no-stop", action="store_true", help=argparse.SUPPRESS)
     parser.add_argument("--restart", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--wait-pid", type=int, help=argparse.SUPPRESS)
     args = parser.parse_args()
     try:
-        update(args.package, args.force, args.no_stop, args.restart)
+        wait_for_process(args.wait_pid)
+        update(args.package, args.force, args.no_stop, args.restart or FROZEN)
         return 0
     except (OSError, RuntimeError, urllib.error.URLError, zipfile.BadZipFile) as error:
         print(f"Aggiornamento non riuscito: {error}", file=sys.stderr)

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import socket
 import subprocess
 import sys
 import threading
@@ -11,12 +12,14 @@ import webbrowser
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+FROZEN = bool(getattr(sys, "frozen", False))
+ROOT = Path(sys.executable).resolve().parent if FROZEN else Path(__file__).resolve().parent
 DATA_DIR = ROOT / "portable-data"
 STATE_FILE = DATA_DIR / "fuocoquiz-state.json"
 VERSION_FILE = ROOT / "version.json"
 LATEST_RELEASE_API = "https://api.github.com/repos/Den901/quiz-400-vvf-2026/releases/latest"
-HOST, PORT = "127.0.0.1", 4190
+HOST = "127.0.0.1"
+PORT = int(os.environ.get("QUIZ_PORT", "4190"))
 
 
 def version_parts(value):
@@ -55,6 +58,10 @@ def update_status():
     }
 
 class Handler(SimpleHTTPRequestHandler):
+    def log_message(self, format, *args):
+        if sys.stderr is not None:
+            super().log_message(format, *args)
+
     def translate_path(self, path):
         translated = super().translate_path(path)
         relative = os.path.relpath(translated, os.getcwd())
@@ -116,12 +123,25 @@ class Handler(SimpleHTTPRequestHandler):
                 def launch_updater():
                     time.sleep(0.4)
                     self.server.shutdown()
-                    command = [
-                        sys.executable,
-                        str(ROOT / "update_quiz.py"),
+                    updater_args = [
                         "--no-stop",
                         "--restart",
+                        "--wait-pid",
+                        str(os.getpid()),
                     ]
+                    if FROZEN:
+                        updater = ROOT / "Aggiorna-Quiz-400-VVF-2026.exe"
+                        if not updater.exists():
+                            raise FileNotFoundError(
+                                "Aggiorna-Quiz-400-VVF-2026.exe non trovato"
+                            )
+                        command = [str(updater), *updater_args]
+                    else:
+                        command = [
+                            sys.executable,
+                            str(ROOT / "update_quiz.py"),
+                            *updater_args,
+                        ]
                     options = {"cwd": str(ROOT)}
                     if os.name == "nt":
                         options["creationflags"] = subprocess.CREATE_NEW_CONSOLE
@@ -160,9 +180,24 @@ class Handler(SimpleHTTPRequestHandler):
         except Exception:
             self.send_error(400)
 
+
+class LocalServer(ThreadingHTTPServer):
+    allow_reuse_address = os.name != "nt"
+
+    def server_bind(self):
+        if os.name == "nt" and hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
+            self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
+        super().server_bind()
+
+
 if __name__ == "__main__":
     os.chdir(ROOT)
-    server = ThreadingHTTPServer((HOST, PORT), Handler)
+    try:
+        server = LocalServer((HOST, PORT), Handler)
+    except OSError:
+        if not os.environ.get("QUIZ_NO_BROWSER"):
+            webbrowser.open(f"http://{HOST}:{PORT}/")
+        raise SystemExit(0)
     if not os.environ.get("QUIZ_NO_BROWSER"):
         threading.Timer(0.8, lambda: webbrowser.open(f"http://{HOST}:{PORT}/")).start()
     print("Quiz 400 VVF 2026 avviato. Lascia aperta questa finestra; Ctrl+C per chiudere.")
