@@ -54,6 +54,9 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 ### Simulazione a tempo
 
 - 40 domande in 40 minuti;
+- cronometro grande e sempre visibile, da 40:00 a 00:00;
+- consegna automatica allo scadere, con i quesiti rimanenti conteggiati come non risposti;
+- ripresa della prova e del tempo effettivamente rimasto dopo un aggiornamento della pagina;
 - estrazione basata su data e ora correnti, diversa a ogni nuova prova;
 - rotazione persistente che evita di riproporre le domande già estratte finché la materia non completa il proprio ciclo;
 - +1 punto per ogni risposta corretta;
@@ -61,6 +64,8 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 - 0 punti per ogni risposta non data;
 - navigazione avanti e indietro;
 - correzione completa alla fine, con risposte corrette, errate e non date.
+
+Anche la prova guidata da 40 domande usa lo stesso cronometro di 40 minuti e termina automaticamente allo scadere. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
 
 Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e spiegazione disponibile.
 
@@ -70,7 +75,7 @@ Le spiegazioni vengono presentate con paragrafi, elenchi, accenti e simboli ripu
 
 La pagina Progressi mostra quante domande sono state svolte e la situazione per materia. I filtri permettono di esercitarsi solo sulle domande da ripetere, non conosciute o mai risposte. Lo storico conserva i risultati delle ultime simulazioni.
 
-La rotazione dei quesiti viene salvata nel profilo. Se chiudi l'app o il portale durante una prova, la successiva estrazione prosegue con domande nuove. Il percorso completo per argomento resta invece intenzionalmente nell'ordine originale.
+La rotazione dei quesiti viene salvata nel profilo. Una prova da 40 in corso viene salvata separatamente per ogni utente: ricaricando la pagina si ritrovano domanda, risposte e tempo effettivamente rimasto. Una volta conclusa, la successiva estrazione prosegue con domande nuove. Il percorso completo per argomento resta invece intenzionalmente nell'ordine originale.
 
 ## Dove vengono salvati i dati
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.3 - 2026-08-11
+
+- Aggiunto un cronometro grande e sempre visibile nelle simulazioni e nelle prove guidate da 40 domande.
+- Il conto alla rovescia parte da 40:00 e conclude automaticamente la prova a 00:00.
+- Le domande non completate allo scadere vengono registrate come non risposte e incluse nel riepilogo finale.
+- Il tempo è calcolato sull'orario reale: continua correttamente anche se la pagina resta in secondo piano.
+- La prova attiva viene salvata per il singolo utente e riprende con il tempo corretto dopo un aggiornamento della pagina.
+- Negli ultimi cinque minuti e nell'ultimo minuto il cronometro cambia colore per rendere evidente la scadenza.
+
 ## 1.1.2 - 2026-08-09
 
 - Aggiunto il pulsante `Aggiorna ora` direttamente nell'avviso dell'app.
