@@ -68,6 +68,8 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 - panoramica orizzontale con 40 pallini numerati: risposta data, non fatta e domanda attuale;
 - salto diretto a qualsiasi domanda toccando il relativo pallino;
 - conferma obbligatoria prima della consegna alla domanda 40, con conteggio delle risposte mancanti;
+- pulsante **Termina prova** dalla domanda 1 alla 39, sempre protetto da conferma;
+- avviso quando si cambia menu: scegliendo di uscire, la prova viene eliminata e non riprende più;
 - correzione completa alla fine, con risposte corrette, errate e non date.
 
 Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Il cronometro è allineato a destra, scorre normalmente senza coprire i contenuti e cambia colore con il tempo rimanente: verde, giallo, arancione e rosso lampeggiante negli ultimi 10 minuti. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
@@ -115,7 +117,7 @@ Prima dell'installazione viene creata una copia in `portable-data/backups`; sono
 
 A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il controllo viene ripetuto ogni 15 minuti mentre l'app resta aperta e quando torni alla finestra dopo averla lasciata in secondo piano. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
 
-Quando trova una nuova versione, compare un popup con **Aggiorna ora** e **Più tardi**. Scegliendo l'aggiornamento, l'app crea il backup, scarica e verifica il pacchetto, installa la release, riavvia il server locale e ricarica automaticamente la pagina. I file esterni con doppio clic restano disponibili come procedura alternativa.
+Quando trova una nuova versione, compare un popup con **Aggiorna ora** e **Più tardi**. Scegliendo l'aggiornamento, l'app crea il backup, scarica e verifica il pacchetto e installa la release. Al termine mostra **Ricarica e aggiorna cache**: il pulsante elimina i file temporanei della versione precedente e carica subito quella nuova. I file esterni con doppio clic restano disponibili come procedura alternativa.
 
 ## Utenti e percorsi personali
 
