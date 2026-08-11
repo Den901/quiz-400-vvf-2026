@@ -15,7 +15,8 @@ L'app controlla automaticamente le nuove versioni a ogni accesso, ogni 15 minuti
 e quando torni alla finestra. Puoi anche usare il pulsante Aggiornamenti dopo il
 login per controllare manualmente. Quando trova una nuova release compare un popup
 con Aggiorna ora e Più tardi. Aggiorna ora crea il backup, installa, riavvia l'app
-e ricarica la pagina automaticamente.
+e mostra Ricarica e aggiorna cache, che elimina i file temporanei vecchi e carica
+subito la nuova versione.
 
 GESTIONE UTENTI
 Gli account si gestiscono in Impostazioni > Utenti e statistiche.
@@ -50,6 +51,9 @@ da 40 domande. Le preferenze restano separate per account e sono nel backup.
 Durante la prova i 40 pallini numerati mostrano domande fatte e non fatte:
 basta toccarne uno per aprire subito quel quesito. Alla domanda 40, Consegna
 prova chiede conferma e mostra quante risposte mancano.
+Da domanda 1 a 39 puoi usare Termina prova, sempre con conferma. Se tocchi un
+altro menu compare un avviso: confermando l'uscita, la prova viene eliminata e
+non sarà ripresa al successivo accesso.
 
 Su macOS, al primo avvio potrebbe essere necessario fare clic destro sul file .command,
 scegliere Apri e confermare. Se richiesto, eseguire nel Terminale:

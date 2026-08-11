@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.1.6 - 2026-08-11
+
+- Aggiunto `Termina prova` dalla domanda 1 alla 39, sempre con conferma e conteggio delle risposte mancanti.
+- Se si cambia menu durante una prova compare un avviso esplicito: confermando, la prova viene eliminata e non può riprendere.
+- Dopo l’installazione di un aggiornamento compare `Ricarica e aggiorna cache` per caricare immediatamente la nuova versione.
+- La PWA usa ora la rete locale prima della cache e mantiene la cache come riserva offline, evitando file vecchi dopo gli aggiornamenti.
+- Aggiunti identificatori di versione agli asset principali dell’interfaccia.
+
 ## 1.1.5 - 2026-08-11
 
 - Il cronometro non resta più sovrapposto ai contenuti durante lo scorrimento.
