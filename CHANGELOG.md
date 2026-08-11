@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.4 - 2026-08-11
+
+- Aggiunte configurazioni personali nominate per la composizione delle prove da 40.
+- Ogni utente può salvare, aggiornare, richiamare ed eliminare più configurazioni senza reinserire ogni volta le quantità.
+- Le preferenze personali restano separate per account e sono comprese nel backup.
+- Aggiunta durante le prove una panoramica orizzontale con 40 pallini numerati e cliccabili.
+- I pallini mostrano subito domande risposte, non fatte e domanda attuale; nella prova guidata distinguono anche risposte corrette ed errate.
+- Le domande tralasciate nella prova guidata possono essere riaperte e completate dalla panoramica.
+- Alla domanda 40 il pulsante diventa `Consegna prova` e richiede conferma, indicando anche quante risposte mancano.
+
 ## 1.1.3 - 2026-08-11
 
 - Aggiunto un cronometro grande e sempre visibile nelle simulazioni e nelle prove guidate da 40 domande.

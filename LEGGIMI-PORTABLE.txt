@@ -40,6 +40,13 @@ A 00:00 la prova termina automaticamente e le domande rimaste diventano
 non risposte. Se aggiorni la pagina, la prova riprende con il tempo realmente
 rimasto; il cronometro non riparte da capo.
 
+CONFIGURAZIONI PERSONALI E PANORAMICA DOMANDE
+In Simulazione ogni utente può salvare e richiamare più composizioni personali
+da 40 domande. Le preferenze restano separate per account e sono nel backup.
+Durante la prova i 40 pallini numerati mostrano domande fatte e non fatte:
+basta toccarne uno per aprire subito quel quesito. Alla domanda 40, Consegna
+prova chiede conferma e mostra quante risposte mancano.
+
 Su macOS, al primo avvio potrebbe essere necessario fare clic destro sul file .command,
 scegliere Apri e confermare. Se richiesto, eseguire nel Terminale:
 chmod +x Avvia-Quiz-400-VVF-2026-macOS.command
