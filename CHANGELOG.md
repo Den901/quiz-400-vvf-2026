@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.1.5 - 2026-08-11
+
+- Il cronometro non resta più sovrapposto ai contenuti durante lo scorrimento.
+- Il riquadro del tempo è ora compatto e allineato a destra.
+- Aggiunta una barra percentuale che si accorcia con il tempo rimanente.
+- Colori progressivi: verde da 40 a 31 minuti, giallo da 30 a 21, arancione da 20 a 11 e rosso lampeggiante negli ultimi 10 minuti.
+- Controllo automatico degli aggiornamenti all’accesso, ogni 15 minuti e quando si riapre l’app.
+- Se è disponibile una nuova versione, compare un popup con le scelte `Aggiorna ora` e `Più tardi`.
+
 ## 1.1.4 - 2026-08-11
 
 - Aggiunte configurazioni personali nominate per la composizione delle prove da 40.

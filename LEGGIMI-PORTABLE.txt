@@ -11,10 +11,11 @@ L'aggiornamento scarica l'ultima release GitHub, crea un backup automatico e
 non sostituisce mai la cartella portable-data. Utenti, progressi, statistiche,
 impostazioni e rotazione dei quiz vengono quindi conservati.
 
-L'app controlla automaticamente le nuove versioni a ogni accesso. Puoi anche
-usare il pulsante Aggiornamenti dopo il login per controllare manualmente.
-Quando trova una nuova release, premi Aggiorna ora: crea il backup, installa,
-riavvia l'app e ricarica la pagina automaticamente.
+L'app controlla automaticamente le nuove versioni a ogni accesso, ogni 15 minuti
+e quando torni alla finestra. Puoi anche usare il pulsante Aggiornamenti dopo il
+login per controllare manualmente. Quando trova una nuova release compare un popup
+con Aggiorna ora e Più tardi. Aggiorna ora crea il backup, installa, riavvia l'app
+e ricarica la pagina automaticamente.
 
 GESTIONE UTENTI
 Gli account si gestiscono in Impostazioni > Utenti e statistiche.
@@ -39,6 +40,9 @@ La simulazione e la prova guidata da 40 mostrano un cronometro da 40:00.
 A 00:00 la prova termina automaticamente e le domande rimaste diventano
 non risposte. Se aggiorni la pagina, la prova riprende con il tempo realmente
 rimasto; il cronometro non riparte da capo.
+Il cronometro è allineato a destra e non copre i contenuti durante lo scorrimento.
+È verde da 40 a 31 minuti, giallo da 30 a 21, arancione da 20 a 11 e rosso
+lampeggiante negli ultimi 10 minuti. La barra inferiore mostra la percentuale rimasta.
 
 CONFIGURAZIONI PERSONALI E PANORAMICA DOMANDE
 In Simulazione ogni utente può salvare e richiamare più composizioni personali
