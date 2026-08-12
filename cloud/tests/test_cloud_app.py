@@ -58,6 +58,14 @@ def test_complete_cloud_account_and_statistics_flow():
         assert public_client.post(
             "/api/auth/register",
             json={
+                "username": "senza.email",
+                "name": "Senza Email",
+                "password": "Sicura-Senza-Email-2026!",
+            },
+        ).status_code == 422
+        assert public_client.post(
+            "/api/auth/register",
+            json={
                 "username": "mario.rossi",
                 "name": "Duplicato",
                 "email": "altro@example.com",
@@ -76,9 +84,15 @@ def test_complete_cloud_account_and_statistics_flow():
                 "25290565": {"attempts": 1, "correct": 0, "wrong": 1, "skipped": 0, "status": "review"},
             },
             "sessions": [
+                {"type": "study", "at": "2026-08-12T08:00:00+00:00", "correct": 7, "wrong": 3, "blank": 0, "score": 6.01, "accuracy": 70, "questionCount": 10, "category": "chimica", "perCategory": {"chimica": {"correct": 7, "wrong": 3, "blank": 0, "total": 10, "accuracy": 70}}},
+                {"type": "guided", "at": "2026-08-12T09:00:00+00:00", "correct": 4, "wrong": 1, "blank": 0, "score": 3.67, "accuracy": 80, "questionCount": 5, "category": "fisica", "perCategory": {"fisica": {"correct": 4, "wrong": 1, "blank": 0, "total": 5, "accuracy": 80}}},
                 {"type": "exam", "at": "2026-08-12T10:00:00+00:00", "correct": 30, "wrong": 5, "blank": 5, "score": 28.35, "accuracy": 86},
                 {"type": "guided-exam", "at": "2026-08-12T11:00:00+00:00", "correct": 32, "wrong": 4, "blank": 4, "score": 30.68, "accuracy": 89},
             ],
+            "quizRotation": {"exam:chimica": {"cursor": 12, "cycle": 0, "size": 1677}},
+            "examPresets": [{"id": "preset-mario", "name": "Prova personale", "plan": {"storia": 8, "logica": 11, "insiemi": 1, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4, "brani": 0}}],
+            "activeExamPresetId": "preset-mario",
+            "theme": "dark",
         }
         save = user_client.put("/api/cloud/state", json={"state": state})
         assert save.status_code == 200
@@ -89,9 +103,23 @@ def test_complete_cloud_account_and_statistics_flow():
         mario = next(item for item in users.json()["users"] if item["id"] == user_id)
         assert mario["statistics"]["answered"] == 2
         assert mario["statistics"]["simulations"] == 1
-        assert mario["statistics"]["guidedQuizzes"] == 1
-        assert mario["statistics"]["averageAccuracy"] == 87.5
+        assert mario["statistics"]["guidedQuizzes"] == 2
+        assert mario["statistics"]["fortyQuizzes"] == 2
+        assert mario["statistics"]["averageFortyScore"] == 29.52
+        assert mario["statistics"]["averageFortyAccuracy"] == 87.5
+        assert mario["statistics"]["subjectQuizzes"] == 2
+        assert mario["statistics"]["averageSubjectScore"] == 4.84
+        assert mario["statistics"]["averageSubjectAccuracy"] == 75.0
         assert mario["statistics"]["averageScore"] == 28.35
+        assert users.json()["totals"]["fortyQuizzes"] == 2
+        assert users.json()["totals"]["averageFortyScore"] == 29.52
+        assert users.json()["totals"]["subjectQuizzes"] == 2
+        assert users.json()["totals"]["averageSubjectAccuracy"] == 75.0
+
+        assert user_client.get("/api/auth/me").json()["user"]["state"]["examPresets"][0]["id"] == "preset-mario"
+        assert admin_client.get("/api/auth/me").json()["user"]["state"]["examPresets"] == []
+        assert user_client.get("/api/auth/me").json()["user"]["state"]["theme"] == "dark"
+        assert admin_client.get("/api/auth/me").json()["user"]["state"]["theme"] == "system"
 
         statistics = admin_client.get(f"/api/admin/users/{user_id}/statistics")
         assert statistics.status_code == 200
@@ -100,7 +128,27 @@ def test_complete_cloud_account_and_statistics_flow():
         assert statistics.json()["categories"]["chimica"]["total"] == 1677
         assert statistics.json()["categories"]["chimica"]["toDo"] == 1675
         assert statistics.json()["categories"]["chimica"]["accuracy"] == 67
+        assert statistics.json()["categories"]["chimica"]["quizCount"] == 1
+        assert statistics.json()["categories"]["chimica"]["averageQuizScore"] == 6.01
+        assert statistics.json()["categories"]["chimica"]["averageQuizAccuracy"] == 70.0
+        assert statistics.json()["categories"]["chimica"]["averageQuizQuestions"] == 10.0
         assert statistics.json()["recentSessions"][0]["type"] == "guided-exam"
+
+        logo_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        logo = admin_client.post("/api/admin/branding/logo", json={"data_url": logo_data})
+        assert logo.status_code == 200
+        assert logo.json()["logoCustomized"] is True
+        assert public_client.get("/api/branding/logo").headers["content-type"].startswith("image/png")
+        manifest = public_client.get("/manifest.webmanifest")
+        assert manifest.status_code == 200
+        assert manifest.json()["icons"][0]["src"].startswith("./api/branding/logo?v=")
+        assert manifest.json()["icons"][0]["type"] == "image/png"
+        assert manifest.json()["icons"][0]["sizes"] == "any"
+        assert admin_client.get("/api/admin/settings").json()["logoCustomized"] is True
+        reset_logo = admin_client.delete("/api/admin/branding/logo")
+        assert reset_logo.status_code == 200
+        assert reset_logo.json()["logoCustomized"] is False
+        assert public_client.get("/api/branding/logo").headers["content-type"].startswith("image/jpeg")
 
         assert admin_client.patch(f"/api/admin/users/{user_id}", json={"role": "admin"}).json()["user"]["role"] == "admin"
         assert admin_client.patch(f"/api/admin/users/{user_id}", json={"role": "user"}).json()["user"]["role"] == "user"
@@ -155,6 +203,7 @@ def test_complete_cloud_account_and_statistics_flow():
             assert forgotten.status_code == missing.status_code == 202
             assert forgotten.json()["message"] == missing.json()["message"]
             mocked_email.assert_awaited_once()
+        assert admin_client.get("/api/admin/settings").json()["smtpLastStatus"]["ok"] is True
         recovered = public_client.post(
             "/api/auth/reset-password",
             json={"token": recovery_token, "password": "Mario-Recuperata-2026!"},

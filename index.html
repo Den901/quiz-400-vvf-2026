@@ -4,19 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#b42318" />
-  <meta name="description" content="Quiz 400 VVF 2026 - PWA offline per esercitarsi ai quiz Vigili del Fuoco" />
+  <meta name="description" content="Quiz 400 VVF 2026 - applicazione installabile per esercitarsi ai quiz Vigili del Fuoco" />
   <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="logo-vvf.png" />
-  <link rel="stylesheet" href="styles.css?v=29" />
-  <link rel="stylesheet" href="styles-extra.css?v=29" />
-  <link rel="stylesheet" href="styles-guided.css?v=29" />
-  <link rel="stylesheet" href="styles-official.css?v=29" />
-  <link rel="stylesheet" href="styles-cloud.css?v=29" />
+  <link rel="icon" href="logo-vvf.jpg" />
+  <link rel="stylesheet" href="styles.css?v=31" />
+  <link rel="stylesheet" href="styles-extra.css?v=31" />
+  <link rel="stylesheet" href="styles-guided.css?v=31" />
+  <link rel="stylesheet" href="styles-official.css?v=31" />
+  <link rel="stylesheet" href="styles-cloud.css?v=31" />
+  <link rel="stylesheet" href="styles-theme.css?v=31" />
   <title>Quiz 400 VVF 2026</title>
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#home" aria-label="Quiz 400 VVF 2026, home"><span class="brand-logo"><img src="logo-vvf.png" alt=""></span><span>Quiz 400 VVF 2026</span></a>
+    <a class="brand" href="#home" aria-label="Quiz 400 VVF 2026, home"><span class="brand-logo"><img data-brand-logo src="logo-vvf.jpg" alt=""></span><span>Quiz 400 VVF 2026</span></a>
     <button id="installBtn" class="ghost hidden">Installa</button>
   </header>
   <main id="app" tabindex="-1"></main>
@@ -29,6 +30,6 @@
     <a href="#settings" data-route="settings" data-admin-nav class="hidden"><span>⚙</span>Admin</a>
   </nav>
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <script type="module" src="app.js?v=29"></script>
+  <script type="module" src="app.js?v=31"></script>
 </body>
 </html>

@@ -20,7 +20,7 @@ New-Item -ItemType Directory -Path $Dist -Force | Out-Null
 
 & $Python -m PyInstaller --noconfirm --clean --onefile --windowed `
     --name 'Quiz-400-VVF-2026' `
-    --icon (Join-Path $ProjectRoot 'logo-vvf.png') `
+    --icon (Join-Path $ProjectRoot 'logo-vvf.jpg') `
     --version-file (Join-Path $ProjectRoot 'windows-version-info-app.txt') `
     --distpath $Dist `
     --workpath (Join-Path $BuildRoot 'main-work') `
@@ -30,7 +30,7 @@ if ($LASTEXITCODE -ne 0) { throw 'Compilazione dell’app EXE non riuscita.' }
 
 & $Python -m PyInstaller --noconfirm --clean --onefile --console `
     --name 'Aggiorna-Quiz-400-VVF-2026' `
-    --icon (Join-Path $ProjectRoot 'logo-vvf.png') `
+    --icon (Join-Path $ProjectRoot 'logo-vvf.jpg') `
     --version-file (Join-Path $ProjectRoot 'windows-version-info-updater.txt') `
     --distpath $Dist `
     --workpath (Join-Path $BuildRoot 'updater-work') `

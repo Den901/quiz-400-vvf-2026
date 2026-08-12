@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.1.2 - 2026-08-12
+
+- Aggiunto nelle schermate di accesso, registrazione e recupero password il disclaimer che identifica la piattaforma come gratuita, amatoriale, non ufficiale e non collegata al Ministero dell'Interno o al Corpo Nazionale dei Vigili del Fuoco.
+- Sostituito in tutta l'app il logo precedente con il nuovo marchio nero e aggiunta all'area Admin la possibilità di caricare o ripristinare il logo globale.
+- Aggiunti i temi chiaro, scuro e automatico, salvati separatamente per ogni utente.
+- Aggiunte nel pannello Admin la media delle prove da 40 domande e le medie dei quiz per argomento, sia complessive sia per singolo utente.
+- Reso esplicito lo stato dell'invio email e impediti falsi messaggi di invio quando il server SMTP non è configurato.
+- L'email è ora obbligatoria nella registrazione pubblica per consentire il recupero della password.
+- Migliorata la resa responsive del portale e corretta la visualizzazione del logo senza compressione.
+
 ## 2.1.1 - 2026-08-12
 
 - Aggiunta la voce **Admin** nella navigazione, visibile esclusivamente agli amministratori.
@@ -58,7 +68,7 @@
 - Aggiunto `Termina prova` dalla domanda 1 alla 39, sempre con conferma e conteggio delle risposte mancanti.
 - Se si cambia menu durante una prova compare un avviso esplicito: confermando, la prova viene eliminata e non può riprendere.
 - Dopo l’installazione di un aggiornamento compare `Ricarica e aggiorna cache` per caricare immediatamente la nuova versione.
-- La PWA usa ora la rete locale prima della cache e mantiene la cache come riserva offline, evitando file vecchi dopo gli aggiornamenti.
+- La PWA usa ora la rete prima della cache locale, evitando file vecchi dopo gli aggiornamenti.
 - Aggiunti identificatori di versione agli asset principali dell’interfaccia.
 
 ## 1.1.5 - 2026-08-11

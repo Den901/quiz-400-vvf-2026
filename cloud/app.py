@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import asyncio
+import base64
 import hashlib
 import json
 import os
@@ -38,7 +39,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.1.1"
+    APP_VERSION = "2.1.2"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -57,6 +58,7 @@ DEPLOYMENT_PROXY_MODE = "external" if os.environ.get("PUBLIC_PROXY_MODE") == "ex
 PORT_CONTROL_DIR = Path(os.environ["PORT_CONTROL_DIR"]).resolve() if os.environ.get("PORT_CONTROL_DIR") else None
 SESSION_COOKIE = "q400_session"
 MAX_STATE_BYTES = 8 * 1024 * 1024
+MAX_LOGO_BYTES = 1024 * 1024
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
 DUCKDNS_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.duckdns\.org)?$")
 
@@ -182,6 +184,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "smtp_password": "",
     "smtp_from_email": "",
     "smtp_use_tls": True,
+    "smtp_last_status": {},
+    "brand_logo_data": "",
+    "brand_logo_mime": "",
+    "brand_logo_updated_at": "",
     "privacy_notice": "I dati sono usati esclusivamente per gestire l'account e il percorso di studio.",
     "exam_config": {"examPlan": {"storia": 8, "logica": 11, "insiemi": 1, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4, "brani": 0}},
 }
@@ -225,12 +231,17 @@ def port_control_status() -> dict[str, Any]:
 
 
 def public_settings(db: Session) -> dict[str, Any]:
+    logo_version = str(get_setting(db, "brand_logo_updated_at") or "default")
+    logo_customized = bool(get_setting(db, "brand_logo_data"))
     return {
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "emailResetEnabled": bool(get_setting(db, "smtp_enabled") and get_setting(db, "smtp_host")),
         "privacyNotice": get_setting(db, "privacy_notice"),
         "examConfig": get_setting(db, "exam_config"),
+        "logoUrl": f"./api/branding/logo?v={logo_version}",
+        "logoCustomized": logo_customized,
+        "logoMime": str(get_setting(db, "brand_logo_mime") or "image/jpeg") if logo_customized else "image/jpeg",
     }
 
 
@@ -255,7 +266,7 @@ def audit(db: Session, action: str, request: Request, actor: str | None = None, 
 
 
 def empty_state() -> dict[str, Any]:
-    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "examPresets": [], "activeExamPresetId": None}
+    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system"}
 
 
 def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
@@ -339,7 +350,7 @@ class LoginInput(BaseModel):
 
 class RegistrationInput(LoginInput):
     name: str = Field(min_length=2, max_length=100)
-    email: EmailStr | None = None
+    email: EmailStr
 
 
 class ForgotInput(BaseModel):
@@ -392,6 +403,10 @@ class PortChangeInput(BaseModel):
     app_port: int = Field(ge=1024, le=65535)
 
 
+class BrandLogoInput(BaseModel):
+    data_url: str = Field(min_length=32, max_length=1_500_000)
+
+
 class CloudSettingsInput(BaseModel):
     site_name: str = Field(min_length=3, max_length=100)
     registration_enabled: bool
@@ -430,17 +445,96 @@ class CloudSettingsInput(BaseModel):
         return value.removesuffix(".duckdns.org")
 
 
+def numeric_value(value: Any) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return float(value)
+
+
+def session_accuracy(session: dict[str, Any]) -> float | None:
+    stored = numeric_value(session.get("accuracy"))
+    if stored is not None:
+        return stored
+    correct = numeric_value(session.get("correct")) or 0
+    wrong = numeric_value(session.get("wrong")) or 0
+    answered = correct + wrong
+    return round(correct / answered * 100, 1) if answered else None
+
+
+def session_score(session: dict[str, Any]) -> float | None:
+    stored = numeric_value(session.get("score"))
+    if stored is not None:
+        return stored
+    correct = numeric_value(session.get("correct"))
+    wrong = numeric_value(session.get("wrong"))
+    if correct is None and wrong is None:
+        return None
+    return round((correct or 0) - (wrong or 0) * 0.33, 2)
+
+
+def average(values: list[float], digits: int = 2) -> float | None:
+    return round(sum(values) / len(values), digits) if values else None
+
+
+def session_group_statistics(sessions: list[dict[str, Any]]) -> dict[str, Any]:
+    scores = [value for session in sessions if (value := session_score(session)) is not None]
+    accuracies = [value for session in sessions if (value := session_accuracy(session)) is not None]
+    question_counts = [
+        value for session in sessions if (value := numeric_value(session.get("questionCount"))) is not None
+    ]
+    return {
+        "count": len(sessions),
+        "averageScore": average(scores),
+        "bestScore": max(scores) if scores else None,
+        "averageAccuracy": average(accuracies, 1),
+        "averageQuestions": average(question_counts, 1),
+    }
+
+
+def subject_session_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    sessions = state_data.get("sessions", []) if isinstance(state_data, dict) else []
+    sessions = sessions if isinstance(sessions, list) else []
+    grouped: dict[str, list[dict[str, Any]]] = {}
+    for session in sessions:
+        if not isinstance(session, dict) or session.get("type") not in {"study", "guided"}:
+            continue
+        per_category = session.get("perCategory")
+        if isinstance(per_category, dict) and per_category:
+            for category, payload in per_category.items():
+                if not isinstance(payload, dict):
+                    continue
+                correct = numeric_value(payload.get("correct")) or 0
+                wrong = numeric_value(payload.get("wrong")) or 0
+                blank = numeric_value(payload.get("blank")) or 0
+                grouped.setdefault(str(category), []).append(
+                    {
+                        **payload,
+                        "score": round(correct - wrong * 0.33, 2),
+                        "questionCount": numeric_value(payload.get("total")) or correct + wrong + blank,
+                    }
+                )
+            continue
+        category = session.get("category")
+        if isinstance(category, str) and category:
+            grouped.setdefault(category, []).append(session)
+    return {category: session_group_statistics(rows) for category, rows in grouped.items()}
+
+
 def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
     progress = state_data.get("progress") if isinstance(state_data, dict) else {}
     sessions = state_data.get("sessions") if isinstance(state_data, dict) else []
     progress = progress if isinstance(progress, dict) else {}
     sessions = sessions if isinstance(sessions, list) else []
     values = [item for item in progress.values() if isinstance(item, dict)]
-    exams = [item for item in sessions if isinstance(item, dict) and item.get("type") == "exam"]
+    valid_sessions = [item for item in sessions if isinstance(item, dict)]
+    exams = [item for item in valid_sessions if item.get("type") == "exam"]
+    forty_quizzes = [item for item in valid_sessions if item.get("type") in {"exam", "guided-exam"}]
     guided = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"guided", "guided-exam"}]
     subject_quizzes = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"study", "guided"}]
-    scores = [float(item.get("score", 0)) for item in exams if isinstance(item.get("score", 0), (int, float))]
-    accuracies = [float(item["accuracy"]) for item in sessions if isinstance(item, dict) and isinstance(item.get("accuracy"), (int, float))]
+    exam_stats = session_group_statistics(exams)
+    forty_stats = session_group_statistics(forty_quizzes)
+    subject_stats = session_group_statistics(subject_quizzes)
+    accuracies = [value for item in valid_sessions if (value := session_accuracy(item)) is not None]
     return {
         "answered": sum(1 for item in values if int(item.get("attempts", 0) or 0) > 0),
         "known": sum(1 for item in values if item.get("status") == "known"),
@@ -450,10 +544,18 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
         "simulations": len(exams),
         "guidedQuizzes": len(guided),
         "subjectQuizzes": len(subject_quizzes),
+        "fortyQuizzes": forty_stats["count"],
+        "guidedFortyQuizzes": sum(1 for item in forty_quizzes if item.get("type") == "guided-exam"),
         "sessions": len(sessions),
-        "averageScore": round(sum(scores) / len(scores), 2) if scores else None,
-        "bestScore": max(scores) if scores else None,
-        "averageAccuracy": round(sum(accuracies) / len(accuracies), 1) if accuracies else None,
+        "averageScore": exam_stats["averageScore"],
+        "bestScore": exam_stats["bestScore"],
+        "averageFortyScore": forty_stats["averageScore"],
+        "bestFortyScore": forty_stats["bestScore"],
+        "averageFortyAccuracy": forty_stats["averageAccuracy"],
+        "averageSubjectScore": subject_stats["averageScore"],
+        "bestSubjectScore": subject_stats["bestScore"],
+        "averageSubjectAccuracy": subject_stats["averageAccuracy"],
+        "averageAccuracy": average(accuracies, 1),
     }
 
 
@@ -499,6 +601,21 @@ def category_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, Any]]
     for bucket in result.values():
         graded = bucket["correctAttempts"] + bucket["wrongAttempts"]
         bucket["accuracy"] = round(bucket["correctAttempts"] / graded * 100) if graded else None
+    for category, quiz_stats in subject_session_statistics(state_data).items():
+        bucket = result.setdefault(category, {"total": 0, "answered": 0, "known": 0, "review": 0, "unknown": 0, "unanswered": 0, "toDo": 0, "correctAttempts": 0, "wrongAttempts": 0, "accuracy": None})
+        bucket.update({
+            "quizCount": quiz_stats["count"],
+            "averageQuizScore": quiz_stats["averageScore"],
+            "bestQuizScore": quiz_stats["bestScore"],
+            "averageQuizAccuracy": quiz_stats["averageAccuracy"],
+            "averageQuizQuestions": quiz_stats["averageQuestions"],
+        })
+    for bucket in result.values():
+        bucket.setdefault("quizCount", 0)
+        bucket.setdefault("averageQuizScore", None)
+        bucket.setdefault("bestQuizScore", None)
+        bucket.setdefault("averageQuizAccuracy", None)
+        bucket.setdefault("averageQuizQuestions", None)
     return result
 
 
@@ -657,6 +774,78 @@ def runtime(db: Session = Depends(get_db)) -> dict[str, Any]:
     return {"mode": "cloud", "version": APP_VERSION, **public_settings(db)}
 
 
+def decode_logo_data_url(data_url: str) -> tuple[str, bytes, str]:
+    match = re.fullmatch(r"data:(image/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\r\n]+)", data_url.strip())
+    if not match:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Usa un'immagine JPEG, PNG o WebP valida.")
+    try:
+        content = base64.b64decode(match.group(2), validate=True)
+    except (ValueError, TypeError) as error:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Immagine non valida.") from error
+    mime = match.group(1)
+    signatures = {
+        "image/jpeg": content.startswith(b"\xff\xd8\xff"),
+        "image/png": content.startswith(b"\x89PNG\r\n\x1a\n"),
+        "image/webp": content.startswith(b"RIFF") and content[8:12] == b"WEBP",
+    }
+    if not content or len(content) > MAX_LOGO_BYTES or not signatures.get(mime, False):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Il logo deve essere JPEG, PNG o WebP e pesare al massimo 1 MB.")
+    return mime, content, base64.b64encode(content).decode("ascii")
+
+
+@app.get("/api/branding/logo")
+def branding_logo(db: Session = Depends(get_db)) -> Response:
+    encoded = str(get_setting(db, "brand_logo_data") or "")
+    mime = str(get_setting(db, "brand_logo_mime") or "image/jpeg")
+    if encoded:
+        try:
+            content = base64.b64decode(encoded, validate=True)
+        except (ValueError, TypeError):
+            content = b""
+        if content:
+            return Response(content=content, media_type=mime, headers={"Cache-Control": "public, max-age=3600"})
+    return FileResponse(ROOT / "logo-vvf.jpg", media_type="image/jpeg", headers={"Cache-Control": "public, max-age=3600"})
+
+
+@app.post("/api/admin/branding/logo")
+def save_branding_logo(payload: BrandLogoInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    mime, _, encoded = decode_logo_data_url(payload.data_url)
+    updated_at = utcnow().isoformat()
+    set_setting(db, "brand_logo_data", encoded)
+    set_setting(db, "brand_logo_mime", mime)
+    set_setting(db, "brand_logo_updated_at", updated_at)
+    audit(db, "admin.brand_logo_updated", request, actor=admin.id, target=admin.id, mime=mime)
+    db.commit()
+    return {"message": "Logo aggiornato in tutto il portale.", "logoUrl": f"./api/branding/logo?v={updated_at}", "logoCustomized": True}
+
+
+@app.delete("/api/admin/branding/logo")
+def reset_branding_logo(request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    updated_at = utcnow().isoformat()
+    set_setting(db, "brand_logo_data", "")
+    set_setting(db, "brand_logo_mime", "")
+    set_setting(db, "brand_logo_updated_at", updated_at)
+    audit(db, "admin.brand_logo_reset", request, actor=admin.id, target=admin.id)
+    db.commit()
+    return {"message": "Logo predefinito ripristinato.", "logoUrl": f"./api/branding/logo?v={updated_at}", "logoCustomized": False}
+
+
+@app.get("/manifest.webmanifest", include_in_schema=False)
+def web_manifest(db: Session = Depends(get_db)) -> JSONResponse:
+    settings = public_settings(db)
+    payload = {
+        "name": str(settings["siteName"] or "Quiz 400 VVF 2026"),
+        "short_name": "Quiz 400 VVF",
+        "description": "Quiz Vigili del Fuoco organizzati per materia, con correzione e statistiche.",
+        "start_url": "./#home",
+        "display": "standalone",
+        "background_color": "#0b0b0c",
+        "theme_color": "#b42318",
+        "icons": [{"src": settings["logoUrl"], "sizes": "any", "type": settings["logoMime"], "purpose": "any maskable"}],
+    }
+    return JSONResponse(payload, media_type="application/manifest+json", headers={"Cache-Control": "no-cache"})
+
+
 @app.get("/api/internal/tls-allowed")
 def tls_allowed(domain: str, db: Session = Depends(get_db)) -> Response:
     allowed = {str(get_setting(db, "duckdns_domain") or "").lower().removesuffix(".duckdns.org") + ".duckdns.org"}
@@ -775,8 +964,11 @@ async def forgot_password(payload: ForgotInput, request: Request, db: Session = 
     db.commit()
     try:
         await send_email(user.email, "Reimposta la password di Quiz 400 VVF 2026", f"Ciao {user.display_name},\n\nusa questo link entro {minutes} minuti per scegliere una nuova password:\n\n{link}\n\nSe non hai richiesto tu il recupero, ignora questa email.", db)
-    except Exception:
-        pass
+        set_setting(db, "smtp_last_status", {"ok": True, "at": utcnow().isoformat(), "kind": "password-reset", "message": "Email di recupero consegnata al server SMTP."})
+        db.commit()
+    except Exception as error:
+        set_setting(db, "smtp_last_status", {"ok": False, "at": utcnow().isoformat(), "kind": "password-reset", "message": str(error)[:300]})
+        db.commit()
     return {"message": generic}
 
 
@@ -831,7 +1023,20 @@ def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db))
         item["statistics"] = state_statistics(row.state.data if row.state else {})
         item["stateUpdatedAt"] = row.state.updated_at.isoformat() if row.state else None
         users_payload.append(item)
-    totals = {"users": len(rows), "active": sum(1 for row in rows if row.active), "admins": sum(1 for row in rows if row.role == "admin"), "simulations": sum(item["statistics"]["simulations"] for item in users_payload)}
+    forty_count = sum(item["statistics"]["fortyQuizzes"] for item in users_payload)
+    subject_count = sum(item["statistics"]["subjectQuizzes"] for item in users_payload)
+    forty_score_total = sum((item["statistics"]["averageFortyScore"] or 0) * item["statistics"]["fortyQuizzes"] for item in users_payload)
+    subject_accuracy_total = sum((item["statistics"]["averageSubjectAccuracy"] or 0) * item["statistics"]["subjectQuizzes"] for item in users_payload)
+    totals = {
+        "users": len(rows),
+        "active": sum(1 for row in rows if row.active),
+        "admins": sum(1 for row in rows if row.role == "admin"),
+        "simulations": sum(item["statistics"]["simulations"] for item in users_payload),
+        "fortyQuizzes": forty_count,
+        "subjectQuizzes": subject_count,
+        "averageFortyScore": round(forty_score_total / forty_count, 2) if forty_count else None,
+        "averageSubjectAccuracy": round(subject_accuracy_total / subject_count, 1) if subject_count else None,
+    }
     return {"users": users_payload, "totals": totals}
 
 
@@ -956,6 +1161,9 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "smtpPasswordConfigured": bool(get_setting(db, "smtp_password")),
         "smtpFromEmail": get_setting(db, "smtp_from_email"),
         "smtpUseTls": bool(get_setting(db, "smtp_use_tls")),
+        "smtpLastStatus": get_setting(db, "smtp_last_status"),
+        "logoUrl": public_settings(db)["logoUrl"],
+        "logoCustomized": bool(get_setting(db, "brand_logo_data")),
         "deploymentProxyMode": DEPLOYMENT_PROXY_MODE,
         "deploymentAppPort": DEPLOYMENT_APP_PORT,
         "deploymentBindAddress": DEPLOYMENT_BIND_ADDRESS,
@@ -1044,7 +1252,11 @@ async def test_email(request: Request, admin: User = Depends(require_admin), db:
     try:
         await send_email(admin.email, "Test Quiz 400 VVF 2026", "La configurazione email del portale funziona correttamente.", db)
     except Exception as error:
+        set_setting(db, "smtp_last_status", {"ok": False, "at": utcnow().isoformat(), "kind": "test", "message": str(error)[:300]})
+        audit(db, "admin.smtp_test", request, actor=admin.id, target=admin.id, success=False)
+        db.commit()
         raise HTTPException(status.HTTP_502_BAD_GATEWAY, f"Invio non riuscito: {error}") from error
+    set_setting(db, "smtp_last_status", {"ok": True, "at": utcnow().isoformat(), "kind": "test", "message": "Email di prova consegnata al server SMTP."})
     audit(db, "admin.smtp_test", request, actor=admin.id, target=admin.id, success=True)
     db.commit()
     return {"message": f"Email di prova inviata a {admin.email}."}
