@@ -103,6 +103,14 @@ Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre s
 
 Le spiegazioni vengono presentate con paragrafi, elenchi, accenti e simboli ripuliti. Per i quesiti per i quali la fonte non fornisce una spiegazione testuale, l'app indica chiaramente che non è disponibile.
 
+### Deep learning · ripasso adattivo
+
+Nella pagina **Simulazione** ogni utente può attivare il Deep learning. Quando è attivo, le domande risposte correttamente non vengono riproposte nelle prove successive finché non sono terminate tutte le domande della stessa materia. Le risposte errate e non date restano invece disponibili nel ciclo, così il ripasso insiste sui punti deboli senza cambiare la composizione di 40 domande.
+
+Simulazione ufficiale e prova guidata mantengono cicli separati. Al completamento di una materia il ciclo ricomincia automaticamente; se restano meno domande della quota prevista, la prova viene comunque completata fino a 40. Stato, preferenza e cicli appartengono al singolo utente e sono inclusi nei backup. Al primo accesso dopo l'introduzione della funzione compare un popup informativo dal quale è possibile attivarla subito o rimandare.
+
+Il nome descrive il metodo di studio adattivo: non viene addestrato un modello e nessuna risposta è inviata a servizi esterni di intelligenza artificiale.
+
 ## Progressi e ripasso
 
 La pagina **Progressi e risultati** mostra un grafico a torta complessivo e, per ogni materia, quante domande sono **Le so**, **Da ripetere**, **Non le so** e **Da fare**. Calcola inoltre precisione e copertura.
@@ -157,7 +165,13 @@ Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il fi
 
 ## Installazione come app
 
-Dal browser puoi scegliere **Installa app** per aggiungere Quiz 400 VVF 2026 alla schermata iniziale o al desktop. Perché il salvataggio portatile continui a funzionare, avvia sempre prima l'app con il file Windows o macOS e lascia aperta la finestra del server locale.
+Il pulsante **Installa** nell'intestazione apre una guida adatta a telefono e tablet:
+
+- su iPhone e iPad apri il portale in Safari, tocca **Condividi**, poi **Aggiungi alla schermata Home**;
+- su Android e tablet Android apri il portale in Chrome, tocca **⋮**, poi **Installa app** o **Aggiungi a schermata Home**;
+- quando il browser rende disponibile l'installazione automatica, nel popup compare anche **Installa ora**.
+
+La modalità tablet si attiva automaticamente tra 700 e 1180 pixel e adatta colonne, dimensioni dei pulsanti e domande sia in verticale sia in orizzontale. Perché il salvataggio portatile continui a funzionare, avvia sempre prima l'app con il file Windows o macOS e lascia aperta la finestra del server locale.
 
 ## Risoluzione dei problemi
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.3 - 2026-08-12
+
+- Aggiunto il Deep learning opzionale per le prove da 40: le domande corrette vengono sospese fino al completamento della materia, mentre errori e non risposte restano nel ripasso.
+- Separati i cicli adattivi della simulazione ufficiale e della prova guidata, con avanzamento per utente, riepilogo finale e salvataggio nei backup cloud e portatili.
+- Aggiunto al primo accesso un popup informativo che permette di attivare subito il Deep learning o rimandare.
+- Aggiunto il popup **Installa** con istruzioni dedicate a iPhone/iPad, Android e tablet, più il pulsante nativo quando supportato dal browser.
+- Aggiunta una modalità tablet PWA automatica ottimizzata per orientamento verticale e orizzontale.
+- Completato il tema scuro per spiegazioni, correzioni, dialoghi di consegna e abbandono prova, popup e pannelli che potevano mantenere sfondi chiari.
+
 ## 2.1.2 - 2026-08-12
 
 - Aggiunto nelle schermate di accesso, registrazione e recupero password il disclaimer che identifica la piattaforma come gratuita, amatoriale, non ufficiale e non collegata al Ministero dell'Interno o al Corpo Nazionale dei Vigili del Fuoco.

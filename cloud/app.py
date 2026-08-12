@@ -39,7 +39,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.1.2"
+    APP_VERSION = "2.1.3"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -266,7 +266,7 @@ def audit(db: Session, action: str, request: Request, actor: str | None = None, 
 
 
 def empty_state() -> dict[str, Any]:
-    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system"}
+    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system", "deepLearning": {"enabled": False, "tracks": {}}, "deepLearningIntroSeen": False}
 
 
 def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:

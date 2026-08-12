@@ -93,6 +93,13 @@ def test_complete_cloud_account_and_statistics_flow():
             "examPresets": [{"id": "preset-mario", "name": "Prova personale", "plan": {"storia": 8, "logica": 11, "insiemi": 1, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4, "brani": 0}}],
             "activeExamPresetId": "preset-mario",
             "theme": "dark",
+            "deepLearning": {
+                "enabled": True,
+                "tracks": {
+                    "exam:chimica": {"cycle": 1, "size": 1677, "mastered": ["25290564"]}
+                },
+            },
+            "deepLearningIntroSeen": True,
         }
         save = user_client.put("/api/cloud/state", json={"state": state})
         assert save.status_code == 200
@@ -120,6 +127,10 @@ def test_complete_cloud_account_and_statistics_flow():
         assert admin_client.get("/api/auth/me").json()["user"]["state"]["examPresets"] == []
         assert user_client.get("/api/auth/me").json()["user"]["state"]["theme"] == "dark"
         assert admin_client.get("/api/auth/me").json()["user"]["state"]["theme"] == "system"
+        assert user_client.get("/api/auth/me").json()["user"]["state"]["deepLearning"]["enabled"] is True
+        assert admin_client.get("/api/auth/me").json()["user"]["state"]["deepLearning"]["enabled"] is False
+        assert user_client.get("/api/auth/me").json()["user"]["state"]["deepLearningIntroSeen"] is True
+        assert admin_client.get("/api/auth/me").json()["user"]["state"]["deepLearningIntroSeen"] is False
 
         statistics = admin_client.get(f"/api/admin/users/{user_id}/statistics")
         assert statistics.status_code == 200
