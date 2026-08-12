@@ -60,9 +60,11 @@ Le domande sono presentate nell'ordine originale. Puoi interrompere la sessione 
 - **Non la so**;
 - **Non risposta**.
 
+Una risposta errata viene inserita subito in **Da ripetere**. Puoi poi scegliere manualmente **Non la so** quando vuoi segnalare una lacuna più netta.
+
 ### Prova guidata da 40 domande
 
-Usa la stessa composizione della simulazione ufficiale. Dopo ogni risposta mostra subito esito, soluzione corretta e spiegazione. I pulsanti **Indietro** e **Continua** sono disponibili sia sopra sia sotto la spiegazione. Alla fine mostra punteggio, calcolo applicato e correzione completa.
+Usa la stessa composizione della simulazione ufficiale. Dopo ogni risposta mostra subito esito e soluzione corretta; la spiegazione è disponibile in una tendina da aprire solo quando serve. I pulsanti **Indietro** e **Continua** sono disponibili sia sopra sia sotto la spiegazione. Alla fine mostra punteggio, calcolo applicato e correzione completa.
 
 Composizione: 8 Storia, 11 Logica, 1 Insiemi, 6 Fisica, 6 Chimica, 4 Informatica e 4 Inglese.
 
@@ -95,15 +97,17 @@ Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Lo
 - avviso quando si cambia menu: scegliendo di uscire, la prova viene eliminata e non riprende più;
 - correzione completa alla fine, con risposte corrette, errate e non date.
 
-Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Il cronometro è allineato a destra, scorre normalmente senza coprire i contenuti e cambia colore con il tempo rimanente: verde, giallo, arancione e rosso lampeggiante negli ultimi 10 minuti. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna. I quiz guidati per singola materia da 15, 30 o 50 domande restano invece senza limite di tempo.
+Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Il cronometro è allineato a destra, scorre normalmente senza coprire i contenuti e cambia colore con il tempo rimanente: verde, giallo, arancione e rosso lampeggiante negli ultimi 10 minuti. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna.
 
-Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e spiegazione disponibile.
+Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e la spiegazione in una tendina richiudibile.
 
 Le spiegazioni vengono presentate con paragrafi, elenchi, accenti e simboli ripuliti. Per i quesiti per i quali la fonte non fornisce una spiegazione testuale, l'app indica chiaramente che non è disponibile.
 
 ## Progressi e ripasso
 
-La pagina Progressi mostra quante domande sono state svolte e la situazione per materia. I filtri permettono di esercitarsi solo sulle domande da ripetere, non conosciute o mai risposte. Lo storico conserva i risultati delle ultime simulazioni.
+La pagina **Progressi e risultati** mostra un grafico a torta complessivo e, per ogni materia, quante domande sono **Le so**, **Da ripetere**, **Non le so** e **Da fare**. Calcola inoltre precisione e copertura.
+
+Lo storico conserva separatamente i risultati delle simulazioni ufficiali, delle prove guidate e dei quiz per materia. L'app confronta errori, precisione e livello di padronanza per individuare le materie più carenti e propone pulsanti di esercitazione mirata sul gruppo più utile.
 
 La rotazione dei quesiti viene salvata nel profilo. Una prova da 40 in corso viene salvata separatamente per ogni utente: ricaricando la pagina si ritrovano domanda, risposte e tempo effettivamente rimasto. Una volta conclusa, la successiva estrazione prosegue con domande nuove. Il percorso completo per argomento resta invece intenzionalmente nell'ordine originale.
 

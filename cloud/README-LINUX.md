@@ -109,7 +109,8 @@ In **Impostazioni > Utenti e statistiche** l'admin può:
 - eliminare definitivamente un account e il suo percorso;
 - generare una password temporanea;
 - vedere domande svolte, conosciute, da ripetere e non conosciute;
-- vedere simulazioni, punteggio medio/migliore, dettaglio per materia e ultime sessioni.
+- vedere simulazioni, prove guidate e quiz per materia, con precisione media e ultime sessioni;
+- vedere per ogni materia domande note, da ripetere, non note, ancora da fare e precisione.
 
 Il sistema impedisce di disattivare o eliminare il proprio account e garantisce che resti almeno un amministratore attivo.
 
