@@ -167,9 +167,6 @@ Dal browser puoi scegliere **Installa app** per aggiungere Quiz 400 VVF 2026 all
 - **Windows mostra un avviso SmartScreen:** gli EXE non sono firmati digitalmente; verifica che il pacchetto provenga dalla release GitHub del progetto, quindi scegli **Ulteriori informazioni > Esegui comunque**.
 - **I progressi non compaiono:** controlla di aver avviato la stessa cartella e di non aver eliminato `portable-data`.
 
-## Dataset e uso autorizzato
-
-Il pacchetto include 11.070 quesiti e 274 diagrammi. La sessione Chrome e le credenziali Mininterno non sono incluse né esportate. Prima di distribuire pubblicamente l'app o la banca dati, conserva la prova dell'autorizzazione e verifica che copra riproduzione e distribuzione dei contenuti.
 
 ## Nota di sicurezza
 
