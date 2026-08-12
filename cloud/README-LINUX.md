@@ -23,7 +23,7 @@ Installa Git se necessario, clona il progetto e avvia l'installatore:
 sudo apt update && sudo apt install -y git
 git clone https://github.com/Den901/quiz-400-vvf-2026.git
 cd quiz-400-vvf-2026
-chmod +x cloud/install-linux.sh cloud/configure-ports.sh cloud/update-linux.sh cloud/backup-linux.sh
+chmod +x cloud/install-linux.sh cloud/install-port-control.sh cloud/apply-port-request.sh cloud/configure-ports.sh cloud/update-linux.sh cloud/backup-linux.sh
 sudo ./cloud/install-linux.sh
 ```
 
@@ -68,15 +68,25 @@ Il reverse proxy deve trasmettere `Host`, `X-Forwarded-For` e `X-Forwarded-Proto
 
 ### Controllare o cambiare porta
 
+Con Caddy installato direttamente sul server puoi abilitare il cambio porta dal pannello:
+
+```bash
+sudo ./cloud/install-port-control.sh quiz.tuodominio.it
+```
+
+Dopo l'installazione, la voce **Admin > Porte e HTTPS** permette di scegliere la nuova porta backend. Un servizio host separato verifica che sia libera, ricrea il backend, aggiorna Caddy e ripristina la porta precedente se qualcosa non riesce. Il portale non accede mai direttamente al socket Docker. La porta pubblica HTTPS resta sempre 443.
+
+Resta disponibile anche la procedura da terminale:
+
 ```bash
 sudo ./cloud/configure-ports.sh
 ```
 
-Lo script mostra la modalità attuale, controlla se la nuova porta è occupata, ricrea soltanto i servizi interessati e ripristina automaticamente la configurazione precedente se il cambio non riesce. Le porte effettive sono visibili anche in **Impostazioni Cloud > Porte e HTTPS**.
+Lo script mostra la modalità attuale, controlla se la nuova porta è occupata, ricrea soltanto i servizi interessati e ripristina automaticamente la configurazione precedente se il cambio non riesce. Le porte effettive sono visibili anche in **Admin > Porte e HTTPS**.
 
 ## Configurare DuckDNS e HTTPS
 
-Nel portale apri **Impostazioni > Impostazioni Cloud** e compila:
+Nel portale apri **Admin > Impostazioni Cloud** e compila:
 
 - **Dominio**: per esempio `mioquiz` oppure `mioquiz.duckdns.org`;
 - **Token DuckDNS**;
@@ -102,7 +112,7 @@ Il link di recupero è monouso. Un reset invalida le sessioni precedenti e obbli
 
 ## Gestione utenti e statistiche
 
-In **Impostazioni > Utenti e statistiche** l'admin può:
+In **Admin > Utenti e statistiche** l'admin può:
 
 - creare utenti o altri amministratori;
 - disattivare e riattivare account;

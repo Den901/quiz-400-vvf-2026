@@ -14,6 +14,8 @@
 .network-status{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid #bbddc5;border-radius:12px;background:#f0fdf4}
 .network-status b{color:#166534}
 .network-status span{color:var(--muted);font-size:12px;text-align:right}
+.port-control{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px;align-items:end;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
+.port-control label{margin:0}.port-control .meta{grid-column:1/-1;margin:0}.port-control button{min-height:47px}
 .cloud-totals{margin:12px 0}
 .cloud-user-card{display:grid;gap:14px}
 .cloud-user-card.inactive{opacity:.66}
@@ -32,4 +34,4 @@
 .cloud-category-stat span{color:var(--muted);font-size:11px}
 .cloud-stats-dialog .history{padding:10px;border-bottom:1px solid var(--line);margin:0}
 .cloud-mode .close-app,.cloud-mode .update-check-button{display:none!important}
-@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.cloud-user-stats{grid-template-columns:repeat(2,1fr)}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}
+@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.port-control{grid-template-columns:1fr}.port-control .meta{grid-column:1}.cloud-user-stats{grid-template-columns:repeat(2,1fr)}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}

@@ -15,7 +15,7 @@ chmod +x cloud/install-linux.sh
 sudo ./cloud/install-linux.sh
 ```
 
-L'installatore controlla le porte occupate e supporta sia HTTPS incluso sia un reverse proxy esistente che mantiene la porta pubblica 443. Dominio DuckDNS, URL pubblico, registrazioni, durata sessioni e posta SMTP si configurano da **Impostazioni Cloud**. Per configurazione proxy, cambio porte, backup e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
+L'installatore controlla le porte occupate e supporta sia HTTPS incluso sia un reverse proxy esistente che mantiene la porta pubblica 443. La voce **Admin**, visibile soltanto agli amministratori, riunisce utenti, statistiche, dominio DuckDNS, registrazioni, durata sessioni, posta SMTP e porte. Per configurazione proxy, cambio porte, backup e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
 
 ## Windows: versione EXE senza Python
 
@@ -149,7 +149,7 @@ Quando trova una nuova versione, compare un popup con **Aggiorna ora** e **Più 
 
 ## Utenti e percorsi personali
 
-La gestione degli account si trova in **Impostazioni > Utenti e statistiche**. Da questa sezione l'amministratore crea, disattiva e riattiva gli utenti e vede un riepilogo delle attività.
+La gestione degli account si trova nella voce **Admin > Utenti e statistiche**. Da questa sezione l'amministratore crea, disattiva e riattiva gli utenti e vede un riepilogo delle attività. La voce Admin non compare negli account normali.
 
 Ogni account conserva in modo indipendente domande svolte, stato “La so / Da ripetere / Non la so”, quiz non risposti, rotazioni, punteggi e storico delle simulazioni. Quando un utente accede vede soltanto il proprio percorso e le proprie statistiche.
 

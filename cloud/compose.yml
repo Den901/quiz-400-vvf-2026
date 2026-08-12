@@ -33,12 +33,15 @@ services:
       PUBLIC_APP_PORT: ${APP_PORT:-8088}
       PUBLIC_APP_BIND_ADDRESS: ${APP_BIND_ADDRESS:-127.0.0.1}
       PUBLIC_PROXY_MODE: ${PROXY_MODE:-bundled}
+      PORT_CONTROL_DIR: ${PORT_CONTROL_CONTAINER_DIR:-}
     depends_on:
       database:
         condition: service_healthy
     expose: ["8000"]
     ports:
       - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8088}:8000"
+    volumes:
+      - ./control:/srv/quiz400-control
     networks: [internal]
 
   caddy:

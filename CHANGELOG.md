@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.1.1 - 2026-08-12
+
+- Aggiunta la voce **Admin** nella navigazione, visibile esclusivamente agli amministratori.
+- Riunite nel pannello Admin gestione utenti, statistiche, registrazioni, DuckDNS, email, backup e configurazione delle prove.
+- Aggiunto il cambio della porta backend direttamente dal pannello sui server con Caddy host configurato.
+- Il cambio porta usa un controllo host separato e limitato: l'app pubblica non riceve accesso al socket Docker.
+- Il controllo verifica la disponibilità della porta, riavvia il solo backend, aggiorna Caddy e ripristina automaticamente la configurazione precedente in caso di errore.
+- HTTPS pubblico continua a usare la porta 443 anche quando cambia la porta interna dell'app.
+
 ## 2.1.0 - 2026-08-12
 
 - Ogni risposta errata viene inserita immediatamente in “Da ripetere”; “Non la so” resta disponibile come classificazione manuale.
