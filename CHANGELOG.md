@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.0 - 2026-08-12
+
+- Aggiunta installazione Linux cloud con Docker Compose, PostgreSQL e HTTPS automatico tramite Caddy.
+- Aggiunte registrazione pubblica, login con sessione protetta e percorso sincronizzato fra dispositivi.
+- Aggiunti recupero password via email SMTP configurabile e reset manuale con password temporanea da parte dell'admin.
+- Aggiunti profilo personale e cambio password obbligatorio dopo un reset amministrativo.
+- Aggiunta gestione centralizzata degli account: creazione, disattivazione, riattivazione, ruolo ed eliminazione.
+- Aggiunta dashboard admin con progressi, livelli di conoscenza, simulazioni, punteggi, materie e ultime attività per ogni utente.
+- Aggiunta configurazione admin di portale, registrazioni, sessioni, DuckDNS, SMTP, URL pubblico e informativa breve.
+- Aggiunto aggiornamento automatico DuckDNS con token cifrato e test manuale dal pannello.
+- Aggiunti backup/ripristino cloud, backup PostgreSQL e migrazioni del database per aggiornamenti futuri.
+- Mantenuta la compatibilità con le versioni portatili Windows, EXE e macOS.
+
 ## 1.2.0 - 2026-08-11
 
 - Aggiunto il pacchetto Windows con `Quiz-400-VVF-2026.exe`, utilizzabile senza installare Python.

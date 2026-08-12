@@ -1,0 +1,32 @@
+.auth-links{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.auth-links a{color:var(--red);font-weight:750;text-decoration:none}
+.cloud-narrow{max-width:620px}
+.cloud-settings{margin-bottom:26px}
+.cloud-settings-form{display:grid;gap:18px}
+.cloud-settings-form fieldset{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:0;padding:18px;border:1px solid var(--line);border-radius:16px}
+.cloud-settings-form legend{padding:0 8px;font-size:1.05rem;font-weight:850}
+.cloud-settings-form label{display:grid;gap:6px;font-size:12px;font-weight:800}
+.cloud-settings-form input,.cloud-settings-form textarea{width:100%;min-height:auto;padding:11px 12px;border:1px solid var(--line);border-radius:11px;background:#fff;font:inherit}
+.cloud-settings-form textarea{min-height:90px;resize:vertical}
+.cloud-settings-form .check-label{display:flex;align-items:center;gap:9px;align-self:end;padding:11px 0}
+.cloud-settings-form .check-label input{width:18px;height:18px}
+.cloud-settings-form .full{grid-column:1/-1}
+.cloud-totals{margin:12px 0}
+.cloud-user-card{display:grid;gap:14px}
+.cloud-user-card.inactive{opacity:.66}
+.cloud-user-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.cloud-user-head h3{margin:0 0 5px}
+.cloud-user-head p{margin:3px 0;color:var(--muted);font-size:13px}
+.cloud-user-role{padding:6px 10px;border-radius:99px;background:#fce7e4;color:var(--red);font-size:11px;font-weight:850}
+.cloud-user-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cloud-user-stats span{display:grid;gap:3px;padding:9px;border-radius:10px;background:#f5f1ec;color:var(--muted);font-size:10px;text-align:center}
+.cloud-user-stats b{color:var(--ink);font-size:18px}
+.cloud-user-actions{display:flex;gap:7px;flex-wrap:wrap}
+.cloud-stats-dialog{width:min(100%,760px)}
+.cloud-stats-dialog>h3{margin:24px 0 10px}
+.cloud-category-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.cloud-category-stat{display:grid;gap:4px;padding:11px;border:1px solid var(--line);border-radius:11px}
+.cloud-category-stat span{color:var(--muted);font-size:11px}
+.cloud-stats-dialog .history{padding:10px;border-bottom:1px solid var(--line);margin:0}
+.cloud-mode .close-app,.cloud-mode .update-check-button{display:none!important}
+@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.cloud-user-stats{grid-template-columns:repeat(2,1fr)}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}
