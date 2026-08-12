@@ -38,7 +38,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.1.0"
+    APP_VERSION = "2.1.1"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -54,6 +54,7 @@ DEPLOYMENT_HTTPS_PORT = environment_port("PUBLIC_HTTPS_PORT", 443)
 DEPLOYMENT_APP_PORT = environment_port("PUBLIC_APP_PORT", 8088)
 DEPLOYMENT_BIND_ADDRESS = os.environ.get("PUBLIC_APP_BIND_ADDRESS", "127.0.0.1")
 DEPLOYMENT_PROXY_MODE = "external" if os.environ.get("PUBLIC_PROXY_MODE") == "external" else "bundled"
+PORT_CONTROL_DIR = Path(os.environ["PORT_CONTROL_DIR"]).resolve() if os.environ.get("PORT_CONTROL_DIR") else None
 SESSION_COOKIE = "q400_session"
 MAX_STATE_BYTES = 8 * 1024 * 1024
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
@@ -210,6 +211,17 @@ def set_setting(db: Session, key: str, value: Any) -> None:
         row.value = stored
     else:
         db.add(Setting(key=key, value=stored))
+
+
+def port_control_status() -> dict[str, Any]:
+    if not PORT_CONTROL_DIR:
+        return {"available": False, "state": "disabled"}
+    status_file = PORT_CONTROL_DIR / "status.json"
+    try:
+        data = json.loads(status_file.read_text(encoding="utf-8"))
+        return {"available": True, **(data if isinstance(data, dict) else {})}
+    except (OSError, ValueError, json.JSONDecodeError):
+        return {"available": True, "state": "ready"}
 
 
 def public_settings(db: Session) -> dict[str, Any]:
@@ -374,6 +386,10 @@ class AdminUserPatch(BaseModel):
 
 class AdminResetInput(BaseModel):
     password: str | None = Field(default=None, min_length=10, max_length=256)
+
+
+class PortChangeInput(BaseModel):
+    app_port: int = Field(ge=1024, le=65535)
 
 
 class CloudSettingsInput(BaseModel):
@@ -945,7 +961,42 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "deploymentBindAddress": DEPLOYMENT_BIND_ADDRESS,
         "deploymentHttpPort": DEPLOYMENT_HTTP_PORT,
         "deploymentHttpsPort": DEPLOYMENT_HTTPS_PORT,
+        "portControl": port_control_status(),
     }
+
+
+@app.post("/api/admin/network/apply", status_code=202)
+def request_port_change(payload: PortChangeInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if not PORT_CONTROL_DIR:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Il controllo porte dal pannello non è installato su questo server.")
+    if DEPLOYMENT_PROXY_MODE != "external":
+        raise HTTPException(status.HTTP_409_CONFLICT, "Il cambio dal pannello è disponibile soltanto con il reverse proxy esterno configurato.")
+    if payload.app_port == DEPLOYMENT_APP_PORT:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Questa è già la porta backend attiva.")
+    public_url = str(get_setting(db, "public_url") or "")
+    domain = (urlparse(public_url).hostname or "").lower()
+    if not domain or not re.fullmatch(r"[a-z0-9](?:[a-z0-9.-]{0,251}[a-z0-9])?", domain):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Salva prima un URL pubblico valido nelle impostazioni Cloud.")
+    request_id = str(uuid.uuid4())
+    control_request = {
+        "requestId": request_id,
+        "requestedAt": utcnow().isoformat(),
+        "requestedBy": admin.id,
+        "currentPort": DEPLOYMENT_APP_PORT,
+        "appPort": payload.app_port,
+        "domain": domain,
+    }
+    try:
+        PORT_CONTROL_DIR.mkdir(parents=True, exist_ok=True)
+        destination = PORT_CONTROL_DIR / "request.json"
+        temporary = PORT_CONTROL_DIR / f"request-{request_id}.tmp"
+        temporary.write_text(json.dumps(control_request, ensure_ascii=False), encoding="utf-8")
+        temporary.replace(destination)
+    except OSError as error:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Impossibile comunicare con il controllo porte del server.") from error
+    audit(db, "admin.port_change_requested", request, actor=admin.id, target=admin.id, oldPort=DEPLOYMENT_APP_PORT, newPort=payload.app_port)
+    db.commit()
+    return {"message": "Cambio porta richiesto. Il portale verrà riavviato per pochi secondi.", "requestId": request_id, "port": payload.app_port}
 
 
 @app.put("/api/admin/settings")

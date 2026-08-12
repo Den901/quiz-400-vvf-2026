@@ -11,5 +11,6 @@ Avvia-FuocoQuiz-Windows.bat
 Avvia-FuocoQuiz-macOS.command
 icon.svg
 cloud/.env
+cloud/control/
 cloud/backups/
 cloud-data.sqlite3

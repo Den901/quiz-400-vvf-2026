@@ -6,6 +6,10 @@ from unittest.mock import AsyncMock, patch
 TEST_DB = Path(__file__).resolve().parents[2] / "tmp" / "cloud-test.sqlite3"
 TEST_DB.parent.mkdir(parents=True, exist_ok=True)
 TEST_DB.unlink(missing_ok=True)
+PORT_CONTROL_DIR = TEST_DB.parent / "cloud-port-control-test"
+PORT_CONTROL_DIR.mkdir(parents=True, exist_ok=True)
+for item in PORT_CONTROL_DIR.iterdir():
+    item.unlink()
 os.environ["DATABASE_URL"] = f"sqlite:///{TEST_DB.as_posix()}"
 os.environ["APP_SECRET"] = "test-secret-for-cloud-integration"
 os.environ["ADMIN_USERNAME"] = "admin"
@@ -16,6 +20,7 @@ os.environ["Q400_ENV"] = "test"
 os.environ["PUBLIC_PROXY_MODE"] = "external"
 os.environ["PUBLIC_APP_PORT"] = "18088"
 os.environ["PUBLIC_APP_BIND_ADDRESS"] = "127.0.0.1"
+os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
@@ -125,12 +130,21 @@ def test_complete_cloud_account_and_statistics_flow():
         assert settings.json()["deploymentProxyMode"] == "external"
         assert settings.json()["deploymentAppPort"] == 18088
         assert settings.json()["deploymentBindAddress"] == "127.0.0.1"
+        assert settings.json()["portControl"]["available"] is True
         assert "token-segreto-test" not in settings.text
         assert "smtp-secret-test" not in settings.text
         assert public_client.get("/api/internal/tls-allowed?domain=quiz-test.duckdns.org").status_code == 204
         assert public_client.get("/api/internal/tls-allowed?domain=evil.example.com").status_code == 403
         assert public_client.get("/api/runtime").json()["registrationEnabled"] is False
         assert public_client.get("/api/runtime").json()["emailResetEnabled"] is True
+
+        assert user_client.post("/api/admin/network/apply", json={"app_port": 18089}).status_code == 403
+        port_change = admin_client.post("/api/admin/network/apply", json={"app_port": 18089})
+        assert port_change.status_code == 202
+        port_request = __import__("json").loads((PORT_CONTROL_DIR / "request.json").read_text(encoding="utf-8"))
+        assert port_request["currentPort"] == 18088
+        assert port_request["appPort"] == 18089
+        assert port_request["domain"] == "quiz-test.duckdns.org"
 
         recovery_token = "R" * 48
         with patch("cloud.app.secrets.token_urlsafe", return_value=recovery_token), patch(

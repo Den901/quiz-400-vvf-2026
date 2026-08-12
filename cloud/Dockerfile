@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /srv/quiz400
 
-RUN addgroup --system quiz400 && adduser --system --ingroup quiz400 quiz400
+RUN addgroup --system --gid 10001 quiz400 && adduser --system --uid 10001 --ingroup quiz400 quiz400
 
 COPY cloud/requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
