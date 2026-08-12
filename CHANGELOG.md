@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.0.1 - 2026-08-12
+
+- Aggiunto controllo delle porte già utilizzate durante l'installazione Linux.
+- Aggiunta modalità per reverse proxy esistente: HTTPS resta pubblico sulla porta 443 e l'app usa una porta backend libera.
+- Aggiunto cambio porte sicuro con ripristino automatico in caso di errore tramite `cloud/configure-ports.sh`.
+- Aggiunto supporto per reverse proxy sul sistema host, in container o su un'altra macchina.
+- Le porte e la modalità proxy effettive sono ora visibili nel pannello Impostazioni Cloud.
+
 ## 2.0.0 - 2026-08-12
 
 - Aggiunta installazione Linux cloud con Docker Compose, PostgreSQL e HTTPS automatico tramite Caddy.

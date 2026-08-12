@@ -38,7 +38,22 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.0.0"
+    APP_VERSION = "2.0.1"
+
+
+def environment_port(name: str, default: int) -> int:
+    try:
+        value = int(os.environ.get(name, str(default)))
+        return value if 1 <= value <= 65535 else default
+    except ValueError:
+        return default
+
+
+DEPLOYMENT_HTTP_PORT = environment_port("PUBLIC_HTTP_PORT", 80)
+DEPLOYMENT_HTTPS_PORT = environment_port("PUBLIC_HTTPS_PORT", 443)
+DEPLOYMENT_APP_PORT = environment_port("PUBLIC_APP_PORT", 8088)
+DEPLOYMENT_BIND_ADDRESS = os.environ.get("PUBLIC_APP_BIND_ADDRESS", "127.0.0.1")
+DEPLOYMENT_PROXY_MODE = "external" if os.environ.get("PUBLIC_PROXY_MODE") == "external" else "bundled"
 SESSION_COOKIE = "q400_session"
 MAX_STATE_BYTES = 8 * 1024 * 1024
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
@@ -904,6 +919,11 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "smtpPasswordConfigured": bool(get_setting(db, "smtp_password")),
         "smtpFromEmail": get_setting(db, "smtp_from_email"),
         "smtpUseTls": bool(get_setting(db, "smtp_use_tls")),
+        "deploymentProxyMode": DEPLOYMENT_PROXY_MODE,
+        "deploymentAppPort": DEPLOYMENT_APP_PORT,
+        "deploymentBindAddress": DEPLOYMENT_BIND_ADDRESS,
+        "deploymentHttpPort": DEPLOYMENT_HTTP_PORT,
+        "deploymentHttpsPort": DEPLOYMENT_HTTPS_PORT,
     }
 
 

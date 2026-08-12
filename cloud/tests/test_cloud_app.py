@@ -13,6 +13,9 @@ os.environ["ADMIN_NAME"] = "Amministratore Test"
 os.environ["ADMIN_EMAIL"] = "admin@example.com"
 os.environ["ADMIN_PASSWORD"] = "Admin-Sicura-2026!"
 os.environ["Q400_ENV"] = "test"
+os.environ["PUBLIC_PROXY_MODE"] = "external"
+os.environ["PUBLIC_APP_PORT"] = "18088"
+os.environ["PUBLIC_APP_BIND_ADDRESS"] = "127.0.0.1"
 
 from fastapi.testclient import TestClient
 
@@ -112,6 +115,9 @@ def test_complete_cloud_account_and_statistics_flow():
         settings = admin_client.put("/api/admin/settings", json=settings_payload)
         assert settings.status_code == 200
         assert settings.json()["duckdnsTokenConfigured"] is True
+        assert settings.json()["deploymentProxyMode"] == "external"
+        assert settings.json()["deploymentAppPort"] == 18088
+        assert settings.json()["deploymentBindAddress"] == "127.0.0.1"
         assert "token-segreto-test" not in settings.text
         assert "smtp-secret-test" not in settings.text
         assert public_client.get("/api/internal/tls-allowed?domain=quiz-test.duckdns.org").status_code == 204
