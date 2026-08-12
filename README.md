@@ -15,7 +15,7 @@ chmod +x cloud/install-linux.sh
 sudo ./cloud/install-linux.sh
 ```
 
-Dominio DuckDNS, URL pubblico, registrazioni, durata sessioni e posta SMTP si configurano direttamente da **Impostazioni Cloud**. Per requisiti di rete, backup, aggiornamenti e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
+L'installatore controlla le porte occupate e supporta sia HTTPS incluso sia un reverse proxy esistente che mantiene la porta pubblica 443. Dominio DuckDNS, URL pubblico, registrazioni, durata sessioni e posta SMTP si configurano da **Impostazioni Cloud**. Per configurazione proxy, cambio porte, backup e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
 
 ## Windows: versione EXE senza Python
 

@@ -28,19 +28,27 @@ services:
       ADMIN_NAME: ${ADMIN_NAME:-Amministratore}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:?Configurare ADMIN_PASSWORD nel file .env}
+      PUBLIC_HTTP_PORT: ${HTTP_PORT:-80}
+      PUBLIC_HTTPS_PORT: ${HTTPS_PORT:-443}
+      PUBLIC_APP_PORT: ${APP_PORT:-8088}
+      PUBLIC_APP_BIND_ADDRESS: ${APP_BIND_ADDRESS:-127.0.0.1}
+      PUBLIC_PROXY_MODE: ${PROXY_MODE:-bundled}
     depends_on:
       database:
         condition: service_healthy
     expose: ["8000"]
+    ports:
+      - "${APP_BIND_ADDRESS:-127.0.0.1}:${APP_PORT:-8088}:8000"
     networks: [internal]
 
   caddy:
     image: caddy:2.10-alpine
+    profiles: ["bundled-proxy"]
     restart: unless-stopped
     ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
+      - "${HTTP_PORT:-80}:80"
+      - "${HTTPS_PORT:-443}:443"
+      - "${HTTPS_PORT:-443}:443/udp"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
       - caddy_data:/data
