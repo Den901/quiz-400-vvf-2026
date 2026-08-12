@@ -35,7 +35,7 @@ read_env() {
 set_env() {
   local key="$1" value="$2"
   if grep -qE "^${key}=" "${ENV_FILE}"; then
-    sed -i -E "s/^${key}=.*/${key}=${value}/" "${ENV_FILE}"
+    sed -i -E "s|^${key}=.*|${key}=${value}|" "${ENV_FILE}"
   else
     printf '%s=%s\n' "${key}" "${value}" >> "${ENV_FILE}"
   fi
