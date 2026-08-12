@@ -38,7 +38,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.0.1"
+    APP_VERSION = "2.1.0"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -421,7 +421,10 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
     sessions = sessions if isinstance(sessions, list) else []
     values = [item for item in progress.values() if isinstance(item, dict)]
     exams = [item for item in sessions if isinstance(item, dict) and item.get("type") == "exam"]
+    guided = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"guided", "guided-exam"}]
+    subject_quizzes = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"study", "guided"}]
     scores = [float(item.get("score", 0)) for item in exams if isinstance(item.get("score", 0), (int, float))]
+    accuracies = [float(item["accuracy"]) for item in sessions if isinstance(item, dict) and isinstance(item.get("accuracy"), (int, float))]
     return {
         "answered": sum(1 for item in values if int(item.get("attempts", 0) or 0) > 0),
         "known": sum(1 for item in values if item.get("status") == "known"),
@@ -429,26 +432,37 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
         "unknown": sum(1 for item in values if item.get("status") == "unknown"),
         "unanswered": sum(1 for item in values if item.get("status") == "unanswered"),
         "simulations": len(exams),
+        "guidedQuizzes": len(guided),
+        "subjectQuizzes": len(subject_quizzes),
         "sessions": len(sessions),
         "averageScore": round(sum(scores) / len(scores), 2) if scores else None,
         "bestScore": max(scores) if scores else None,
+        "averageAccuracy": round(sum(accuracies) / len(accuracies), 1) if accuracies else None,
     }
 
 
 question_categories: dict[str, str] = {}
+question_category_totals: dict[str, int] = {}
 
 
 def load_question_categories() -> None:
-    global question_categories
+    global question_categories, question_category_totals
     try:
         rows = json.loads((ROOT / "quiz-dataset.json").read_text(encoding="utf-8"))
         question_categories = {str(row["id"]): str(row["category"]) for row in rows if isinstance(row, dict) and row.get("id") and row.get("category")}
+        question_category_totals = {}
+        for category in question_categories.values():
+            question_category_totals[category] = question_category_totals.get(category, 0) + 1
     except (OSError, ValueError):
         question_categories = {}
+        question_category_totals = {}
 
 
-def category_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, int]]:
-    result: dict[str, dict[str, int]] = {}
+def category_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    result: dict[str, dict[str, Any]] = {
+        category: {"total": total, "answered": 0, "known": 0, "review": 0, "unknown": 0, "unanswered": total, "toDo": total, "correctAttempts": 0, "wrongAttempts": 0, "accuracy": None}
+        for category, total in question_category_totals.items()
+    }
     progress = state_data.get("progress", {}) if isinstance(state_data, dict) else {}
     if not isinstance(progress, dict):
         return result
@@ -456,12 +470,19 @@ def category_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, int]]
         if not isinstance(item, dict):
             continue
         category = question_categories.get(str(question_id), "altro")
-        bucket = result.setdefault(category, {"answered": 0, "known": 0, "review": 0, "unknown": 0, "unanswered": 0})
+        bucket = result.setdefault(category, {"total": 0, "answered": 0, "known": 0, "review": 0, "unknown": 0, "unanswered": 0, "toDo": 0, "correctAttempts": 0, "wrongAttempts": 0, "accuracy": None})
         if int(item.get("attempts", 0) or 0) > 0:
             bucket["answered"] += 1
         item_status = str(item.get("status") or "unanswered")
-        if item_status in bucket:
+        if item_status in {"known", "review", "unknown"}:
             bucket[item_status] += 1
+            bucket["unanswered"] = max(0, bucket["unanswered"] - 1)
+            bucket["toDo"] = bucket["unanswered"]
+        bucket["correctAttempts"] += int(item.get("correct", 0) or 0)
+        bucket["wrongAttempts"] += int(item.get("wrong", 0) or 0)
+    for bucket in result.values():
+        graded = bucket["correctAttempts"] + bucket["wrongAttempts"]
+        bucket["accuracy"] = round(bucket["correctAttempts"] / graded * 100) if graded else None
     return result
 
 

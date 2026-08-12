@@ -1,5 +1,17 @@
 # Changelog
 
+## 2.1.0 - 2026-08-12
+
+- Ogni risposta errata viene inserita immediatamente in “Da ripetere”; “Non la so” resta disponibile come classificazione manuale.
+- Ogni materia mostra un grafico a torta con domande note, da ripetere, non note e ancora da fare.
+- Aggiunte precisione, copertura, tentativi e cronologia dei risultati per singola materia.
+- Aggiunte statistiche separate per simulazioni ufficiali, prove guidate e quiz per materia.
+- L’app individua automaticamente le materie più carenti e propone esercitazioni mirate sul gruppo più utile.
+- Le sessioni salvano il dettaglio dei risultati per materia e restano separate per ogni utente, anche nel portale Cloud.
+- Il pannello amministratore Cloud mostra precisione, domande da ripetere e copertura per materia.
+- Le spiegazioni sono ora racchiuse in una tendina e si aprono solo su richiesta, durante il quiz e nel riepilogo finale.
+- Abbandonando una prova guidata a tempo, le risposte della prova non alterano più i progressi personali.
+
 ## 2.0.1 - 2026-08-12
 
 - Aggiunto controllo delle porte già utilizzate durante l'installazione Linux.

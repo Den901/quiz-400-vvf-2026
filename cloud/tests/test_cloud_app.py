@@ -67,11 +67,12 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_client.get("/api/admin/users").status_code == 403
         state = {
             "progress": {
-                "vf20240001": {"attempts": 2, "correct": 2, "wrong": 0, "skipped": 0, "status": "known"},
-                "vf20240002": {"attempts": 1, "correct": 0, "wrong": 1, "skipped": 0, "status": "unknown"},
+                "25290564": {"attempts": 2, "correct": 2, "wrong": 0, "skipped": 0, "status": "known"},
+                "25290565": {"attempts": 1, "correct": 0, "wrong": 1, "skipped": 0, "status": "review"},
             },
             "sessions": [
-                {"type": "exam", "at": "2026-08-12T10:00:00+00:00", "correct": 30, "wrong": 5, "blank": 5, "score": 28.35}
+                {"type": "exam", "at": "2026-08-12T10:00:00+00:00", "correct": 30, "wrong": 5, "blank": 5, "score": 28.35, "accuracy": 86},
+                {"type": "guided-exam", "at": "2026-08-12T11:00:00+00:00", "correct": 32, "wrong": 4, "blank": 4, "score": 30.68, "accuracy": 89},
             ],
         }
         save = user_client.put("/api/cloud/state", json={"state": state})
@@ -83,12 +84,18 @@ def test_complete_cloud_account_and_statistics_flow():
         mario = next(item for item in users.json()["users"] if item["id"] == user_id)
         assert mario["statistics"]["answered"] == 2
         assert mario["statistics"]["simulations"] == 1
+        assert mario["statistics"]["guidedQuizzes"] == 1
+        assert mario["statistics"]["averageAccuracy"] == 87.5
         assert mario["statistics"]["averageScore"] == 28.35
 
         statistics = admin_client.get(f"/api/admin/users/{user_id}/statistics")
         assert statistics.status_code == 200
         assert statistics.json()["summary"]["known"] == 1
-        assert statistics.json()["recentSessions"][0]["score"] == 28.35
+        assert statistics.json()["summary"]["review"] == 1
+        assert statistics.json()["categories"]["chimica"]["total"] == 1677
+        assert statistics.json()["categories"]["chimica"]["toDo"] == 1675
+        assert statistics.json()["categories"]["chimica"]["accuracy"] == 67
+        assert statistics.json()["recentSessions"][0]["type"] == "guided-exam"
 
         assert admin_client.patch(f"/api/admin/users/{user_id}", json={"role": "admin"}).json()["user"]["role"] == "admin"
         assert admin_client.patch(f"/api/admin/users/{user_id}", json={"role": "user"}).json()["user"]["role"] == "user"
