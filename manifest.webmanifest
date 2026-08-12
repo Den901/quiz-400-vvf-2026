@@ -4,7 +4,7 @@
   "description": "Quiz Vigili del Fuoco organizzati per materia, con correzione e statistiche.",
   "start_url": "./#home",
   "display": "standalone",
-  "background_color": "#f7f4ef",
+  "background_color": "#0b0b0c",
   "theme_color": "#b42318",
-  "icons": [{ "src": "logo-vvf.png", "sizes": "1920x1280", "type": "image/png", "purpose": "any" }]
+  "icons": [{ "src": "logo-vvf.jpg", "sizes": "850x850", "type": "image/jpeg", "purpose": "any maskable" }]
 }

@@ -179,4 +179,4 @@ Consulta anche `Guida-Quiz-400-VVF-2026.pdf` per la guida completa impaginata.
 
 ## Creazione degli EXE
 
-Per rigenerare entrambi gli eseguibili su Windows esegui `build-windows-exe.ps1`. Lo script crea un ambiente di compilazione separato, incorpora `logo-vvf.png` come icona e deposita i file in `outputs/windows-exe-dist`. Gli eseguibili compilati non vengono aggiunti al repository: sono distribuiti nel pacchetto Windows delle release.
+Per rigenerare entrambi gli eseguibili su Windows esegui `build-windows-exe.ps1`. Lo script crea un ambiente di compilazione separato, incorpora `logo-vvf.jpg` come icona e deposita i file in `outputs/windows-exe-dist`. Gli eseguibili compilati non vengono aggiunti al repository: sono distribuiti nel pacchetto Windows delle release.

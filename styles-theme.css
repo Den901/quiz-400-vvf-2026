@@ -1,0 +1,21 @@
+.auth-logo{display:block;width:clamp(92px,22vw,150px);aspect-ratio:1;object-fit:contain;border-radius:24px;background:#000;margin:0 0 20px;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.amateur-disclaimer{display:grid;gap:5px;max-width:580px;margin-top:20px;padding:14px 16px;border:1px solid #d6b36b;border-radius:14px;background:#fff8df;color:#6b4300;font-size:12px;line-height:1.5}
+.amateur-disclaimer b{font-size:13px}.amateur-disclaimer span{color:inherit}
+.branding-settings{display:grid;gap:18px;margin-bottom:24px}.branding-settings h2{margin:5px 0 8px}.branding-editor{display:grid;grid-template-columns:150px 1fr;gap:20px;align-items:center}.branding-editor>img{display:block;width:150px;aspect-ratio:1;object-fit:contain;border-radius:22px;background:#000;border:1px solid var(--line)}.branding-editor label{display:grid;gap:8px;font-size:13px;font-weight:800}.branding-editor input{width:100%}
+.theme-button{white-space:nowrap}
+html[data-theme="dark"]{color-scheme:dark;--ink:#f6f2ee;--muted:#b9b0a9;--cream:#0b0b0c;--card:#171719;--line:#343035;--red:#ef6257;--red2:#ff6b61;--green:#45c98b;--amber:#f7b955;--shadow:0 12px 30px rgba(0,0,0,.28)}
+html[data-theme="dark"] .topbar{background:rgba(11,11,12,.92)}
+html[data-theme="dark"] .bottom-nav{background:rgba(17,17,19,.96)}
+html[data-theme="dark"] input,html[data-theme="dark"] textarea,html[data-theme="dark"] select,html[data-theme="dark"] input[type=file],html[data-theme="dark"] .cloud-settings-form input,html[data-theme="dark"] .cloud-settings-form textarea,html[data-theme="dark"] .auth-card input,html[data-theme="dark"] .admin-form input,html[data-theme="dark"] .admin-form select{background:#111113;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .secondary,html[data-theme="dark"] .cat-icon{background:#3a1c1b;color:#ffaca5}
+html[data-theme="dark"] .answer .letter,html[data-theme="dark"] .feedback,html[data-theme="dark"] .progress,html[data-theme="dark"] .cloud-user-stats span,html[data-theme="dark"] .cloud-average-grid .stat,html[data-theme="dark"] .question-overview,html[data-theme="dark"] .preset-row{background:#242125}
+html[data-theme="dark"] .answer.correct{background:#123125}html[data-theme="dark"] .answer.wrong,html[data-theme="dark"] .answer.picked{background:#3a1b1d}
+html[data-theme="dark"] .quick.accent,html[data-theme="dark"] .hero{background:linear-gradient(145deg,#161116,#3d1718 65%,#70221f)}
+html[data-theme="dark"] .rotation-card,html[data-theme="dark"] .guided-card,html[data-theme="dark"] .trainer-feedback,html[data-theme="dark"] .result-review-item{background:#1d1b1e!important}
+html[data-theme="dark"] .network-status,html[data-theme="dark"] .smtp-status.success{background:#10281d;border-color:#285c42;color:#8ce0b5}
+html[data-theme="dark"] .smtp-status.warning,html[data-theme="dark"] .amateur-disclaimer{background:#332a12;border-color:#826824;color:#f7d98b}
+html[data-theme="dark"] .smtp-status.error,html[data-theme="dark"] .notice{background:#39191b;border-color:#8b3536;color:#ffc2bd}
+html[data-theme="dark"] .cloud-user-role{background:#3a1c1b;color:#ffaca5}
+html[data-theme="dark"] .cloud-average-grid .highlight{background:#4a2020;color:#ffc0ba}
+html[data-theme="dark"] .status-chip.known{background:#123125;color:#8ce0b5}html[data-theme="dark"] .status-chip.review{background:#392e15;color:#f7d98b}html[data-theme="dark"] .status-chip.unknown{background:#3a1b1d;color:#ffc0ba}html[data-theme="dark"] .status-chip.unanswered{background:#29262a;color:#d1c8c2}
+@media(max-width:650px){.branding-editor{grid-template-columns:1fr}.branding-editor>img{width:min(52vw,180px);margin:auto}.theme-button span{display:none}.auth-logo{margin-inline:auto}.amateur-disclaimer{text-align:left}}

@@ -17,13 +17,17 @@
 .port-control{display:grid;grid-template-columns:minmax(180px,1fr) auto;gap:12px;align-items:end;padding:14px;border:1px solid var(--line);border-radius:14px;background:#fff}
 .port-control label{margin:0}.port-control .meta{grid-column:1/-1;margin:0}.port-control button{min-height:47px}
 .cloud-totals{margin:12px 0}
+.cloud-admin-summary,.cloud-average-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.cloud-admin-summary .stat,.cloud-average-grid .stat{display:grid;gap:5px;align-content:center;min-height:82px;text-align:center}
+.cloud-average-grid .stat{padding:12px;border-radius:12px;background:#f5f1ec}
+.cloud-average-grid .highlight{background:#fce7e4;color:var(--red)}
 .cloud-user-card{display:grid;gap:14px}
 .cloud-user-card.inactive{opacity:.66}
 .cloud-user-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
 .cloud-user-head h3{margin:0 0 5px}
 .cloud-user-head p{margin:3px 0;color:var(--muted);font-size:13px}
 .cloud-user-role{padding:6px 10px;border-radius:99px;background:#fce7e4;color:var(--red);font-size:11px;font-weight:850}
-.cloud-user-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.cloud-user-stats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
 .cloud-user-stats span{display:grid;gap:3px;padding:9px;border-radius:10px;background:#f5f1ec;color:var(--muted);font-size:10px;text-align:center}
 .cloud-user-stats b{color:var(--ink);font-size:18px}
 .cloud-user-actions{display:flex;gap:7px;flex-wrap:wrap}
@@ -32,6 +36,12 @@
 .cloud-category-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 .cloud-category-stat{display:grid;gap:4px;padding:11px;border:1px solid var(--line);border-radius:11px}
 .cloud-category-stat span{color:var(--muted);font-size:11px}
+.cloud-category-stat .quiz-average-line{padding-top:6px;border-top:1px dashed var(--line);color:var(--ink)}
+.smtp-status{display:grid;gap:4px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:12px}
+.smtp-status.warning{border-color:#f0c36a;background:#fff8df;color:#784b00}
+.smtp-status.success{border-color:#bbddc5;background:#f0fdf4;color:#166534}
+.smtp-status.error{border-color:#efaaa4;background:#fff1f0;color:#991b1b}
 .cloud-stats-dialog .history{padding:10px;border-bottom:1px solid var(--line);margin:0}
 .cloud-mode .close-app,.cloud-mode .update-check-button{display:none!important}
-@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.port-control{grid-template-columns:1fr}.port-control .meta{grid-column:1}.cloud-user-stats{grid-template-columns:repeat(2,1fr)}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}
+@media(max-width:900px){.cloud-admin-summary,.cloud-average-grid,.cloud-user-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.port-control{grid-template-columns:1fr}.port-control .meta{grid-column:1}.cloud-admin-summary,.cloud-average-grid,.cloud-user-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}
