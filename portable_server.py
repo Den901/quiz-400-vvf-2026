@@ -15,6 +15,11 @@ from pathlib import Path
 FROZEN = bool(getattr(sys, "frozen", False))
 ROOT = Path(sys.executable).resolve().parent if FROZEN else Path(__file__).resolve().parent
 DATA_DIR = ROOT / "portable-data"
+if FROZEN:
+    # Gli eseguibili Windows senza console possono esporre stream assenti o
+    # collegati a handle non validi. La libreria HTTP richiede stream scrivibili.
+    sys.stdout = open(os.devnull, "w", encoding="utf-8")
+    sys.stderr = open(os.devnull, "w", encoding="utf-8")
 STATE_FILE = DATA_DIR / "fuocoquiz-state.json"
 VERSION_FILE = ROOT / "version.json"
 LATEST_RELEASE_API = "https://api.github.com/repos/Den901/quiz-400-vvf-2026/releases/latest"
@@ -200,5 +205,6 @@ if __name__ == "__main__":
         raise SystemExit(0)
     if not os.environ.get("QUIZ_NO_BROWSER"):
         threading.Timer(0.8, lambda: webbrowser.open(f"http://{HOST}:{PORT}/")).start()
-    print("Quiz 400 VVF 2026 avviato. Lascia aperta questa finestra; Ctrl+C per chiudere.")
+    if sys.stdout is not None:
+        print("Quiz 400 VVF 2026 avviato. Lascia aperta questa finestra; Ctrl+C per chiudere.")
     server.serve_forever()
