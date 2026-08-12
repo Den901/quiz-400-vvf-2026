@@ -1,0 +1,10 @@
+.git
+outputs
+tmp
+work
+portable-data/*.json
+portable-data/backups
+__pycache__
+*.pyc
+cloud-data.sqlite3
+.env

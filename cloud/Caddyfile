@@ -1,0 +1,19 @@
+{
+    admin off
+    on_demand_tls {
+        ask http://app:8000/api/internal/tls-allowed
+    }
+}
+
+http:// {
+    encode zstd gzip
+    reverse_proxy app:8000
+}
+
+https:// {
+    tls {
+        on_demand
+    }
+    encode zstd gzip
+    reverse_proxy app:8000
+}

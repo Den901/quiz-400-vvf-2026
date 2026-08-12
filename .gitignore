@@ -9,3 +9,6 @@ Guida-FuocoQuiz.pdf
 Avvia-FuocoQuiz-Windows.bat
 Avvia-FuocoQuiz-macOS.command
 icon.svg
+cloud/.env
+cloud/backups/
+cloud-data.sqlite3

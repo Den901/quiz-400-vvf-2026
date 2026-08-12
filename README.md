@@ -2,6 +2,21 @@
 
 Applicazione portatile e PWA installabile per esercitarsi sui quiz del concorso Vigili del Fuoco. Funziona su Windows e macOS, si adatta a telefono, tablet e desktop e conserva utenti, progressi, configurazione e statistiche nella cartella dell'app.
 
+## Versione Linux Cloud
+
+La versione 2.0 aggiunge un portale pubblico installabile su Ubuntu/Debian con Docker Compose. Comprende PostgreSQL, HTTPS automatico, supporto DuckDNS, registrazione pubblica, recupero password, dati sincronizzati e un pannello amministratore con gestione account e statistiche dettagliate.
+
+Avvio rapido sul server:
+
+```bash
+git clone https://github.com/Den901/quiz-400-vvf-2026.git
+cd quiz-400-vvf-2026
+chmod +x cloud/install-linux.sh
+sudo ./cloud/install-linux.sh
+```
+
+Dominio DuckDNS, URL pubblico, registrazioni, durata sessioni e posta SMTP si configurano direttamente da **Impostazioni Cloud**. Per requisiti di rete, backup, aggiornamenti e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
+
 ## Windows: versione EXE senza Python
 
 Scarica `Quiz-400-VVF-2026-Windows-EXE.zip`, estrai completamente lo ZIP e fai doppio clic su `Quiz-400-VVF-2026.exe`. Non è necessario installare Python. L'eseguibile usa come icona il logo VVF fornito per il progetto.
@@ -32,7 +47,7 @@ Al primo avvio viene chiesto di creare l'amministratore principale. L'amministra
 - importare dataset autorizzati;
 - utilizzare tutte le modalità di studio e simulazione.
 
-Conserva con cura nome utente e password: non esiste un servizio online per recuperarli.
+Nella versione portatile conserva con cura nome utente e password: il recupero via email è disponibile soltanto nella versione Linux Cloud.
 
 ## Modalità di studio
 
@@ -154,7 +169,7 @@ Il pacchetto include 11.070 quesiti e 274 diagrammi. La sessione Chrome e le cre
 
 ## Nota di sicurezza
 
-Questa versione è pensata per uso locale e portatile. Il server ascolta soltanto sul computer (`127.0.0.1`) e non espone l'app alla rete. Per un servizio pubblico multiutente servono un backend protetto, database, recupero password, backup centralizzati e informativa privacy.
+La modalità portatile ascolta soltanto sul computer (`127.0.0.1`) e non espone l'app alla rete. La modalità Linux Cloud usa invece backend protetto, PostgreSQL, recupero password e backup centralizzati; prima di aprirla al pubblico occorre predisporre l'informativa privacy.
 
 Consulta anche `Guida-Quiz-400-VVF-2026.pdf` per la guida completa impaginata.
 
