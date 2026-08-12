@@ -9,6 +9,8 @@ La versione 2.0 aggiunge un portale pubblico installabile su Ubuntu/Debian con D
 Avvio rapido sul server:
 
 ```bash
+git clone https://github.com/Den901/quiz-400-vvf-2026.git
+cd quiz-400-vvf-2026
 chmod +x cloud/install-linux.sh
 sudo ./cloud/install-linux.sh
 ```

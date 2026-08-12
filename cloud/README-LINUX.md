@@ -18,16 +18,19 @@ La versione portatile Windows/macOS continua a funzionare separatamente.
 
 ## Installazione
 
-Dalla cartella del progetto:
+Installa Git se necessario, clona il progetto e avvia l'installatore:
 
 ```bash
+sudo apt update && sudo apt install -y git
+git clone https://github.com/Den901/quiz-400-vvf-2026.git
+cd quiz-400-vvf-2026
 chmod +x cloud/install-linux.sh cloud/update-linux.sh cloud/backup-linux.sh
 sudo ./cloud/install-linux.sh
 ```
 
 Lo script:
 
-1. installa Docker su Debian/Ubuntu se manca;
+1. installa Docker Engine e Compose dal repository ufficiale Docker se mancano;
 2. chiede l'account del primo amministratore;
 3. genera segreti casuali per database e cifratura;
 4. crea `cloud/.env` con permessi riservati;
