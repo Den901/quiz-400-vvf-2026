@@ -19,3 +19,25 @@ html[data-theme="dark"] .cloud-user-role{background:#3a1c1b;color:#ffaca5}
 html[data-theme="dark"] .cloud-average-grid .highlight{background:#4a2020;color:#ffc0ba}
 html[data-theme="dark"] .status-chip.known{background:#123125;color:#8ce0b5}html[data-theme="dark"] .status-chip.review{background:#392e15;color:#f7d98b}html[data-theme="dark"] .status-chip.unknown{background:#3a1b1d;color:#ffc0ba}html[data-theme="dark"] .status-chip.unanswered{background:#29262a;color:#d1c8c2}
 @media(max-width:650px){.branding-editor{grid-template-columns:1fr}.branding-editor>img{width:min(52vw,180px);margin:auto}.theme-button span{display:none}.auth-logo{margin-inline:auto}.amateur-disclaimer{text-align:left}}
+html[data-theme="dark"] body,html[data-theme="dark"] .delivery-confirm-card,html[data-theme="dark"] .install-dialog{background:var(--cream);color:var(--ink)}
+html[data-theme="dark"] .delivery-confirm-card,html[data-theme="dark"] .install-dialog,html[data-theme="dark"] .update-dialog{background:var(--card);border-color:var(--line)}
+html[data-theme="dark"] .delivery-confirm-card p,html[data-theme="dark"] .install-lead{color:var(--muted)}
+html[data-theme="dark"] .explanation-details{background:#201e21;border-color:#484148}
+html[data-theme="dark"] .explanation-details>summary{background:#201e21;color:var(--ink)}
+html[data-theme="dark"] .explanation-details[open]>summary{background:#2b272c;border-color:#484148}
+html[data-theme="dark"] .explanation-details .explanation-copy{background:#171719;color:var(--ink)}
+html[data-theme="dark"] .review-answer{background:#3a1b1d;color:var(--ink)}
+html[data-theme="dark"] .review-answer.correct-text{background:#123125;color:var(--ink)}
+html[data-theme="dark"] .review-explanation,html[data-theme="dark"] .score-formula,html[data-theme="dark"] .tablet-install-note{background:#242125;color:var(--ink);border-color:#494148}
+html[data-theme="dark"] .review-tabs{background:var(--cream)}html[data-theme="dark"] .review-tabs a{background:#242125;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .mastery-summary{background:linear-gradient(135deg,#171719,#21191a)}html[data-theme="dark"] .mastery-pie::before{background:var(--card)}
+html[data-theme="dark"] .preset-row.active{background:#10281d;border-color:#285c42}html[data-theme="dark"] .preset-active-badge{background:#123125;color:#8ce0b5}
+html[data-theme="dark"] .deep-learning-card,html[data-theme="dark"] .deep-learning-result{background:linear-gradient(145deg,#151c29,#171719);border-color:#345686}
+html[data-theme="dark"] .deep-learning-note{background:#17243a;color:#b7d0ff}html[data-theme="dark"] .deep-learning-progress{background:#242125;border-color:#3f536f}
+html[data-theme="dark"] .mode-deep-badge{background:#17243a;color:#b7d0ff}
+html[data-theme="dark"] .install-platform{background:#242125;border-color:var(--line)}html[data-theme="dark"] .install-platform.recommended{background:#17243a;border-color:#345686}
+html[data-theme="dark"] .install-status.success{background:#10281d;border-color:#285c42;color:#8ce0b5}
+html[data-theme="dark"] .question-dot{background:#29262a;color:#d1c8c2;border-color:#5e565e}html[data-theme="dark"] .question-dot.answered{background:#17243a;color:#b7d0ff;border-color:#4d75b7}html[data-theme="dark"] .question-dot.correct{background:#123125;color:#8ce0b5;border-color:#33875c}html[data-theme="dark"] .question-dot.wrong{background:#3a1b1d;color:#ffc0ba;border-color:#a64a4b}html[data-theme="dark"] .question-dot.blank{background:#302b2d;color:#d5ccc6;border-color:#6e6369}
+html[data-theme="dark"] .settings-total,html[data-theme="dark"] .targeted-empty{background:#332a12;border-color:#826824;color:#f7d98b}
+html[data-theme="dark"] .subject-mini-stats .known{background:#123125;color:#8ce0b5}html[data-theme="dark"] .subject-mini-stats .review{background:#392e15;color:#f7d98b}html[data-theme="dark"] .subject-mini-stats .unknown{background:#3a1b1d;color:#ffc0ba}html[data-theme="dark"] .subject-mini-stats .unanswered{background:#29262a;color:#d1c8c2}
+html[data-theme="dark"] textarea,html[data-theme="dark"] input[type=file],html[data-theme="dark"] .port-control{background:#111113;color:var(--ink);border-color:var(--line)}
