@@ -39,7 +39,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.1.3"
+    APP_VERSION = "2.1.4"
 
 
 def environment_port(name: str, default: int) -> int:

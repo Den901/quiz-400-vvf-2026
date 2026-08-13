@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.4 - 2026-08-13
+
+- Separata la gestione **Utenti e statistiche** dalle Impostazioni amministrative.
+- Aggiunta una voce **Utenti** dedicata, visibile esclusivamente agli amministratori, su desktop, tablet e mobile.
+- Mantenute nella nuova pagina tutte le funzioni di creazione e gestione account e le statistiche cloud per singolo utente.
+
 ## 2.1.3 - 2026-08-12
 
 - Aggiunto il Deep learning opzionale per le prove da 40: le domande corrette vengono sospese fino al completamento della materia, mentre errori e non risposte restano nel ripasso.
