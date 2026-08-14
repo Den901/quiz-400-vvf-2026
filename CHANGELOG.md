@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.5 - 2026-08-14
+
+- Resa più leggibile la cronologia con indicatori separati per **Giuste**, **Sbagliate** e **Non risposte**.
+- Aggiunta la revisione completa degli ultimi 5 quiz: domanda, risposta data, soluzione corretta e spiegazione.
+- Limitati ai 5 quiz più recenti i dettagli delle domande per contenere lo spazio occupato, mantenendo punteggi e statistiche di tutta la cronologia.
+- Aggiunto per ogni utente un popup, mostrato una sola volta dopo l'aggiornamento, con il riepilogo delle novità.
+
 ## 2.1.4 - 2026-08-13
 
 - Separata la gestione **Utenti e statistiche** dalle Impostazioni amministrative.

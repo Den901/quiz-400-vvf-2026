@@ -30,6 +30,8 @@ html[data-theme="dark"] .review-answer{background:#3a1b1d;color:var(--ink)}
 html[data-theme="dark"] .review-answer.correct-text{background:#123125;color:var(--ink)}
 html[data-theme="dark"] .review-explanation,html[data-theme="dark"] .score-formula,html[data-theme="dark"] .tablet-install-note{background:#242125;color:var(--ink);border-color:#494148}
 html[data-theme="dark"] .review-tabs{background:var(--cream)}html[data-theme="dark"] .review-tabs a{background:#242125;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .history-counts .correct{background:#153a2b;color:#8ee6b5}html[data-theme="dark"] .history-counts .wrong{background:#48201f;color:#ffaaa4}html[data-theme="dark"] .history-counts .blank{background:#302d31;color:#d4cdd6}
+html[data-theme="dark"] .release-notes-list li{background:#242125;border-color:var(--line)}html[data-theme="dark"] .release-notes-list li:before{background:#153a2b;color:#8ee6b5}
 html[data-theme="dark"] .mastery-summary{background:linear-gradient(135deg,#171719,#21191a)}html[data-theme="dark"] .mastery-pie::before{background:var(--card)}
 html[data-theme="dark"] .preset-row.active{background:#10281d;border-color:#285c42}html[data-theme="dark"] .preset-active-badge{background:#123125;color:#8ce0b5}
 html[data-theme="dark"] .deep-learning-card,html[data-theme="dark"] .deep-learning-result{background:linear-gradient(145deg,#151c29,#171719);border-color:#345686}
