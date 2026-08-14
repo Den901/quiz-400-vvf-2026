@@ -40,7 +40,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.2.0"
+    APP_VERSION = "2.3.0"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -106,6 +106,8 @@ class User(Base):
     must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    privacy_policy_version: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    privacy_acknowledged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     state: Mapped["UserState"] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)
     sessions: Mapped[list["LoginSession"]] = relationship(cascade="all, delete-orphan")
     reset_tokens: Mapped[list["PasswordReset"]] = relationship(cascade="all, delete-orphan")
@@ -193,7 +195,19 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "brand_logo_data": "",
     "brand_logo_mime": "",
     "brand_logo_updated_at": "",
-    "privacy_notice": "I dati sono usati esclusivamente per gestire l'account e il percorso di studio.",
+    "privacy_notice": "Usiamo i dati necessari per gestire account, sicurezza e percorso di studio. Nessuna pubblicità o profilazione commerciale.",
+    "privacy_controller_name": "Titolare della demo",
+    "privacy_controller_address": "",
+    "privacy_contact_email": "privacy@example.com",
+    "privacy_pec_email": "privacy@pec.example.com",
+    "privacy_dpo_contact": "",
+    "privacy_hosting_location": "Italia (server autogestito)",
+    "privacy_email_provider": "Fornitore SMTP configurato dall'amministratore",
+    "privacy_transfer_note": "Le sole email di servizio possono essere trattate dal fornitore SMTP anche fuori dallo Spazio economico europeo, secondo le garanzie applicabili dichiarate dal fornitore.",
+    "privacy_policy_version": "2026-08-14",
+    "privacy_effective_date": "2026-08-14",
+    "privacy_audit_log_days": 180,
+    "privacy_backup_days": 30,
     "exam_config": {"examPlan": {"storia": 8, "logica": 11, "insiemi": 1, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4, "brani": 0}},
 }
 SECRET_SETTING_KEYS = {"duckdns_token", "smtp_password"}
@@ -335,11 +349,29 @@ def inspect_update_archive(path: Path) -> dict[str, Any]:
 def public_settings(db: Session) -> dict[str, Any]:
     logo_version = str(get_setting(db, "brand_logo_updated_at") or "default")
     logo_customized = bool(get_setting(db, "brand_logo_data"))
+    privacy = {
+        "controllerName": get_setting(db, "privacy_controller_name"),
+        "controllerAddress": get_setting(db, "privacy_controller_address"),
+        "contactEmail": get_setting(db, "privacy_contact_email"),
+        "pecEmail": get_setting(db, "privacy_pec_email"),
+        "dpoContact": get_setting(db, "privacy_dpo_contact"),
+        "hostingLocation": get_setting(db, "privacy_hosting_location"),
+        "emailProvider": get_setting(db, "privacy_email_provider"),
+        "transferNote": get_setting(db, "privacy_transfer_note"),
+        "policyVersion": get_setting(db, "privacy_policy_version"),
+        "effectiveDate": get_setting(db, "privacy_effective_date"),
+        "sessionDays": int(get_setting(db, "session_days") or 30),
+        "resetTokenMinutes": int(get_setting(db, "reset_token_minutes") or 30),
+        "auditLogDays": int(get_setting(db, "privacy_audit_log_days") or 180),
+        "backupDays": int(get_setting(db, "privacy_backup_days") or 30),
+    }
+    privacy["complete"] = bool(privacy["controllerName"] and privacy["contactEmail"])
     return {
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "emailResetEnabled": bool(get_setting(db, "smtp_enabled") and get_setting(db, "smtp_host")),
         "privacyNotice": get_setting(db, "privacy_notice"),
+        "privacy": privacy,
         "examConfig": get_setting(db, "exam_config"),
         "logoUrl": f"./api/branding/logo?v={logo_version}",
         "logoCustomized": logo_customized,
@@ -382,6 +414,8 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         "mustChangePassword": user.must_change_password,
         "createdAt": user.created_at.isoformat(),
         "lastLoginAt": user.last_login_at.isoformat() if user.last_login_at else None,
+        "privacyPolicyVersion": user.privacy_policy_version,
+        "privacyAcknowledgedAt": user.privacy_acknowledged_at.isoformat() if user.privacy_acknowledged_at else None,
     }
     if include_state:
         payload["state"] = user.state.data if user.state else empty_state()
@@ -455,6 +489,11 @@ class RegistrationInput(LoginInput):
     email: EmailStr
 
 
+class PublicRegistrationInput(RegistrationInput):
+    privacy_acknowledged: bool
+    privacy_policy_version: str = Field(min_length=1, max_length=40)
+
+
 class ForgotInput(BaseModel):
     account: str = Field(min_length=3, max_length=254)
 
@@ -520,6 +559,18 @@ class CloudSettingsInput(BaseModel):
     session_days: int = Field(ge=1, le=365)
     reset_token_minutes: int = Field(ge=10, le=1440)
     privacy_notice: str = Field(default="", max_length=2000)
+    privacy_controller_name: str = Field(default="", max_length=200)
+    privacy_controller_address: str = Field(default="", max_length=300)
+    privacy_contact_email: EmailStr | None = None
+    privacy_pec_email: EmailStr | None = None
+    privacy_dpo_contact: str = Field(default="", max_length=300)
+    privacy_hosting_location: str = Field(default="", max_length=300)
+    privacy_email_provider: str = Field(default="", max_length=300)
+    privacy_transfer_note: str = Field(default="", max_length=1500)
+    privacy_policy_version: str = Field(min_length=1, max_length=40)
+    privacy_effective_date: str = Field(min_length=10, max_length=10, pattern=r"^\d{4}-\d{2}-\d{2}$")
+    privacy_audit_log_days: int = Field(ge=30, le=730)
+    privacy_backup_days: int = Field(ge=1, le=365)
     duckdns_enabled: bool
     duckdns_domain: str = Field(default="", max_length=80)
     duckdns_token: str = Field(default="", max_length=200)
@@ -815,6 +866,8 @@ def initialize_database() -> None:
             db.add(user)
         db.execute(LoginSession.__table__.delete().where(LoginSession.expires_at <= utcnow()))
         db.execute(PasswordReset.__table__.delete().where(PasswordReset.expires_at <= utcnow()))
+        audit_days = max(30, min(730, int(get_setting(db, "privacy_audit_log_days") or 180)))
+        db.execute(AuditLog.__table__.delete().where(AuditLog.created_at < utcnow() - timedelta(days=audit_days)))
         db.commit()
 
 
@@ -885,6 +938,16 @@ def runtime(db: Session = Depends(get_db)) -> dict[str, Any]:
     except (OSError, ValueError, json.JSONDecodeError):
         release_notes = {}
     return {"mode": "cloud", "version": APP_VERSION, "releaseNotes": release_notes, **public_settings(db)}
+
+
+@app.get("/api/privacy")
+def privacy_information(db: Session = Depends(get_db)) -> dict[str, Any]:
+    settings = public_settings(db)
+    return {
+        "siteName": settings["siteName"],
+        "summary": settings["privacyNotice"],
+        **settings["privacy"],
+    }
 
 
 def decode_logo_data_url(data_url: str) -> tuple[str, bytes, str]:
@@ -971,10 +1034,13 @@ def tls_allowed(domain: str, db: Session = Depends(get_db)) -> Response:
 
 
 @app.post("/api/auth/register", status_code=201)
-def register(payload: RegistrationInput, request: Request, db: Session = Depends(get_db)) -> dict[str, str]:
+def register(payload: PublicRegistrationInput, request: Request, db: Session = Depends(get_db)) -> dict[str, str]:
     enforce_rate_limit(request, "register", 8, 3600)
     if not get_setting(db, "registration_enabled"):
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Le registrazioni sono chiuse.")
+    current_policy_version = str(get_setting(db, "privacy_policy_version") or "")
+    if not payload.privacy_acknowledged or payload.privacy_policy_version != current_policy_version:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Leggi e conferma la presa visione dell'informativa privacy aggiornata.")
     try:
         username = normalize_username(payload.username)
     except ValueError as error:
@@ -982,11 +1048,20 @@ def register(payload: RegistrationInput, request: Request, db: Session = Depends
     email = normalize_email(str(payload.email) if payload.email else None)
     if db.scalar(select(User).where((User.username == username) | ((User.email == email) if email else False))):
         raise HTTPException(status.HTTP_409_CONFLICT, "Nome utente o email già utilizzati.")
-    user = User(username=username, display_name=payload.name.strip(), email=email, password_hash=password_hasher.hash(payload.password), role="user", active=True)
+    user = User(
+        username=username,
+        display_name=payload.name.strip(),
+        email=email,
+        password_hash=password_hasher.hash(payload.password),
+        role="user",
+        active=True,
+        privacy_policy_version=current_policy_version,
+        privacy_acknowledged_at=utcnow(),
+    )
     user.state = UserState(data=empty_state())
     db.add(user)
     db.flush()
-    audit(db, "user.registered", request, target=user.id)
+    audit(db, "user.registered", request, target=user.id, privacyPolicyVersion=current_policy_version)
     db.commit()
     return {"message": "Registrazione completata. Ora puoi accedere."}
 
@@ -1001,7 +1076,7 @@ def login(payload: LoginInput, request: Request, response: Response, db: Session
     except (VerifyMismatchError, InvalidHashError):
         valid = False
     if not user or not valid or not user.active:
-        audit(db, "auth.login_failed", request, target=user.id if user else None, username=username)
+        audit(db, "auth.login_failed", request, target=user.id if user else None, usernameHash=hashlib.sha256(username.encode("utf-8")).hexdigest()[:16])
         db.commit()
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Credenziali non valide.")
     if password_hasher.check_needs_rehash(user.password_hash):
@@ -1028,6 +1103,32 @@ def logout(request: Request, response: Response, db: Session = Depends(get_db)) 
 @app.get("/api/auth/me")
 def me(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
     return {"user": serialize_user(user, include_state=True), "config": get_setting(db, "exam_config")}
+
+
+@app.get("/api/account/data-export")
+def export_personal_data(user: User = Depends(require_user), db: Session = Depends(get_db)) -> JSONResponse:
+    activity = db.scalars(
+        select(AuditLog)
+        .where((AuditLog.actor_user_id == user.id) | (AuditLog.target_user_id == user.id))
+        .order_by(AuditLog.created_at.asc())
+    ).all()
+    payload = {
+        "app": "Quiz 400 VVF 2026",
+        "exportedAt": utcnow().isoformat(),
+        "profile": serialize_user(user),
+        "studyState": user.state.data if user.state else empty_state(),
+        "activityLog": [
+            {
+                "action": row.action,
+                "details": row.details,
+                "ipAddress": row.ip_address,
+                "createdAt": row.created_at.isoformat(),
+            }
+            for row in activity
+        ],
+    }
+    filename = f"quiz400-miei-dati-{utcnow().date().isoformat()}.json"
+    return JSONResponse(payload, headers={"Content-Disposition": f'attachment; filename="{filename}"'})
 
 
 @app.put("/api/auth/profile")
@@ -1247,7 +1348,7 @@ def admin_delete_user(user_id: str, request: Request, admin: User = Depends(requ
         raise HTTPException(status.HTTP_409_CONFLICT, "Non puoi eliminare il tuo account.")
     if target.role == "admin" and db.scalar(select(func.count(User.id)).where(User.role == "admin", User.active.is_(True))) <= 1:
         raise HTTPException(status.HTTP_409_CONFLICT, "Deve rimanere almeno un amministratore attivo.")
-    audit(db, "admin.user_deleted", request, actor=admin.id, target=target.id, username=target.username)
+    audit(db, "admin.user_deleted", request, actor=admin.id, target=target.id)
     db.delete(target)
     db.commit()
     return Response(status_code=204)
@@ -1262,6 +1363,19 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "sessionDays": get_setting(db, "session_days"),
         "resetTokenMinutes": get_setting(db, "reset_token_minutes"),
         "privacyNotice": get_setting(db, "privacy_notice"),
+        "privacyControllerName": get_setting(db, "privacy_controller_name"),
+        "privacyControllerAddress": get_setting(db, "privacy_controller_address"),
+        "privacyContactEmail": get_setting(db, "privacy_contact_email"),
+        "privacyPecEmail": get_setting(db, "privacy_pec_email"),
+        "privacyDpoContact": get_setting(db, "privacy_dpo_contact"),
+        "privacyHostingLocation": get_setting(db, "privacy_hosting_location"),
+        "privacyEmailProvider": get_setting(db, "privacy_email_provider"),
+        "privacyTransferNote": get_setting(db, "privacy_transfer_note"),
+        "privacyPolicyVersion": get_setting(db, "privacy_policy_version"),
+        "privacyEffectiveDate": get_setting(db, "privacy_effective_date"),
+        "privacyAuditLogDays": get_setting(db, "privacy_audit_log_days"),
+        "privacyBackupDays": get_setting(db, "privacy_backup_days"),
+        "privacyComplete": public_settings(db)["privacy"]["complete"],
         "duckdnsEnabled": bool(get_setting(db, "duckdns_enabled")),
         "duckdnsDomain": get_setting(db, "duckdns_domain"),
         "duckdnsTokenConfigured": bool(get_setting(db, "duckdns_token")),
@@ -1489,6 +1603,12 @@ def save_admin_settings(payload: CloudSettingsInput, request: Request, admin: Us
     values = {
         "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "public_url": payload.public_url,
         "session_days": payload.session_days, "reset_token_minutes": payload.reset_token_minutes, "privacy_notice": payload.privacy_notice.strip(),
+        "privacy_controller_name": payload.privacy_controller_name.strip(), "privacy_controller_address": payload.privacy_controller_address.strip(),
+        "privacy_contact_email": str(payload.privacy_contact_email or ""), "privacy_pec_email": str(payload.privacy_pec_email or ""),
+        "privacy_dpo_contact": payload.privacy_dpo_contact.strip(), "privacy_hosting_location": payload.privacy_hosting_location.strip(),
+        "privacy_email_provider": payload.privacy_email_provider.strip(), "privacy_transfer_note": payload.privacy_transfer_note.strip(),
+        "privacy_policy_version": payload.privacy_policy_version.strip(), "privacy_effective_date": payload.privacy_effective_date,
+        "privacy_audit_log_days": payload.privacy_audit_log_days, "privacy_backup_days": payload.privacy_backup_days,
         "duckdns_enabled": payload.duckdns_enabled, "duckdns_domain": payload.duckdns_domain, "duckdns_interval_minutes": payload.duckdns_interval_minutes,
         "smtp_enabled": payload.smtp_enabled, "smtp_host": payload.smtp_host.strip(), "smtp_port": payload.smtp_port,
         "smtp_username": payload.smtp_username.strip(), "smtp_from_email": str(payload.smtp_from_email or ""), "smtp_use_tls": payload.smtp_use_tls,
@@ -1559,7 +1679,20 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     db.execute(UserState.__table__.delete())
     db.execute(User.__table__.delete())
     for item in data["users"]:
-        user = User(id=item["id"], username=normalize_username(item["username"]), display_name=str(item["name"])[:100], email=normalize_email(item.get("email")), password_hash=item["passwordHash"], role=item.get("role", "user"), active=bool(item.get("active", True)), must_change_password=bool(item.get("mustChangePassword", False)), created_at=datetime.fromisoformat(item["createdAt"]))
+        user = User(
+            id=item["id"],
+            username=normalize_username(item["username"]),
+            display_name=str(item["name"])[:100],
+            email=normalize_email(item.get("email")),
+            password_hash=item["passwordHash"],
+            role=item.get("role", "user"),
+            active=bool(item.get("active", True)),
+            must_change_password=bool(item.get("mustChangePassword", False)),
+            created_at=datetime.fromisoformat(item["createdAt"]),
+            last_login_at=datetime.fromisoformat(item["lastLoginAt"]) if item.get("lastLoginAt") else None,
+            privacy_policy_version=item.get("privacyPolicyVersion"),
+            privacy_acknowledged_at=datetime.fromisoformat(item["privacyAcknowledgedAt"]) if item.get("privacyAcknowledgedAt") else None,
+        )
         user.state = UserState(data=item.get("state") or empty_state(), revision=int(item.get("revision", 1) or 1))
         db.add(user)
     for key, value in data["settings"].items():

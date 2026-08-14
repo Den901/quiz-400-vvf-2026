@@ -1,6 +1,6 @@
 {
   "name": "fuoco-quiz-pwa",
   "private": true,
-  "version": "2.2.0",
+  "version": "2.3.0",
   "scripts": { "start": "npx --yes serve . -l 4173" }
 }

@@ -44,6 +44,13 @@ def test_complete_cloud_account_and_statistics_flow():
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
         assert runtime.json()["registrationEnabled"] is True
+        assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
+        assert runtime.json()["privacy"]["complete"] is True
+        policy_version = runtime.json()["privacy"]["policyVersion"]
+        privacy = public_client.get("/api/privacy")
+        assert privacy.status_code == 200
+        assert privacy.json()["contactEmail"] == "privacy@example.com"
+        assert privacy.json()["pecEmail"] == "privacy@pec.example.com"
 
         admin_login = login(admin_client, "admin", "Admin-Sicura-2026!")
         assert admin_login.status_code == 200
@@ -57,6 +64,8 @@ def test_complete_cloud_account_and_statistics_flow():
                 "name": "Mario Rossi",
                 "email": "mario@example.com",
                 "password": "Mario-Sicura-2026!",
+                "privacy_acknowledged": True,
+                "privacy_policy_version": policy_version,
             },
         )
         assert registration.status_code == 201
@@ -75,12 +84,29 @@ def test_complete_cloud_account_and_statistics_flow():
                 "name": "Duplicato",
                 "email": "altro@example.com",
                 "password": "Altra-Sicura-2026!",
+                "privacy_acknowledged": True,
+                "privacy_policy_version": policy_version,
             },
         ).status_code == 409
+
+        stale_policy = public_client.post(
+            "/api/auth/register",
+            json={
+                "username": "policy.stale",
+                "name": "Policy Stale",
+                "email": "stale@example.com",
+                "password": "Policy-Stale-2026!",
+                "privacy_acknowledged": True,
+                "privacy_policy_version": "old-version",
+            },
+        )
+        assert stale_policy.status_code == 409
 
         user_login = login(user_client, "mario.rossi", "Mario-Sicura-2026!")
         assert user_login.status_code == 200
         user_id = user_login.json()["user"]["id"]
+        assert user_login.json()["user"]["privacyPolicyVersion"] == policy_version
+        assert user_login.json()["user"]["privacyAcknowledgedAt"]
 
         assert user_client.get("/api/admin/users").status_code == 403
         state = {
@@ -136,6 +162,11 @@ def test_complete_cloud_account_and_statistics_flow():
         assert admin_client.get("/api/auth/me").json()["user"]["state"]["deepLearning"]["enabled"] is False
         assert user_client.get("/api/auth/me").json()["user"]["state"]["deepLearningIntroSeen"] is True
         assert admin_client.get("/api/auth/me").json()["user"]["state"]["deepLearningIntroSeen"] is False
+        personal_export = user_client.get("/api/account/data-export")
+        assert personal_export.status_code == 200
+        assert personal_export.json()["profile"]["id"] == user_id
+        assert "passwordHash" not in personal_export.text
+        assert "token" not in personal_export.text.lower()
 
         statistics = admin_client.get(f"/api/admin/users/{user_id}/statistics")
         assert statistics.status_code == 200
@@ -176,6 +207,18 @@ def test_complete_cloud_account_and_statistics_flow():
             "session_days": 14,
             "reset_token_minutes": 45,
             "privacy_notice": "Informativa di prova",
+            "privacy_controller_name": "Titolare del test",
+            "privacy_controller_address": "",
+            "privacy_contact_email": "privacy@example.com",
+            "privacy_pec_email": "privacy@pec.example.com",
+            "privacy_dpo_contact": "",
+            "privacy_hosting_location": "Italia (server test)",
+            "privacy_email_provider": "Provider SMTP di test",
+            "privacy_transfer_note": "Nessun trasferimento nel test.",
+            "privacy_policy_version": "2026-08-test",
+            "privacy_effective_date": "2026-08-14",
+            "privacy_audit_log_days": 120,
+            "privacy_backup_days": 30,
             "duckdns_enabled": True,
             "duckdns_domain": "quiz-test.duckdns.org",
             "duckdns_token": "token-segreto-test",
@@ -201,6 +244,8 @@ def test_complete_cloud_account_and_statistics_flow():
         assert public_client.get("/api/internal/tls-allowed?domain=evil.example.com").status_code == 403
         assert public_client.get("/api/runtime").json()["registrationEnabled"] is False
         assert public_client.get("/api/runtime").json()["emailResetEnabled"] is True
+        assert public_client.get("/api/runtime").json()["privacy"]["policyVersion"] == "2026-08-test"
+        assert admin_client.get("/api/admin/settings").json()["privacyComplete"] is True
 
         assert user_client.post("/api/admin/network/apply", json={"app_port": 18089}).status_code == 403
         port_change = admin_client.post("/api/admin/network/apply", json={"app_port": 18089})
@@ -212,7 +257,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "2.2.0"
+        assert update_status.json()["currentVersion"] == "2.3.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

@@ -1,5 +1,11 @@
 # Verifica tecnica e legale preliminare
 
+## Privacy e protezione dei dati
+
+La versione cloud presenta un'informativa estesa prima della registrazione, registra la sola presa visione del testo vigente e permette all'utente di esportare i dati che lo riguardano. Il portale non usa cookie pubblicitari o strumenti di profilazione commerciale. Gli amministratori devono mantenere aggiornati dal pannello i dati del titolare, i fornitori effettivi, l'ubicazione del server, gli eventuali trasferimenti internazionali e i tempi di conservazione.
+
+Il testo è una base tecnica aderente alla struttura dell'articolo 13 GDPR, ma la conformità dipende anche dall'organizzazione concreta del titolare, dai contratti con i fornitori, dalle misure di sicurezza, dalla gestione delle richieste e dall'aggiornamento del registro dei trattamenti quando applicabile.
+
 Data della verifica: 7 agosto 2026. Questa è una valutazione progettuale, non un parere legale.
 
 ## Cosa è stato osservato

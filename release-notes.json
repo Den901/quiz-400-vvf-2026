@@ -1,14 +1,14 @@
 {
-  "version": "2.2.0",
-  "title": "Il portale si aggiorna dal pannello Admin",
-  "summary": "Da questa versione la manutenzione è concentrata sul portale server Linux e Windows.",
+  "version": "2.3.0",
+  "title": "Privacy, trasparenza e controllo dei dati",
+  "summary": "Il portale dispone ora di un'informativa privacy estesa e collegata alle funzioni realmente utilizzate.",
   "items": [
-    "Nuovo centro aggiornamenti cloud con ricerca automatica e manuale delle release GitHub.",
-    "Versione installata, nuova versione e changelog sono visibili prima di avviare l’installazione.",
-    "È possibile caricare manualmente un pacchetto ZIP server validato e installarlo dal pannello.",
-    "Ogni aggiornamento crea un backup PostgreSQL e una copia recuperabile dei file correnti.",
-    "Riavvio e spegnimento protetti agiscono soltanto sul portale, lasciando accesi server e altri servizi.",
-    "Le nuove release sono dedicate al server Linux e Windows; il pacchetto EXE standalone è stato ritirato."
+    "Nuova informativa pubblica conforme alla struttura dell'articolo 13 GDPR, accessibile prima della registrazione e dall'account.",
+    "La registrazione memorizza versione e data della presa visione, senza usare un consenso generico o pubblicitario.",
+    "Ogni utente può esportare profilo, percorso di studio e log che lo riguardano in formato JSON.",
+    "Il pannello Admin consente di modificare titolare, contatti, PEC, fornitori, trasferimenti e tempi di conservazione.",
+    "I log tecnici più vecchi del limite configurato vengono cancellati automaticamente e gli identificativi dei login falliti sono minimizzati.",
+    "Cookie tecnico, memoria PWA, ripasso adattivo, destinatari, backup e diritti degli utenti sono descritti in modo chiaro anche in dark mode e su tablet."
   ],
-  "footnote": "Account, statistiche, preferenze e banca dati restano separati dal codice applicativo e non vengono sostituiti durante l’aggiornamento."
+  "footnote": "I dati del titolare sono configurabili esclusivamente dal pannello Admin. L'informativa non sostituisce la verifica periodica dei trattamenti e dei fornitori effettivamente utilizzati."
 }

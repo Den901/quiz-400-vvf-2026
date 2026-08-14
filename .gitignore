@@ -3,6 +3,7 @@ output/
 work/
 tmp/
 __pycache__/
+.venv/
 *.pyc
 portable-data/*.json
 portable-data/backups/

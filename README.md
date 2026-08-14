@@ -1,5 +1,7 @@
 # Quiz 400 VVF 2026
 
+La versione cloud include un'informativa privacy pubblica configurabile dall'amministratore, la registrazione della presa visione e l'esportazione dei dati personali dell'utente.
+
 Portale web amatoriale e gratuito per esercitarsi sui quiz del concorso Vigili del Fuoco. È una PWA installabile da browser su telefono, tablet e computer, ma viene gestita centralmente da un server Linux o Windows.
 
 Il progetto non rappresenta, non è affiliato e non è approvato dal Ministero dell’Interno, dal Corpo Nazionale dei Vigili del Fuoco o da altri enti del concorso.

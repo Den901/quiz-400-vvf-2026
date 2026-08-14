@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 - 2026-08-14
+
+- Aggiunta informativa privacy pubblica strutturata secondo gli articoli 12 e 13 GDPR.
+- Aggiunta configurazione Admin di titolare, email, PEC, DPO opzionale, infrastruttura, provider email, trasferimenti e conservazione.
+- Registrazione con presa visione versionata dell'informativa e relativa data nel profilo utente.
+- Esportazione personale di profilo, statistiche, preferenze e log senza password o token.
+- Pulizia automatica dei log di sicurezza oltre il periodo configurato e minimizzazione dei dati dei login falliti.
+- Informativa accessibile dal login, dalla registrazione e dall'account, con stampa/PDF, tema scuro e layout mobile/tablet.
+
 ## 2.2.0 - 2026-08-14
 
 - Nuovo centro aggiornamenti cloud riservato agli amministratori.
