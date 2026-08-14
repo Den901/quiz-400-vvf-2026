@@ -8,3 +8,7 @@ __pycache__
 *.pyc
 cloud-data.sqlite3
 .env
+cloud/.env
+cloud/backups
+cloud/control
+cloud/data

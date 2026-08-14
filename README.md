@@ -1,193 +1,153 @@
 # Quiz 400 VVF 2026
 
-Applicazione portatile e PWA installabile per esercitarsi sui quiz del concorso Vigili del Fuoco. Funziona su Windows e macOS, si adatta a telefono, tablet e desktop e conserva utenti, progressi, configurazione e statistiche nella cartella dell'app.
+Portale web amatoriale e gratuito per esercitarsi sui quiz del concorso Vigili del Fuoco. È una PWA installabile da browser su telefono, tablet e computer, ma viene gestita centralmente da un server Linux o Windows.
 
-## Versione Linux Cloud
+Il progetto non rappresenta, non è affiliato e non è approvato dal Ministero dell’Interno, dal Corpo Nazionale dei Vigili del Fuoco o da altri enti del concorso.
 
-La versione 2.0 aggiunge un portale pubblico installabile su Ubuntu/Debian con Docker Compose. Comprende PostgreSQL, HTTPS automatico, supporto DuckDNS, registrazione pubblica, recupero password, dati sincronizzati e un pannello amministratore con gestione account e statistiche dettagliate.
+## Distribuzione supportata
 
-Avvio rapido sul server:
+Dalla versione 2.2.0 viene mantenuta una sola linea software:
+
+- portale server Docker per Linux e Windows;
+- database PostgreSQL centralizzato;
+- accesso pubblico HTTPS, anche dietro reverse proxy esistente;
+- PWA per iPhone, iPad, Android, tablet e desktop;
+- pacchetto di aggiornamento unico `Quiz-400-VVF-2026-Server.zip`.
+
+Non vengono più create nuove versioni EXE o nuove release standalone. Gli eventuali file EXE presenti nelle vecchie release restano soltanto come archivio storico e non ricevono aggiornamenti.
+
+## Funzioni principali
+
+- quiz per materia in ordine, con ripresa dalle domande non ancora fatte;
+- classificazione personale: **Le so**, **Da ripetere**, **Non le so**, **Da fare**;
+- errore inserito automaticamente tra le domande da ripetere;
+- prova guidata con risposta corretta e spiegazione a tendina;
+- simulazione ufficiale di 40 domande in 40 minuti;
+- punteggio `+1` corretta, `-0,33` errata, `0` non risposta;
+- composizione predefinita: 8 storia, 12 logica (di cui 1 insiemi), 6 fisica, 6 chimica, 4 informatica, 4 inglese;
+- composizioni personalizzate salvate separatamente per ogni utente;
+- panoramica delle 40 domande e navigazione avanti/indietro;
+- consegna manuale con conferma e consegna automatica a tempo scaduto;
+- riepilogo finale con giuste, sbagliate, non risposte, punteggio e spiegazioni;
+- revisione dettagliata degli ultimi cinque quiz;
+- statistiche globali, per materia e per tipo di prova;
+- suggerimenti di esercitazione sulle materie più deboli;
+- ripasso adattivo “Deep learning” senza servizi di intelligenza artificiale esterni;
+- tema chiaro, scuro o automatico;
+- logo configurabile dall’amministratore;
+- registrazione, recupero password via email e gestione utenti;
+- preferenze, progressi e statistiche isolati per account.
+
+## Pannello amministratore
+
+La voce **Admin** contiene:
+
+- impostazioni generali, DuckDNS, SMTP, porte e reverse proxy;
+- utenti e statistiche centralizzate;
+- backup e ripristino applicativo;
+- logo e composizione predefinita delle prove;
+- centro aggiornamenti del portale;
+- riavvio e spegnimento del solo portale.
+
+La versione installata è visibile nell’intestazione e nel centro aggiornamenti.
+
+## Aggiornamenti cloud
+
+Il portale controlla automaticamente GitHub quando accede un amministratore e ogni 15 minuti durante l’uso. Nel centro aggiornamenti è possibile:
+
+1. premere **Cerca aggiornamenti**;
+2. vedere versione installata e versione disponibile;
+3. leggere il changelog completo prima dell’installazione;
+4. installare la release server pubblicata su GitHub;
+5. caricare manualmente lo stesso file ZIP e installarlo.
+
+Un pacchetto manuale viene accettato solo se contiene il manifest server, una versione valida e l’elenco verificabile dei file. Prima dell’installazione il controllo esterno al portale crea:
+
+- un dump PostgreSQL;
+- una copia dei file applicativi correnti.
+
+Se il nuovo portale non torna disponibile, i file precedenti vengono ripristinati. Il volume PostgreSQL, `cloud/.env`, backup e file di controllo non sono inclusi né sostituiti dal pacchetto.
+
+## Installazione Linux
+
+Requisiti per l’installazione automatica: Ubuntu o Debian con accesso amministratore. Docker viene installato dallo script se manca.
 
 ```bash
-git clone https://github.com/Den901/quiz-400-vvf-2026.git
-cd quiz-400-vvf-2026
-chmod +x cloud/install-linux.sh
 sudo ./cloud/install-linux.sh
 ```
 
-L'installatore controlla le porte occupate e supporta sia HTTPS incluso sia un reverse proxy esistente che mantiene la porta pubblica 443. La voce **Admin**, visibile soltanto agli amministratori, riunisce utenti, statistiche, dominio DuckDNS, registrazioni, durata sessioni, posta SMTP e porte. Per configurazione proxy, cambio porte, backup e sicurezza consulta [`cloud/README-LINUX.md`](cloud/README-LINUX.md).
+Con reverse proxy già esistente, lascia pubblica la porta 443 sul proxy e inoltra internamente verso la porta backend scelta. Il backend dovrebbe ascoltare su `127.0.0.1` quando il proxy gira sulla stessa macchina.
 
-## Windows: versione EXE senza Python
+Per un’installazione già esistente:
 
-Scarica `Quiz-400-VVF-2026-Windows-EXE.zip`, estrai completamente lo ZIP e fai doppio clic su `Quiz-400-VVF-2026.exe`. Non è necessario installare Python. L'eseguibile usa come icona il logo VVF fornito per il progetto.
+```bash
+sudo ./cloud/install-server-control.sh
+```
 
-Tieni insieme tutti i file estratti: l'app salva account, progressi e statistiche nella cartella `portable-data` accanto all'EXE. Per l'aggiornamento manuale puoi fare doppio clic su `Aggiorna-Quiz-400-VVF-2026.exe`; gli aggiornamenti avviati dall'app selezionano automaticamente lo stesso pacchetto Windows e non sostituiscono i dati.
+Guida completa: [cloud/README-LINUX.md](cloud/README-LINUX.md).
 
-Gli EXE non sono firmati con un certificato commerciale. Al primo avvio Windows SmartScreen può mostrare un avviso: verifica di aver scaricato il file dalla release GitHub del progetto, quindi scegli **Ulteriori informazioni > Esegui comunque**.
+## Installazione Windows Server
 
-## Avvio portatile Windows e macOS
+Requisiti: Windows 10/11 o Windows Server con Docker Desktop/Engine e Docker Compose disponibili. Aprire PowerShell come amministratore:
 
-1. Estrai completamente il file ZIP in una cartella normale.
-2. Su Windows, in alternativa all'EXE, fai doppio clic su `Avvia-Quiz-400-VVF-2026-Windows.bat`.
-3. Su macOS fai doppio clic su `Avvia-Quiz-400-VVF-2026-macOS.command`.
-4. Lascia aperta la finestra di avvio mentre usi l'app.
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\cloud\install-windows.ps1
+```
 
-Per terminare correttamente usa il pulsante **Chiudi app** nell'intestazione: spegne il server locale e conferma che i dati sono stati salvati. Se il browser impedisce la chiusura automatica della scheda, puoi chiuderla manualmente dopo il messaggio finale.
+Lo script crea PostgreSQL, avvia il portale e registra il controllo aggiornamenti all’avvio di Windows. Il backend ascolta sulla prima porta libera da 8088 in poi; il reverse proxy HTTPS può pubblicarlo sulla 443.
 
-Quiz 400 VVF 2026 si apre automaticamente nel browser all'indirizzo locale `http://127.0.0.1:4190/`.
+Guida completa: [cloud/README-WINDOWS.md](cloud/README-WINDOWS.md).
 
-Questi avviatori tradizionali usano Python 3. Se non è presente, chiedono il consenso prima di scaricare e installare la versione ufficiale. Windows usa Winget quando disponibile; macOS richiede la password di amministratore. Il pacchetto EXE per Windows non richiede Python.
+## Avvio dopo uno spegnimento dal pannello
 
-## Primo accesso
+Lo spegnimento agisce soltanto sul container del portale. PostgreSQL, sistema operativo e altri servizi restano accesi.
 
-Al primo avvio viene chiesto di creare l'amministratore principale. L'amministratore può:
+Linux:
 
-- creare utenti e altri amministratori;
-- disattivare o riattivare gli account;
-- importare dataset autorizzati;
-- utilizzare tutte le modalità di studio e simulazione.
+```bash
+sudo ./cloud/start-linux.sh
+```
 
-Nella versione portatile conserva con cura nome utente e password: il recupero via email è disponibile soltanto nella versione Linux Cloud.
+Windows PowerShell:
 
-## Modalità di studio
+```powershell
+.\cloud\start-windows.ps1
+```
 
-### Percorso per argomento
+## Backup
 
-Le domande sono presentate nell'ordine originale. Puoi interrompere la sessione e riprendere dalla prima domanda non ancora svolta. Ogni quesito viene classificato come:
+Dal pannello Admin è possibile esportare e ripristinare account, impostazioni, progressi e statistiche. Per un backup PostgreSQL completo:
 
-- **La so**;
-- **Da ripetere**;
-- **Non la so**;
-- **Non risposta**.
+Linux:
 
-Una risposta errata viene inserita subito in **Da ripetere**. Puoi poi scegliere manualmente **Non la so** quando vuoi segnalare una lacuna più netta.
+```bash
+sudo ./cloud/backup-linux.sh
+```
 
-### Prova guidata da 40 domande
+Windows PowerShell:
 
-Usa la stessa composizione della simulazione ufficiale. Dopo ogni risposta mostra subito esito e soluzione corretta; la spiegazione è disponibile in una tendina da aprire solo quando serve. I pulsanti **Indietro** e **Continua** sono disponibili sia sopra sia sotto la spiegazione. Alla fine mostra punteggio, calcolo applicato e correzione completa.
+```powershell
+.\cloud\backup-windows.ps1
+```
 
-Composizione: 8 Storia, 11 Logica, 1 Insiemi, 6 Fisica, 6 Chimica, 4 Informatica e 4 Inglese.
+I dump vengono conservati in `cloud/backups`, esclusa dal repository e dai pacchetti di aggiornamento.
 
-Per alcuni quesiti di Insiemi la fonte non fornisce una spiegazione testuale: vengono comunque mostrati diagramma e soluzione corretta.
+## Creazione di una release server
 
-### Configurazione delle prove da 40
+```powershell
+python .\cloud\build-server-release.py
+```
 
-Un amministratore può definire nelle **Impostazioni** la composizione predefinita. Per ogni materia può impostare da 0 a 40 domande: inserendo 0 la materia viene esclusa. Il totale deve restare esattamente 40.
+Il file risultante è `outputs/Quiz-400-VVF-2026-Server.zip`. Il costruttore esclude automaticamente credenziali, database, backup, directory di controllo, dati portatili ed eseguibili.
 
-Nella pagina **Simulazione**, ogni utente può inoltre salvare più configurazioni personali con un nome, per esempio “Prova ufficiale” o “Ripasso logica”. Una configurazione può essere richiamata, aggiornata o eliminata senza reinserire ogni volta le quantità. Le preferenze sono separate per account, si applicano sia alla prova guidata sia alla simulazione a tempo e sono incluse nei backup.
+## Sicurezza e dati
 
-Il pulsante **Ripristina predefinita** riporta la composizione a 8 Storia, 11 Logica, 1 Insiemi, 6 Fisica, 6 Chimica, 4 Informatica e 4 Inglese.
+- password utente: hash Argon2;
+- cookie di sessione: `HttpOnly`, `Secure` su HTTPS e `SameSite=Lax`;
+- token SMTP e DuckDNS: cifrati con la chiave del server;
+- operazioni di aggiornamento, riavvio e spegnimento: disponibili soltanto agli amministratori e inoltrate a un controllo host separato;
+- richieste di spegnimento e riavvio: conferma obbligatoria anche sul backend;
+- dati persistenti: volume PostgreSQL separato dal codice e dai pacchetti.
 
-### Simulazione a tempo
-
-- 40 domande in 40 minuti;
-- cronometro compatto e allineato a destra, da 40:00 a 00:00, senza sovrapporsi ai contenuti durante lo scorrimento;
-- consegna automatica allo scadere, con i quesiti rimanenti conteggiati come non risposti;
-- ripresa della prova e del tempo effettivamente rimasto dopo un aggiornamento della pagina;
-- estrazione basata su data e ora correnti, diversa a ogni nuova prova;
-- rotazione persistente che evita di riproporre le domande già estratte finché la materia non completa il proprio ciclo;
-- +1 punto per ogni risposta corretta;
-- -0,33 punti per ogni risposta errata;
-- 0 punti per ogni risposta non data;
-- navigazione avanti e indietro;
-- panoramica orizzontale con 40 pallini numerati: risposta data, non fatta e domanda attuale;
-- salto diretto a qualsiasi domanda toccando il relativo pallino;
-- conferma obbligatoria prima della consegna alla domanda 40, con conteggio delle risposte mancanti;
-- pulsante **Termina prova** dalla domanda 1 alla 39, sempre protetto da conferma;
-- avviso quando si cambia menu: scegliendo di uscire, la prova viene eliminata e non riprende più;
-- correzione completa alla fine, con risposte corrette, errate e non date.
-
-Anche la prova guidata da 40 domande usa lo stesso cronometro e la stessa panoramica, distinguendo inoltre risposte corrette ed errate. Il cronometro è allineato a destra, scorre normalmente senza coprire i contenuti e cambia colore con il tempo rimanente: verde, giallo, arancione e rosso lampeggiante negli ultimi 10 minuti. Le domande tralasciate possono essere riaperte dai pallini e completate prima della consegna.
-
-Il risultato finale di entrambe le prove mostra il punteggio in evidenza e tre sezioni consultabili: **Risposte errate**, **Non risposte** e **Risposte corrette**. Ogni scheda riporta risposta scelta, soluzione esatta e la spiegazione in una tendina richiudibile.
-
-Le spiegazioni vengono presentate con paragrafi, elenchi, accenti e simboli ripuliti. Per i quesiti per i quali la fonte non fornisce una spiegazione testuale, l'app indica chiaramente che non è disponibile.
-
-### Deep learning · ripasso adattivo
-
-Nella pagina **Simulazione** ogni utente può attivare il Deep learning. Quando è attivo, le domande risposte correttamente non vengono riproposte nelle prove successive finché non sono terminate tutte le domande della stessa materia. Le risposte errate e non date restano invece disponibili nel ciclo, così il ripasso insiste sui punti deboli senza cambiare la composizione di 40 domande.
-
-Simulazione ufficiale e prova guidata mantengono cicli separati. Al completamento di una materia il ciclo ricomincia automaticamente; se restano meno domande della quota prevista, la prova viene comunque completata fino a 40. Stato, preferenza e cicli appartengono al singolo utente e sono inclusi nei backup. Al primo accesso dopo l'introduzione della funzione compare un popup informativo dal quale è possibile attivarla subito o rimandare.
-
-Il nome descrive il metodo di studio adattivo: non viene addestrato un modello e nessuna risposta è inviata a servizi esterni di intelligenza artificiale.
-
-## Progressi e ripasso
-
-La pagina **Progressi e risultati** mostra un grafico a torta complessivo e, per ogni materia, quante domande sono **Le so**, **Da ripetere**, **Non le so** e **Da fare**. Calcola inoltre precisione e copertura.
-
-Lo storico conserva separatamente i risultati delle simulazioni ufficiali, delle prove guidate e dei quiz per materia. L'app confronta errori, precisione e livello di padronanza per individuare le materie più carenti e propone pulsanti di esercitazione mirata sul gruppo più utile.
-
-La rotazione dei quesiti viene salvata nel profilo. Una prova da 40 in corso viene salvata separatamente per ogni utente: ricaricando la pagina si ritrovano domanda, risposte e tempo effettivamente rimasto. Una volta conclusa, la successiva estrazione prosegue con domande nuove. Il percorso completo per argomento resta invece intenzionalmente nell'ordine originale.
-
-## Dove vengono salvati i dati
-
-La versione portatile salva automaticamente tutto, comprese le impostazioni delle prove, in:
-
-`portable-data/fuocoquiz-state.json`
-
-Il file contiene account, password sotto forma di hash, progressi, statistiche e dataset aggiuntivi importati. Non contiene password in chiaro.
-
-Per trasferire o fare un backup, usa **Chiudi app** e copia l'intera cartella. Non rinominare o modificare manualmente il file JSON. Se elimini la cartella `portable-data`, perdi gli account e i progressi locali.
-
-### Backup dall'app
-
-Un amministratore può aprire **Impostazioni prove > Backup e ripristino**:
-
-- **Scarica backup** crea un file JSON contenente utenti, progressi, statistiche, composizione delle prove e dataset importati;
-- **Ripristina backup** controlla il file e chiede conferma prima di sostituire tutti i dati attuali;
-- dopo il ripristino l'app viene ricaricata automaticamente.
-
-Conserva i backup in un luogo protetto: pur non contenendo password in chiaro, includono account e dati di studio.
-
-## Aggiornare senza perdere i dati
-
-Chiudi la prova in corso, quindi usa il file adatto al computer:
-
-- Windows EXE: doppio clic su `Aggiorna-Quiz-400-VVF-2026.exe`;
-- Windows: doppio clic su `Aggiorna-Quiz-400-VVF-2026-Windows.bat`;
-- macOS: doppio clic su `Aggiorna-Quiz-400-VVF-2026-macOS.command`.
-
-Il programma controlla l'ultima release pubblicata su GitHub, arresta in sicurezza l'eventuale app locale ancora aperta, crea un backup automatico e installa i nuovi file. La cartella `portable-data` viene esclusa dall'aggiornamento: account, password sotto forma di hash, progressi, statistiche, rotazione dei quiz e impostazioni restano conservati.
-
-Prima dell'installazione viene creata una copia in `portable-data/backups`; sono mantenuti automaticamente gli ultimi dieci backup. Al termine riavvia l'app con il normale file di avvio.
-
-A ogni accesso l'app controlla automaticamente se esiste una release più recente. Il controllo viene ripetuto ogni 15 minuti mentre l'app resta aperta e quando torni alla finestra dopo averla lasciata in secondo piano. Il pulsante **Aggiornamenti** nell'intestazione permette di ripetere il controllo manualmente. Se non c'è connessione, i quiz e i dati locali continuano a funzionare normalmente.
-
-Quando trova una nuova versione, compare un popup con **Aggiorna ora** e **Più tardi**. Scegliendo l'aggiornamento, l'app crea il backup, scarica e verifica il pacchetto e installa la release. Al termine mostra **Ricarica e aggiorna cache**: il pulsante elimina i file temporanei della versione precedente e carica subito quella nuova. I file esterni con doppio clic restano disponibili come procedura alternativa.
-
-## Utenti e percorsi personali
-
-La gestione degli account si trova nella voce **Admin > Utenti e statistiche**. Da questa sezione l'amministratore crea, disattiva e riattiva gli utenti e vede un riepilogo delle attività. La voce Admin non compare negli account normali.
-
-Ogni account conserva in modo indipendente domande svolte, stato “La so / Da ripetere / Non la so”, quiz non risposti, rotazioni, punteggi e storico delle simulazioni. Quando un utente accede vede soltanto il proprio percorso e le proprie statistiche.
-
-Non estrarre manualmente un nuovo ZIP sopra una vecchia installazione: usa il file **Aggiorna** adatto alla tua versione oppure fai prima un backup dall'app.
-
-## Installazione come app
-
-Il pulsante **Installa** nell'intestazione apre una guida adatta a telefono e tablet:
-
-- su iPhone e iPad apri il portale in Safari, tocca **Condividi**, poi **Aggiungi alla schermata Home**;
-- su Android e tablet Android apri il portale in Chrome, tocca **⋮**, poi **Installa app** o **Aggiungi a schermata Home**;
-- quando il browser rende disponibile l'installazione automatica, nel popup compare anche **Installa ora**.
-
-La modalità tablet si attiva automaticamente tra 700 e 1180 pixel e adatta colonne, dimensioni dei pulsanti e domande sia in verticale sia in orizzontale. Perché il salvataggio portatile continui a funzionare, avvia sempre prima l'app con il file Windows o macOS e lascia aperta la finestra del server locale.
-
-## Risoluzione dei problemi
-
-- **La pagina non si apre:** verifica che la finestra di avvio sia ancora aperta e visita `http://127.0.0.1:4190/`.
-- **La porta è occupata:** chiudi eventuali altre copie dell'app e riavvia.
-- **macOS blocca il file:** fai clic destro su `Avvia-Quiz-400-VVF-2026-macOS.command`, scegli **Apri** e conferma. Se necessario esegui `chmod +x Avvia-Quiz-400-VVF-2026-macOS.command` nel Terminale.
-- **Windows mostra un avviso SmartScreen:** gli EXE non sono firmati digitalmente; verifica che il pacchetto provenga dalla release GitHub del progetto, quindi scegli **Ulteriori informazioni > Esegui comunque**.
-- **I progressi non compaiono:** controlla di aver avviato la stessa cartella e di non aver eliminato `portable-data`.
-
-
-## Nota di sicurezza
-
-La modalità portatile ascolta soltanto sul computer (`127.0.0.1`) e non espone l'app alla rete. La modalità Linux Cloud usa invece backend protetto, PostgreSQL, recupero password e backup centralizzati; prima di aprirla al pubblico occorre predisporre l'informativa privacy.
-
-Consulta anche `Guida-Quiz-400-VVF-2026.pdf` per la guida completa impaginata.
-
-## Creazione degli EXE
-
-Per rigenerare entrambi gli eseguibili su Windows esegui `build-windows-exe.ps1`. Lo script crea un ambiente di compilazione separato, incorpora `logo-vvf.jpg` come icona e deposita i file in `outputs/windows-exe-dist`. Gli eseguibili compilati non vengono aggiunti al repository: sono distribuiti nel pacchetto Windows delle release.
+Prima di aprire il portale al pubblico occorre predisporre una propria informativa privacy e verificare di avere titolo per usare e distribuire banca dati, spiegazioni, immagini e marchi.

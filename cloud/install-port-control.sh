@@ -103,4 +103,5 @@ systemctl daemon-reload
 systemctl enable --now quiz400-port-control.path
 cd "${PROJECT_DIR}"
 docker compose --env-file cloud/.env -f cloud/compose.yml up -d --build --force-recreate app
+"${SCRIPT_DIR}/install-server-control.sh"
 echo "Pannello porte attivo: HTTPS 443 -> backend locale ${APP_PORT}."

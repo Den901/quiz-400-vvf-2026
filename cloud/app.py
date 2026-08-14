@@ -13,19 +13,20 @@ import string
 import threading
 import time
 import uuid
+import zipfile
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Any, Generator
+from typing import Any, Generator, Literal
 from urllib.parse import urlparse
 
 import httpx
 from argon2 import PasswordHasher
 from argon2.exceptions import InvalidHashError, VerifyMismatchError
 from cryptography.fernet import Fernet, InvalidToken
-from fastapi import Depends, FastAPI, HTTPException, Request, Response, status
+from fastapi import Depends, FastAPI, File, HTTPException, Request, Response, UploadFile, status
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field, field_validator
@@ -39,7 +40,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.1.5"
+    APP_VERSION = "2.2.0"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -58,9 +59,13 @@ DEPLOYMENT_PROXY_MODE = "external" if os.environ.get("PUBLIC_PROXY_MODE") == "ex
 PORT_CONTROL_DIR = Path(os.environ["PORT_CONTROL_DIR"]).resolve() if os.environ.get("PORT_CONTROL_DIR") else None
 SESSION_COOKIE = "q400_session"
 MAX_STATE_BYTES = 8 * 1024 * 1024
+MAX_UPDATE_BYTES = 96 * 1024 * 1024
 MAX_LOGO_BYTES = 1024 * 1024
+UPDATE_REPOSITORY = os.environ.get("UPDATE_REPOSITORY", "Den901/quiz-400-vvf-2026").strip()
+UPDATE_ASSET_NAME = os.environ.get("UPDATE_ASSET_NAME", "Quiz-400-VVF-2026-Server.zip").strip()
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
 DUCKDNS_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.duckdns\.org)?$")
+VERSION_RE = re.compile(r"^v?(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
 
 if not APP_SECRET:
     if os.environ.get("Q400_ENV", "development") == "production":
@@ -228,6 +233,103 @@ def port_control_status() -> dict[str, Any]:
         return {"available": True, **(data if isinstance(data, dict) else {})}
     except (OSError, ValueError, json.JSONDecodeError):
         return {"available": True, "state": "ready"}
+
+
+def semantic_version(value: str) -> tuple[int, int, int] | None:
+    match = VERSION_RE.fullmatch(str(value).strip())
+    return tuple(int(part) for part in match.groups()) if match else None
+
+
+def read_control_json(name: str) -> dict[str, Any] | None:
+    if not PORT_CONTROL_DIR:
+        return None
+    try:
+        value = json.loads((PORT_CONTROL_DIR / name).read_text(encoding="utf-8"))
+        return value if isinstance(value, dict) else None
+    except (OSError, ValueError, json.JSONDecodeError):
+        return None
+
+
+def write_control_json(name: str, payload: dict[str, Any]) -> None:
+    if not PORT_CONTROL_DIR:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Il controllo del portale non è installato su questo server.")
+    try:
+        PORT_CONTROL_DIR.mkdir(parents=True, exist_ok=True)
+        temporary = PORT_CONTROL_DIR / f".{name}-{uuid.uuid4().hex}.tmp"
+        temporary.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
+        temporary.replace(PORT_CONTROL_DIR / name)
+    except OSError as error:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Impossibile comunicare con il controllo del server.") from error
+
+
+def portal_control_status() -> dict[str, Any]:
+    if not PORT_CONTROL_DIR:
+        return {"available": False, "state": "disabled"}
+    data = read_control_json("server-status.json")
+    return {"available": True, **(data or {"state": "ready"})}
+
+
+def public_update_metadata(data: dict[str, Any] | None) -> dict[str, Any] | None:
+    if not data:
+        return None
+    hidden = {"assetUrl", "filePath", "requestedBy"}
+    return {key: value for key, value in data.items() if key not in hidden}
+
+
+def create_portal_request(action: str, admin: "User", **details: Any) -> dict[str, Any]:
+    if not PORT_CONTROL_DIR:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Installa prima il controllo aggiornamenti sul server.")
+    if (PORT_CONTROL_DIR / "server-request.json").exists() or (PORT_CONTROL_DIR / "server-request.processing.json").exists():
+        raise HTTPException(status.HTTP_409_CONFLICT, "È già in corso un'operazione sul portale.")
+    current_status = portal_control_status()
+    if current_status.get("state") in {"backing-up", "downloading", "installing", "restarting", "stopping"}:
+        raise HTTPException(status.HTTP_409_CONFLICT, "È già in corso un'operazione sul portale.")
+    request_id = str(uuid.uuid4())
+    payload = {
+        "requestId": request_id,
+        "action": action,
+        "requestedAt": utcnow().isoformat(),
+        "requestedBy": admin.id,
+        "currentVersion": APP_VERSION,
+        **details,
+    }
+    write_control_json("server-request.json", payload)
+    return payload
+
+
+def inspect_update_archive(path: Path) -> dict[str, Any]:
+    try:
+        with zipfile.ZipFile(path) as archive:
+            names = archive.namelist()
+            if not names or len(names) > 5000:
+                raise ValueError("Pacchetto vuoto o troppo complesso.")
+            for name in names:
+                normalized = name.replace("\\", "/")
+                parts = [part for part in normalized.split("/") if part]
+                if normalized.startswith("/") or ".." in parts or (parts and ":" in parts[0]):
+                    raise ValueError("Il pacchetto contiene percorsi non sicuri.")
+            if "release-manifest.json" not in names or "version.json" not in names:
+                raise ValueError("Non è un pacchetto server Quiz 400 VVF valido.")
+            manifest = json.loads(archive.read("release-manifest.json"))
+            version_file = json.loads(archive.read("version.json"))
+    except (OSError, zipfile.BadZipFile, KeyError, ValueError, json.JSONDecodeError) as error:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, str(error) or "Pacchetto di aggiornamento non valido.") from error
+    if not isinstance(manifest, dict) or manifest.get("app") != "Quiz 400 VVF 2026 Server":
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Manifest del pacchetto non valido.")
+    version = str(manifest.get("version") or version_file.get("version") or "").removeprefix("v")
+    if not semantic_version(version) or str(version_file.get("version")) != version:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Versione del pacchetto non valida o incoerente.")
+    files = manifest.get("files")
+    if not isinstance(files, list) or not files or any(not isinstance(item, dict) or not item.get("path") or not item.get("sha256") for item in files):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Elenco file del pacchetto non valido.")
+    changelog = manifest.get("changelog", "")
+    if isinstance(changelog, list):
+        changelog = "\n".join(f"• {item}" for item in changelog if isinstance(item, str))
+    return {
+        "version": version,
+        "changelog": str(changelog)[:20000],
+        "platform": str(manifest.get("platform") or "Linux e Windows"),
+    }
 
 
 def public_settings(db: Session) -> dict[str, Any]:
@@ -401,6 +503,10 @@ class AdminResetInput(BaseModel):
 
 class PortChangeInput(BaseModel):
     app_port: int = Field(ge=1024, le=65535)
+
+
+class UpdateInstallInput(BaseModel):
+    source: Literal["github", "upload"]
 
 
 class BrandLogoInput(BaseModel):
@@ -734,7 +840,8 @@ app = FastAPI(title="Quiz 400 VVF 2026 Cloud", version=APP_VERSION, lifespan=lif
 async def security_middleware(request: Request, call_next):
     if request.method in {"POST", "PUT", "PATCH", "DELETE"} and request.url.path.startswith("/api/"):
         length = int(request.headers.get("content-length", "0") or 0)
-        if length > MAX_STATE_BYTES:
+        maximum = MAX_UPDATE_BYTES if request.url.path == "/api/admin/update/upload" else MAX_STATE_BYTES
+        if length > maximum:
             return JSONResponse({"detail": "Richiesta troppo grande."}, status_code=413)
         origin = request.headers.get("origin")
         if origin:
@@ -771,7 +878,13 @@ def health() -> dict[str, str]:
 
 @app.get("/api/runtime")
 def runtime(db: Session = Depends(get_db)) -> dict[str, Any]:
-    return {"mode": "cloud", "version": APP_VERSION, **public_settings(db)}
+    try:
+        release_notes = json.loads((ROOT / "release-notes.json").read_text(encoding="utf-8"))
+        if not isinstance(release_notes, dict) or release_notes.get("version") != APP_VERSION:
+            release_notes = {}
+    except (OSError, ValueError, json.JSONDecodeError):
+        release_notes = {}
+    return {"mode": "cloud", "version": APP_VERSION, "releaseNotes": release_notes, **public_settings(db)}
 
 
 def decode_logo_data_url(data_url: str) -> tuple[str, bytes, str]:
@@ -1205,6 +1318,166 @@ def request_port_change(payload: PortChangeInput, request: Request, admin: User 
     audit(db, "admin.port_change_requested", request, actor=admin.id, target=admin.id, oldPort=DEPLOYMENT_APP_PORT, newPort=payload.app_port)
     db.commit()
     return {"message": "Cambio porta richiesto. Il portale verrà riavviato per pochi secondi.", "requestId": request_id, "port": payload.app_port}
+
+
+@app.get("/api/admin/update/status")
+def update_status(_: User = Depends(require_admin)) -> dict[str, Any]:
+    return {
+        "currentVersion": APP_VERSION,
+        "repository": UPDATE_REPOSITORY,
+        "assetName": UPDATE_ASSET_NAME,
+        "database": "PostgreSQL",
+        "control": portal_control_status(),
+        "github": public_update_metadata(read_control_json("github-release.json")),
+        "upload": public_update_metadata(read_control_json("pending-update.json")),
+    }
+
+
+@app.post("/api/admin/update/check")
+async def check_github_update(request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", UPDATE_REPOSITORY):
+        raise HTTPException(status.HTTP_500_INTERNAL_SERVER_ERROR, "Repository aggiornamenti non configurato correttamente.")
+    api_url = f"https://api.github.com/repos/{UPDATE_REPOSITORY}/releases/latest"
+    try:
+        async with httpx.AsyncClient(timeout=25, follow_redirects=True, headers={"Accept": "application/vnd.github+json", "User-Agent": f"Quiz400VVF/{APP_VERSION}"}) as client:
+            response = await client.get(api_url)
+            response.raise_for_status()
+        release = response.json()
+    except (httpx.HTTPError, ValueError) as error:
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "GitHub non è raggiungibile oppure non ha una release pubblicata.") from error
+    latest_version = str(release.get("tag_name") or "").strip().removeprefix("v")
+    if not semantic_version(latest_version):
+        raise HTTPException(status.HTTP_502_BAD_GATEWAY, "La release GitHub non contiene una versione valida.")
+    assets = release.get("assets") if isinstance(release.get("assets"), list) else []
+    asset = next((item for item in assets if item.get("name") == UPDATE_ASSET_NAME), None)
+    if not asset:
+        asset = next((item for item in assets if str(item.get("name", "")).lower().endswith("server.zip")), None)
+    asset_url = str(asset.get("browser_download_url") or "") if asset else ""
+    expected_prefix = f"https://github.com/{UPDATE_REPOSITORY}/releases/download/"
+    if asset_url and not asset_url.startswith(expected_prefix):
+        asset_url = ""
+    current_semver = semantic_version(APP_VERSION) or (0, 0, 0)
+    latest_semver = semantic_version(latest_version) or (0, 0, 0)
+    metadata = {
+        "source": "github",
+        "currentVersion": APP_VERSION,
+        "latestVersion": latest_version,
+        "updateAvailable": latest_semver > current_semver,
+        "canInstall": latest_semver > current_semver and bool(asset_url),
+        "changelog": str(release.get("body") or "Nessun changelog pubblicato.")[:20000],
+        "releaseUrl": str(release.get("html_url") or ""),
+        "publishedAt": release.get("published_at"),
+        "checkedAt": utcnow().isoformat(),
+        "assetName": str(asset.get("name") or "") if asset else "",
+        "assetSize": int(asset.get("size") or 0) if asset else 0,
+        "assetUrl": asset_url,
+    }
+    write_control_json("github-release.json", metadata)
+    audit(db, "admin.update_checked", request, actor=admin.id, target=admin.id, latestVersion=latest_version, updateAvailable=metadata["updateAvailable"])
+    db.commit()
+    return public_update_metadata(metadata) or {}
+
+
+@app.post("/api/admin/update/upload", status_code=201)
+async def upload_update_package(request: Request, file: UploadFile = File(...), admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if not PORT_CONTROL_DIR:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Installa prima il controllo aggiornamenti sul server.")
+    if not str(file.filename or "").lower().endswith(".zip"):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Carica il file ZIP server prodotto per una release.")
+    uploads_dir = PORT_CONTROL_DIR / "uploads"
+    try:
+        uploads_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as error:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La cartella degli aggiornamenti non è scrivibile.") from error
+    package_id = str(uuid.uuid4())
+    destination = uploads_dir / f"update-{package_id}.zip"
+    temporary = uploads_dir / f".update-{package_id}.tmp"
+    size = 0
+    digest = hashlib.sha256()
+    try:
+        with temporary.open("wb") as handle:
+            while chunk := await file.read(1024 * 1024):
+                size += len(chunk)
+                if size > MAX_UPDATE_BYTES:
+                    raise HTTPException(status.HTTP_413_REQUEST_ENTITY_TOO_LARGE, "Il pacchetto supera 96 MB.")
+                digest.update(chunk)
+                handle.write(chunk)
+        temporary.replace(destination)
+        inspected = inspect_update_archive(destination)
+    except Exception:
+        temporary.unlink(missing_ok=True)
+        destination.unlink(missing_ok=True)
+        raise
+    finally:
+        await file.close()
+    latest_semver = semantic_version(inspected["version"]) or (0, 0, 0)
+    current_semver = semantic_version(APP_VERSION) or (0, 0, 0)
+    metadata = {
+        "source": "upload",
+        "currentVersion": APP_VERSION,
+        "latestVersion": inspected["version"],
+        "updateAvailable": latest_semver > current_semver,
+        "canInstall": latest_semver > current_semver,
+        "changelog": inspected["changelog"] or "Nessun changelog incluso nel pacchetto.",
+        "platform": inspected["platform"],
+        "uploadedAt": utcnow().isoformat(),
+        "originalName": Path(str(file.filename)).name[:200],
+        "assetSize": size,
+        "sha256": digest.hexdigest(),
+        "filePath": f"uploads/{destination.name}",
+    }
+    write_control_json("pending-update.json", metadata)
+    audit(db, "admin.update_uploaded", request, actor=admin.id, target=admin.id, version=inspected["version"], size=size)
+    db.commit()
+    return public_update_metadata(metadata) or {}
+
+
+@app.post("/api/admin/update/install", status_code=202)
+def install_update(payload: UpdateInstallInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    source_file = "github-release.json" if payload.source == "github" else "pending-update.json"
+    metadata = read_control_json(source_file)
+    if not metadata:
+        raise HTTPException(status.HTTP_409_CONFLICT, "Prima controlla GitHub oppure carica un pacchetto di aggiornamento.")
+    if not metadata.get("canInstall") or not metadata.get("updateAvailable"):
+        raise HTTPException(status.HTTP_409_CONFLICT, "Il pacchetto non contiene una versione più recente di quella installata.")
+    details: dict[str, Any] = {
+        "source": payload.source,
+        "targetVersion": metadata["latestVersion"],
+        "sha256": str(metadata.get("sha256") or ""),
+    }
+    if payload.source == "github":
+        details["assetUrl"] = str(metadata.get("assetUrl") or "")
+        if not details["assetUrl"]:
+            raise HTTPException(status.HTTP_409_CONFLICT, "La release non contiene il pacchetto server installabile.")
+    else:
+        relative_path = str(metadata.get("filePath") or "")
+        if not re.fullmatch(r"uploads/update-[0-9a-f-]{36}\.zip", relative_path):
+            raise HTTPException(status.HTTP_409_CONFLICT, "Il file caricato non è più disponibile.")
+        details["filePath"] = relative_path
+    control_request = create_portal_request("update", admin, **details)
+    audit(db, "admin.update_requested", request, actor=admin.id, target=admin.id, source=payload.source, version=metadata["latestVersion"])
+    db.commit()
+    return {"message": "Aggiornamento avviato. Backup, installazione e riavvio saranno automatici.", "requestId": control_request["requestId"], "version": metadata["latestVersion"]}
+
+
+@app.post("/api/admin/server/restart", status_code=202)
+def restart_portal(request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if request.headers.get("x-confirm-portal-action") != "RESTART":
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "Conferma riavvio mancante.")
+    control_request = create_portal_request("restart", admin)
+    audit(db, "admin.portal_restart_requested", request, actor=admin.id, target=admin.id)
+    db.commit()
+    return {"message": "Riavvio del portale richiesto.", "requestId": control_request["requestId"]}
+
+
+@app.post("/api/admin/server/stop", status_code=202)
+def stop_portal(request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if request.headers.get("x-confirm-portal-action") != "STOP":
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "Conferma spegnimento mancante.")
+    control_request = create_portal_request("stop", admin)
+    audit(db, "admin.portal_stop_requested", request, actor=admin.id, target=admin.id)
+    db.commit()
+    return {"message": "Spegnimento del solo portale richiesto. Il server e gli altri servizi restano accesi.", "requestId": control_request["requestId"]}
 
 
 @app.put("/api/admin/settings")

@@ -160,6 +160,7 @@ if [[ ! -f "${ENV_FILE}" ]]; then
     printf 'APP_BIND_ADDRESS=%s\n' "${APP_BIND_ADDRESS}"
     printf 'PROXY_MODE=%s\n' "${PROXY_MODE}"
     printf 'COMPOSE_PROFILES=%s\n' "${COMPOSE_PROFILES}"
+    printf 'PORT_CONTROL_CONTAINER_DIR=/srv/quiz400-control\n'
   } > "${ENV_FILE}"
   chmod 600 "${ENV_FILE}"
   echo "Configurazione protetta creata in cloud/.env"
@@ -178,6 +179,7 @@ fi
 
 cd "${PROJECT_DIR}"
 docker compose --env-file cloud/.env -f cloud/compose.yml up -d --build
+./cloud/install-server-control.sh
 
 echo
 echo "Quiz 400 VVF 2026 Cloud è avviato."

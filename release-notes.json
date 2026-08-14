@@ -1,0 +1,14 @@
+{
+  "version": "2.2.0",
+  "title": "Il portale si aggiorna dal pannello Admin",
+  "summary": "Da questa versione la manutenzione è concentrata sul portale server Linux e Windows.",
+  "items": [
+    "Nuovo centro aggiornamenti cloud con ricerca automatica e manuale delle release GitHub.",
+    "Versione installata, nuova versione e changelog sono visibili prima di avviare l’installazione.",
+    "È possibile caricare manualmente un pacchetto ZIP server validato e installarlo dal pannello.",
+    "Ogni aggiornamento crea un backup PostgreSQL e una copia recuperabile dei file correnti.",
+    "Riavvio e spegnimento protetti agiscono soltanto sul portale, lasciando accesi server e altri servizi.",
+    "Le nuove release sono dedicate al server Linux e Windows; il pacchetto EXE standalone è stato ritirato."
+  ],
+  "footnote": "Account, statistiche, preferenze e banca dati restano separati dal codice applicativo e non vengono sostituiti durante l’aggiornamento."
+}

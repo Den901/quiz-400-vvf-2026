@@ -39,4 +39,5 @@ if ! grep -qE '^APP_PORT=' "${ENV_FILE}"; then
 fi
 
 docker compose --env-file cloud/.env -f cloud/compose.yml up -d --build
+./cloud/install-server-control.sh
 echo "Aggiornamento completato. Il database e i volumi sono stati conservati."

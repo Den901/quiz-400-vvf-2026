@@ -43,3 +43,9 @@ html[data-theme="dark"] .question-dot{background:#29262a;color:#d1c8c2;border-co
 html[data-theme="dark"] .settings-total,html[data-theme="dark"] .targeted-empty{background:#332a12;border-color:#826824;color:#f7d98b}
 html[data-theme="dark"] .subject-mini-stats .known{background:#123125;color:#8ce0b5}html[data-theme="dark"] .subject-mini-stats .review{background:#392e15;color:#f7d98b}html[data-theme="dark"] .subject-mini-stats .unknown{background:#3a1b1d;color:#ffc0ba}html[data-theme="dark"] .subject-mini-stats .unanswered{background:#29262a;color:#d1c8c2}
 html[data-theme="dark"] textarea,html[data-theme="dark"] input[type=file],html[data-theme="dark"] .port-control{background:#111113;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .version-badge,html[data-theme="dark"] .version-comparison span{background:#242426;color:var(--muted)}
+html[data-theme="dark"] .update-source-card{background:var(--surface,#171719);border-color:var(--line)}
+html[data-theme="dark"] .update-changelog pre{background:#111113;color:var(--ink);border-color:var(--line)}
+html[data-theme="dark"] .portal-operation-status{background:#10271b;border-color:#245d3a;color:#9be8b7}
+html[data-theme="dark"] .portal-operation-status.downloading,html[data-theme="dark"] .portal-operation-status.backing-up,html[data-theme="dark"] .portal-operation-status.installing,html[data-theme="dark"] .portal-operation-status.restarting,html[data-theme="dark"] .portal-operation-status.stopping{background:#332711;border-color:#775b22;color:#f8d57d}
+html[data-theme="dark"] .portal-operation-status.error{background:#351517;border-color:#7a2d31;color:#ffb4b8}

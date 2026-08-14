@@ -1,6 +1,11 @@
+import hashlib
+import io
+import json
 import os
+import shutil
+import zipfile
 from pathlib import Path
-from unittest.mock import AsyncMock, patch
+from unittest.mock import AsyncMock, MagicMock, patch
 
 
 TEST_DB = Path(__file__).resolve().parents[2] / "tmp" / "cloud-test.sqlite3"
@@ -9,7 +14,7 @@ TEST_DB.unlink(missing_ok=True)
 PORT_CONTROL_DIR = TEST_DB.parent / "cloud-port-control-test"
 PORT_CONTROL_DIR.mkdir(parents=True, exist_ok=True)
 for item in PORT_CONTROL_DIR.iterdir():
-    item.unlink()
+    shutil.rmtree(item) if item.is_dir() else item.unlink()
 os.environ["DATABASE_URL"] = f"sqlite:///{TEST_DB.as_posix()}"
 os.environ["APP_SECRET"] = "test-secret-for-cloud-integration"
 os.environ["ADMIN_USERNAME"] = "admin"
@@ -204,6 +209,87 @@ def test_complete_cloud_account_and_statistics_flow():
         assert port_request["currentPort"] == 18088
         assert port_request["appPort"] == 18089
         assert port_request["domain"] == "quiz-test.duckdns.org"
+
+        update_status = admin_client.get("/api/admin/update/status")
+        assert update_status.status_code == 200
+        assert update_status.json()["currentVersion"] == "2.2.0"
+        assert update_status.json()["database"] == "PostgreSQL"
+        assert update_status.json()["control"]["available"] is True
+        assert user_client.get("/api/admin/update/status").status_code == 403
+
+        github_response = MagicMock()
+        github_response.raise_for_status.return_value = None
+        github_response.json.return_value = {
+            "tag_name": "v9.9.9",
+            "body": "- Changelog di prova",
+            "html_url": "https://github.com/Den901/quiz-400-vvf-2026/releases/tag/v9.9.9",
+            "published_at": "2026-08-14T10:00:00Z",
+            "assets": [{"name": "Quiz-400-VVF-2026-Server.zip", "size": 1234, "browser_download_url": "https://github.com/Den901/quiz-400-vvf-2026/releases/download/v9.9.9/Quiz-400-VVF-2026-Server.zip"}],
+        }
+        github_client = MagicMock()
+        github_client.get = AsyncMock(return_value=github_response)
+        github_context = MagicMock()
+        github_context.__aenter__ = AsyncMock(return_value=github_client)
+        github_context.__aexit__ = AsyncMock(return_value=None)
+        with patch("cloud.app.httpx.AsyncClient", return_value=github_context):
+            checked = admin_client.post("/api/admin/update/check")
+        assert checked.status_code == 200
+        assert checked.json()["latestVersion"] == "9.9.9"
+        assert checked.json()["updateAvailable"] is True
+        assert checked.json()["canInstall"] is True
+        assert "assetUrl" not in checked.json()
+
+        install_github = admin_client.post("/api/admin/update/install", json={"source": "github"})
+        assert install_github.status_code == 202
+        server_request = json.loads((PORT_CONTROL_DIR / "server-request.json").read_text(encoding="utf-8"))
+        assert server_request["action"] == "update"
+        assert server_request["source"] == "github"
+        assert server_request["targetVersion"] == "9.9.9"
+        (PORT_CONTROL_DIR / "server-request.json").unlink()
+
+        app_content = b"console.log('test update');\n"
+        version_content = json.dumps({"name": "Quiz 400 VVF 2026", "version": "9.9.8"}).encode()
+        manifest = {
+            "app": "Quiz 400 VVF 2026 Server",
+            "version": "9.9.8",
+            "platform": "Linux e Windows",
+            "changelog": ["Pacchetto manuale di prova"],
+            "files": [
+                {"path": "app.js", "sha256": hashlib.sha256(app_content).hexdigest(), "size": len(app_content)},
+                {"path": "version.json", "sha256": hashlib.sha256(version_content).hexdigest(), "size": len(version_content)},
+            ],
+            "removedFiles": [],
+        }
+        package = io.BytesIO()
+        with zipfile.ZipFile(package, "w", zipfile.ZIP_DEFLATED) as archive:
+            archive.writestr("app.js", app_content)
+            archive.writestr("version.json", version_content)
+            archive.writestr("release-manifest.json", json.dumps(manifest))
+        uploaded = admin_client.post(
+            "/api/admin/update/upload",
+            files={"file": ("Quiz-400-VVF-2026-Server.zip", package.getvalue(), "application/zip")},
+        )
+        assert uploaded.status_code == 201
+        assert uploaded.json()["latestVersion"] == "9.9.8"
+        assert uploaded.json()["canInstall"] is True
+        assert "filePath" not in uploaded.json()
+        install_upload = admin_client.post("/api/admin/update/install", json={"source": "upload"})
+        assert install_upload.status_code == 202
+        upload_request = json.loads((PORT_CONTROL_DIR / "server-request.json").read_text(encoding="utf-8"))
+        assert upload_request["source"] == "upload"
+        assert upload_request["filePath"].startswith("uploads/update-")
+        (PORT_CONTROL_DIR / "server-request.json").unlink()
+
+        assert admin_client.post("/api/admin/server/restart").status_code == 400
+        restart = admin_client.post("/api/admin/server/restart", headers={"X-Confirm-Portal-Action": "RESTART"})
+        assert restart.status_code == 202
+        assert json.loads((PORT_CONTROL_DIR / "server-request.json").read_text(encoding="utf-8"))["action"] == "restart"
+        (PORT_CONTROL_DIR / "server-request.json").unlink()
+        assert admin_client.post("/api/admin/server/stop").status_code == 400
+        stop = admin_client.post("/api/admin/server/stop", headers={"X-Confirm-Portal-Action": "STOP"})
+        assert stop.status_code == 202
+        assert json.loads((PORT_CONTROL_DIR / "server-request.json").read_text(encoding="utf-8"))["action"] == "stop"
+        (PORT_CONTROL_DIR / "server-request.json").unlink()
 
         recovery_token = "R" * 48
         with patch("cloud.app.secrets.token_urlsafe", return_value=recovery_token), patch(

@@ -34,6 +34,8 @@ services:
       PUBLIC_APP_BIND_ADDRESS: ${APP_BIND_ADDRESS:-127.0.0.1}
       PUBLIC_PROXY_MODE: ${PROXY_MODE:-bundled}
       PORT_CONTROL_DIR: ${PORT_CONTROL_CONTAINER_DIR:-}
+      UPDATE_REPOSITORY: ${UPDATE_REPOSITORY:-Den901/quiz-400-vvf-2026}
+      UPDATE_ASSET_NAME: ${UPDATE_ASSET_NAME:-Quiz-400-VVF-2026-Server.zip}
     depends_on:
       database:
         condition: service_healthy

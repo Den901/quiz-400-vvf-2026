@@ -1,5 +1,5 @@
-const CACHE='quiz400vvf-v34';
-const ASSETS=['./','./index.html','./styles.css?v=34','./styles-extra.css?v=34','./styles-guided.css?v=34','./styles-official.css?v=34','./styles-cloud.css?v=34','./styles-theme.css?v=34','./app.js?v=34','./data.js','./quiz-dataset.json','./manifest.webmanifest','./logo-vvf.jpg'];
+const CACHE='quiz400vvf-v35';
+const ASSETS=['./','./index.html','./styles.css?v=35','./styles-extra.css?v=35','./styles-guided.css?v=35','./styles-official.css?v=35','./styles-cloud.css?v=35','./styles-theme.css?v=35','./app.js?v=35','./data.js','./quiz-dataset.json','./manifest.webmanifest','./logo-vvf.jpg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(async c=>{await c.addAll(ASSETS);try{const list=await fetch('./quiz-images.json').then(r=>r.json());await c.addAll(['./quiz-images.json',...list])}catch{}}).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET'||new URL(e.request.url).pathname.startsWith('/api/'))return;e.respondWith(fetch(e.request,{cache:'no-store'}).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(cached=>cached||caches.match('./index.html'))))});

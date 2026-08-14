@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.2.0 - 2026-08-14
+
+- Nuovo centro aggiornamenti cloud riservato agli amministratori.
+- Controllo automatico al login e controllo manuale delle release GitHub.
+- Versione installata sempre visibile e confronto con la nuova versione disponibile.
+- Changelog mostrato prima dell’installazione.
+- Installazione da GitHub oppure da pacchetto ZIP server caricato manualmente.
+- Validazione di versione, percorsi e hash dei file del pacchetto.
+- Backup PostgreSQL e copia dei file automatici prima dell’aggiornamento, con ripristino dei file in caso di errore.
+- Riavvio e spegnimento del solo portale dal pannello Admin, entrambi con conferma.
+- Pacchetto server unico per Linux e Windows e nuovi script di gestione Windows.
+- Nuove release EXE standalone dismesse; PostgreSQL resta il database ufficiale.
+
 ## 2.1.5 - 2026-08-14
 
 - Resa più leggibile la cronologia con indicatori separati per **Giuste**, **Sbagliate** e **Non risposte**.

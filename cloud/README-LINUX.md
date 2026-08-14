@@ -6,7 +6,7 @@ Questa modalità pubblica usa servizi isolati:
 - **database**: PostgreSQL per account, progressi, sessioni e impostazioni;
 - **caddy opzionale**: proxy e HTTPS automatico soltanto quando non esiste già un reverse proxy.
 
-La versione portatile Windows/macOS continua a funzionare separatamente.
+Dalla versione 2.2.0 questa è la distribuzione principale del progetto; lo stesso pacchetto server è installabile anche su Windows.
 
 ## Requisiti
 
@@ -23,7 +23,7 @@ Installa Git se necessario, clona il progetto e avvia l'installatore:
 sudo apt update && sudo apt install -y git
 git clone https://github.com/Den901/quiz-400-vvf-2026.git
 cd quiz-400-vvf-2026
-chmod +x cloud/install-linux.sh cloud/install-port-control.sh cloud/apply-port-request.sh cloud/configure-ports.sh cloud/update-linux.sh cloud/backup-linux.sh
+chmod +x cloud/*.sh
 sudo ./cloud/install-linux.sh
 ```
 
@@ -34,7 +34,8 @@ Lo script:
 3. rileva le porte già utilizzate e chiede se è presente un reverse proxy HTTPS;
 4. genera segreti casuali per database e cifratura;
 5. crea `cloud/.env` con permessi riservati;
-6. costruisce e avvia i container necessari.
+6. costruisce e avvia i container necessari;
+7. installa il controllo host per aggiornamenti, riavvio e spegnimento del solo portale.
 
 Se usi il proxy incluso, apri inizialmente l'indirizzo mostrato dall'installatore. Se usi un reverse proxy esistente, configura prima il dominio come descritto sotto.
 
@@ -138,13 +139,41 @@ sudo ./cloud/backup-linux.sh
 
 Il dump PostgreSQL viene salvato in `cloud/backups`. I file più vecchi di 30 giorni vengono eliminati. È consigliato copiare i dump anche su uno spazio esterno cifrato.
 
-## Aggiornamento
+## Aggiornamento dal pannello Admin
+
+La versione installata è sempre visibile nell'intestazione e in **Admin > Aggiornamenti software**. Il portale controlla GitHub all'accesso di un amministratore e ogni 15 minuti. È inoltre possibile:
+
+- avviare manualmente la ricerca;
+- confrontare versione installata e disponibile;
+- leggere il changelog prima dell'installazione;
+- installare la release GitHub;
+- caricare e installare il pacchetto server ZIP.
+
+Se il controllo non è ancora presente su un'installazione precedente:
+
+```bash
+sudo ./cloud/install-server-control.sh
+```
+
+Prima di ogni installazione vengono creati il dump PostgreSQL e una copia dei file correnti. Se il portale aggiornato non supera il controllo di salute, i file precedenti vengono ripristinati. Il database e `cloud/.env` non vengono sostituiti.
+
+Resta disponibile anche l'aggiornamento da terminale:
 
 ```bash
 sudo ./cloud/update-linux.sh
 ```
 
 Lo script crea prima un dump, scarica gli aggiornamenti, applica le migrazioni del database e ricostruisce i container senza eliminare i volumi.
+
+## Riavvio e spegnimento
+
+I pulsanti in **Admin > Controllo server** richiedono conferma e agiscono soltanto sul portale. Non spengono Linux, PostgreSQL, Caddy o altri servizi.
+
+Dopo aver spento il portale dal pannello, riaccendilo dal server:
+
+```bash
+sudo ./cloud/start-linux.sh
+```
 
 ## Comandi utili
 

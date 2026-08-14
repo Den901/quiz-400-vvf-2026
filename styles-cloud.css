@@ -43,5 +43,31 @@
 .smtp-status.error{border-color:#efaaa4;background:#fff1f0;color:#991b1b}
 .cloud-stats-dialog .history{padding:10px;border-bottom:1px solid var(--line);margin:0}
 .cloud-mode .close-app,.cloud-mode .update-check-button{display:none!important}
+.header-version{padding:4px 7px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:10px;font-weight:850}
+.portal-update-center,.server-power-card{display:grid;gap:16px;margin-bottom:22px}
+.portal-update-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.portal-update-head h2,.server-power-card h2{margin:3px 0 0}
+.version-badge{display:grid;gap:3px;min-width:130px;padding:10px 13px;border:1px solid var(--line);border-radius:12px;background:#f5f1ec;color:var(--muted);font-size:11px;text-align:right}
+.version-badge b{color:var(--ink);font-size:18px}
+.portal-update-actions,.server-power-actions{display:flex;gap:9px;flex-wrap:wrap}
+.update-source-card{display:grid;gap:14px;padding:16px;border:1px solid var(--line);border-radius:15px;background:#fff}
+.update-empty{display:grid;gap:5px;color:var(--muted)}
+.update-empty b{color:var(--ink)}
+.update-version-line,.version-comparison{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.update-version-line>span{padding:5px 9px;border-radius:999px;background:#fce7e4;color:var(--red);font-size:11px;font-weight:850;text-transform:uppercase;letter-spacing:.04em}
+.update-version-line>b{font-size:19px}
+.version-comparison{justify-content:flex-start}
+.version-comparison span{padding:8px 10px;border-radius:10px;background:#f5f1ec;color:var(--muted);font-size:11px}
+.version-comparison b{color:var(--ink)}
+.update-changelog{display:grid;gap:8px}
+.update-changelog pre{max-height:270px;margin:0;padding:14px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:#f8f7f5;color:var(--ink);font:500 13px/1.55 system-ui,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.portal-operation-status{padding:11px 13px;border:1px solid #bbddc5;border-radius:11px;background:#f0fdf4;color:#166534;font-size:12px;font-weight:750}
+.portal-operation-status.downloading,.portal-operation-status.backing-up,.portal-operation-status.installing,.portal-operation-status.restarting,.portal-operation-status.stopping{border-color:#f0c36a;background:#fff8df;color:#784b00}
+.portal-operation-status.error{border-color:#efaaa4;background:#fff1f0;color:#991b1b}
+.server-power-card{grid-template-columns:minmax(0,1fr) auto;align-items:start}
+.server-power-card p{margin:6px 0 0}
+.portal-update-prompt .update-changelog{margin:14px 0}
+.portal-update-prompt .update-changelog pre{max-height:220px}
+.portal-progress-dialog{min-height:260px;align-content:center}
 @media(max-width:900px){.cloud-admin-summary,.cloud-average-grid,.cloud-user-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.port-control{grid-template-columns:1fr}.port-control .meta{grid-column:1}.cloud-admin-summary,.cloud-average-grid,.cloud-user-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}}
+@media(max-width:650px){.cloud-settings-form fieldset{grid-template-columns:1fr}.cloud-settings-form .full{grid-column:auto}.network-status{display:grid}.network-status span{text-align:left}.port-control{grid-template-columns:1fr}.port-control .meta{grid-column:1}.cloud-admin-summary,.cloud-average-grid,.cloud-user-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.cloud-category-list{grid-template-columns:1fr}.cloud-user-head{display:grid}.auth-links{display:grid}.cloud-user-actions button{flex:1 1 42%}.portal-update-head{display:grid}.version-badge{text-align:left}.server-power-card{grid-template-columns:1fr}.portal-update-actions>*{flex:1 1 100%}.server-power-actions{display:grid}.update-version-line{align-items:flex-start}.update-changelog pre{max-height:230px}}
