@@ -15,6 +15,7 @@ DEFAULT_OUTPUT = ROOT / "outputs" / "Quiz-400-VVF-2026-Server.zip"
 ROOT_FILES = {
     ".dockerignore",
     "app.js",
+    "quiz-selection.js",
     "data.js",
     "index.html",
     "manifest.webmanifest",

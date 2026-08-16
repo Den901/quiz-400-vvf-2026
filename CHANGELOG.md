@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.4.0 - 2026-08-17
+
+- Corretta la rotazione delle prove da 40 per impedire ripetizioni prima dell'esaurimento delle domande disponibili nel ciclo.
+- Il Deep learning usa ora le classificazioni personali maturate in tutte le modalità, compresi i quiz per materia.
+- Aggiunta priorità esplicita: **Non le so**, **Da ripetere**, **Da fare** e, solo quando necessario, **Le so**.
+- Aggiunta memoria delle domande deboli già proposte, separata per simulazione ufficiale e prova guidata.
+- Una risposta corretta classifica subito la domanda come **Le so**; un errore la classifica **Da ripetere**.
+- Aggiunti test automatici sulla rotazione ordinaria, sulla priorità adattiva e sul caso con 900 domande già note.
+
 ## 2.3.0 - 2026-08-14
 
 - Aggiunta informativa privacy pubblica strutturata secondo gli articoli 12 e 13 GDPR.
