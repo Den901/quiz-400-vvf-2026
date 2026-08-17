@@ -93,6 +93,31 @@ export function selectRotatingQuestions(source, count, rotation = {}, seed = '')
   };
 }
 
+/**
+ * Mantiene l'ordine originale ma riparte dalla domanda successiva al cursore.
+ * Il filtro viene applicato dopo la rotazione dell'intera banca, cosi il
+ * cursore resta valido anche quando una domanda cambia stato.
+ */
+export function selectOrderedQuestions(source, cursor = {}, include = () => true) {
+  const questions = uniqueQuestions(source);
+  if (!questions.length) return [];
+
+  let position = Number(cursor?.position);
+  const lastId = String(cursor?.lastId ?? '');
+  const positionMatches = Number.isInteger(position)
+    && position >= 0
+    && position < questions.length
+    && (!lastId || idOf(questions[position]) === lastId);
+
+  if (!positionMatches) {
+    position = lastId ? questions.findIndex(question => idOf(question) === lastId) : -1;
+  }
+
+  const start = position >= 0 ? (position + 1) % questions.length : 0;
+  const ordered = [...questions.slice(start), ...questions.slice(0, start)];
+  return ordered.filter(include);
+}
+
 const normalizedStatus = status => ['known', 'review', 'unknown'].includes(status) ? status : 'unanswered';
 
 export function applyLearningOutcome(progress, {blank = false, correct = false}, countAttempt = true, at = new Date().toISOString()) {

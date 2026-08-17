@@ -1,14 +1,13 @@
 {
-  "version": "2.5.0",
-  "title": "Memoria completa dei quiz da 40 e conferma delle risposte",
-  "summary": "Le due prove da 40 condividono ora una memoria unica dei quesiti già mostrati e la prova guidata richiede una conferma prima di rivelare il risultato.",
+  "version": "2.5.1",
+  "title": "Ripresa corretta dei quiz per materia",
+  "summary": "I filtri Le so, Da ripetere, Non le so e Da fare ricordano ora l'ultima domanda svolta per ogni materia e ripartono da quella successiva.",
   "items": [
-    "Verificati sul database reale 8 e 12 quesiti ripetuti fra prove guidate consecutive; eliminata la causa che faceva rientrare subito una domanda dopo il passaggio a “Le so”.",
-    "Simulazione ufficiale e prova guidata condividono la stessa memoria: finché la materia dispone di altri quesiti, quelli già mostrati non vengono riproposti.",
-    "La selezione privilegia sempre domande “Non le so”, “Da ripetere” o mai fatte; le domande “Le so” vengono pescate soltanto quando servono dopo l'esaurimento delle alternative disponibili.",
-    "La prova guidata usa l'intera banca dati invece del piccolo sottoinsieme con spiegazione, che in alcune materie conteneva soltanto 25 quesiti. Le spiegazioni mancanti vengono dichiarate, mai inventate.",
-    "Nella prova guidata da 40 puoi cambiare risposta liberamente: il risultato appare soltanto dopo aver premuto Continua.",
-    "Il pulsante Termina prova offre ora tre scelte: Concludi quiz e salva, Annulla, oppure Termina senza salvare né risultati né statistiche."
+    "Individuata sui dati reali la ripetizione di domande già classificate nei quiz per materia.",
+    "Aggiunto un cursore personale distinto per materia e per stato: Le so, Da ripetere, Non le so e Da fare.",
+    "Alla riapertura il quiz mantiene l'ordine ufficiale e parte dalla domanda successiva all'ultima svolta, invece di tornare all'inizio del gruppo.",
+    "Per gli account esistenti il primo cursore viene ricostruito automaticamente dall'attività più recente già salvata.",
+    "Il cambio di stato e le risposte continuano a essere sincronizzati sul database personale dell'utente."
   ],
-  "footnote": "Al primo avvio la nuova memoria importa automaticamente i quesiti presenti nelle prove recenti già salvate. Dati, statistiche e preferenze restano intatti."
+  "footnote": "La correzione non azzera progressi, statistiche o classificazioni esistenti."
 }

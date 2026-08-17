@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5.1 - 2026-08-17
+
+- Corretta la ripetizione delle prime domande nei filtri dei quiz per materia.
+- Aggiunto un cursore personale separato per materia e stato: **Le so**, **Da ripetere**, **Non le so** e **Da fare**.
+- La riapertura mantiene l'ordine ufficiale e riparte dalla domanda successiva all'ultima svolta.
+- Per gli utenti esistenti il cursore iniziale viene ricostruito dall'attività più recente già salvata.
+- Progressi, statistiche e classificazioni esistenti restano invariati.
+
 ## 2.5.0 - 2026-08-17
 
 - Verificate sul database reale 8 e 12 ripetizioni tra prove guidate consecutive e corretta la causa.

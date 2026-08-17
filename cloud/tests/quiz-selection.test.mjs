@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   applyLearningOutcome,
   selectAdaptiveQuestions,
+  selectOrderedQuestions,
   selectPersonalizedQuestions,
   selectRotatingQuestions
 } from '../../quiz-selection.js';
@@ -100,4 +101,27 @@ test('una domanda diventata Le so resta esclusa dal ciclo corrente', () => {
 
   assert.equal(second.selected.some(question => firstIds.has(question.id)), false);
   assert.equal(second.selection.weak, 12);
+});
+
+test('il filtro per materia riprende dalla domanda successiva mantenendo l ordine', () => {
+  const source = questions(8);
+  const statuses = new Map(source.map((question, index) => [question.id, index % 2 ? 'review' : 'known']));
+  const selected = selectOrderedQuestions(
+    source,
+    {version: 2, lastId: 'q-4', position: 3},
+    question => statuses.get(question.id) === 'review'
+  );
+
+  assert.deepEqual(selected.map(question => question.id), ['q-6', 'q-8', 'q-2', 'q-4']);
+});
+
+test('il cursore per materia resta valido se la domanda ha cambiato stato', () => {
+  const source = questions(6);
+  const selected = selectOrderedQuestions(
+    source,
+    {version: 2, lastId: 'q-3', position: 2},
+    question => ['q-1', 'q-4', 'q-5'].includes(question.id)
+  );
+
+  assert.deepEqual(selected.map(question => question.id), ['q-4', 'q-5', 'q-1']);
 });

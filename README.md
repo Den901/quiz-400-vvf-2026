@@ -20,7 +20,7 @@ Non vengono più create nuove versioni EXE o nuove release standalone. Gli event
 
 ## Funzioni principali
 
-- quiz per materia in ordine, con ripresa dalle domande non ancora fatte;
+- quiz per materia in ordine, con ripresa dalle domande non ancora fatte e cursori separati per ogni filtro di studio;
 - classificazione personale: **Le so**, **Da ripetere**, **Non le so**, **Da fare**;
 - errore inserito automaticamente tra le domande da ripetere;
 - prova guidata con risposta corretta e spiegazione a tendina;
