@@ -1,5 +1,16 @@
 # Changelog
 
+## 2.5.0 - 2026-08-17
+
+- Verificate sul database reale 8 e 12 ripetizioni tra prove guidate consecutive e corretta la causa.
+- Aggiunta una memoria unica, condivisa da simulazione ufficiale e prova guidata, per tutte le domande già mostrate nelle prove da 40.
+- La memoria resta valida anche quando una risposta corretta cambia lo stato della domanda in **Le so**.
+- La selezione privilegia sempre **Non le so**, **Da ripetere** e **Da fare** prima delle domande note.
+- La prova guidata usa l'intera banca dati; le spiegazioni non disponibili non vengono inventate.
+- Nella prova guidata da 40 la risposta è modificabile fino alla conferma con **Continua**.
+- Il comando **Termina prova** permette di concludere e salvare, annullare oppure terminare senza salvare.
+- L'abbandono senza salvataggio ripristina anche la rotazione precedente, senza alterare il percorso futuro.
+
 ## 2.4.0 - 2026-08-17
 
 - Corretta la rotazione delle prove da 40 per impedire ripetizioni prima dell'esaurimento delle domande disponibili nel ciclo.

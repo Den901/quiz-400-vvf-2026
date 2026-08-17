@@ -185,3 +185,66 @@ export function selectAdaptiveQuestions(source, count, bucket = {}, knownRotatio
     }
   };
 }
+
+/**
+ * Selezione personale condivisa dalle due prove da 40. La memoria comprende
+ * tutte le domande già mostrate, anche quando cambiano stato dopo la risposta.
+ */
+export function selectPersonalizedQuestions(source, count, exposure = {}, seed = '', statusFor = () => 'unanswered', options = {}) {
+  const questions = uniqueQuestions(source);
+  const target = Math.min(Math.max(0, Math.floor(Number(count) || 0)), questions.length);
+  if (!target) return {selected: [], exposure: {...exposure, version: 3, seen: []}};
+
+  const validIds = new Set(questions.map(idOf));
+  const seen = new Set((Array.isArray(exposure?.seen) ? exposure.seen : []).map(String).filter(id => validIds.has(id)));
+  const used = new Set();
+  const selected = [];
+  let cycle = Math.max(1, Math.floor(Number(exposure?.cycle) || 1));
+  const statusOf = question => normalizedStatus(statusFor(question));
+  const prefers = typeof options.prefer === 'function' ? options.prefer : () => false;
+
+  const append = (pool, label) => {
+    if (selected.length >= target) return;
+    const available = pool.filter(question => !seen.has(idOf(question)) && !used.has(idOf(question)));
+    const preferred = shuffle(available.filter(prefers), `${seed}|${label}|preferred|cycle-${cycle}`);
+    const others = shuffle(available.filter(question => !prefers(question)), `${seed}|${label}|other|cycle-${cycle}`);
+    for (const question of [...preferred, ...others].slice(0, target - selected.length)) {
+      selected.push(question);
+      used.add(idOf(question));
+    }
+  };
+
+  const appendCycle = () => {
+    if (options.adaptive) {
+      append(questions.filter(question => statusOf(question) === 'unknown'), 'unknown');
+      append(questions.filter(question => statusOf(question) === 'review'), 'review');
+      append(questions.filter(question => statusOf(question) === 'unanswered'), 'unanswered');
+    } else {
+      append(questions.filter(question => statusOf(question) !== 'known'), 'weak');
+    }
+    append(questions.filter(question => statusOf(question) === 'known'), 'known');
+  };
+
+  appendCycle();
+  if (selected.length < target) {
+    cycle += 1;
+    seen.clear();
+    appendCycle();
+  }
+
+  selected.forEach(question => seen.add(idOf(question)));
+  return {
+    selected,
+    exposure: {
+      version: 3,
+      cycle,
+      seen: [...seen],
+      size: questions.length,
+      updatedAt: new Date().toISOString()
+    },
+    selection: {
+      weak: selected.filter(question => statusOf(question) !== 'known').length,
+      known: selected.filter(question => statusOf(question) === 'known').length
+    }
+  };
+}

@@ -1,14 +1,14 @@
 {
-  "version": "2.4.0",
-  "title": "Quiz più vari e ripasso adattivo dai tuoi punti deboli",
-  "summary": "Le prove da 40 ora evitano le ripetizioni premature e il Deep learning usa l'intero percorso personale, compresi i quiz per materia.",
+  "version": "2.5.0",
+  "title": "Memoria completa dei quiz da 40 e conferma delle risposte",
+  "summary": "Le due prove da 40 condividono ora una memoria unica dei quesiti già mostrati e la prova guidata richiede una conferma prima di rivelare il risultato.",
   "items": [
-    "Corretta la rotazione delle domande nelle simulazioni ufficiali e nelle prove guidate: una domanda non ricompare prima di aver attraversato il gruppo disponibile.",
-    "Il Deep learning sceglie nell'ordine le domande “Non le so”, “Da ripetere” e “Da fare”; quelle “Le so” vengono usate soltanto se servono per completare la materia prevista dalla prova.",
-    "La selezione adattiva considera le classificazioni ottenute in tutte le modalità, inclusi i quiz per argomento: il lavoro già svolto in Storia, Logica e nelle altre materie non viene ignorato.",
-    "Ogni modalità conserva per utente la memoria delle domande deboli già proposte, evitando di pescare più volte lo stesso piccolo gruppo mentre ce ne sono altre da allenare.",
-    "Una risposta corretta passa subito a “Le so”; una risposta errata passa a “Da ripetere”.",
-    "Aggiornate le spiegazioni nell'interfaccia Deep learning e nel riepilogo finale per rendere chiara la priorità usata dall'algoritmo."
+    "Verificati sul database reale 8 e 12 quesiti ripetuti fra prove guidate consecutive; eliminata la causa che faceva rientrare subito una domanda dopo il passaggio a “Le so”.",
+    "Simulazione ufficiale e prova guidata condividono la stessa memoria: finché la materia dispone di altri quesiti, quelli già mostrati non vengono riproposti.",
+    "La selezione privilegia sempre domande “Non le so”, “Da ripetere” o mai fatte; le domande “Le so” vengono pescate soltanto quando servono dopo l'esaurimento delle alternative disponibili.",
+    "La prova guidata usa l'intera banca dati invece del piccolo sottoinsieme con spiegazione, che in alcune materie conteneva soltanto 25 quesiti. Le spiegazioni mancanti vengono dichiarate, mai inventate.",
+    "Nella prova guidata da 40 puoi cambiare risposta liberamente: il risultato appare soltanto dopo aver premuto Continua.",
+    "Il pulsante Termina prova offre ora tre scelte: Concludi quiz e salva, Annulla, oppure Termina senza salvare né risultati né statistiche."
   ],
-  "footnote": "Le statistiche e le preferenze esistenti restano intatte durante l'aggiornamento. La rotazione è separata per simulazione e prova guidata, mentre la classificazione delle conoscenze è condivisa."
+  "footnote": "Al primo avvio la nuova memoria importa automaticamente i quesiti presenti nelle prove recenti già salvate. Dati, statistiche e preferenze restano intatti."
 }

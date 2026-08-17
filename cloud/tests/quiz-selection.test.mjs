@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   applyLearningOutcome,
   selectAdaptiveQuestions,
+  selectPersonalizedQuestions,
   selectRotatingQuestions
 } from '../../quiz-selection.js';
 
@@ -71,4 +72,32 @@ test('una risposta corretta passa subito a Le so e un errore a Da ripetere', () 
   applyLearningOutcome(progress, {correct: false}, true, '2026-08-17T10:01:00.000Z');
   assert.equal(progress.status, 'review');
   assert.equal(progress.wrong, 3);
+});
+
+test('simulazione e guidata condividono la stessa memoria anti-ripetizione', () => {
+  const source = questions(1000);
+  const statuses = new Map(source.map((question, index) => [question.id, index < 900 ? 'known' : 'unanswered']));
+  const alreadyShown = source.slice(900, 908).map(question => question.id);
+  let exposure = {version: 3, cycle: 1, seen: alreadyShown};
+
+  const official = selectPersonalizedQuestions(source, 8, exposure, 'official', question => statuses.get(question.id), {adaptive: true});
+  exposure = official.exposure;
+  const guided = selectPersonalizedQuestions(source, 8, exposure, 'guided', question => statuses.get(question.id), {adaptive: true});
+
+  const firstIds = new Set([...alreadyShown, ...official.selected.map(question => question.id)]);
+  assert.equal(official.selection.weak, 8);
+  assert.equal(guided.selection.weak, 8);
+  assert.equal(guided.selected.some(question => firstIds.has(question.id)), false);
+});
+
+test('una domanda diventata Le so resta esclusa dal ciclo corrente', () => {
+  const source = questions(120);
+  const statuses = new Map(source.map(question => [question.id, 'review']));
+  const first = selectPersonalizedQuestions(source, 12, {}, 'first', question => statuses.get(question.id), {adaptive: true});
+  first.selected.forEach(question => statuses.set(question.id, 'known'));
+  const second = selectPersonalizedQuestions(source, 12, first.exposure, 'second', question => statuses.get(question.id), {adaptive: true});
+  const firstIds = new Set(first.selected.map(question => question.id));
+
+  assert.equal(second.selected.some(question => firstIds.has(question.id)), false);
+  assert.equal(second.selection.weak, 12);
 });
