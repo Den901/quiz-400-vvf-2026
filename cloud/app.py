@@ -16,11 +16,12 @@ import uuid
 import zipfile
 from collections import defaultdict, deque
 from contextlib import asynccontextmanager
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, date, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
 from typing import Any, Generator, Literal
 from urllib.parse import urlparse
+from zoneinfo import ZoneInfo
 
 import httpx
 from argon2 import PasswordHasher
@@ -30,7 +31,8 @@ from fastapi import Depends, FastAPI, File, HTTPException, Request, Response, Up
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, EmailStr, Field, field_validator
-from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, JSON, String, Text, create_engine, func, select
+from sqlalchemy import Boolean, Date, DateTime, ForeignKey, Integer, JSON, String, Text, UniqueConstraint, create_engine, func, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import DeclarativeBase, Mapped, Session, mapped_column, relationship, sessionmaker
 
 
@@ -66,6 +68,9 @@ UPDATE_ASSET_NAME = os.environ.get("UPDATE_ASSET_NAME", "Quiz-400-VVF-2026-Serve
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
 DUCKDNS_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.duckdns\.org)?$")
 VERSION_RE = re.compile(r"^v?(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
+CHALLENGE_SECONDS = 40 * 60
+CHALLENGE_TIMEZONE = ZoneInfo("Europe/Rome")
+CHALLENGE_LOGIC_TOPICS = ("deduzioni", "serie", "verbale", "calcolo", "figure", "insiemi", "relazioni", "ordinamenti", "brani", "mista")
 
 if not APP_SECRET:
     if os.environ.get("Q400_ENV", "development") == "production":
@@ -167,6 +172,33 @@ class AuditLog(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
 
 
+class DailyChallenge(Base):
+    __tablename__ = "daily_challenges"
+
+    challenge_date: Mapped[date] = mapped_column(Date, primary_key=True)
+    question_ids: Mapped[list[str]] = mapped_column(JSON)
+    composition: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    app_version: Mapped[str] = mapped_column(String(40), default=APP_VERSION)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
+class DailyChallengeAttempt(Base):
+    __tablename__ = "daily_challenge_attempts"
+    __table_args__ = (UniqueConstraint("challenge_date", "user_id", name="uq_daily_challenge_attempt_user_date"),)
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    challenge_date: Mapped[date] = mapped_column(ForeignKey("daily_challenges.challenge_date", ondelete="CASCADE"), index=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    answers: Mapped[list[int | None]] = mapped_column(JSON, default=list)
+    started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    submitted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
+    correct: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    wrong: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    blank: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    score_x100: Mapped[int | None] = mapped_column(Integer, nullable=True, index=True)
+    duration_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
+
+
 engine_options: dict[str, Any] = {"pool_pre_ping": True}
 if DATABASE_URL.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
@@ -177,6 +209,7 @@ SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 DEFAULT_SETTINGS: dict[str, Any] = {
     "site_name": "Quiz 400 VVF 2026",
     "registration_enabled": True,
+    "daily_challenge_enabled": True,
     "public_url": "",
     "session_days": 30,
     "reset_token_minutes": 30,
@@ -373,6 +406,7 @@ def public_settings(db: Session) -> dict[str, Any]:
     return {
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
+        "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
         "emailResetEnabled": bool(get_setting(db, "smtp_enabled") and get_setting(db, "smtp_host")),
         "privacyNotice": get_setting(db, "privacy_notice"),
         "privacy": privacy,
@@ -523,6 +557,10 @@ class StateInput(BaseModel):
     config: dict[str, Any] | None = None
 
 
+class DailyChallengeAnswersInput(BaseModel):
+    answers: list[int | None] = Field(min_length=40, max_length=40)
+
+
 class AdminUserInput(RegistrationInput):
     role: str = "user"
 
@@ -561,6 +599,7 @@ class BrandLogoInput(BaseModel):
 class CloudSettingsInput(BaseModel):
     site_name: str = Field(min_length=3, max_length=100)
     registration_enabled: bool
+    daily_challenge_enabled: bool = True
     public_url: str = Field(default="", max_length=300)
     session_days: int = Field(ge=1, le=365)
     reset_token_minutes: int = Field(ge=10, le=1440)
@@ -698,8 +737,8 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
     study_resources = study_paths.get("resources", {}) if isinstance(study_paths, dict) else {}
     study_values = [item for item in study_resources.values() if isinstance(item, dict)] if isinstance(study_resources, dict) else []
     valid_sessions = [item for item in sessions if isinstance(item, dict)]
-    exams = [item for item in valid_sessions if item.get("type") == "exam"]
-    forty_quizzes = [item for item in valid_sessions if item.get("type") in {"exam", "guided-exam"}]
+    exams = [item for item in valid_sessions if item.get("type") in {"exam", "daily-challenge"}]
+    forty_quizzes = [item for item in valid_sessions if item.get("type") in {"exam", "guided-exam", "daily-challenge"}]
     guided = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"guided", "guided-exam"}]
     subject_quizzes = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"study", "guided", "tutor"}]
     exam_stats = session_group_statistics(exams)
@@ -717,6 +756,7 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
         "subjectQuizzes": len(subject_quizzes),
         "fortyQuizzes": forty_stats["count"],
         "guidedFortyQuizzes": sum(1 for item in forty_quizzes if item.get("type") == "guided-exam"),
+        "dailyChallenges": sum(1 for item in forty_quizzes if item.get("type") == "daily-challenge"),
         "sessions": len(sessions),
         "averageScore": exam_stats["averageScore"],
         "bestScore": exam_stats["bestScore"],
@@ -732,21 +772,337 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+question_bank: list[dict[str, Any]] = []
+questions_by_id: dict[str, dict[str, Any]] = {}
 question_categories: dict[str, str] = {}
 question_category_totals: dict[str, int] = {}
 
 
 def load_question_categories() -> None:
-    global question_categories, question_category_totals
+    global question_bank, questions_by_id, question_categories, question_category_totals
     try:
         rows = json.loads((ROOT / "quiz-dataset.json").read_text(encoding="utf-8"))
-        question_categories = {str(row["id"]): macro_question_category(row["category"]) for row in rows if isinstance(row, dict) and row.get("id") and row.get("category")}
+        question_bank = [row for row in rows if isinstance(row, dict) and row.get("id") and row.get("category") and isinstance(row.get("answers"), list)]
+        questions_by_id = {str(row["id"]): row for row in question_bank}
+        question_categories = {str(row["id"]): macro_question_category(row["category"]) for row in question_bank}
         question_category_totals = {}
         for category in question_categories.values():
             question_category_totals[category] = question_category_totals.get(category, 0) + 1
     except (OSError, ValueError):
+        question_bank = []
+        questions_by_id = {}
         question_categories = {}
         question_category_totals = {}
+
+
+def challenge_today() -> date:
+    return datetime.now(CHALLENGE_TIMEZONE).date()
+
+
+def aware_utc(value: datetime) -> datetime:
+    return value.replace(tzinfo=UTC) if value.tzinfo is None else value.astimezone(UTC)
+
+
+def deterministic_questions(source: list[dict[str, Any]], count: int, seed: str) -> list[dict[str, Any]]:
+    if len(source) < count:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La banca dati non contiene abbastanza quesiti per creare la sfida giornaliera.")
+    return sorted(source, key=lambda row: hashlib.sha256(f"{seed}|{row['id']}".encode("utf-8")).digest())[:count]
+
+
+def challenge_logic_topic(question: dict[str, Any]) -> str:
+    category = str(question.get("category") or "")
+    if category == "insiemi":
+        return "insiemi"
+    if category == "brani":
+        return "brani"
+    topic = str(question.get("logicTopic") or "")
+    return topic if topic in CHALLENGE_LOGIC_TOPICS else "mista"
+
+
+def normalized_challenge_composition(db: Session) -> dict[str, dict[str, int]]:
+    defaults = DEFAULT_SETTINGS["exam_config"]
+    configured = get_setting(db, "exam_config")
+    configured = configured if isinstance(configured, dict) else defaults
+    raw_plan = configured.get("examPlan") if isinstance(configured.get("examPlan"), dict) else defaults["examPlan"]
+    categories = ("storia", "logica", "fisica", "chimica", "informatica", "inglese")
+    plan = {category: max(0, int(raw_plan.get(category, 0) or 0)) for category in categories}
+    if sum(plan.values()) != 40:
+        plan = dict(defaults["examPlan"])
+    raw_logic = configured.get("logicPlan") if isinstance(configured.get("logicPlan"), dict) else defaults["logicPlan"]
+    logic_plan = {topic: max(0, int(raw_logic.get(topic, 0) or 0)) for topic in CHALLENGE_LOGIC_TOPICS}
+    if sum(logic_plan.values()) != plan["logica"]:
+        if plan["logica"] == sum(defaults["logicPlan"].values()):
+            logic_plan = dict(defaults["logicPlan"])
+        else:
+            fallback_topics = tuple(topic for topic in CHALLENGE_LOGIC_TOPICS if topic != "brani")
+            logic_plan = {topic: 0 for topic in CHALLENGE_LOGIC_TOPICS}
+            for index in range(plan["logica"]):
+                logic_plan[fallback_topics[index % len(fallback_topics)]] += 1
+    return {"examPlan": plan, "logicPlan": logic_plan}
+
+
+def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
+    if not question_bank:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Banca dati dei quiz non disponibile.")
+    composition = normalized_challenge_composition(db)
+    plan = composition["examPlan"]
+    logic_plan = composition["logicPlan"]
+    seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
+    selected: list[dict[str, Any]] = []
+    for category, count in plan.items():
+        if not count:
+            continue
+        if category != "logica":
+            source = [row for row in question_bank if macro_question_category(row.get("category")) == category]
+            selected.extend(deterministic_questions(source, count, f"{seed}|{category}"))
+            continue
+        logic_source = [row for row in question_bank if macro_question_category(row.get("category")) == "logica"]
+        for topic, topic_count in logic_plan.items():
+            if topic_count:
+                source = [row for row in logic_source if challenge_logic_topic(row) == topic]
+                selected.extend(deterministic_questions(source, topic_count, f"{seed}|logica|{topic}"))
+    if len(selected) != 40 or len({str(row["id"]) for row in selected}) != 40:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
+    ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())
+    return DailyChallenge(challenge_date=challenge_date, question_ids=[str(row["id"]) for row in ordered], composition=composition, app_version=APP_VERSION)
+
+
+def get_or_create_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
+    challenge = db.get(DailyChallenge, challenge_date)
+    if challenge:
+        return challenge
+    challenge = build_daily_challenge(challenge_date, db)
+    db.add(challenge)
+    try:
+        db.flush()
+        return challenge
+    except IntegrityError:
+        db.rollback()
+        existing = db.get(DailyChallenge, challenge_date)
+        if not existing:
+            raise
+        return existing
+
+
+def challenge_questions(challenge: DailyChallenge) -> list[dict[str, Any]]:
+    questions = [questions_by_id.get(str(question_id)) for question_id in challenge.question_ids]
+    if any(question is None for question in questions):
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Una domanda della sfida non è più disponibile nella banca dati.")
+    return [question for question in questions if question is not None]
+
+
+def public_challenge_question(question: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "id": str(question["id"]),
+        "category": str(question.get("category") or ""),
+        "text": str(question.get("text") or ""),
+        "answers": [str(answer) for answer in question.get("answers", [])],
+        "image": str(question.get("image") or ""),
+    }
+
+
+def validate_challenge_answers(challenge: DailyChallenge, answers: list[int | None]) -> list[int | None]:
+    questions = challenge_questions(challenge)
+    if len(answers) != len(questions):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Sono richieste esattamente 40 risposte.")
+    normalized: list[int | None] = []
+    for answer, question in zip(answers, questions, strict=True):
+        if answer is None:
+            normalized.append(None)
+        elif isinstance(answer, bool) or answer < 0 or answer >= len(question.get("answers", [])):
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Una delle risposte selezionate non è valida.")
+        else:
+            normalized.append(int(answer))
+    return normalized
+
+
+def challenge_expiry(attempt: DailyChallengeAttempt) -> datetime:
+    return aware_utc(attempt.started_at) + timedelta(seconds=CHALLENGE_SECONDS)
+
+
+def finalize_challenge_attempt(attempt: DailyChallengeAttempt, challenge: DailyChallenge, submitted_at: datetime | None = None) -> DailyChallengeAttempt:
+    if attempt.submitted_at:
+        return attempt
+    questions = challenge_questions(challenge)
+    answers = validate_challenge_answers(challenge, list(attempt.answers or [None] * len(questions)))
+    correct = sum(1 for answer, question in zip(answers, questions, strict=True) if answer is not None and answer == int(question["correct"]))
+    wrong = sum(1 for answer, question in zip(answers, questions, strict=True) if answer is not None and answer != int(question["correct"]))
+    blank = len(questions) - correct - wrong
+    finished_at = min(submitted_at or utcnow(), challenge_expiry(attempt))
+    attempt.answers = answers
+    attempt.submitted_at = finished_at
+    attempt.correct = correct
+    attempt.wrong = wrong
+    attempt.blank = blank
+    attempt.score_x100 = correct * 100 - wrong * 33
+    attempt.duration_seconds = max(0, min(CHALLENGE_SECONDS, int((aware_utc(finished_at) - aware_utc(attempt.started_at)).total_seconds())))
+    return attempt
+
+
+def challenge_result_details(attempt: DailyChallengeAttempt, challenge: DailyChallenge) -> list[dict[str, Any]]:
+    details = []
+    for answer, question in zip(attempt.answers, challenge_questions(challenge), strict=True):
+        correct_index = int(question["correct"])
+        details.append({
+            **public_challenge_question(question),
+            "correct": correct_index,
+            "explanation": str(question.get("explanation") or ""),
+            "choice": answer,
+            "blank": answer is None,
+            "isCorrect": answer is not None and answer == correct_index,
+        })
+    return details
+
+
+def challenge_score(attempt: DailyChallengeAttempt) -> float | None:
+    return round(attempt.score_x100 / 100, 2) if attempt.score_x100 is not None else None
+
+
+def record_challenge_in_user_state(user: User, attempt: DailyChallengeAttempt, challenge: DailyChallenge) -> None:
+    if not attempt.submitted_at:
+        return
+    state_data = dict(user.state.data if user.state and isinstance(user.state.data, dict) else empty_state())
+    recorded = list(state_data.get("dailyChallengeRecordedDates") or [])
+    key = challenge.challenge_date.isoformat()
+    if key in recorded:
+        return
+    progress = dict(state_data.get("progress") or {})
+    review: list[dict[str, Any]] = []
+    per_category: dict[str, dict[str, int]] = {}
+    completed_at = aware_utc(attempt.submitted_at).isoformat()
+    for answer, question in zip(attempt.answers, challenge_questions(challenge), strict=True):
+        question_id = str(question["id"])
+        correct_index = int(question["correct"])
+        is_blank = answer is None
+        is_correct = answer is not None and answer == correct_index
+        item = dict(progress.get(question_id) or {"attempts": 0, "correct": 0, "wrong": 0, "skipped": 0, "status": "unanswered"})
+        if is_blank:
+            item["skipped"] = int(item.get("skipped", 0) or 0) + 1
+            if not int(item.get("attempts", 0) or 0):
+                item["status"] = "unanswered"
+        else:
+            item["attempts"] = int(item.get("attempts", 0) or 0) + 1
+            if is_correct:
+                item["correct"] = int(item.get("correct", 0) or 0) + 1
+                item["status"] = "known"
+            else:
+                item["wrong"] = int(item.get("wrong", 0) or 0) + 1
+                item["status"] = "review"
+        item["lastAt"] = completed_at
+        progress[question_id] = item
+        category = macro_question_category(question.get("category"))
+        bucket = per_category.setdefault(category, {"correct": 0, "wrong": 0, "blank": 0, "total": 0})
+        bucket["total"] += 1
+        bucket["blank" if is_blank else "correct" if is_correct else "wrong"] += 1
+        review.append({
+            "id": question_id,
+            "category": category,
+            "logicTopic": challenge_logic_topic(question) if category == "logica" else None,
+            "choiceText": None if is_blank else str(question["answers"][answer]),
+            "correctText": str(question["answers"][correct_index]),
+            "blank": is_blank,
+            "correct": is_correct,
+        })
+    for bucket in per_category.values():
+        answered = bucket["correct"] + bucket["wrong"]
+        bucket["accuracy"] = round(bucket["correct"] / answered * 100) if answered else None
+    sessions = list(state_data.get("sessions") or [])
+    sessions.append({
+        "id": f"daily-challenge-{key}",
+        "type": "daily-challenge",
+        "at": completed_at,
+        "challengeDate": key,
+        "correct": attempt.correct,
+        "wrong": attempt.wrong,
+        "blank": attempt.blank,
+        "score": challenge_score(attempt),
+        "accuracy": round((attempt.correct or 0) / max(1, (attempt.correct or 0) + (attempt.wrong or 0)) * 100),
+        "questionCount": 40,
+        "perCategory": per_category,
+        "review": review,
+        "durationSeconds": attempt.duration_seconds,
+    })
+    sessions_with_review = [item for item in sessions if isinstance(item, dict) and isinstance(item.get("review"), list)]
+    for item in sessions_with_review[:-5]:
+        item.pop("review", None)
+    recorded.append(key)
+    state_data["progress"] = progress
+    state_data["sessions"] = sessions
+    state_data["dailyChallengeRecordedDates"] = recorded[-400:]
+    if not user.state:
+        user.state = UserState(data=state_data, revision=1)
+    else:
+        user.state.data = state_data
+        user.state.revision += 1
+        user.state.updated_at = utcnow()
+
+
+def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: str) -> dict[str, Any]:
+    rows = db.execute(
+        select(DailyChallengeAttempt, User)
+        .join(User, User.id == DailyChallengeAttempt.user_id)
+        .where(DailyChallengeAttempt.challenge_date == challenge_date, DailyChallengeAttempt.submitted_at.is_not(None))
+    ).all()
+    ordered = sorted(rows, key=lambda row: (-(row[0].score_x100 or 0), -(row[0].correct or 0), row[0].wrong or 0, row[0].duration_seconds or CHALLENGE_SECONDS, aware_utc(row[0].submitted_at)))
+    entries = [
+        {
+            "rank": index + 1,
+            "displayName": user.display_name,
+            "score": challenge_score(attempt),
+            "correct": attempt.correct,
+            "wrong": attempt.wrong,
+            "blank": attempt.blank,
+            "durationSeconds": attempt.duration_seconds,
+            "submittedAt": aware_utc(attempt.submitted_at).isoformat(),
+            "isCurrentUser": attempt.user_id == current_user_id,
+        }
+        for index, (attempt, user) in enumerate(ordered)
+    ]
+    current = next((entry for entry in entries if entry["isCurrentUser"]), None)
+    return {"date": challenge_date.isoformat(), "participants": len(entries), "entries": entries[:50], "currentUser": current}
+
+
+def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallengeAttempt | None, db: Session, user: User) -> dict[str, Any]:
+    now = utcnow()
+    if attempt and not attempt.submitted_at and now >= challenge_expiry(attempt):
+        finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+        record_challenge_in_user_state(user, attempt, challenge)
+        db.commit()
+    elif attempt and attempt.submitted_at:
+        record_challenge_in_user_state(user, attempt, challenge)
+        db.commit()
+    status_value = "completed" if attempt and attempt.submitted_at else "active" if attempt else "not_started"
+    payload: dict[str, Any] = {
+        "date": challenge.challenge_date.isoformat(),
+        "status": status_value,
+        "durationSeconds": CHALLENGE_SECONDS,
+        "questionCount": len(challenge.question_ids),
+        "composition": challenge.composition,
+        "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id),
+    }
+    if not attempt:
+        return payload
+    payload.update({
+        "startedAt": aware_utc(attempt.started_at).isoformat(),
+        "expiresAt": challenge_expiry(attempt).isoformat(),
+        "remainingSeconds": max(0, int((challenge_expiry(attempt) - now).total_seconds())) if not attempt.submitted_at else 0,
+    })
+    if not attempt.submitted_at:
+        payload["questions"] = [public_challenge_question(question) for question in challenge_questions(challenge)]
+        payload["answers"] = list(attempt.answers)
+        return payload
+    payload.update({
+        "submittedAt": aware_utc(attempt.submitted_at).isoformat(),
+        "result": {
+            "correct": attempt.correct,
+            "wrong": attempt.wrong,
+            "blank": attempt.blank,
+            "score": challenge_score(attempt),
+            "durationSeconds": attempt.duration_seconds,
+            "questions": challenge_result_details(attempt, challenge),
+        },
+    })
+    return payload
 
 
 def category_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, Any]]:
@@ -1251,6 +1607,104 @@ def save_cloud_state(payload: StateInput, request: Request, user: User = Depends
     return {"revision": user.state.revision}
 
 
+def parsed_challenge_date(value: str) -> date:
+    try:
+        return date.fromisoformat(value)
+    except ValueError as error:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata.") from error
+
+
+def user_challenge_attempt(db: Session, challenge_date: date, user_id: str, lock: bool = False) -> DailyChallengeAttempt | None:
+    query = select(DailyChallengeAttempt).where(DailyChallengeAttempt.challenge_date == challenge_date, DailyChallengeAttempt.user_id == user_id)
+    if lock:
+        query = query.with_for_update()
+    return db.scalar(query)
+
+
+@app.get("/api/challenges/today")
+def today_challenge(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if not get_setting(db, "daily_challenge_enabled"):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "La Sfida del giorno è disattivata.")
+    challenge = get_or_create_daily_challenge(challenge_today(), db)
+    db.commit()
+    attempt = user_challenge_attempt(db, challenge.challenge_date, user.id)
+    return serialize_daily_challenge(challenge, attempt, db, user)
+
+
+@app.post("/api/challenges/today/start")
+def start_today_challenge(request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if not get_setting(db, "daily_challenge_enabled"):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "La Sfida del giorno è disattivata.")
+    challenge = get_or_create_daily_challenge(challenge_today(), db)
+    attempt = user_challenge_attempt(db, challenge.challenge_date, user.id)
+    if not attempt:
+        attempt = DailyChallengeAttempt(challenge_date=challenge.challenge_date, user_id=user.id, answers=[None] * len(challenge.question_ids))
+        db.add(attempt)
+        try:
+            db.flush()
+            audit(db, "challenge.started", request, actor=user.id, target=user.id, challengeDate=challenge.challenge_date.isoformat())
+            db.commit()
+        except IntegrityError:
+            db.rollback()
+            attempt = user_challenge_attempt(db, challenge.challenge_date, user.id)
+            if not attempt:
+                raise
+    else:
+        db.commit()
+    return serialize_daily_challenge(challenge, attempt, db, user)
+
+
+@app.put("/api/challenges/{challenge_date}/answers")
+def save_challenge_answers(challenge_date: str, payload: DailyChallengeAnswersInput, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    selected_date = parsed_challenge_date(challenge_date)
+    challenge = db.get(DailyChallenge, selected_date)
+    attempt = user_challenge_attempt(db, selected_date, user.id, lock=True)
+    if not challenge or not attempt:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
+    if attempt.submitted_at or utcnow() >= challenge_expiry(attempt):
+        if not attempt.submitted_at:
+            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+            record_challenge_in_user_state(user, attempt, challenge)
+            db.commit()
+        return serialize_daily_challenge(challenge, attempt, db, user)
+    attempt.answers = validate_challenge_answers(challenge, payload.answers)
+    db.commit()
+    return {
+        "status": "active",
+        "date": selected_date.isoformat(),
+        "remainingSeconds": max(0, int((challenge_expiry(attempt) - utcnow()).total_seconds())),
+        "answered": sum(1 for answer in attempt.answers if answer is not None),
+    }
+
+
+@app.post("/api/challenges/{challenge_date}/submit")
+def submit_challenge(challenge_date: str, payload: DailyChallengeAnswersInput, request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    selected_date = parsed_challenge_date(challenge_date)
+    challenge = db.get(DailyChallenge, selected_date)
+    attempt = user_challenge_attempt(db, selected_date, user.id, lock=True)
+    if not challenge or not attempt:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
+    if not attempt.submitted_at:
+        now = utcnow()
+        if now < challenge_expiry(attempt):
+            attempt.answers = validate_challenge_answers(challenge, payload.answers)
+            finalize_challenge_attempt(attempt, challenge, now)
+        else:
+            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+        record_challenge_in_user_state(user, attempt, challenge)
+        audit(db, "challenge.completed", request, actor=user.id, target=user.id, challengeDate=selected_date.isoformat(), score=challenge_score(attempt))
+        db.commit()
+    return serialize_daily_challenge(challenge, attempt, db, user)
+
+
+@app.get("/api/challenges/{challenge_date}/leaderboard")
+def daily_challenge_leaderboard(challenge_date: str, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    selected_date = parsed_challenge_date(challenge_date)
+    if not db.get(DailyChallenge, selected_date):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata.")
+    return challenge_leaderboard(db, selected_date, user.id)
+
+
 @app.get("/api/admin/users")
 def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     rows = db.scalars(select(User).order_by(User.created_at.desc())).all()
@@ -1389,6 +1843,7 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
     return {
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
+        "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
         "publicUrl": get_setting(db, "public_url"),
         "sessionDays": get_setting(db, "session_days"),
         "resetTokenMinutes": get_setting(db, "reset_token_minutes"),
@@ -1631,7 +2086,7 @@ def save_admin_settings(payload: CloudSettingsInput, request: Request, admin: Us
     if payload.smtp_enabled and (not payload.smtp_host or not payload.smtp_from_email):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Per attivare la posta servono server SMTP e mittente.")
     values = {
-        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "public_url": payload.public_url,
+        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "daily_challenge_enabled": payload.daily_challenge_enabled, "public_url": payload.public_url,
         "session_days": payload.session_days, "reset_token_minutes": payload.reset_token_minutes, "privacy_notice": payload.privacy_notice.strip(),
         "privacy_controller_name": payload.privacy_controller_name.strip(), "privacy_controller_address": payload.privacy_controller_address.strip(),
         "privacy_contact_email": str(payload.privacy_contact_email or ""), "privacy_pec_email": str(payload.privacy_pec_email or ""),
@@ -1688,10 +2143,14 @@ async def test_email(request: Request, admin: User = Depends(require_admin), db:
 @app.get("/api/admin/backup")
 def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> JSONResponse:
     users_rows = db.scalars(select(User)).all()
+    challenge_rows = db.scalars(select(DailyChallenge).order_by(DailyChallenge.challenge_date)).all()
+    attempt_rows = db.scalars(select(DailyChallengeAttempt).order_by(DailyChallengeAttempt.challenge_date, DailyChallengeAttempt.started_at)).all()
     payload = {
-        "app": "Quiz 400 VVF 2026 Cloud", "version": 1, "createdAt": utcnow().isoformat(),
+        "app": "Quiz 400 VVF 2026 Cloud", "version": 2, "createdAt": utcnow().isoformat(),
         "users": [{**serialize_user(row, include_state=True), "passwordHash": row.password_hash} for row in users_rows],
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
+        "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
+        "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
     }
     headers = {"Content-Disposition": f'attachment; filename="quiz-400-vvf-cloud-backup-{utcnow().date().isoformat()}.json"'}
     return JSONResponse(payload, headers=headers)
@@ -1704,6 +2163,8 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     data = await request.json()
     if data.get("app") != "Quiz 400 VVF 2026 Cloud" or not isinstance(data.get("users"), list) or not isinstance(data.get("settings"), dict):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Backup non valido.")
+    db.execute(DailyChallengeAttempt.__table__.delete())
+    db.execute(DailyChallenge.__table__.delete())
     db.execute(LoginSession.__table__.delete())
     db.execute(PasswordReset.__table__.delete())
     db.execute(UserState.__table__.delete())
@@ -1726,6 +2187,16 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
         )
         user.state = UserState(data=item.get("state") or empty_state(), revision=int(item.get("revision", 1) or 1))
         db.add(user)
+    db.flush()
+    for item in data.get("dailyChallenges", []):
+        if not isinstance(item, dict):
+            continue
+        db.add(DailyChallenge(challenge_date=date.fromisoformat(item["date"]), question_ids=list(item.get("questionIds") or []), composition=dict(item.get("composition") or {}), app_version=str(item.get("appVersion") or APP_VERSION), created_at=datetime.fromisoformat(item["createdAt"])))
+    db.flush()
+    for item in data.get("dailyChallengeAttempts", []):
+        if not isinstance(item, dict):
+            continue
+        db.add(DailyChallengeAttempt(id=str(item["id"]), challenge_date=date.fromisoformat(item["date"]), user_id=str(item["userId"]), answers=list(item.get("answers") or [None] * 40), started_at=datetime.fromisoformat(item["startedAt"]), submitted_at=datetime.fromisoformat(item["submittedAt"]) if item.get("submittedAt") else None, correct=item.get("correct"), wrong=item.get("wrong"), blank=item.get("blank"), score_x100=item.get("scoreX100"), duration_seconds=item.get("durationSeconds")))
     for key, value in data["settings"].items():
         if key in DEFAULT_SETTINGS:
             row = db.get(Setting, key)

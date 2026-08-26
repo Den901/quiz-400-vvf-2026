@@ -43,6 +43,8 @@ Non vengono più create nuove versioni EXE o nuove release standalone. Gli event
 - errore inserito automaticamente tra le domande da ripetere;
 - prova guidata con risposta corretta e spiegazione a tendina;
 - simulazione ufficiale di 40 domande in 40 minuti;
+- **Sfida del giorno** cloud con gli stessi 40 quesiti nello stesso ordine per tutti, un solo risultato valido per account e correzione esclusivamente alla consegna;
+- classifica giornaliera con punteggio calcolato dal server, risposte salvate durante la prova e spareggio per corrette, errori e tempo;
 - punteggio `+1` corretta, `-0,33` errata, `0` non risposta;
 - composizione predefinita: 8 storia, 12 logica, 6 fisica, 6 chimica, 4 informatica, 4 inglese;
 - macro-materia Logica comprendente anche comprensione dei brani e insiemi, senza voci duplicate nell’elenco degli argomenti;
@@ -70,6 +72,7 @@ La voce **Admin** contiene:
 - utenti e statistiche centralizzate;
 - backup e ripristino applicativo;
 - logo e composizione predefinita delle prove;
+- attivazione della Sfida del giorno, la cui composizione comune segue il piano predefinito dell’amministratore;
 - visibilità dei singoli Percorsi di studio;
 - centro aggiornamenti del portale;
 - riavvio e spegnimento del solo portale.

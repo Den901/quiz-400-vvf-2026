@@ -1,16 +1,17 @@
 {
-  "version": "3.4.1",
+  "version": "3.5.0",
   "showToUsers": false,
-  "title": "Percorsi completamente digitali e verifiche realmente mirate",
-  "summary": "Corrette la lettura dei capitoli, la navigazione dell’indice e l’associazione tra ogni lezione e i relativi quesiti.",
+  "title": "Sfida del giorno e classifica",
+  "summary": "Ogni giorno tutti gli utenti possono affrontare la stessa prova ufficiale da 40 domande e confrontare il risultato in una classifica comune.",
   "items": [
-    "Rimossi i PDF dal portale server: le dispense sono disponibili esclusivamente come lezioni native.",
-    "Le figure non mostrano più pagine intere: schemi, mappe, formule e diagrammi vengono ritagliati dal documento originale.",
-    "Recuperate tramite OCR le pagine-immagine che lasciavano capitoli o sezioni senza contenuto.",
-    "Ricostruite come tabelle native le pagine con schemi non estraibili, compresi ossiacidi, sali, reazioni e multipli/sottomultipli.",
-    "Le verifiche di fine capitolo non ereditano più le materie precedenti e usano filtri specifici per il contenuto appena studiato.",
-    "Quando non esistono quesiti realmente compatibili, il portale lo dichiara senza proporre domande generiche o fuori argomento.",
-    "Corretto l’indice laterale: selezionare un capitolo scorre la lezione senza tornare alla Home."
+    "Aggiunta la Sfida del giorno: 40 quesiti uguali e nello stesso ordine per tutti gli utenti.",
+    "Timer ufficiale da 40 minuti, punteggio +1 / −0,33 / 0 e correzione visibile soltanto dopo la consegna.",
+    "Un solo risultato valido per account ogni giorno, con risposte salvate sul server durante la prova.",
+    "Nuova classifica giornaliera ordinata per punteggio, risposte corrette, numero di errori e tempo impiegato.",
+    "Soluzioni, spiegazioni e revisione completa diventano disponibili al termine della sfida.",
+    "Il risultato aggiorna anche il percorso personale, le statistiche e il Tutor.",
+    "L’amministratore può attivare o disattivare Sfida e classifica dalle impostazioni Cloud.",
+    "Backup e ripristino comprendono ora anche sfide, tentativi e classifiche."
   ],
-  "footnote": "Release 3.4.1 · correzione Percorsi di studio; nessun popup automatico inviato agli utenti."
+  "footnote": "Release 3.5.0 · Sfida del giorno; nessun popup automatico inviato agli utenti."
 }

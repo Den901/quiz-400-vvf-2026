@@ -1,5 +1,18 @@
 # Changelog
 
+## 3.5.0 - 2026-08-27
+
+- Introdotta la **Sfida del giorno**: una prova ufficiale da 40 domande, identica e nello stesso ordine per tutti gli utenti.
+- Cronometro da 40 minuti, correzione esclusivamente alla consegna e punteggio ufficiale `+1 / -0,33 / 0` calcolato dal server.
+- Un solo tentativo valido per account al giorno; le risposte confermate vengono salvate sul server e la prova può essere ripresa mentre il timer continua.
+- Aggiunta la classifica giornaliera con spareggio per risposte corrette, errori e tempo impiegato.
+- Soluzioni, spiegazioni e revisione completa vengono rese disponibili soltanto al termine della sfida.
+- Il risultato entra nelle statistiche personali, aggiorna la classificazione delle domande e alimenta il Tutor.
+- Aggiunto il controllo amministratore per attivare/disattivare sfida e classifica; la composizione usa la configurazione predefinita dell’admin e non le preferenze personali.
+- Backup e ripristino includono sfide, tentativi e classifiche.
+- Aggiornata l’informativa privacy con la visibilità del nome visualizzato e del risultato ai soli utenti autenticati.
+- Cache PWA aggiornata alla revisione 58. Nessun popup automatico agli utenti.
+
 ## 3.4.1 - 2026-08-26
 
 - rimossi dal portale server i PDF originali: le dispense vengono distribuite soltanto come lezioni native;

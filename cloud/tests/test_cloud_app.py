@@ -43,8 +43,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.4.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.4.1"
+        assert runtime.json()["version"] == "3.5.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.5.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
@@ -203,6 +203,50 @@ def test_complete_cloud_account_and_statistics_flow():
         assert statistics.json()["categories"]["chimica"]["averageQuizQuestions"] == 10.0
         assert statistics.json()["recentSessions"][0]["type"] == "guided-exam"
 
+        assert public_client.get("/api/challenges/today").status_code == 401
+        user_challenge = user_client.get("/api/challenges/today")
+        admin_challenge = admin_client.get("/api/challenges/today")
+        assert user_challenge.status_code == admin_challenge.status_code == 200
+        assert user_challenge.json()["status"] == "not_started"
+        assert user_challenge.json()["questionCount"] == 40
+        assert sum(user_challenge.json()["composition"]["examPlan"].values()) == 40
+
+        user_start = user_client.post("/api/challenges/today/start", json={})
+        admin_start = admin_client.post("/api/challenges/today/start", json={})
+        assert user_start.status_code == admin_start.status_code == 200
+        assert user_start.json()["status"] == "active"
+        assert len(user_start.json()["questions"]) == 40
+        assert [item["id"] for item in user_start.json()["questions"]] == [item["id"] for item in admin_start.json()["questions"]]
+        assert all("correct" not in item and "explanation" not in item for item in user_start.json()["questions"])
+
+        challenge_date = user_start.json()["date"]
+        answers = [0] * 40
+        draft = user_client.put(f"/api/challenges/{challenge_date}/answers", json={"answers": answers})
+        assert draft.status_code == 200
+        assert draft.json()["answered"] == 40
+        submitted = user_client.post(f"/api/challenges/{challenge_date}/submit", json={"answers": answers})
+        assert submitted.status_code == 200
+        assert submitted.json()["status"] == "completed"
+        assert submitted.json()["result"]["correct"] + submitted.json()["result"]["wrong"] + submitted.json()["result"]["blank"] == 40
+        assert len(submitted.json()["result"]["questions"]) == 40
+        assert all("correct" in item and "isCorrect" in item for item in submitted.json()["result"]["questions"])
+        repeated_submit = user_client.post(f"/api/challenges/{challenge_date}/submit", json={"answers": [1] * 40})
+        assert repeated_submit.status_code == 200
+        assert repeated_submit.json()["result"]["score"] == submitted.json()["result"]["score"]
+        assert user_client.put(f"/api/challenges/{challenge_date}/answers", json={"answers": [1] * 40}).json()["status"] == "completed"
+
+        ranking = admin_client.get(f"/api/challenges/{challenge_date}/leaderboard")
+        assert ranking.status_code == 200
+        assert ranking.json()["participants"] == 1
+        assert ranking.json()["entries"][0]["displayName"] == "Mario Rossi"
+        assert ranking.json()["entries"][0]["rank"] == 1
+        challenge_state = user_client.get("/api/auth/me").json()["user"]["state"]
+        assert challenge_state["sessions"][-1]["type"] == "daily-challenge"
+        assert challenge_state["dailyChallengeRecordedDates"] == [challenge_date]
+        challenge_stats = admin_client.get(f"/api/admin/users/{user_id}/statistics").json()["summary"]
+        assert challenge_stats["dailyChallenges"] == 1
+        assert challenge_stats["fortyQuizzes"] == 3
+
         logo_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
         logo = admin_client.post("/api/admin/branding/logo", json={"data_url": logo_data})
         assert logo.status_code == 200
@@ -225,6 +269,7 @@ def test_complete_cloud_account_and_statistics_flow():
         settings_payload = {
             "site_name": "Quiz VVF Cloud Test",
             "registration_enabled": False,
+            "daily_challenge_enabled": False,
             "public_url": "https://quiz-test.duckdns.org",
             "session_days": 14,
             "reset_token_minutes": 45,
@@ -265,6 +310,8 @@ def test_complete_cloud_account_and_statistics_flow():
         assert public_client.get("/api/internal/tls-allowed?domain=quiz-test.duckdns.org").status_code == 204
         assert public_client.get("/api/internal/tls-allowed?domain=evil.example.com").status_code == 403
         assert public_client.get("/api/runtime").json()["registrationEnabled"] is False
+        assert public_client.get("/api/runtime").json()["dailyChallengeEnabled"] is False
+        assert user_client.get("/api/challenges/today").status_code == 404
         assert public_client.get("/api/runtime").json()["emailResetEnabled"] is True
         assert public_client.get("/api/runtime").json()["privacy"]["policyVersion"] == "2026-08-test"
         assert admin_client.get("/api/admin/settings").json()["privacyComplete"] is True
@@ -279,7 +326,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.4.1"
+        assert update_status.json()["currentVersion"] == "3.5.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -399,6 +446,8 @@ def test_complete_cloud_account_and_statistics_flow():
         assert backup.status_code == 200
         assert backup.json()["app"] == "Quiz 400 VVF 2026 Cloud"
         assert len(backup.json()["users"]) == 2
+        assert len(backup.json()["dailyChallenges"]) == 1
+        assert len(backup.json()["dailyChallengeAttempts"]) == 2
 
         csrf = admin_client.put(
             "/api/admin/settings",
