@@ -3,10 +3,14 @@ import test from 'node:test';
 
 import {
   applyLearningOutcome,
+  ensureGuidedPendingAnswers,
+  guidedPendingAnswerAt,
+  guidedResultRows,
   selectAdaptiveQuestions,
   selectOrderedQuestions,
   selectPersonalizedQuestions,
-  selectRotatingQuestions
+  selectRotatingQuestions,
+  setGuidedPendingAnswer
 } from '../../quiz-selection.js';
 
 const questions = count => Array.from({length: count}, (_, index) => ({id: `q-${index + 1}`}));
@@ -124,4 +128,51 @@ test('il cursore per materia resta valido se la domanda ha cambiato stato', () =
   );
 
   assert.deepEqual(selected.map(question => question.id), ['q-4', 'q-5', 'q-1']);
+});
+
+test('la prova guidata conserva una scelta provvisoria distinta per ogni domanda', () => {
+  const pool = [
+    {id: 'g-1', answers: ['A', 'B', 'C'], correct: 1},
+    {id: 'g-2', answers: ['A', 'B', 'C'], correct: 0},
+    {id: 'g-3', answers: ['A', 'B', 'C'], correct: 2}
+  ];
+  const state = {mode: 'guided-exam', pool, index: 0, history: {}, selected: null};
+
+  setGuidedPendingAnswer(state, 0, 1);
+  setGuidedPendingAnswer(state, 1, 2);
+
+  assert.equal(guidedPendingAnswerAt(state, 0), 1);
+  assert.equal(guidedPendingAnswerAt(state, 1), 2);
+  assert.equal(guidedPendingAnswerAt(state, 2), null);
+});
+
+test('le scelte provvisorie vengono conteggiate alla consegna senza sovrascrivere quelle confermate', () => {
+  const pool = [
+    {id: 'g-1', answers: ['A', 'B'], correct: 1},
+    {id: 'g-2', answers: ['A', 'B'], correct: 0},
+    {id: 'g-3', answers: ['A', 'B'], correct: 1}
+  ];
+  const confirmed = {choice: 0, blank: false, correct: true, q: pool[1]};
+  const state = {mode: 'guided-exam', pool, index: 2, history: {'g-2': confirmed}, selected: null};
+  setGuidedPendingAnswer(state, 0, 1);
+  setGuidedPendingAnswer(state, 1, 1);
+
+  const rows = guidedResultRows(state);
+  assert.deepEqual(rows.map(row => ({choice: row.choice, correct: row.correct, blank: row.blank})), [
+    {choice: 1, correct: true, blank: false},
+    {choice: 0, correct: true, blank: false},
+    {choice: null, correct: false, blank: true}
+  ]);
+});
+
+test('una prova guidata salvata dalla versione precedente recupera la scelta aperta', () => {
+  const state = {
+    mode: 'guided-exam',
+    pool: [{id: 'old-1', answers: ['A', 'B'], correct: 0}],
+    index: 0,
+    history: {},
+    selected: 1
+  };
+
+  assert.deepEqual(ensureGuidedPendingAnswers(state), [1]);
 });

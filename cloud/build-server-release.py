@@ -15,6 +15,13 @@ DEFAULT_OUTPUT = ROOT / "outputs" / "Quiz-400-VVF-2026-Server.zip"
 ROOT_FILES = {
     ".dockerignore",
     "app.js",
+    "logic-topics.js",
+    "subject-topics.js",
+    "tutor.js",
+    "notes-ui.js",
+    "study-notes.js",
+    "practice-notes.js",
+    "element-properties.js",
     "quiz-selection.js",
     "data.js",
     "index.html",
@@ -28,6 +35,12 @@ ROOT_FILES = {
     "styles-official.css",
     "styles-cloud.css",
     "styles-theme.css",
+    "styles-notes.css",
+    "styles-study-paths.css",
+    "study-paths.js",
+    "study-paths-ui.js",
+    "study-content-ui.js",
+    "study-checkpoint.js",
     "logo-vvf.jpg",
     "logo-vvf.png",
     "quiz-dataset.json",
@@ -47,6 +60,9 @@ REMOVED_FILES = [
 def included_files() -> list[Path]:
     paths = [ROOT / name for name in ROOT_FILES]
     paths.extend(path for path in (ROOT / "quiz-images").rglob("*") if path.is_file())
+    paths.extend(path for path in (ROOT / "study-materials" / "images").rglob("*") if path.is_file())
+    paths.extend(path for path in (ROOT / "study-content").glob("*.json") if path.is_file())
+    paths.extend(path for path in (ROOT / "study-content" / "visuals").glob("*-figure-p*.jpg") if path.is_file())
     paths.extend(
         path
         for path in (ROOT / "cloud").rglob("*")

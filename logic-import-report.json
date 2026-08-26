@@ -1,0 +1,19 @@
+{
+  "generatedAt": "2026-08-17T14:25:18.282Z",
+  "sourceQuestions": 4463,
+  "excludedLongPassages": 554,
+  "duplicatesSkipped": 685,
+  "questionsAdded": 3224,
+  "totalQuestions": 14294,
+  "topicCounts": {
+    "figure": 781,
+    "relazioni": 47,
+    "mista": 771,
+    "calcolo": 636,
+    "deduzioni": 605,
+    "verbale": 213,
+    "serie": 66,
+    "ordinamenti": 105
+  },
+  "missingImages": []
+}

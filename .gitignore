@@ -15,3 +15,7 @@ cloud/.env
 cloud/control/
 cloud/backups/
 cloud-data.sqlite3
+study-materials/pdfs/
+study-materials/pages/
+study-content/visuals/*-p*.jpg
+!study-content/visuals/*-figure-p*.jpg

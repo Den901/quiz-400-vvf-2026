@@ -2,9 +2,10 @@
   "name": "fuoco-quiz-pwa",
   "private": true,
   "type": "module",
-  "version": "2.5.1",
+  "version": "3.4.1",
   "scripts": {
     "start": "npx --yes serve . -l 4173",
+    "test": "node --test cloud/tests/*.test.mjs",
     "test:selection": "node --test cloud/tests/quiz-selection.test.mjs"
   }
 }

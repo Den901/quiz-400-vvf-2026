@@ -12,3 +12,7 @@ cloud/.env
 cloud/backups
 cloud/control
 cloud/data
+study-materials/pdfs
+study-materials/pages
+study-content/visuals/*-p*.jpg
+!study-content/visuals/*-figure-p*.jpg

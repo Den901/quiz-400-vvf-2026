@@ -1,0 +1,682 @@
+[
+  {
+    "id": "storia-unita",
+    "title": "Unità d’Italia (1848-1861)",
+    "pageCount": 9,
+    "wordCount": 4043,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-destra-sinistra",
+    "title": "Destra e Sinistra storica",
+    "pageCount": 5,
+    "wordCount": 1915,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-giolitti",
+    "title": "Età giolittiana",
+    "pageCount": 5,
+    "wordCount": 1893,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-prima-guerra",
+    "title": "Prima guerra mondiale",
+    "pageCount": 4,
+    "wordCount": 1857,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-italia-prima-guerra",
+    "title": "L’Italia nella Prima guerra mondiale",
+    "pageCount": 4,
+    "wordCount": 1160,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-primo-dopoguerra",
+    "title": "Primo dopoguerra",
+    "pageCount": 4,
+    "wordCount": 1201,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-crisi-1929",
+    "title": "Crisi del 1929 e regimi totalitari",
+    "pageCount": 5,
+    "wordCount": 1404,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-fascismo",
+    "title": "Italia fascista",
+    "pageCount": 6,
+    "wordCount": 1989,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-seconda-guerra",
+    "title": "Seconda guerra mondiale",
+    "pageCount": 9,
+    "wordCount": 3179,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-resistenza",
+    "title": "Resistenza in Italia",
+    "pageCount": 4,
+    "wordCount": 903,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-secondo-dopoguerra",
+    "title": "Secondo dopoguerra e Guerra fredda",
+    "pageCount": 6,
+    "wordCount": 1809,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-repubblicana",
+    "title": "L’Italia repubblicana",
+    "pageCount": 6,
+    "wordCount": 1821,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-anni-piombo",
+    "title": "Crisi energetica e anni di piombo",
+    "pageCount": 13,
+    "wordCount": 3473,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-1980-oggi",
+    "title": "Sviluppi politici e sociali dal 1980 a oggi",
+    "pageCount": 10,
+    "wordCount": 4258,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "storia-malavita",
+    "title": "Malavita organizzata e protagonisti dell’antimafia",
+    "pageCount": 7,
+    "wordCount": 2200,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-sinonimi-1",
+    "title": "Sinonimi e contrari",
+    "pageCount": 7,
+    "wordCount": 1786,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-sinonimi-2",
+    "title": "Sinonimi, contrari e classificazioni concettuali",
+    "pageCount": 5,
+    "wordCount": 1087,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-anagrammi-1",
+    "title": "Anagrammi",
+    "pageCount": 6,
+    "wordCount": 568,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-anagrammi-2",
+    "title": "Anagrammi · seconda parte",
+    "pageCount": 1,
+    "wordCount": 202,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-semantica",
+    "title": "Nozioni di semantica",
+    "pageCount": 5,
+    "wordCount": 1272,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-sillogismi",
+    "title": "Sillogismi",
+    "pageCount": 9,
+    "wordCount": 2261,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-operazioni",
+    "title": "Le quattro operazioni",
+    "pageCount": 8,
+    "wordCount": 2965,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-mcm-mcd",
+    "title": "m.c.m. e M.C.D.",
+    "pageCount": 2,
+    "wordCount": 670,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-frazioni",
+    "title": "Frazioni",
+    "pageCount": 2,
+    "wordCount": 240,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-frazioni-proporzioni",
+    "title": "Frazioni e proporzioni",
+    "pageCount": 2,
+    "wordCount": 464,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-proporzioni",
+    "title": "Proporzioni",
+    "pageCount": 4,
+    "wordCount": 423,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-percentuali",
+    "title": "Frazioni generatrici e percentuali",
+    "pageCount": 4,
+    "wordCount": 893,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-equivalenze",
+    "title": "Equivalenze",
+    "pageCount": 3,
+    "wordCount": 445,
+    "visualCount": 2,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-equivalenze-2",
+    "title": "Equivalenze · approfondimento",
+    "pageCount": 7,
+    "wordCount": 803,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-multipli-sottomultipli",
+    "title": "Multipli e sottomultipli · schema",
+    "pageCount": 1,
+    "wordCount": 130,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-multipli-sottomultipli-2",
+    "title": "Multipli e sottomultipli · secondo schema",
+    "pageCount": 1,
+    "wordCount": 84,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-sequenze",
+    "title": "Sequenze e serie particolari",
+    "pageCount": 12,
+    "wordCount": 2734,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-relazioni-insiemistiche",
+    "title": "Relazioni insiemistiche · guida pratica",
+    "pageCount": 17,
+    "wordCount": 1680,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-configurazioni",
+    "title": "Serie nelle configurazioni grafico-geometriche",
+    "pageCount": 6,
+    "wordCount": 1361,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-serie-tabelle",
+    "title": "Serie e tabelle",
+    "pageCount": 5,
+    "wordCount": 2101,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-grafici-tabelle",
+    "title": "Grafici e tabelle",
+    "pageCount": 4,
+    "wordCount": 1443,
+    "visualCount": 3,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-rappresentazioni",
+    "title": "Rappresentazioni grafiche",
+    "pageCount": 5,
+    "wordCount": 543,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-attenzione",
+    "title": "Attenzione e precisione",
+    "pageCount": 7,
+    "wordCount": 1302,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-equazioni",
+    "title": "Equazioni",
+    "pageCount": 3,
+    "wordCount": 1021,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-trasformazioni",
+    "title": "Equazioni e trasformazioni simboliche",
+    "pageCount": 1,
+    "wordCount": 220,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-probabilita-svolta",
+    "title": "Calcolo delle probabilità con esercizi svolti",
+    "pageCount": 3,
+    "wordCount": 675,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-probabilita",
+    "title": "Probabilità",
+    "pageCount": 1,
+    "wordCount": 367,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-combinatorio",
+    "title": "Calcolo combinatorio",
+    "pageCount": 9,
+    "wordCount": 2142,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "logica-combinatorio-schema",
+    "title": "Schema del calcolo combinatorio",
+    "pageCount": 1,
+    "wordCount": 93,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-06-21",
+    "title": "Test del 21 giugno 2024",
+    "pageCount": 1,
+    "wordCount": 233,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-verbale-2024-07-19",
+    "title": "Test di logica verbale del 19 luglio 2024",
+    "pageCount": 4,
+    "wordCount": 844,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-equivalenze",
+    "title": "Test sulle equivalenze",
+    "pageCount": 1,
+    "wordCount": 52,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-07-12",
+    "title": "Test del 12 luglio 2024",
+    "pageCount": 2,
+    "wordCount": 482,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-08-02",
+    "title": "Test del 2 agosto 2024",
+    "pageCount": 6,
+    "wordCount": 459,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-08-27",
+    "title": "Test del 27 agosto 2024",
+    "pageCount": 2,
+    "wordCount": 528,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-08-28",
+    "title": "Test del 28 agosto 2024",
+    "pageCount": 3,
+    "wordCount": 739,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-08-30",
+    "title": "Test del 30 agosto 2024",
+    "pageCount": 3,
+    "wordCount": 866,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-02",
+    "title": "Test del 2 settembre 2024",
+    "pageCount": 2,
+    "wordCount": 461,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-04",
+    "title": "Test del 4 settembre 2024",
+    "pageCount": 2,
+    "wordCount": 454,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-11",
+    "title": "Test dell’11 settembre 2024",
+    "pageCount": 3,
+    "wordCount": 732,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-13",
+    "title": "Test del 13 settembre 2024",
+    "pageCount": 3,
+    "wordCount": 738,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-16",
+    "title": "Test del 16 settembre 2024",
+    "pageCount": 3,
+    "wordCount": 734,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-20",
+    "title": "Test del 20 settembre 2024",
+    "pageCount": 3,
+    "wordCount": 732,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-25",
+    "title": "Test del 25 settembre 2024",
+    "pageCount": 3,
+    "wordCount": 684,
+    "visualCount": 0,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "test-logica-2024-09-27",
+    "title": "Test del 27 settembre 2024 · relazioni insiemistiche",
+    "pageCount": 6,
+    "wordCount": 468,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-grandezze",
+    "title": "Grandezze scalari e vettoriali",
+    "pageCount": 16,
+    "wordCount": 645,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-cinematica",
+    "title": "Cinematica",
+    "pageCount": 34,
+    "wordCount": 2261,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-dinamica",
+    "title": "Dinamica",
+    "pageCount": 12,
+    "wordCount": 1083,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-forze",
+    "title": "Altri tipi di forze",
+    "pageCount": 6,
+    "wordCount": 470,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-lavoro-energia",
+    "title": "Lavoro ed energia",
+    "pageCount": 11,
+    "wordCount": 691,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-statica",
+    "title": "Dinamica del corpo rigido e statica",
+    "pageCount": 12,
+    "wordCount": 699,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-fluidi",
+    "title": "Fluidi",
+    "pageCount": 16,
+    "wordCount": 1341,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "fisica-termodinamica",
+    "title": "Termodinamica",
+    "pageCount": 35,
+    "wordCount": 2115,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-generale",
+    "title": "Chimica generale",
+    "pageCount": 44,
+    "wordCount": 3723,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-nomenclatura",
+    "title": "Nomenclatura chimica",
+    "pageCount": 46,
+    "wordCount": 3445,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-reazioni",
+    "title": "Reazioni chimiche e bilanciamento",
+    "pageCount": 30,
+    "wordCount": 1752,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-redox",
+    "title": "Reazioni di ossidoriduzione",
+    "pageCount": 13,
+    "wordCount": 849,
+    "visualCount": 5,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-acidi-basi",
+    "title": "Acidi e basi",
+    "pageCount": 31,
+    "wordCount": 2050,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-termodinamica",
+    "title": "Termodinamica, cinetica ed equilibrio chimico",
+    "pageCount": 38,
+    "wordCount": 3359,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-organica-1",
+    "title": "Chimica organica · prima parte",
+    "pageCount": 30,
+    "wordCount": 2225,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "chimica-organica-2",
+    "title": "Chimica organica · gruppi funzionali",
+    "pageCount": 20,
+    "wordCount": 1646,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-base",
+    "title": "Elementi di informatica di base",
+    "pageCount": 53,
+    "wordCount": 18684,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-word",
+    "title": "Word",
+    "pageCount": 60,
+    "wordCount": 10372,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-excel",
+    "title": "Excel",
+    "pageCount": 50,
+    "wordCount": 16136,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-access",
+    "title": "Access",
+    "pageCount": 22,
+    "wordCount": 1646,
+    "visualCount": 6,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-powerpoint",
+    "title": "PowerPoint",
+    "pageCount": 51,
+    "wordCount": 10739,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-sicurezza",
+    "title": "Sicurezza informatica",
+    "pageCount": 15,
+    "wordCount": 7812,
+    "visualCount": 1,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-reti",
+    "title": "Reti informatiche",
+    "pageCount": 34,
+    "wordCount": 4692,
+    "visualCount": 8,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-stampanti",
+    "title": "Approfondimento sulle stampanti",
+    "pageCount": 4,
+    "wordCount": 1330,
+    "visualCount": 3,
+    "remainingBrokenCharacters": 0
+  },
+  {
+    "id": "informatica-stampanti-laser",
+    "title": "Come funziona una stampante laser",
+    "pageCount": 6,
+    "wordCount": 765,
+    "visualCount": 4,
+    "remainingBrokenCharacters": 0
+  }
+]

@@ -43,9 +43,19 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
+        assert runtime.json()["version"] == "3.4.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.4.1"
+        assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
+        app_shell = public_client.get("/")
+        assert app_shell.headers["x-frame-options"] == "DENY"
+        assert "frame-ancestors 'none'" in app_shell.headers["content-security-policy"]
+        study_lesson = public_client.get("/study-content/chimica-generale.json")
+        assert study_lesson.status_code == 200
+        assert study_lesson.json()["id"] == "chimica-generale"
+        assert len(study_lesson.json()["sections"]) > 10
         policy_version = runtime.json()["privacy"]["policyVersion"]
         privacy = public_client.get("/api/privacy")
         assert privacy.status_code == 200
@@ -69,6 +79,7 @@ def test_complete_cloud_account_and_statistics_flow():
             },
         )
         assert registration.status_code == 201
+        assert "attesa di approvazione" in registration.json()["message"]
         assert public_client.post(
             "/api/auth/register",
             json={
@@ -102,9 +113,20 @@ def test_complete_cloud_account_and_statistics_flow():
         )
         assert stale_policy.status_code == 409
 
+        pending_login = login(user_client, "mario.rossi", "Mario-Sicura-2026!")
+        assert pending_login.status_code == 403
+        pending_users = admin_client.get("/api/admin/users").json()
+        pending_mario = next(item for item in pending_users["users"] if item["username"] == "mario.rossi")
+        assert pending_mario["approved"] is False
+        assert pending_users["totals"]["pendingApproval"] == 1
+        user_id = pending_mario["id"]
+        approval = admin_client.patch(f"/api/admin/users/{user_id}", json={"approved": True})
+        assert approval.status_code == 200
+        assert approval.json()["user"]["approved"] is True
+
         user_login = login(user_client, "mario.rossi", "Mario-Sicura-2026!")
         assert user_login.status_code == 200
-        user_id = user_login.json()["user"]["id"]
+        assert user_login.json()["user"]["id"] == user_id
         assert user_login.json()["user"]["privacyPolicyVersion"] == policy_version
         assert user_login.json()["user"]["privacyAcknowledgedAt"]
 
@@ -257,7 +279,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "2.5.1"
+        assert update_status.json()["currentVersion"] == "3.4.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

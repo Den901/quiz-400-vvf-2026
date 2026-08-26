@@ -273,3 +273,58 @@ export function selectPersonalizedQuestions(source, count, exposure = {}, seed =
     }
   };
 }
+
+const validGuidedChoice = (question, choice) => Number.isInteger(choice)
+  && choice >= 0
+  && choice < (Array.isArray(question?.answers) ? question.answers.length : 0);
+
+/**
+ * Mantiene una scelta provvisoria distinta per ogni domanda della prova
+ * guidata da 40. Converte anche le prove salvate dalle versioni precedenti,
+ * che conservavano soltanto la scelta della domanda attualmente aperta.
+ */
+export function ensureGuidedPendingAnswers(state) {
+  const pool = Array.isArray(state?.pool) ? state.pool : [];
+  const previous = Array.isArray(state?.pendingAnswers) ? state.pendingAnswers : [];
+  const pending = Array.from({length: pool.length}, (_, index) => (
+    validGuidedChoice(pool[index], previous[index]) ? previous[index] : null
+  ));
+  const current = Number(state?.index);
+  if (Number.isInteger(current) && current >= 0 && current < pool.length) {
+    const history = state?.history?.[pool[current]?.id];
+    if ((!history || history.blank) && validGuidedChoice(pool[current], state?.selected)) {
+      pending[current] = state.selected;
+    }
+  }
+  state.pendingAnswers = pending;
+  return pending;
+}
+
+export function guidedPendingAnswerAt(state, index) {
+  const pending = ensureGuidedPendingAnswers(state);
+  return Number.isInteger(index) && index >= 0 && index < pending.length ? pending[index] : null;
+}
+
+export function setGuidedPendingAnswer(state, index, choice) {
+  const pending = ensureGuidedPendingAnswers(state);
+  if (!Number.isInteger(index) || index < 0 || index >= pending.length) return null;
+  pending[index] = validGuidedChoice(state.pool[index], choice) ? choice : null;
+  return pending[index];
+}
+
+/**
+ * Alla consegna, una scelta ancora provvisoria viene considerata risposta:
+ * l'utente l'ha selezionata e la conferma finale della prova la rende valida.
+ */
+export function guidedResultRows(state) {
+  const pending = ensureGuidedPendingAnswers(state);
+  return state.pool.map((question, index) => {
+    const history = state.history?.[question.id];
+    const choice = pending[index];
+    if (history && !history.blank) return history;
+    if (validGuidedChoice(question, choice)) {
+      return {choice, blank: false, correct: choice === question.correct, q: question};
+    }
+    return history || {choice: null, blank: true, correct: false, q: question};
+  });
+}

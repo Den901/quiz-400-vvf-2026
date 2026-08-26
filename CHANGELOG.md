@@ -1,5 +1,169 @@
 # Changelog
 
+## 3.4.1 - 2026-08-26
+
+- rimossi dal portale server i PDF originali: le dispense vengono distribuite soltanto come lezioni native;
+- sostituite le schermate di pagine intere con ritagli dei soli schemi, formule, mappe e diagrammi utili;
+- aggiunto il recupero OCR delle pagine-immagine, eliminando sezioni e capitoli apparentemente vuoti;
+- ricostruite come tabelle native e responsive le pagine non estraibili su ossiacidi, sali ternari, reazioni di sintesi e prefissi del Sistema Internazionale;
+- rese le verifiche specifiche per la lezione corrente, senza trascinare automaticamente gli argomenti precedenti;
+- aggiunti filtri puntuali per periodi storici, tipi di logica, capitoli di fisica e chimica e programmi informatici;
+- se la banca dati non contiene quesiti davvero compatibili, il portale lo segnala senza usare domande generiche;
+- corretto l’indice laterale delle lezioni: ora scorre al capitolo scelto senza cambiare rotta o tornare alla Home;
+- cache PWA aggiornata alla versione 57; nessun popup automatico inviato agli utenti.
+
+## 3.4.0 - 2026-08-26
+
+- digitalizzate 85 dispense in 166.770 parole organizzate come lezioni native del portale, eliminando il passaggio obbligatorio dal visualizzatore PDF;
+- conservati 302 schemi, formule, tabelle ed esempi visuali selezionati dalle pagine originali;
+- aggiunti indice interno, impaginazione responsive, lettura ottimizzata e supporto completo al tema scuro;
+- aggiunta a ogni lezione la verifica di fine capitolo con 5 quesiti reali relativi soltanto agli argomenti già affrontati;
+- la selezione delle verifiche privilegia domande non fatte, non note o da ripetere e applica gli esiti al percorso personale “Le so / Da ripetere”;
+- spiegazioni mantenute a tendina e risultati registrati nello storico quiz dell’utente;
+- cache PWA aggiornata alla versione 56; nessun popup automatico inviato agli utenti.
+
+## 3.3.2 - 2026-08-26
+
+- Corretto il messaggio “connessione negata” nel lettore PDF dei Percorsi di studio: i documenti possono essere incorporati esclusivamente dalle pagine dello stesso portale.
+- Mantenute le protezioni contro l'incorporamento da siti esterni e incrementata la cache PWA.
+
+## 3.3.1 - 2026-08-26
+
+- Corretto il pacchetto cloud affinché includa nel contenitore i moduli, gli stili e tutti i documenti dei nuovi Percorsi di studio.
+- Incrementata la cache PWA per rendere subito disponibili i file della nuova sezione dopo l'aggiornamento.
+
+## 3.3.0 - 2026-08-25
+
+- aggiunta la nuova sezione autonoma **Percorsi di studio**, separata dagli Appunti;
+- organizzati tutti i 98 materiali consegnati in cinque percorsi e moduli progressivi: Storia, Logica e matematica, Fisica, Chimica e Informatica;
+- integrate 85 dispense PDF, 9 bignami in formato Pages tramite anteprima visuale e 4 schemi grafici;
+- ogni utente dispone di avanzamento personale per lezione, stato “Da iniziare”, “In corso” o “Completata” e funzione Riprendi;
+- aggiunto il collegamento diretto tra ciascuna lezione e i quiz del relativo sottoargomento;
+- il Tutor segnala nella sezione il contenuto più adatto all’area debole prioritaria;
+- l’amministratore può mostrare o nascondere ogni percorso e vedere quante lezioni ha completato ciascun utente;
+- i documenti si aprono dentro il percorso con comando per la visualizzazione a tutto schermo;
+- interfaccia verificata per tema chiaro/scuro, telefono, tablet e desktop;
+- cache PWA aggiornata alla versione 53; nessun popup automatico inviato agli utenti.
+
+## 3.2.0 - 2026-08-25
+
+- aggiunti 10 capitoli di Informatica allineati ai 2.119 quesiti e ai relativi sottoargomenti;
+- aggiunti 10 capitoli di Logica allineati ai 5.853 quesiti, con procedure di risoluzione ed errori tipici;
+- aggiunti 10 capitoli di Inglese allineati ai 1.551 quesiti, con regole, esempi e trappole ricorrenti;
+- ogni capitolo mostra quanti quesiti del dataset sono collegati e rimanda direttamente all’allenamento della materia;
+- ricerca Appunti estesa ai trenta nuovi capitoli;
+- aggiunti i quattro Re d’Italia dal 1861 al 1946;
+- aggiunti tutti i Presidenti del Consiglio del Regno d’Italia e della transizione costituzionale, con area politica e partito;
+- mantenuta separata la cronologia completa dei Presidenti del Consiglio della Repubblica;
+- interfaccia verificata su desktop, tablet, telefono e tema scuro;
+- cache PWA aggiornata alla versione 52; nessun popup automatico inviato agli utenti.
+
+## 3.1.0 - 2026-08-25
+
+- ampliata la scheda di tutti i 118 elementi con famiglia, stato standard, origine naturale o sintetica, numero e massa atomica, valenze, temperature di fusione ed ebollizione, numeri di ossidazione e configurazione elettronica;
+- dati chimici verificati tramite PubChem, con indicazione esplicita dei valori previsti o non determinati;
+- aggiunti partito e area politica a tutti i Presidenti del Consiglio della Repubblica;
+- inserita una nota didattica che distingue i governi repubblicani da Destra storica e Sinistra storica del Regno d’Italia;
+- ricerca Appunti estesa alle nuove proprietà chimiche e classificazioni politiche;
+- migliorata la disposizione delle schede su desktop, tablet, telefono e tema scuro;
+- cache PWA aggiornata alla versione 51.
+
+## 3.0.1 - 2026-08-25
+
+- attivato per tutti gli utenti il popup informativo della nuova sezione Appunti;
+- il messaggio presenta Chimica, Fisica, tavola periodica, cronologie e ricerca globale;
+- il popup viene mostrato una sola volta per account;
+- cache PWA aggiornata alla versione 50.
+
+## 3.0.0 - 2026-08-25
+
+- nuova sezione **Appunti** accessibile dal menu principale e dalla Home;
+- appunti sintetici di Chimica e Fisica divisi in capitoli richiudibili, con ricerca per definizione o formula;
+- tavola periodica interattiva completa di 118 elementi, filtri per famiglia e scheda dettaglio;
+- cronologie aggiornate di Presidenti della Repubblica, Papi dall’Unità d’Italia e Presidenti del Consiglio dalla nascita della Repubblica;
+- ricerca unica tra concetti, elementi e personaggi storici;
+- trucchi mnemonici per l’ordine dei Papi e dei Presidenti della Repubblica, chiaramente indicati come aiuti amatoriali;
+- interfaccia Appunti ottimizzata per tema chiaro/scuro, telefono, tablet e desktop;
+- cache PWA aggiornata alla versione 49; il rilascio non apre popup automatici agli utenti.
+
+## 2.9.1 - 2026-08-25
+
+- Corretta la perdita della risposta selezionata nella prova guidata da 40 quando si passa a un’altra domanda tramite la panoramica.
+- Aggiunta una memoria provvisoria separata per ciascuna delle 40 domande: le scelte restano modificabili fino alla conferma.
+- Conservate le risposte selezionate anche dopo un ricaricamento o la ripresa della prova in corso.
+- Conteggiate alla consegna le risposte selezionate ma non ancora confermate singolarmente; soltanto i quesiti realmente vuoti restano non risposti.
+- Aggiunto nella panoramica lo stato “Selezionata” per distinguere le risposte provvisorie da quelle già corrette o errate.
+- Attivato un popup informativo del bugfix mostrato una sola volta a ogni utente.
+- Aggiornata la cache PWA alla versione 48.
+
+## 2.9.0 - 2026-08-25
+
+- Divise le 2.119 domande di Informatica in dieci settori: hardware, sistemi e file, Word, Excel, Office e dati, reti, Internet, sicurezza, software e informatica generale.
+- Divise le 1.090 domande di Storia in dieci periodi e aree, dal Risorgimento all’Italia repubblicana e alla storia internazionale.
+- Divise le 1.551 domande di Inglese in dieci settori grammaticali e lessicali, tra cui tempi verbali, modali, pronomi, preposizioni, costruzione della frase e vocabolario.
+- Aggiunti per tutti i nuovi settori percorso ordinato, ripresa, quiz guidati, filtri, grafico, statistiche e analisi del Tutor.
+- Mantenute senza modifiche banca dati, risposte, spiegazioni, preferenze, utenti e progressi esistenti.
+- Attivato per questa release un popup informativo mostrato una sola volta a ogni utente.
+- Aggiornata la cache PWA alla versione 47.
+
+## 2.8.2 - 2026-08-20
+
+- Mostrate cinque voci alla volta nel menu inferiore su telefono.
+- Reso il menu scorrevole orizzontalmente per raggiungere Dati, Utenti e Admin senza comprimere le icone.
+- Portata automaticamente in vista la voce attiva durante la navigazione.
+- Disattivati i popup automatici di changelog; potranno essere riattivati esplicitamente per una release scelta dall’amministratore.
+- Aggiornata la cache PWA alla versione 46.
+
+## 2.8.1 - 2026-08-20
+
+- Aggiunto **Tutor** come pulsante nel menu inferiore fisso.
+- Mantenuto l’accesso al Tutor anche dalla Home.
+- Compattata la barra superiore alle larghezze tablet per evitare pulsanti fuori dal bordo in orizzontale.
+- Aggiornata la cache PWA alla versione 45 per rendere subito disponibili la nuova navigazione e la correzione tablet.
+
+## 2.8.0 - 2026-08-20
+
+- Aggiunta la nuova sezione **Tutor**, accessibile dalla Home.
+- Analizzati errori, non risposte, punti persi e precisione delle ultime cinque prove da 40, insieme allo stato generale delle domande.
+- Individuate automaticamente le priorità per materia e, quando disponibile, per sottosettore di Logica, Chimica e Fisica.
+- Aggiunta per ogni priorità una strategia di studio motivata e un allenamento dedicato avviabile direttamente.
+- Aggiunti piani personali da 15, 30 o 60 minuti, rispettivamente con 15, 30 o 50 domande.
+- Distribuito il piano tra le tre aree più deboli con priorità a Non le so, Da ripetere e Da fare.
+- Aggiunta una rotazione Tutor separata, così l’allenamento non altera la memoria anti-ripetizione delle simulazioni da 40.
+- Salvati gli allenamenti Tutor nella cronologia e nelle statistiche personali e amministrative.
+- Aggiornata la cache PWA alla versione 43.
+
+## 2.7.0 - 2026-08-20
+
+- Divise le 1.677 domande di Chimica in dieci settori selezionabili, tra cui reazioni, leggi e bilanciamenti, atomo, legami, mole e soluzioni, acidi e basi, stati della materia e chimica organica.
+- Divise le 2.004 domande di Fisica in dieci settori selezionabili, tra cui misure, cinematica, dinamica, energia, fluidi, termodinamica, onde, elettromagnetismo e fisica atomica.
+- Aggiunti per ogni settore percorso ordinato, ripresa dalle non fatte, quiz guidati, filtri personali, grafico e statistiche dedicate.
+- Mostrato il settore accanto alla materia durante i quiz di Chimica e Fisica.
+- Resi stabilmente fissi il menu superiore e la navigazione inferiore durante lo scorrimento su browser mobili e PWA.
+- Conservate integralmente domande, risposte, spiegazioni, progressi, utenti, preferenze e statistiche esistenti.
+- Aggiornata la cache PWA alla versione 42.
+
+## 2.6.1 - 2026-08-17
+
+- Riunite **Logica**, **Logica · Brani** e **Logica · Insiemi** in un’unica macro-materia Logica.
+- Aggiunti Comprensione dei brani e Insiemi e diagrammi tra i tipi selezionabili nello studio e nelle prove da 40.
+- Conservata automaticamente la precedente composizione ufficiale trasformando 11 Logica + 1 Insiemi in 12 Logica.
+- Riunite le statistiche di Logica senza perdere progressi, sessioni o preferenze personali esistenti.
+- Reso esplicito il totale di ogni tipo di quiz; Figure e simboli comprende 785 quesiti, 765 dei quali con immagine.
+- Ridotte dimensioni e spazi verticali di domande, immagini e risposte su desktop, tablet e mobile.
+- Aggiornata la cache PWA alla versione 41.
+
+## 2.6.0 - 2026-08-17
+
+- Aggiunte 3.224 domande di logica dopo esclusione dei brani lunghi e deduplica rispetto alla banca esistente.
+- Importate tutte le figure necessarie ai quesiti visivi e aggiunta una nota di soluzione verificata quando non è disponibile un commento esplicativo completo.
+- Divisa Logica in otto sottosezioni: deduzioni, serie, verbale, calcolo, figure, relazioni, ordinamenti e logica mista.
+- Aggiunti studio ordinato, quiz guidati, filtri personali, grafico e statistiche per ogni sottosezione.
+- Nelle configurazioni delle prove da 40 è ora possibile distribuire esattamente il totale Logica tra le sottosezioni scelte.
+- La rotazione e il Deep learning tengono traccia separatamente delle sottosezioni, evitando ripetizioni premature.
+- I nuovi account pubblici richiedono approvazione amministrativa; tutti gli account preesistenti restano approvati tramite migrazione.
+- Aggiornata la cache PWA alla versione 40 senza eliminare dati o statistiche degli utenti.
+
 ## 2.5.1 - 2026-08-17
 
 - Corretta la ripetizione delle prime domande nei filtri dei quiz per materia.

@@ -1,13 +1,16 @@
 {
-  "version": "2.5.1",
-  "title": "Ripresa corretta dei quiz per materia",
-  "summary": "I filtri Le so, Da ripetere, Non le so e Da fare ricordano ora l'ultima domanda svolta per ogni materia e ripartono da quella successiva.",
+  "version": "3.4.1",
+  "showToUsers": false,
+  "title": "Percorsi completamente digitali e verifiche realmente mirate",
+  "summary": "Corrette la lettura dei capitoli, la navigazione dell’indice e l’associazione tra ogni lezione e i relativi quesiti.",
   "items": [
-    "Individuata sui dati reali la ripetizione di domande già classificate nei quiz per materia.",
-    "Aggiunto un cursore personale distinto per materia e per stato: Le so, Da ripetere, Non le so e Da fare.",
-    "Alla riapertura il quiz mantiene l'ordine ufficiale e parte dalla domanda successiva all'ultima svolta, invece di tornare all'inizio del gruppo.",
-    "Per gli account esistenti il primo cursore viene ricostruito automaticamente dall'attività più recente già salvata.",
-    "Il cambio di stato e le risposte continuano a essere sincronizzati sul database personale dell'utente."
+    "Rimossi i PDF dal portale server: le dispense sono disponibili esclusivamente come lezioni native.",
+    "Le figure non mostrano più pagine intere: schemi, mappe, formule e diagrammi vengono ritagliati dal documento originale.",
+    "Recuperate tramite OCR le pagine-immagine che lasciavano capitoli o sezioni senza contenuto.",
+    "Ricostruite come tabelle native le pagine con schemi non estraibili, compresi ossiacidi, sali, reazioni e multipli/sottomultipli.",
+    "Le verifiche di fine capitolo non ereditano più le materie precedenti e usano filtri specifici per il contenuto appena studiato.",
+    "Quando non esistono quesiti realmente compatibili, il portale lo dichiara senza proporre domande generiche o fuori argomento.",
+    "Corretto l’indice laterale: selezionare un capitolo scorre la lezione senza tornare alla Home."
   ],
-  "footnote": "La correzione non azzera progressi, statistiche o classificazioni esistenti."
+  "footnote": "Release 3.4.1 · correzione Percorsi di studio; nessun popup automatico inviato agli utenti."
 }

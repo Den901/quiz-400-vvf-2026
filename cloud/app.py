@@ -40,7 +40,7 @@ APP_SECRET = os.environ.get("APP_SECRET", "")
 try:
     APP_VERSION = str(json.loads((ROOT / "version.json").read_text(encoding="utf-8"))["version"])
 except (OSError, ValueError, KeyError, TypeError):
-    APP_VERSION = "2.5.1"
+    APP_VERSION = "3.2.0"
 
 
 def environment_port(name: str, default: int) -> int:
@@ -103,6 +103,7 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(Text)
     role: Mapped[str] = mapped_column(String(10), default="user", index=True)
     active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    approved: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -208,7 +209,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "privacy_effective_date": "2026-08-14",
     "privacy_audit_log_days": 180,
     "privacy_backup_days": 30,
-    "exam_config": {"examPlan": {"storia": 8, "logica": 11, "insiemi": 1, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4, "brani": 0}},
+    "exam_config": {
+        "examPlan": {"storia": 8, "logica": 12, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4},
+        "logicPlan": {"deduzioni": 2, "serie": 2, "verbale": 2, "calcolo": 1, "figure": 1, "insiemi": 1, "relazioni": 1, "ordinamenti": 1, "brani": 0, "mista": 1},
+    },
 }
 SECRET_SETTING_KEYS = {"duckdns_token", "smtp_password"}
 
@@ -400,7 +404,7 @@ def audit(db: Session, action: str, request: Request, actor: str | None = None, 
 
 
 def empty_state() -> dict[str, Any]:
-    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "fortyQuestionExposure": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system", "deepLearning": {"enabled": False, "tracks": {}}, "deepLearningIntroSeen": False, "releaseNotesSeen": ""}
+    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "fortyQuestionExposure": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system", "deepLearning": {"enabled": False, "tracks": {}}, "deepLearningIntroSeen": False, "releaseNotesSeen": "", "studyPaths": {"resources": {}, "lastResourceId": None, "checkpoints": {}}}
 
 
 def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
@@ -411,6 +415,7 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         "email": user.email,
         "role": user.role,
         "active": user.active,
+        "approved": user.approved,
         "mustChangePassword": user.must_change_password,
         "createdAt": user.created_at.isoformat(),
         "lastLoginAt": user.last_login_at.isoformat() if user.last_login_at else None,
@@ -447,7 +452,7 @@ def current_user_optional(request: Request, db: Session) -> User | None:
     if not login_session:
         return None
     user = db.get(User, login_session.user_id)
-    return user if user and user.active else None
+    return user if user and user.active and user.approved else None
 
 
 def require_user(request: Request, db: Session = Depends(get_db)) -> User:
@@ -533,6 +538,7 @@ class AdminUserPatch(BaseModel):
     name: str | None = Field(default=None, min_length=2, max_length=100)
     email: EmailStr | None = None
     active: bool | None = None
+    approved: bool | None = None
     role: str | None = None
 
 
@@ -648,12 +654,17 @@ def session_group_statistics(sessions: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
+def macro_question_category(value: Any) -> str:
+    category = str(value or "")
+    return "logica" if category in {"logica", "brani", "insiemi"} else category
+
+
 def subject_session_statistics(state_data: dict[str, Any]) -> dict[str, dict[str, Any]]:
     sessions = state_data.get("sessions", []) if isinstance(state_data, dict) else []
     sessions = sessions if isinstance(sessions, list) else []
     grouped: dict[str, list[dict[str, Any]]] = {}
     for session in sessions:
-        if not isinstance(session, dict) or session.get("type") not in {"study", "guided"}:
+        if not isinstance(session, dict) or session.get("type") not in {"study", "guided", "tutor"}:
             continue
         per_category = session.get("perCategory")
         if isinstance(per_category, dict) and per_category:
@@ -663,7 +674,7 @@ def subject_session_statistics(state_data: dict[str, Any]) -> dict[str, dict[str
                 correct = numeric_value(payload.get("correct")) or 0
                 wrong = numeric_value(payload.get("wrong")) or 0
                 blank = numeric_value(payload.get("blank")) or 0
-                grouped.setdefault(str(category), []).append(
+                grouped.setdefault(macro_question_category(category), []).append(
                     {
                         **payload,
                         "score": round(correct - wrong * 0.33, 2),
@@ -673,7 +684,7 @@ def subject_session_statistics(state_data: dict[str, Any]) -> dict[str, dict[str
             continue
         category = session.get("category")
         if isinstance(category, str) and category:
-            grouped.setdefault(category, []).append(session)
+            grouped.setdefault(macro_question_category(category), []).append(session)
     return {category: session_group_statistics(rows) for category, rows in grouped.items()}
 
 
@@ -683,11 +694,14 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
     progress = progress if isinstance(progress, dict) else {}
     sessions = sessions if isinstance(sessions, list) else []
     values = [item for item in progress.values() if isinstance(item, dict)]
+    study_paths = state_data.get("studyPaths", {}) if isinstance(state_data, dict) else {}
+    study_resources = study_paths.get("resources", {}) if isinstance(study_paths, dict) else {}
+    study_values = [item for item in study_resources.values() if isinstance(item, dict)] if isinstance(study_resources, dict) else []
     valid_sessions = [item for item in sessions if isinstance(item, dict)]
     exams = [item for item in valid_sessions if item.get("type") == "exam"]
     forty_quizzes = [item for item in valid_sessions if item.get("type") in {"exam", "guided-exam"}]
     guided = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"guided", "guided-exam"}]
-    subject_quizzes = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"study", "guided"}]
+    subject_quizzes = [item for item in sessions if isinstance(item, dict) and item.get("type") in {"study", "guided", "tutor"}]
     exam_stats = session_group_statistics(exams)
     forty_stats = session_group_statistics(forty_quizzes)
     subject_stats = session_group_statistics(subject_quizzes)
@@ -713,6 +727,8 @@ def state_statistics(state_data: dict[str, Any]) -> dict[str, Any]:
         "bestSubjectScore": subject_stats["bestScore"],
         "averageSubjectAccuracy": subject_stats["averageAccuracy"],
         "averageAccuracy": average(accuracies, 1),
+        "studyResourcesStarted": sum(1 for item in study_values if item.get("status") == "started"),
+        "studyResourcesCompleted": sum(1 for item in study_values if item.get("status") == "completed"),
     }
 
 
@@ -724,7 +740,7 @@ def load_question_categories() -> None:
     global question_categories, question_category_totals
     try:
         rows = json.loads((ROOT / "quiz-dataset.json").read_text(encoding="utf-8"))
-        question_categories = {str(row["id"]): str(row["category"]) for row in rows if isinstance(row, dict) and row.get("id") and row.get("category")}
+        question_categories = {str(row["id"]): macro_question_category(row["category"]) for row in rows if isinstance(row, dict) and row.get("id") and row.get("category")}
         question_category_totals = {}
         for category in question_categories.values():
             question_category_totals[category] = question_category_totals.get(category, 0) + 1
@@ -861,7 +877,7 @@ def initialize_database() -> None:
                 admin_username = normalize_username(admin_username)
             except ValueError as error:
                 raise RuntimeError(str(error)) from error
-            user = User(username=admin_username, display_name=os.environ.get("ADMIN_NAME", "Amministratore")[:100], email=normalize_email(os.environ.get("ADMIN_EMAIL")), password_hash=password_hasher.hash(admin_password), role="admin", active=True)
+            user = User(username=admin_username, display_name=os.environ.get("ADMIN_NAME", "Amministratore")[:100], email=normalize_email(os.environ.get("ADMIN_EMAIL")), password_hash=password_hasher.hash(admin_password), role="admin", active=True, approved=True)
             user.state = UserState(data=empty_state())
             db.add(user)
         db.execute(LoginSession.__table__.delete().where(LoginSession.expires_at <= utcnow()))
@@ -913,10 +929,12 @@ async def security_middleware(request: Request, call_next):
         return Response(status_code=308, headers={"Location": target})
     response = await call_next(request)
     response.headers["X-Content-Type-Options"] = "nosniff"
-    response.headers["X-Frame-Options"] = "DENY"
+    embedded_study_pdf = request.url.path.startswith("/study-materials/pdfs/")
+    response.headers["X-Frame-Options"] = "SAMEORIGIN" if embedded_study_pdf else "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     response.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=()"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    frame_ancestors = "'self'" if embedded_study_pdf else "'none'"
+    response.headers["Content-Security-Policy"] = f"default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors {frame_ancestors}"
     if secure_request(request):
         response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     if request.url.path.startswith("/api/"):
@@ -1055,6 +1073,7 @@ def register(payload: PublicRegistrationInput, request: Request, db: Session = D
         password_hash=password_hasher.hash(payload.password),
         role="user",
         active=True,
+        approved=False,
         privacy_policy_version=current_policy_version,
         privacy_acknowledged_at=utcnow(),
     )
@@ -1063,7 +1082,7 @@ def register(payload: PublicRegistrationInput, request: Request, db: Session = D
     db.flush()
     audit(db, "user.registered", request, target=user.id, privacyPolicyVersion=current_policy_version)
     db.commit()
-    return {"message": "Registrazione completata. Ora puoi accedere."}
+    return {"message": "Registrazione completata. Il tuo account è in attesa di approvazione da parte dell’amministratore."}
 
 
 @app.post("/api/auth/login")
@@ -1079,6 +1098,10 @@ def login(payload: LoginInput, request: Request, response: Response, db: Session
         audit(db, "auth.login_failed", request, target=user.id if user else None, usernameHash=hashlib.sha256(username.encode("utf-8")).hexdigest()[:16])
         db.commit()
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Credenziali non valide.")
+    if not user.approved:
+        audit(db, "auth.login_pending_approval", request, target=user.id)
+        db.commit()
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Account in attesa di approvazione da parte dell’amministratore.")
     if password_hasher.check_needs_rehash(user.password_hash):
         user.password_hash = password_hasher.hash(payload.password)
     user.last_login_at = utcnow()
@@ -1244,6 +1267,7 @@ def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db))
     totals = {
         "users": len(rows),
         "active": sum(1 for row in rows if row.active),
+        "pendingApproval": sum(1 for row in rows if not row.approved),
         "admins": sum(1 for row in rows if row.role == "admin"),
         "simulations": sum(item["statistics"]["simulations"] for item in users_payload),
         "fortyQuizzes": forty_count,
@@ -1280,7 +1304,7 @@ def admin_create_user(payload: AdminUserInput, request: Request, admin: User = D
     email = normalize_email(str(payload.email) if payload.email else None)
     if db.scalar(select(User).where((User.username == username) | ((User.email == email) if email else False))):
         raise HTTPException(status.HTTP_409_CONFLICT, "Nome utente o email già utilizzati.")
-    user = User(username=username, display_name=payload.name.strip(), email=email, password_hash=password_hasher.hash(payload.password), role=payload.role, active=True, must_change_password=True)
+    user = User(username=username, display_name=payload.name.strip(), email=email, password_hash=password_hasher.hash(payload.password), role=payload.role, active=True, approved=True, must_change_password=True)
     user.state = UserState(data=empty_state())
     db.add(user)
     db.flush()
@@ -1314,6 +1338,12 @@ def admin_patch_user(user_id: str, payload: AdminUserPatch, request: Request, ad
             raise HTTPException(status.HTTP_409_CONFLICT, "Deve rimanere almeno un amministratore attivo.")
         target.active = payload.active
         if not target.active:
+            db.execute(LoginSession.__table__.delete().where(LoginSession.user_id == target.id))
+    if payload.approved is not None:
+        if target.role == "admin" and not payload.approved:
+            raise HTTPException(status.HTTP_409_CONFLICT, "Un amministratore non può essere messo in attesa di approvazione.")
+        target.approved = payload.approved
+        if not target.approved:
             db.execute(LoginSession.__table__.delete().where(LoginSession.user_id == target.id))
     audit(db, "admin.user_updated", request, actor=admin.id, target=target.id, fields=list(payload.model_fields_set))
     db.commit()
@@ -1687,6 +1717,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
             password_hash=item["passwordHash"],
             role=item.get("role", "user"),
             active=bool(item.get("active", True)),
+            approved=bool(item.get("approved", True)),
             must_change_password=bool(item.get("mustChangePassword", False)),
             created_at=datetime.fromisoformat(item["createdAt"]),
             last_login_at=datetime.fromisoformat(item["lastLoginAt"]) if item.get("lastLoginAt") else None,
