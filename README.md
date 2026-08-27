@@ -44,7 +44,9 @@ Non vengono più create nuove versioni EXE o nuove release standalone. Gli event
 - prova guidata con risposta corretta e spiegazione a tendina;
 - simulazione ufficiale di 40 domande in 40 minuti;
 - **Sfida del giorno** cloud con gli stessi 40 quesiti nello stesso ordine per tutti, un solo risultato valido per account e correzione esclusivamente alla consegna;
+- composizione della Sfida del giorno personalizzabile dall’admin senza alterare la prova o la classifica già in corso, con comprensione dei brani sempre esclusa;
 - classifica giornaliera con punteggio calcolato dal server, risposte salvate durante la prova e spareggio per corrette, errori e tempo;
+- segnalazione dei quesiti errati direttamente dalla prova o dal riepilogo, con revisione centralizzata da parte dell’amministratore;
 - punteggio `+1` corretta, `-0,33` errata, `0` non risposta;
 - composizione predefinita: 8 storia, 12 logica, 6 fisica, 6 chimica, 4 informatica, 4 inglese;
 - macro-materia Logica comprendente anche comprensione dei brani e insiemi, senza voci duplicate nell’elenco degli argomenti;
@@ -73,6 +75,8 @@ La voce **Admin** contiene:
 - backup e ripristino applicativo;
 - logo e composizione predefinita delle prove;
 - attivazione della Sfida del giorno, la cui composizione comune segue il piano predefinito dell’amministratore;
+- configurazione dedicata delle quantità per materia e per sottosezione di Logica della successiva Sfida del giorno;
+- coda delle segnalazioni con notifica, dettagli del quesito, chiusura della segnalazione, disattivazione e riattivazione; un quesito disattivato sparisce soltanto dalle nuove prove;
 - visibilità dei singoli Percorsi di studio;
 - centro aggiornamenti del portale;
 - riavvio e spegnimento del solo portale.

@@ -71,6 +71,7 @@ VERSION_RE = re.compile(r"^v?(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
 CHALLENGE_SECONDS = 40 * 60
 CHALLENGE_TIMEZONE = ZoneInfo("Europe/Rome")
 CHALLENGE_LOGIC_TOPICS = ("deduzioni", "serie", "verbale", "calcolo", "figure", "insiemi", "relazioni", "ordinamenti", "brani", "mista")
+CHALLENGE_SELECTABLE_LOGIC_TOPICS = tuple(topic for topic in CHALLENGE_LOGIC_TOPICS if topic != "brani")
 
 if not APP_SECRET:
     if os.environ.get("Q400_ENV", "development") == "production":
@@ -199,6 +200,29 @@ class DailyChallengeAttempt(Base):
     duration_seconds: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
 
+class QuestionReport(Base):
+    __tablename__ = "question_reports"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    question_id: Mapped[str] = mapped_column(String(100), index=True)
+    user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    reason: Mapped[str] = mapped_column(String(40))
+    note: Mapped[str] = mapped_column(Text, default="")
+    status: Mapped[str] = mapped_column(String(20), default="pending", index=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+    reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    reviewed_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+
+
+class DisabledQuestion(Base):
+    __tablename__ = "disabled_questions"
+
+    question_id: Mapped[str] = mapped_column(String(100), primary_key=True)
+    reason: Mapped[str] = mapped_column(Text, default="")
+    disabled_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
+    disabled_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+
+
 engine_options: dict[str, Any] = {"pool_pre_ping": True}
 if DATABASE_URL.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
@@ -243,6 +267,10 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "privacy_audit_log_days": 180,
     "privacy_backup_days": 30,
     "exam_config": {
+        "examPlan": {"storia": 8, "logica": 12, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4},
+        "logicPlan": {"deduzioni": 2, "serie": 2, "verbale": 2, "calcolo": 1, "figure": 1, "insiemi": 1, "relazioni": 1, "ordinamenti": 1, "brani": 0, "mista": 1},
+    },
+    "daily_challenge_config": {
         "examPlan": {"storia": 8, "logica": 12, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4},
         "logicPlan": {"deduzioni": 2, "serie": 2, "verbale": 2, "calcolo": 1, "figure": 1, "insiemi": 1, "relazioni": 1, "ordinamenti": 1, "brani": 0, "mista": 1},
     },
@@ -600,6 +628,7 @@ class CloudSettingsInput(BaseModel):
     site_name: str = Field(min_length=3, max_length=100)
     registration_enabled: bool
     daily_challenge_enabled: bool = True
+    daily_challenge_config: dict[str, Any] | None = None
     public_url: str = Field(default="", max_length=300)
     session_days: int = Field(ge=1, le=365)
     reset_token_minutes: int = Field(ge=10, le=1440)
@@ -637,7 +666,6 @@ class CloudSettingsInput(BaseModel):
         if value and (urlparse(value).scheme not in {"http", "https"} or not urlparse(value).hostname):
             raise ValueError("URL pubblico non valido.")
         return value
-
     @field_validator("duckdns_domain")
     @classmethod
     def duckdns_domain_is_valid(cls, value: str) -> str:
@@ -645,6 +673,37 @@ class CloudSettingsInput(BaseModel):
         if value and not DUCKDNS_RE.fullmatch(value):
             raise ValueError("Dominio DuckDNS non valido.")
         return value.removesuffix(".duckdns.org")
+
+
+class DailyChallengeSettingsInput(BaseModel):
+    enabled: bool = True
+    config: dict[str, Any]
+
+
+QUESTION_REPORT_REASONS = {
+    "question": "Testo o domanda errata",
+    "answer": "Risposta corretta errata",
+    "explanation": "Spiegazione errata o illeggibile",
+    "image": "Immagine mancante o errata",
+    "other": "Altro",
+}
+
+
+class QuestionReportInput(BaseModel):
+    question_id: str = Field(min_length=1, max_length=100)
+    reason: str = Field(min_length=1, max_length=40)
+    note: str = Field(default="", max_length=1500)
+
+    @field_validator("reason")
+    @classmethod
+    def reason_is_valid(cls, value: str) -> str:
+        if value not in QUESTION_REPORT_REASONS:
+            raise ValueError("Motivo della segnalazione non valido.")
+        return value
+
+
+class QuestionModerationInput(BaseModel):
+    reason: str = Field(default="", max_length=1500)
 
 
 def numeric_value(value: Any) -> float | None:
@@ -795,6 +854,59 @@ def load_question_categories() -> None:
         question_category_totals = {}
 
 
+def disabled_question_ids(db: Session) -> set[str]:
+    return {str(question_id) for question_id in db.scalars(select(DisabledQuestion.question_id)).all()}
+
+
+def available_question_bank(db: Session) -> list[dict[str, Any]]:
+    disabled = disabled_question_ids(db)
+    return [question for question in question_bank if str(question["id"]) not in disabled]
+
+
+def admin_question_payload(question_id: str) -> dict[str, Any]:
+    question = questions_by_id.get(str(question_id))
+    if not question:
+        return {"id": str(question_id), "category": "", "text": "Quesito non più presente nella banca dati.", "answers": [], "correct": None, "explanation": "", "image": ""}
+    return {
+        "id": str(question["id"]),
+        "category": str(question.get("category") or ""),
+        "text": str(question.get("text") or ""),
+        "answers": [str(answer) for answer in question.get("answers", [])],
+        "correct": int(question["correct"]) if isinstance(question.get("correct"), int) else None,
+        "explanation": str(question.get("explanation") or ""),
+        "image": str(question.get("image") or ""),
+    }
+
+
+def serialize_question_report(report: QuestionReport, db: Session) -> dict[str, Any]:
+    reporter = db.get(User, report.user_id) if report.user_id else None
+    reviewer = db.get(User, report.reviewed_by_user_id) if report.reviewed_by_user_id else None
+    return {
+        "id": report.id,
+        "questionId": report.question_id,
+        "question": admin_question_payload(report.question_id),
+        "reporter": reporter.display_name if reporter else "Account non più disponibile",
+        "reason": report.reason,
+        "reasonLabel": QUESTION_REPORT_REASONS.get(report.reason, report.reason),
+        "note": report.note,
+        "status": report.status,
+        "createdAt": aware_utc(report.created_at).isoformat(),
+        "reviewedAt": aware_utc(report.reviewed_at).isoformat() if report.reviewed_at else None,
+        "reviewedBy": reviewer.display_name if reviewer else None,
+    }
+
+
+def serialize_disabled_question(row: DisabledQuestion, db: Session) -> dict[str, Any]:
+    admin = db.get(User, row.disabled_by_user_id) if row.disabled_by_user_id else None
+    return {
+        "questionId": row.question_id,
+        "question": admin_question_payload(row.question_id),
+        "reason": row.reason,
+        "disabledAt": aware_utc(row.disabled_at).isoformat(),
+        "disabledBy": admin.display_name if admin else None,
+    }
+
+
 def challenge_today() -> date:
     return datetime.now(CHALLENGE_TIMEZONE).date()
 
@@ -819,26 +931,57 @@ def challenge_logic_topic(question: dict[str, Any]) -> str:
     return topic if topic in CHALLENGE_LOGIC_TOPICS else "mista"
 
 
-def normalized_challenge_composition(db: Session) -> dict[str, dict[str, int]]:
-    defaults = DEFAULT_SETTINGS["exam_config"]
-    configured = get_setting(db, "exam_config")
+def normalize_daily_challenge_config(configured: Any, *, strict: bool = False) -> dict[str, dict[str, int]]:
+    defaults = DEFAULT_SETTINGS["daily_challenge_config"]
     configured = configured if isinstance(configured, dict) else defaults
     raw_plan = configured.get("examPlan") if isinstance(configured.get("examPlan"), dict) else defaults["examPlan"]
     categories = ("storia", "logica", "fisica", "chimica", "informatica", "inglese")
-    plan = {category: max(0, int(raw_plan.get(category, 0) or 0)) for category in categories}
+    try:
+        plan = {category: max(0, min(40, int(raw_plan.get(category, 0) or 0))) for category in categories}
+    except (TypeError, ValueError):
+        plan = dict(defaults["examPlan"])
     if sum(plan.values()) != 40:
+        if strict:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "La composizione della Sfida del giorno deve contenere esattamente 40 domande.")
         plan = dict(defaults["examPlan"])
     raw_logic = configured.get("logicPlan") if isinstance(configured.get("logicPlan"), dict) else defaults["logicPlan"]
-    logic_plan = {topic: max(0, int(raw_logic.get(topic, 0) or 0)) for topic in CHALLENGE_LOGIC_TOPICS}
-    if sum(logic_plan.values()) != plan["logica"]:
+    try:
+        logic_plan = {topic: max(0, min(40, int(raw_logic.get(topic, 0) or 0))) for topic in CHALLENGE_SELECTABLE_LOGIC_TOPICS}
+    except (TypeError, ValueError):
+        logic_plan = {topic: int(defaults["logicPlan"].get(topic, 0)) for topic in CHALLENGE_SELECTABLE_LOGIC_TOPICS}
+    logic_plan["brani"] = 0
+    if sum(logic_plan[topic] for topic in CHALLENGE_SELECTABLE_LOGIC_TOPICS) != plan["logica"]:
+        if strict:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "La distribuzione delle sottosezioni di Logica deve coincidere con il numero di domande di Logica. I brani non sono ammessi.")
         if plan["logica"] == sum(defaults["logicPlan"].values()):
             logic_plan = dict(defaults["logicPlan"])
         else:
-            fallback_topics = tuple(topic for topic in CHALLENGE_LOGIC_TOPICS if topic != "brani")
             logic_plan = {topic: 0 for topic in CHALLENGE_LOGIC_TOPICS}
             for index in range(plan["logica"]):
-                logic_plan[fallback_topics[index % len(fallback_topics)]] += 1
+                logic_plan[CHALLENGE_SELECTABLE_LOGIC_TOPICS[index % len(CHALLENGE_SELECTABLE_LOGIC_TOPICS)]] += 1
+    logic_plan["brani"] = 0
     return {"examPlan": plan, "logicPlan": logic_plan}
+
+
+def validate_daily_challenge_capacity(config: dict[str, dict[str, int]], db: Session) -> None:
+    plan = config["examPlan"]
+    source_bank = available_question_bank(db)
+    for category, count in plan.items():
+        if not count or category == "logica":
+            continue
+        available = sum(1 for row in source_bank if macro_question_category(row.get("category")) == category)
+        if count > available:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, f"La banca dati contiene soltanto {available} domande per {category}.")
+    logic_source = [row for row in source_bank if macro_question_category(row.get("category")) == "logica"]
+    for topic in CHALLENGE_SELECTABLE_LOGIC_TOPICS:
+        count = config["logicPlan"].get(topic, 0)
+        available = sum(1 for row in logic_source if challenge_logic_topic(row) == topic)
+        if count > available:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, f"La banca dati contiene soltanto {available} domande nella sottosezione Logica “{topic}”.")
+
+
+def normalized_challenge_composition(db: Session) -> dict[str, dict[str, int]]:
+    return normalize_daily_challenge_config(get_setting(db, "daily_challenge_config"))
 
 
 def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
@@ -847,16 +990,17 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     composition = normalized_challenge_composition(db)
     plan = composition["examPlan"]
     logic_plan = composition["logicPlan"]
+    active_bank = available_question_bank(db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
     for category, count in plan.items():
         if not count:
             continue
         if category != "logica":
-            source = [row for row in question_bank if macro_question_category(row.get("category")) == category]
+            source = [row for row in active_bank if macro_question_category(row.get("category")) == category]
             selected.extend(deterministic_questions(source, count, f"{seed}|{category}"))
             continue
-        logic_source = [row for row in question_bank if macro_question_category(row.get("category")) == "logica"]
+        logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]
         for topic, topic_count in logic_plan.items():
             if topic_count:
                 source = [row for row in logic_source if challenge_logic_topic(row) == topic]
@@ -1491,11 +1635,23 @@ def export_personal_data(user: User = Depends(require_user), db: Session = Depen
         .where((AuditLog.actor_user_id == user.id) | (AuditLog.target_user_id == user.id))
         .order_by(AuditLog.created_at.asc())
     ).all()
+    reports = db.scalars(select(QuestionReport).where(QuestionReport.user_id == user.id).order_by(QuestionReport.created_at.asc())).all()
     payload = {
         "app": "Quiz 400 VVF 2026",
         "exportedAt": utcnow().isoformat(),
         "profile": serialize_user(user),
         "studyState": user.state.data if user.state else empty_state(),
+        "questionReports": [
+            {
+                "questionId": row.question_id,
+                "reason": row.reason,
+                "note": row.note,
+                "status": row.status,
+                "createdAt": aware_utc(row.created_at).isoformat(),
+                "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None,
+            }
+            for row in reports
+        ],
         "activityLog": [
             {
                 "action": row.action,
@@ -1605,6 +1761,98 @@ def save_cloud_state(payload: StateInput, request: Request, user: User = Depends
         audit(db, "state.checkpoint", request, actor=user.id, target=user.id, revision=user.state.revision)
     db.commit()
     return {"revision": user.state.revision}
+
+
+@app.get("/api/questions/availability")
+def question_availability(_: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    rows = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at)).all()
+    latest = max((aware_utc(row.disabled_at) for row in rows), default=None)
+    return {
+        "disabledQuestionIds": [row.question_id for row in rows],
+        "revision": f"{len(rows)}:{latest.isoformat() if latest else '0'}",
+    }
+
+
+@app.post("/api/question-reports", status_code=201)
+def create_question_report(payload: QuestionReportInput, request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> JSONResponse:
+    enforce_rate_limit(request, "question-report", 30, 3600)
+    question_id = str(payload.question_id).strip()
+    if question_id not in questions_by_id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Quesito non trovato.")
+    if db.get(DisabledQuestion, question_id):
+        raise HTTPException(status.HTTP_409_CONFLICT, "Il quesito è già stato reso non disponibile dall'amministratore.")
+    existing = db.scalar(select(QuestionReport).where(QuestionReport.question_id == question_id, QuestionReport.user_id == user.id, QuestionReport.status == "pending"))
+    if existing:
+        return JSONResponse({"report": serialize_question_report(existing, db), "duplicate": True, "message": "Avevi già segnalato questo quesito: la revisione è in attesa."}, status_code=200)
+    report = QuestionReport(question_id=question_id, user_id=user.id, reason=payload.reason, note=payload.note.strip(), status="pending")
+    db.add(report)
+    db.flush()
+    audit(db, "question.reported", request, actor=user.id, target=user.id, questionId=question_id, reason=payload.reason)
+    db.commit()
+    return JSONResponse({"report": serialize_question_report(report, db), "duplicate": False, "message": "Segnalazione inviata all'amministratore."}, status_code=201)
+
+
+@app.get("/api/admin/question-reports")
+def admin_question_reports(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    pending = db.scalars(select(QuestionReport).where(QuestionReport.status == "pending").order_by(QuestionReport.created_at.desc())).all()
+    disabled = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at.desc())).all()
+    return {
+        "pendingCount": len(pending),
+        "pending": [serialize_question_report(row, db) for row in pending],
+        "disabled": [serialize_disabled_question(row, db) for row in disabled],
+    }
+
+
+@app.post("/api/admin/question-reports/{report_id}/dismiss")
+def dismiss_question_report(report_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    report = db.get(QuestionReport, report_id)
+    if not report:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Segnalazione non trovata.")
+    if report.status == "pending":
+        report.status = "dismissed"
+        report.reviewed_at = utcnow()
+        report.reviewed_by_user_id = admin.id
+        audit(db, "admin.question_report_dismissed", request, actor=admin.id, target=report.user_id, questionId=report.question_id, reportId=report.id)
+        db.commit()
+    return {"report": serialize_question_report(report, db), "message": "Segnalazione chiusa: il quesito resta disponibile."}
+
+
+@app.post("/api/admin/questions/{question_id}/disable")
+def disable_question(question_id: str, payload: QuestionModerationInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    question_id = str(question_id).strip()
+    if question_id not in questions_by_id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Quesito non trovato.")
+    row = db.get(DisabledQuestion, question_id)
+    if not row:
+        row = DisabledQuestion(question_id=question_id)
+        db.add(row)
+    row.reason = payload.reason.strip() or "Quesito disattivato dopo revisione amministrativa."
+    row.disabled_at = utcnow()
+    row.disabled_by_user_id = admin.id
+    reports = db.scalars(select(QuestionReport).where(QuestionReport.question_id == question_id, QuestionReport.status == "pending")).all()
+    for report in reports:
+        report.status = "resolved"
+        report.reviewed_at = row.disabled_at
+        report.reviewed_by_user_id = admin.id
+    audit(db, "admin.question_disabled", request, actor=admin.id, target=admin.id, questionId=question_id, reportsResolved=len(reports))
+    db.commit()
+    return {
+        "disabled": serialize_disabled_question(row, db),
+        "reportsResolved": len(reports),
+        "currentChallengesPreserved": True,
+        "message": "Quesito disattivato per tutte le nuove esercitazioni. Le prove e le classifiche già create restano invariate.",
+    }
+
+
+@app.delete("/api/admin/questions/{question_id}/disable")
+def enable_question(question_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    row = db.get(DisabledQuestion, str(question_id))
+    if not row:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Il quesito è già disponibile.")
+    db.delete(row)
+    audit(db, "admin.question_enabled", request, actor=admin.id, target=admin.id, questionId=str(question_id))
+    db.commit()
+    return {"message": "Quesito riattivato nelle nuove esercitazioni."}
 
 
 def parsed_challenge_date(value: str) -> date:
@@ -1844,6 +2092,7 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
+        "dailyChallengeConfig": normalized_challenge_composition(db),
         "publicUrl": get_setting(db, "public_url"),
         "sessionDays": get_setting(db, "session_days"),
         "resetTokenMinutes": get_setting(db, "reset_token_minutes"),
@@ -2085,8 +2334,12 @@ def save_admin_settings(payload: CloudSettingsInput, request: Request, admin: Us
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Per attivare DuckDNS servono dominio e token.")
     if payload.smtp_enabled and (not payload.smtp_host or not payload.smtp_from_email):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Per attivare la posta servono server SMTP e mittente.")
+    daily_challenge_config = normalized_challenge_composition(db)
+    if payload.daily_challenge_config is not None:
+        daily_challenge_config = normalize_daily_challenge_config(payload.daily_challenge_config, strict=True)
+        validate_daily_challenge_capacity(daily_challenge_config, db)
     values = {
-        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "daily_challenge_enabled": payload.daily_challenge_enabled, "public_url": payload.public_url,
+        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "daily_challenge_enabled": payload.daily_challenge_enabled, "daily_challenge_config": daily_challenge_config, "public_url": payload.public_url,
         "session_days": payload.session_days, "reset_token_minutes": payload.reset_token_minutes, "privacy_notice": payload.privacy_notice.strip(),
         "privacy_controller_name": payload.privacy_controller_name.strip(), "privacy_controller_address": payload.privacy_controller_address.strip(),
         "privacy_contact_email": str(payload.privacy_contact_email or ""), "privacy_pec_email": str(payload.privacy_pec_email or ""),
@@ -2113,6 +2366,30 @@ def save_admin_settings(payload: CloudSettingsInput, request: Request, admin: Us
     if duckdns_wakeup:
         duckdns_wakeup.set()
     return admin_settings(admin, db)
+
+
+@app.put("/api/admin/challenge-settings")
+def save_daily_challenge_settings(payload: DailyChallengeSettingsInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    config = normalize_daily_challenge_config(payload.config, strict=True)
+    validate_daily_challenge_capacity(config, db)
+    set_setting(db, "daily_challenge_enabled", payload.enabled)
+    set_setting(db, "daily_challenge_config", config)
+    current_challenge = db.get(DailyChallenge, challenge_today())
+    audit(
+        db,
+        "challenge.settings_updated",
+        request,
+        actor=admin.id,
+        target=admin.id,
+        currentChallengePreserved=bool(current_challenge),
+    )
+    db.commit()
+    return {
+        "enabled": payload.enabled,
+        "config": config,
+        "currentChallengePreserved": bool(current_challenge),
+        "message": "Configurazione salvata. La sfida eventualmente già creata oggi e la sua classifica non sono state modificate.",
+    }
 
 
 @app.post("/api/admin/settings/test-duckdns")
@@ -2145,12 +2422,16 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
     users_rows = db.scalars(select(User)).all()
     challenge_rows = db.scalars(select(DailyChallenge).order_by(DailyChallenge.challenge_date)).all()
     attempt_rows = db.scalars(select(DailyChallengeAttempt).order_by(DailyChallengeAttempt.challenge_date, DailyChallengeAttempt.started_at)).all()
+    report_rows = db.scalars(select(QuestionReport).order_by(QuestionReport.created_at)).all()
+    disabled_rows = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at)).all()
     payload = {
-        "app": "Quiz 400 VVF 2026 Cloud", "version": 2, "createdAt": utcnow().isoformat(),
+        "app": "Quiz 400 VVF 2026 Cloud", "version": 3, "createdAt": utcnow().isoformat(),
         "users": [{**serialize_user(row, include_state=True), "passwordHash": row.password_hash} for row in users_rows],
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
         "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
+        "questionReports": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "reason": row.reason, "note": row.note, "status": row.status, "createdAt": aware_utc(row.created_at).isoformat(), "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None, "reviewedByUserId": row.reviewed_by_user_id} for row in report_rows],
+        "disabledQuestions": [{"questionId": row.question_id, "reason": row.reason, "disabledAt": aware_utc(row.disabled_at).isoformat(), "disabledByUserId": row.disabled_by_user_id} for row in disabled_rows],
     }
     headers = {"Content-Disposition": f'attachment; filename="quiz-400-vvf-cloud-backup-{utcnow().date().isoformat()}.json"'}
     return JSONResponse(payload, headers=headers)
@@ -2163,12 +2444,17 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     data = await request.json()
     if data.get("app") != "Quiz 400 VVF 2026 Cloud" or not isinstance(data.get("users"), list) or not isinstance(data.get("settings"), dict):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Backup non valido.")
+    restore_admin_id = admin.id
+    db.execute(QuestionReport.__table__.delete())
+    db.execute(DisabledQuestion.__table__.delete())
     db.execute(DailyChallengeAttempt.__table__.delete())
     db.execute(DailyChallenge.__table__.delete())
     db.execute(LoginSession.__table__.delete())
     db.execute(PasswordReset.__table__.delete())
     db.execute(UserState.__table__.delete())
     db.execute(User.__table__.delete())
+    db.flush()
+    db.expunge_all()
     for item in data["users"]:
         user = User(
             id=item["id"],
@@ -2197,6 +2483,14 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
         if not isinstance(item, dict):
             continue
         db.add(DailyChallengeAttempt(id=str(item["id"]), challenge_date=date.fromisoformat(item["date"]), user_id=str(item["userId"]), answers=list(item.get("answers") or [None] * 40), started_at=datetime.fromisoformat(item["startedAt"]), submitted_at=datetime.fromisoformat(item["submittedAt"]) if item.get("submittedAt") else None, correct=item.get("correct"), wrong=item.get("wrong"), blank=item.get("blank"), score_x100=item.get("scoreX100"), duration_seconds=item.get("durationSeconds")))
+    for item in data.get("disabledQuestions", []):
+        if not isinstance(item, dict) or not item.get("questionId"):
+            continue
+        db.add(DisabledQuestion(question_id=str(item["questionId"]), reason=str(item.get("reason") or ""), disabled_at=datetime.fromisoformat(item["disabledAt"]), disabled_by_user_id=item.get("disabledByUserId")))
+    for item in data.get("questionReports", []):
+        if not isinstance(item, dict) or not item.get("id") or not item.get("questionId"):
+            continue
+        db.add(QuestionReport(id=str(item["id"]), question_id=str(item["questionId"]), user_id=item.get("userId"), reason=str(item.get("reason") or "other"), note=str(item.get("note") or ""), status=str(item.get("status") or "pending"), created_at=datetime.fromisoformat(item["createdAt"]), reviewed_at=datetime.fromisoformat(item["reviewedAt"]) if item.get("reviewedAt") else None, reviewed_by_user_id=item.get("reviewedByUserId")))
     for key, value in data["settings"].items():
         if key in DEFAULT_SETTINGS:
             row = db.get(Setting, key)
@@ -2204,7 +2498,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
                 row.value = value
             else:
                 db.add(Setting(key=key, value=value))
-    audit(db, "admin.backup_restored", request, actor=admin.id, target=admin.id)
+    audit(db, "admin.backup_restored", request, actor=restore_admin_id, target=restore_admin_id)
     db.commit()
     return Response(status_code=204)
 

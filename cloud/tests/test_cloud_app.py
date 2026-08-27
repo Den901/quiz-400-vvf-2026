@@ -4,6 +4,7 @@ import json
 import os
 import shutil
 import zipfile
+from datetime import timedelta
 from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
@@ -29,7 +30,7 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import app
+from cloud.app import SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today
 
 
 def login(client: TestClient, username: str, password: str):
@@ -43,15 +44,16 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.5.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.5.0"
-        assert runtime.json()["releaseNotes"]["showToUsers"] is False
+        assert runtime.json()["version"] == "3.6.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.6.0"
+        assert runtime.json()["releaseNotes"]["showToUsers"] is True
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
         app_shell = public_client.get("/")
         assert app_shell.headers["x-frame-options"] == "DENY"
         assert "frame-ancestors 'none'" in app_shell.headers["content-security-policy"]
+        assert 'data-route="data"' not in app_shell.text
         study_lesson = public_client.get("/study-content/chimica-generale.json")
         assert study_lesson.status_code == 200
         assert study_lesson.json()["id"] == "chimica-generale"
@@ -210,6 +212,8 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_challenge.json()["status"] == "not_started"
         assert user_challenge.json()["questionCount"] == 40
         assert sum(user_challenge.json()["composition"]["examPlan"].values()) == 40
+        assert user_challenge.json()["composition"]["logicPlan"]["brani"] == 0
+        original_challenge_composition = user_challenge.json()["composition"]
 
         user_start = user_client.post("/api/challenges/today/start", json={})
         admin_start = admin_client.post("/api/challenges/today/start", json={})
@@ -217,6 +221,8 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_start.json()["status"] == "active"
         assert len(user_start.json()["questions"]) == 40
         assert [item["id"] for item in user_start.json()["questions"]] == [item["id"] for item in admin_start.json()["questions"]]
+        original_challenge_ids = [item["id"] for item in user_start.json()["questions"]]
+        assert all(item["category"] != "brani" for item in user_start.json()["questions"])
         assert all("correct" not in item and "explanation" not in item for item in user_start.json()["questions"])
 
         challenge_date = user_start.json()["date"]
@@ -246,6 +252,64 @@ def test_complete_cloud_account_and_statistics_flow():
         challenge_stats = admin_client.get(f"/api/admin/users/{user_id}/statistics").json()["summary"]
         assert challenge_stats["dailyChallenges"] == 1
         assert challenge_stats["fortyQuizzes"] == 3
+
+        reported_question_id = original_challenge_ids[0]
+        report_payload = {"question_id": reported_question_id, "reason": "answer", "note": "La soluzione indicata sembra errata."}
+        reported = user_client.post("/api/question-reports", json=report_payload)
+        assert reported.status_code == 201
+        assert reported.json()["duplicate"] is False
+        report_id = reported.json()["report"]["id"]
+        duplicate = user_client.post("/api/question-reports", json=report_payload)
+        assert duplicate.status_code == 200
+        assert duplicate.json()["duplicate"] is True
+        assert duplicate.json()["report"]["id"] == report_id
+        assert user_client.get("/api/admin/question-reports").status_code == 403
+        moderation = admin_client.get("/api/admin/question-reports")
+        assert moderation.status_code == 200
+        assert moderation.json()["pendingCount"] == 1
+        assert moderation.json()["pending"][0]["question"]["id"] == reported_question_id
+        assert "correct" in moderation.json()["pending"][0]["question"]
+        dismissed = admin_client.post(f"/api/admin/question-reports/{report_id}/dismiss")
+        assert dismissed.status_code == 200
+        assert dismissed.json()["report"]["status"] == "dismissed"
+        reported_again = user_client.post("/api/question-reports", json={**report_payload, "reason": "explanation"})
+        assert reported_again.status_code == 201
+        disabled = admin_client.post(
+            f"/api/admin/questions/{reported_question_id}/disable",
+            json={"reason": "Quesito in revisione dopo segnalazione."},
+        )
+        assert disabled.status_code == 200
+        assert disabled.json()["currentChallengesPreserved"] is True
+        assert disabled.json()["reportsResolved"] == 1
+        assert user_client.post("/api/question-reports", json=report_payload).status_code == 409
+        availability = user_client.get("/api/questions/availability")
+        assert availability.status_code == 200
+        assert reported_question_id in availability.json()["disabledQuestionIds"]
+        with SessionLocal() as moderation_db:
+            assert reported_question_id not in {str(item["id"]) for item in available_question_bank(moderation_db)}
+            future_challenge = build_daily_challenge(challenge_today() + timedelta(days=1), moderation_db)
+            assert reported_question_id not in future_challenge.question_ids
+
+        future_challenge_config = {
+            "examPlan": {"storia": 9, "logica": 11, "fisica": 6, "chimica": 6, "informatica": 4, "inglese": 4},
+            "logicPlan": {"deduzioni": 2, "serie": 2, "verbale": 2, "calcolo": 1, "figure": 1, "insiemi": 1, "relazioni": 1, "ordinamenti": 1, "brani": 5, "mista": 0},
+        }
+        challenge_settings = admin_client.put(
+            "/api/admin/challenge-settings",
+            json={"enabled": True, "config": future_challenge_config},
+        )
+        assert user_client.put("/api/admin/challenge-settings", json={"enabled": True, "config": future_challenge_config}).status_code == 403
+        assert challenge_settings.status_code == 200
+        assert challenge_settings.json()["currentChallengePreserved"] is True
+        assert challenge_settings.json()["config"]["logicPlan"]["brani"] == 0
+        assert sum(challenge_settings.json()["config"]["examPlan"].values()) == 40
+        preserved_challenge = user_client.get("/api/challenges/today")
+        assert preserved_challenge.status_code == 200
+        assert preserved_challenge.json()["composition"] == original_challenge_composition
+        assert [item["id"] for item in preserved_challenge.json()["result"]["questions"]] == original_challenge_ids
+        assert preserved_challenge.json()["leaderboard"]["participants"] == 1
+        assert reported_question_id in [item["id"] for item in preserved_challenge.json()["result"]["questions"]]
+        assert admin_client.get("/api/admin/settings").json()["dailyChallengeConfig"] == challenge_settings.json()["config"]
 
         logo_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
         logo = admin_client.post("/api/admin/branding/logo", json={"data_url": logo_data})
@@ -305,6 +369,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert settings.json()["deploymentAppPort"] == 18088
         assert settings.json()["deploymentBindAddress"] == "127.0.0.1"
         assert settings.json()["portControl"]["available"] is True
+        assert settings.json()["dailyChallengeConfig"] == challenge_settings.json()["config"]
         assert "token-segreto-test" not in settings.text
         assert "smtp-secret-test" not in settings.text
         assert public_client.get("/api/internal/tls-allowed?domain=quiz-test.duckdns.org").status_code == 204
@@ -326,7 +391,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.5.0"
+        assert update_status.json()["currentVersion"] == "3.6.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -448,6 +513,11 @@ def test_complete_cloud_account_and_statistics_flow():
         assert len(backup.json()["users"]) == 2
         assert len(backup.json()["dailyChallenges"]) == 1
         assert len(backup.json()["dailyChallengeAttempts"]) == 2
+        assert len(backup.json()["questionReports"]) == 2
+        assert backup.json()["disabledQuestions"][0]["questionId"] == reported_question_id
+        enabled = admin_client.delete(f"/api/admin/questions/{reported_question_id}/disable")
+        assert enabled.status_code == 200
+        assert reported_question_id not in admin_client.get("/api/questions/availability").json()["disabledQuestionIds"]
 
         csrf = admin_client.put(
             "/api/admin/settings",
@@ -461,3 +531,10 @@ def test_complete_cloud_account_and_statistics_flow():
         ).status_code == 409
         assert admin_client.delete(f"/api/admin/users/{user_id}").status_code == 204
         assert admin_client.get(f"/api/admin/users/{user_id}/statistics").status_code == 404
+        restored = admin_client.post("/api/admin/restore", json=backup.json(), headers={"X-Confirm-Restore": "RESTORE"})
+        assert restored.status_code == 204
+        restored_admin = TestClient(app)
+        assert login(restored_admin, "admin", "Admin-Sicura-2026!").status_code == 200
+        restored_moderation = restored_admin.get("/api/admin/question-reports")
+        assert len(restored_moderation.json()["pending"]) == 0
+        assert restored_moderation.json()["disabled"][0]["questionId"] == reported_question_id

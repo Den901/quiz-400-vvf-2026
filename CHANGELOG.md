@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.6.0 - 2026-08-27
+
+- Aggiunta nell’Admin una configurazione dedicata della Sfida del giorno con quantità modificabili per materia e per sottosezione di Logica.
+- I quesiti di comprensione dei brani sono sempre esclusi dalla Sfida del giorno, anche se una richiesta amministrativa tenta di inserirli.
+- Cambiare la configurazione non rigenera la sfida già creata oggi e non modifica tentativi, punteggi o classifica in corso; la nuova composizione vale dalla prossima generazione.
+- Nella schermata conclusiva la classifica è mostrata prima del risultato personale.
+- Le 40 domande corrette sono raccolte nel pannello richiudibile **Il tuo test**.
+- Rimossa la voce **Dati** dalla barra di navigazione.
+- Aggiunto **Segnala quesito errato** nelle prove e nei riepiloghi, con motivo e nota facoltativa.
+- Nuova coda **Segnalazioni quesiti** nel pannello Admin, contatore di notifica, revisione e chiusura degli avvisi.
+- L’admin può rendere un quesito non disponibile nelle nuove esercitazioni o riattivarlo; prove già iniziate, Sfida già generata e classifica restano intatte.
+- Backup e ripristino includono segnalazioni e quesiti disattivati; la nuova migrazione PostgreSQL non modifica i dati esistenti.
+- Cache PWA aggiornata alla revisione 60 e popup informativo una tantum agli utenti per presentare il nuovo pulsante di segnalazione.
+
 ## 3.5.0 - 2026-08-27
 
 - Introdotta la **Sfida del giorno**: una prova ufficiale da 40 domande, identica e nello stesso ordine per tutti gli utenti.

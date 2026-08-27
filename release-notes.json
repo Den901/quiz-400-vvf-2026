@@ -1,17 +1,20 @@
 {
-  "version": "3.5.0",
-  "showToUsers": false,
-  "title": "Sfida del giorno e classifica",
-  "summary": "Ogni giorno tutti gli utenti possono affrontare la stessa prova ufficiale da 40 domande e confrontare il risultato in una classifica comune.",
+  "version": "3.6.0",
+  "showToUsers": true,
+  "title": "Ora puoi segnalare un quesito errato",
+  "summary": "Durante un quiz o nel riepilogo finale trovi il nuovo pulsante “Segnala quesito errato”: scegli il problema, aggiungi se vuoi una nota e invia tutto all’amministratore.",
   "items": [
-    "Aggiunta la Sfida del giorno: 40 quesiti uguali e nello stesso ordine per tutti gli utenti.",
-    "Timer ufficiale da 40 minuti, punteggio +1 / −0,33 / 0 e correzione visibile soltanto dopo la consegna.",
-    "Un solo risultato valido per account ogni giorno, con risposte salvate sul server durante la prova.",
-    "Nuova classifica giornaliera ordinata per punteggio, risposte corrette, numero di errori e tempo impiegato.",
-    "Soluzioni, spiegazioni e revisione completa diventano disponibili al termine della sfida.",
-    "Il risultato aggiorna anche il percorso personale, le statistiche e il Tutor.",
-    "L’amministratore può attivare o disattivare Sfida e classifica dalle impostazioni Cloud.",
-    "Backup e ripristino comprendono ora anche sfide, tentativi e classifiche."
+    "Nuova configurazione Admin delle quantità per materia e per sottosezione di Logica.",
+    "I brani di comprensione sono sempre esclusi dalla Sfida del giorno.",
+    "La sfida e la classifica già in corso restano immutate quando l’admin salva una nuova composizione.",
+    "La classifica appare prima del risultato personale nella schermata conclusiva.",
+    "Le 40 domande corrette sono raccolte nel pannello richiudibile Il tuo test.",
+    "Rimossa la voce Dati dalla barra di navigazione.",
+    "Aggiunto il pulsante Segnala quesito errato durante i quiz e nei riepiloghi finali.",
+    "L’Admin riceve un contatore delle segnalazioni e dispone di una coda di revisione completa di risposte e spiegazione.",
+    "Un quesito revisionato può essere reso non disponibile nelle nuove esercitazioni e successivamente riattivato.",
+    "Le prove già iniziate, la Sfida del giorno già creata e la relativa classifica restano sempre invariate.",
+    "Backup e ripristino comprendono segnalazioni e quesiti disattivati."
   ],
-  "footnote": "Release 3.5.0 · Sfida del giorno; nessun popup automatico inviato agli utenti."
+  "footnote": "Questo avviso viene mostrato una sola volta per account. Le segnalazioni non interrompono la prova in corso."
 }
