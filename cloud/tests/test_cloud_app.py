@@ -44,9 +44,9 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.6.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.6.0"
-        assert runtime.json()["releaseNotes"]["showToUsers"] is True
+        assert runtime.json()["version"] == "3.6.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.6.1"
+        assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -121,10 +121,15 @@ def test_complete_cloud_account_and_statistics_flow():
         pending_mario = next(item for item in pending_users["users"] if item["username"] == "mario.rossi")
         assert pending_mario["approved"] is False
         assert pending_users["totals"]["pendingApproval"] == 1
+        pending_count = admin_client.get("/api/admin/users/pending-count")
+        assert pending_count.status_code == 200
+        assert pending_count.json() == {"pendingCount": 1}
+        assert user_client.get("/api/admin/users/pending-count").status_code == 401
         user_id = pending_mario["id"]
         approval = admin_client.patch(f"/api/admin/users/{user_id}", json={"approved": True})
         assert approval.status_code == 200
         assert approval.json()["user"]["approved"] is True
+        assert admin_client.get("/api/admin/users/pending-count").json() == {"pendingCount": 0}
 
         user_login = login(user_client, "mario.rossi", "Mario-Sicura-2026!")
         assert user_login.status_code == 200
@@ -391,7 +396,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.6.0"
+        assert update_status.json()["currentVersion"] == "3.6.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

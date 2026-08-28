@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.6.1 - 2026-08-28
+
+- Aggiunto sulla voce **Utenti** del menu Admin il contatore degli account in attesa di approvazione.
+- Il contatore viene verificato all'accesso, ogni 90 secondi e quando l'app torna in primo piano.
+- Dopo l'approvazione la notifica viene aggiornata immediatamente, senza ricaricare il portale.
+- Nessun popup di aggiornamento viene inviato agli utenti per questa modifica amministrativa.
+
 ## 3.6.0 - 2026-08-27
 
 - Aggiunta nell’Admin una configurazione dedicata della Sfida del giorno con quantità modificabili per materia e per sottosezione di Logica.

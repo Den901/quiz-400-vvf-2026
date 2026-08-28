@@ -1980,6 +1980,12 @@ def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db))
     return {"users": users_payload, "totals": totals}
 
 
+@app.get("/api/admin/users/pending-count")
+def admin_pending_users_count(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, int]:
+    pending_count = db.scalar(select(func.count()).select_from(User).where(User.approved.is_(False))) or 0
+    return {"pendingCount": int(pending_count)}
+
+
 @app.get("/api/admin/users/{user_id}/statistics")
 def admin_user_statistics(user_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     target = db.get(User, user_id)

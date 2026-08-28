@@ -1,8 +1,8 @@
 {
-  "version": "3.6.0",
-  "showToUsers": true,
-  "title": "Ora puoi segnalare un quesito errato",
-  "summary": "Durante un quiz o nel riepilogo finale trovi il nuovo pulsante “Segnala quesito errato”: scegli il problema, aggiungi se vuoi una nota e invia tutto all’amministratore.",
+  "version": "3.6.1",
+  "showToUsers": false,
+  "title": "Notifica account da approvare",
+  "summary": "Gli amministratori vedono sulla barra di navigazione quanti nuovi utenti attendono l’approvazione.",
   "items": [
     "Nuova configurazione Admin delle quantità per materia e per sottosezione di Logica.",
     "I brani di comprensione sono sempre esclusi dalla Sfida del giorno.",
@@ -14,7 +14,9 @@
     "L’Admin riceve un contatore delle segnalazioni e dispone di una coda di revisione completa di risposte e spiegazione.",
     "Un quesito revisionato può essere reso non disponibile nelle nuove esercitazioni e successivamente riattivato.",
     "Le prove già iniziate, la Sfida del giorno già creata e la relativa classifica restano sempre invariate.",
-    "Backup e ripristino comprendono segnalazioni e quesiti disattivati."
+    "Backup e ripristino comprendono segnalazioni e quesiti disattivati.",
+    "Nuovo contatore rosso sulla voce Utenti per gli account in attesa di approvazione.",
+    "Il conteggio si aggiorna automaticamente e scompare appena gli account vengono approvati."
   ],
-  "footnote": "Questo avviso viene mostrato una sola volta per account. Le segnalazioni non interrompono la prova in corso."
+  "footnote": "Aggiornamento riservato agli amministratori: nessun popup viene mostrato agli utenti."
 }
