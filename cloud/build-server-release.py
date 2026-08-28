@@ -15,6 +15,7 @@ DEFAULT_OUTPUT = ROOT / "outputs" / "Quiz-400-VVF-2026-Server.zip"
 ROOT_FILES = {
     ".dockerignore",
     "app.js",
+    "challenge-reminders.js",
     "logic-topics.js",
     "subject-topics.js",
     "tutor.js",

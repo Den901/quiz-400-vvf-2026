@@ -466,7 +466,7 @@ def audit(db: Session, action: str, request: Request, actor: str | None = None, 
 
 
 def empty_state() -> dict[str, Any]:
-    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "fortyQuestionExposure": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system", "deepLearning": {"enabled": False, "tracks": {}}, "deepLearningIntroSeen": False, "releaseNotesSeen": "", "studyPaths": {"resources": {}, "lastResourceId": None, "checkpoints": {}}}
+    return {"progress": {}, "sessions": [], "categoryCursor": {}, "examCursor": {}, "examCount": 0, "quizGenerationCount": 0, "quizRotation": {}, "fortyQuestionExposure": {}, "examPresets": [], "activeExamPresetId": None, "theme": "system", "deepLearning": {"enabled": False, "tracks": {}}, "deepLearningIntroSeen": False, "releaseNotesSeen": "", "studyPaths": {"resources": {}, "lastResourceId": None, "checkpoints": {}}, "dailyChallengeReminders": {}}
 
 
 def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:

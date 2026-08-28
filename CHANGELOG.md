@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.7.0 - 2026-08-28
+
+- Aggiunti tre promemoria interni della **Sfida del giorno**: mattina, metà giornata e sera.
+- Ogni fascia viene mostrata al massimo una volta al giorno per account e la memoria è sincronizzata tra i dispositivi.
+- Il server verifica lo stato reale della sfida: chi ha già consegnato non riceve alcun promemoria.
+- I popup non interrompono quiz o simulazioni in corso e non appaiono mentre l'utente sta già consultando la Sfida.
+- Il messaggio distingue tra sfida da iniziare e sfida da riprendere e mostra quanti candidati sono già entrati in classifica.
+- Nessun popup separato di changelog viene inviato agli utenti.
+
 ## 3.6.1 - 2026-08-28
 
 - Aggiunto sulla voce **Utenti** del menu Admin il contatore degli account in attesa di approvazione.

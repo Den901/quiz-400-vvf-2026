@@ -12,7 +12,7 @@ COPY cloud/requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir -r /tmp/requirements.txt
 
 COPY --chown=quiz400:quiz400 cloud ./cloud
-COPY --chown=quiz400:quiz400 app.js logic-topics.js subject-topics.js tutor.js notes-ui.js study-notes.js practice-notes.js study-paths.js study-paths-ui.js study-content-ui.js study-checkpoint.js element-properties.js quiz-selection.js data.js index.html manifest.webmanifest sw.js version.json release-notes.json ./
+COPY --chown=quiz400:quiz400 app.js challenge-reminders.js logic-topics.js subject-topics.js tutor.js notes-ui.js study-notes.js practice-notes.js study-paths.js study-paths-ui.js study-content-ui.js study-checkpoint.js element-properties.js quiz-selection.js data.js index.html manifest.webmanifest sw.js version.json release-notes.json ./
 COPY --chown=quiz400:quiz400 styles.css styles-extra.css styles-guided.css styles-official.css styles-cloud.css styles-theme.css styles-notes.css styles-study-paths.css ./
 COPY --chown=quiz400:quiz400 logo-vvf.jpg logo-vvf.png quiz-dataset.json quiz-images.json ./
 COPY --chown=quiz400:quiz400 quiz-images ./quiz-images

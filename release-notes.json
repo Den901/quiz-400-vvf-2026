@@ -1,8 +1,8 @@
 {
-  "version": "3.6.1",
+  "version": "3.7.0",
   "showToUsers": false,
-  "title": "Notifica account da approvare",
-  "summary": "Gli amministratori vedono sulla barra di navigazione quanti nuovi utenti attendono l’approvazione.",
+  "title": "Promemoria Sfida del giorno",
+  "summary": "Chi non ha ancora completato la Sfida del giorno riceve fino a tre promemoria interni, distribuiti tra mattina, metà giornata e sera.",
   "items": [
     "Nuova configurazione Admin delle quantità per materia e per sottosezione di Logica.",
     "I brani di comprensione sono sempre esclusi dalla Sfida del giorno.",
@@ -16,7 +16,10 @@
     "Le prove già iniziate, la Sfida del giorno già creata e la relativa classifica restano sempre invariate.",
     "Backup e ripristino comprendono segnalazioni e quesiti disattivati.",
     "Nuovo contatore rosso sulla voce Utenti per gli account in attesa di approvazione.",
-    "Il conteggio si aggiorna automaticamente e scompare appena gli account vengono approvati."
+    "Il conteggio si aggiorna automaticamente e scompare appena gli account vengono approvati.",
+    "Promemoria della Sfida del giorno al mattino, a metà giornata e alla sera.",
+    "Il promemoria viene mostrato soltanto agli utenti che non hanno ancora consegnato la sfida odierna.",
+    "Nessun popup interrompe una prova già in corso; il pulsante apre direttamente la Sfida da iniziare o riprendere."
   ],
-  "footnote": "Aggiornamento riservato agli amministratori: nessun popup viene mostrato agli utenti."
+  "footnote": "Le novità di versione non generano un popup separato: vengono mostrati soltanto i promemoria della Sfida richiesti."
 }
