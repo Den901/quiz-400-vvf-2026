@@ -105,6 +105,7 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 .daily-ranking-row:nth-child(3)>strong:first-child{background:#7b8794}
 .daily-ranking-row:nth-child(4)>strong:first-child{background:#a56336}
 .daily-ranking-row small{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#b42318;color:#fff;font-weight:800}
+.daily-participant{display:flex;align-items:center;gap:10px;min-width:0;font-weight:750}.daily-participant>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.daily-avatar{width:42px;height:42px;flex:0 0 42px;border-radius:50%;object-fit:cover;object-position:center;background:#d8d8d8;border:2px solid #fff;box-shadow:0 0 0 1px #00000018}.daily-current-rank .daily-avatar{width:46px;height:46px;flex-basis:46px}
 .daily-current-rank,.daily-rank-highlight{display:flex;align-items:center;justify-content:center;gap:14px;padding:15px;border-radius:14px;background:#fff3cd;border:1px solid #e5ad28}
 .daily-rank-highlight{flex-direction:column;min-width:190px;margin:0}
 .daily-rank-highlight strong{font-size:3.2rem;line-height:1;color:#a46000}
@@ -113,6 +114,7 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 .challenge-empty-ranking{display:flex;flex-direction:column;gap:5px;align-items:center;text-align:center;padding:28px;border:1px dashed var(--line);border-radius:14px;margin:16px 0;color:var(--muted)}
 .daily-answer-note{text-align:center;margin:12px auto 0;max-width:760px}
 .challenge-loading{display:grid;place-items:center;min-height:180px}
+.profile-account-card{width:min(100%,680px)}.profile-avatar-editor{display:grid;grid-template-columns:136px minmax(0,1fr);gap:22px;align-items:center;padding-bottom:20px;margin-bottom:4px;border-bottom:1px solid var(--line)}.profile-avatar-editor>img{width:136px;height:136px;border-radius:50%;object-fit:cover;object-position:center;background:#d8d8d8;border:4px solid #fff;box-shadow:0 6px 20px #0002,0 0 0 1px var(--line)}.profile-avatar-editor h2{margin:0 0 4px}.profile-avatar-editor .quiz-actions{justify-content:flex-start;margin-top:10px}.profile-avatar-file{position:relative;display:inline-flex;margin-top:10px;cursor:pointer}.profile-avatar-file input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}.profile-avatar-editor [data-profile-avatar-status]{margin:8px 0 0}
 .notice span{display:block;margin-top:6px}
 .daily-test-details{margin-top:18px;padding:0;overflow:hidden}
 .daily-test-details>summary{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 22px;cursor:pointer;list-style:none;background:var(--surface-soft,#f8f6f3)}
@@ -143,6 +145,7 @@ html[data-theme="dark"] .daily-challenge-quick,html[data-theme="dark"] .daily-ch
 html[data-theme="dark"] .daily-composition span,html[data-theme="dark"] .daily-rule-row span,html[data-theme="dark"] .daily-ranking-row,html[data-theme="dark"] .daily-current-rank,html[data-theme="dark"] .daily-rank-highlight{background:#242426;border-color:#5d4b21;color:var(--ink)}
 html[data-theme="dark"] .daily-rule-row span,html[data-theme="dark"] .daily-ranking-row.current{background:#33290f;border-color:#8b6d25}
 html[data-theme="dark"] .daily-test-details>summary,html[data-theme="dark"] .daily-challenge-admin-settings,html[data-theme="dark"] .daily-admin-logic{background:#1c1b1d;border-color:#725a24!important}
+html[data-theme="dark"] .daily-avatar,html[data-theme="dark"] .profile-avatar-editor>img{border-color:#2b2b2d;box-shadow:0 0 0 1px #ffffff2b}html[data-theme="dark"] .profile-avatar-editor{border-color:#3b3b3d}
 html[data-theme="dark"] .daily-no-passages{background:#33290f;border-color:#8b6d25;color:#ffdd85}
 html[data-theme="dark"] .daily-reminder-participants{background:#33290f;color:#ffdd85}
 html[data-theme="dark"] .daily-admin-total,html[data-theme="dark"] .daily-admin-logic-total{background:#17271c;color:#a9e5bc}
@@ -150,6 +153,7 @@ html[data-theme="dark"] .daily-admin-total.invalid,html[data-theme="dark"] .dail
 
 @media(max-width:1050px){.daily-admin-plan,.daily-admin-logic-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:720px){.daily-challenge-rules{grid-template-columns:1fr;gap:12px}.daily-challenge-emblem{width:58px;height:58px;border-radius:17px;font-size:2rem}.daily-challenge-action{align-items:stretch;flex-direction:column}.daily-challenge-action button{width:100%;min-width:0}.daily-completed-summary{grid-template-columns:1fr}.daily-rank-highlight{min-width:0}.daily-test-details>summary{align-items:flex-start;padding:17px}.daily-test-details>summary>strong{font-size:.78rem}.daily-test-review-body{padding:2px 14px 16px}.daily-admin-plan,.daily-admin-logic-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.profile-avatar-editor{grid-template-columns:1fr;text-align:center}.profile-avatar-editor>img{width:120px;height:120px;margin:auto}.profile-avatar-editor .quiz-actions{display:grid;justify-content:stretch}.profile-avatar-editor .quiz-actions>*{width:100%}.profile-avatar-file{justify-content:center}}
 @media(max-width:520px){.daily-challenge-reminder .quiz-actions{display:grid}.daily-challenge-reminder .quiz-actions>*{width:100%}}
 
 /* Segnalazioni e moderazione quesiti */

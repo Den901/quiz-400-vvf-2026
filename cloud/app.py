@@ -63,6 +63,8 @@ SESSION_COOKIE = "q400_session"
 MAX_STATE_BYTES = 8 * 1024 * 1024
 MAX_UPDATE_BYTES = 96 * 1024 * 1024
 MAX_LOGO_BYTES = 1024 * 1024
+MAX_AVATAR_BYTES = 1024 * 1024
+DEFAULT_AVATAR_BYTES = base64.b64decode((ROOT / "cloud" / "assets" / "default-avatar.b64").read_text(encoding="ascii").strip(), validate=True)
 UPDATE_REPOSITORY = os.environ.get("UPDATE_REPOSITORY", "Den901/quiz-400-vvf-2026").strip()
 UPDATE_ASSET_NAME = os.environ.get("UPDATE_ASSET_NAME", "Quiz-400-VVF-2026-Server.zip").strip()
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,39}$")
@@ -116,8 +118,19 @@ class User(Base):
     privacy_policy_version: Mapped[str | None] = mapped_column(String(40), nullable=True)
     privacy_acknowledged_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     state: Mapped["UserState"] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)
+    avatar: Mapped["UserAvatar | None"] = relationship(back_populates="user", cascade="all, delete-orphan", uselist=False)
     sessions: Mapped[list["LoginSession"]] = relationship(cascade="all, delete-orphan")
     reset_tokens: Mapped[list["PasswordReset"]] = relationship(cascade="all, delete-orphan")
+
+
+class UserAvatar(Base):
+    __tablename__ = "user_avatars"
+
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    data: Mapped[str] = mapped_column(Text)
+    mime: Mapped[str] = mapped_column(String(20))
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, onupdate=utcnow)
+    user: Mapped[User] = relationship(back_populates="avatar")
 
 
 class UserState(Base):
@@ -483,6 +496,7 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         "lastLoginAt": user.last_login_at.isoformat() if user.last_login_at else None,
         "privacyPolicyVersion": user.privacy_policy_version,
         "privacyAcknowledgedAt": user.privacy_acknowledged_at.isoformat() if user.privacy_acknowledged_at else None,
+        "avatarUrl": f"./api/users/{user.id}/avatar",
     }
     if include_state:
         payload["state"] = user.state.data if user.state else empty_state()
@@ -578,6 +592,10 @@ class ChangePasswordInput(BaseModel):
 class ProfileInput(BaseModel):
     name: str = Field(min_length=2, max_length=100)
     email: EmailStr | None = None
+
+
+class ProfileAvatarInput(BaseModel):
+    data_url: str = Field(min_length=32, max_length=1_500_000)
 
 
 class StateInput(BaseModel):
@@ -1192,6 +1210,7 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
         {
             "rank": index + 1,
             "displayName": user.display_name,
+            "avatarUrl": f"./api/users/{user.id}/avatar",
             "score": challenge_score(attempt),
             "correct": attempt.correct,
             "wrong": attempt.wrong,
@@ -1468,23 +1487,31 @@ def privacy_information(db: Session = Depends(get_db)) -> dict[str, Any]:
     }
 
 
-def decode_logo_data_url(data_url: str) -> tuple[str, bytes, str]:
-    match = re.fullmatch(r"data:(image/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\r\n]+)", data_url.strip())
-    if not match:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Usa un'immagine JPEG, PNG o WebP valida.")
-    try:
-        content = base64.b64decode(match.group(2), validate=True)
-    except (ValueError, TypeError) as error:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Immagine non valida.") from error
-    mime = match.group(1)
+def image_signature_matches(mime: str, content: bytes) -> bool:
     signatures = {
         "image/jpeg": content.startswith(b"\xff\xd8\xff"),
         "image/png": content.startswith(b"\x89PNG\r\n\x1a\n"),
         "image/webp": content.startswith(b"RIFF") and content[8:12] == b"WEBP",
     }
-    if not content or len(content) > MAX_LOGO_BYTES or not signatures.get(mime, False):
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Il logo deve essere JPEG, PNG o WebP e pesare al massimo 1 MB.")
+    return bool(signatures.get(mime, False))
+
+
+def decode_image_data_url(data_url: str, maximum: int, label: str) -> tuple[str, bytes, str]:
+    match = re.fullmatch(r"data:(image/(?:jpeg|png|webp));base64,([A-Za-z0-9+/=\r\n]+)", data_url.strip())
+    if not match:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Usa un'immagine JPEG, PNG o WebP valida.")
+    try:
+        content = base64.b64decode(match.group(2).replace("\r", "").replace("\n", ""), validate=True)
+    except (ValueError, TypeError) as error:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Immagine non valida.") from error
+    mime = match.group(1)
+    if not content or len(content) > maximum or not image_signature_matches(mime, content):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, f"{label} deve essere JPEG, PNG o WebP e pesare al massimo 1 MB.")
     return mime, content, base64.b64encode(content).decode("ascii")
+
+
+def decode_logo_data_url(data_url: str) -> tuple[str, bytes, str]:
+    return decode_image_data_url(data_url, MAX_LOGO_BYTES, "Il logo")
 
 
 @app.get("/api/branding/logo")
@@ -1640,6 +1667,7 @@ def export_personal_data(user: User = Depends(require_user), db: Session = Depen
         "app": "Quiz 400 VVF 2026",
         "exportedAt": utcnow().isoformat(),
         "profile": serialize_user(user),
+        "profilePhoto": ({"mime": user.avatar.mime, "dataUrl": f"data:{user.avatar.mime};base64,{user.avatar.data}", "updatedAt": aware_utc(user.avatar.updated_at).isoformat()} if user.avatar else None),
         "studyState": user.state.data if user.state else empty_state(),
         "questionReports": [
             {
@@ -1676,6 +1704,56 @@ def update_profile(payload: ProfileInput, request: Request, user: User = Depends
     audit(db, "user.profile_updated", request, actor=user.id, target=user.id)
     db.commit()
     return {"user": serialize_user(user, include_state=True)}
+
+
+def user_avatar_response(request: Request, content: bytes, mime: str) -> Response:
+    etag = f'"{hashlib.sha256(content).hexdigest()}"'
+    headers = {"Cache-Control": "private, no-cache", "ETag": etag}
+    if request.headers.get("if-none-match") == etag:
+        return Response(status_code=status.HTTP_304_NOT_MODIFIED, headers=headers)
+    return Response(content=content, media_type=mime, headers=headers)
+
+
+@app.get("/api/users/{user_id}/avatar")
+def user_avatar(user_id: str, request: Request, _: User = Depends(require_user), db: Session = Depends(get_db)) -> Response:
+    target = db.get(User, user_id)
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Utente non trovato.")
+    avatar = db.get(UserAvatar, user_id)
+    if avatar:
+        try:
+            content = base64.b64decode(avatar.data, validate=True)
+        except (ValueError, TypeError):
+            content = b""
+        if content and len(content) <= MAX_AVATAR_BYTES and image_signature_matches(avatar.mime, content):
+            return user_avatar_response(request, content, avatar.mime)
+    return user_avatar_response(request, DEFAULT_AVATAR_BYTES, "image/jpeg")
+
+
+@app.put("/api/auth/avatar")
+def update_avatar(payload: ProfileAvatarInput, request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    mime, _, encoded = decode_image_data_url(payload.data_url, MAX_AVATAR_BYTES, "La foto profilo")
+    updated_at = utcnow()
+    avatar = db.get(UserAvatar, user.id)
+    if avatar:
+        avatar.data = encoded
+        avatar.mime = mime
+        avatar.updated_at = updated_at
+    else:
+        db.add(UserAvatar(user_id=user.id, data=encoded, mime=mime, updated_at=updated_at))
+    audit(db, "user.avatar_updated", request, actor=user.id, target=user.id, mime=mime)
+    db.commit()
+    return {"message": "Foto profilo aggiornata.", "avatarUrl": f"./api/users/{user.id}/avatar?v={int(updated_at.timestamp())}"}
+
+
+@app.delete("/api/auth/avatar")
+def delete_avatar(request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    avatar = db.get(UserAvatar, user.id)
+    if avatar:
+        db.delete(avatar)
+    audit(db, "user.avatar_removed", request, actor=user.id, target=user.id)
+    db.commit()
+    return {"message": "Foto profilo rimossa.", "avatarUrl": f"./api/users/{user.id}/avatar?v={int(utcnow().timestamp())}"}
 
 
 @app.post("/api/auth/change-password", status_code=204)
@@ -2430,9 +2508,17 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
     attempt_rows = db.scalars(select(DailyChallengeAttempt).order_by(DailyChallengeAttempt.challenge_date, DailyChallengeAttempt.started_at)).all()
     report_rows = db.scalars(select(QuestionReport).order_by(QuestionReport.created_at)).all()
     disabled_rows = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at)).all()
+    backup_users = []
+    for row in users_rows:
+        avatar = db.get(UserAvatar, row.id)
+        backup_users.append({
+            **serialize_user(row, include_state=True),
+            "passwordHash": row.password_hash,
+            "avatar": ({"data": avatar.data, "mime": avatar.mime, "updatedAt": aware_utc(avatar.updated_at).isoformat()} if avatar else None),
+        })
     payload = {
-        "app": "Quiz 400 VVF 2026 Cloud", "version": 3, "createdAt": utcnow().isoformat(),
-        "users": [{**serialize_user(row, include_state=True), "passwordHash": row.password_hash} for row in users_rows],
+        "app": "Quiz 400 VVF 2026 Cloud", "version": 4, "createdAt": utcnow().isoformat(),
+        "users": backup_users,
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
         "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
@@ -2457,6 +2543,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     db.execute(DailyChallenge.__table__.delete())
     db.execute(LoginSession.__table__.delete())
     db.execute(PasswordReset.__table__.delete())
+    db.execute(UserAvatar.__table__.delete())
     db.execute(UserState.__table__.delete())
     db.execute(User.__table__.delete())
     db.flush()
@@ -2478,6 +2565,19 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
             privacy_acknowledged_at=datetime.fromisoformat(item["privacyAcknowledgedAt"]) if item.get("privacyAcknowledgedAt") else None,
         )
         user.state = UserState(data=item.get("state") or empty_state(), revision=int(item.get("revision", 1) or 1))
+        avatar = item.get("avatar")
+        if isinstance(avatar, dict) and avatar.get("data") and avatar.get("mime"):
+            try:
+                avatar_content = base64.b64decode(str(avatar["data"]), validate=True)
+            except (ValueError, TypeError):
+                avatar_content = b""
+            avatar_mime = str(avatar["mime"])
+            if avatar_content and len(avatar_content) <= MAX_AVATAR_BYTES and image_signature_matches(avatar_mime, avatar_content):
+                user.avatar = UserAvatar(
+                    data=base64.b64encode(avatar_content).decode("ascii"),
+                    mime=avatar_mime,
+                    updated_at=datetime.fromisoformat(avatar["updatedAt"]) if avatar.get("updatedAt") else utcnow(),
+                )
         db.add(user)
     db.flush()
     for item in data.get("dailyChallenges", []):

@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.8.0 - 2026-08-29
+
+- Aggiunta la foto profilo personale nella schermata **Account**, con anteprima, ottimizzazione automatica e possibilità di rimozione.
+- La foto compare accanto al nome nella classifica della **Sfida del giorno**, con layout adattato a desktop, tablet, smartphone e tema scuro.
+- In assenza di una foto viene mostrata l'immagine neutra fornita come avatar predefinito.
+- Le immagini personalizzate sono disponibili soltanto dopo l'accesso, validate come JPEG/PNG/WebP e limitate a 1 MB dopo l'ottimizzazione.
+- Foto e metadati sono conservati in PostgreSQL, inclusi nei backup/ripristini e nell'esportazione personale; la cancellazione dell'account elimina anche la foto.
+- Aggiornata l'informativa privacy sulla visibilità della foto nella classifica interna.
+- Cache PWA aggiornata alla revisione 63; nessun popup di changelog viene inviato automaticamente agli utenti.
+
 ## 3.7.0 - 2026-08-28
 
 - Aggiunti tre promemoria interni della **Sfida del giorno**: mattina, metà giornata e sera.

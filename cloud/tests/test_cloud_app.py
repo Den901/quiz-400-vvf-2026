@@ -30,7 +30,7 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today
+from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today
 
 
 def login(client: TestClient, username: str, password: str):
@@ -44,8 +44,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.7.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.7.0"
+        assert runtime.json()["version"] == "3.8.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.8.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
@@ -251,6 +251,29 @@ def test_complete_cloud_account_and_statistics_flow():
         assert ranking.json()["participants"] == 1
         assert ranking.json()["entries"][0]["displayName"] == "Mario Rossi"
         assert ranking.json()["entries"][0]["rank"] == 1
+        avatar_url = ranking.json()["entries"][0]["avatarUrl"].removeprefix(".")
+        assert avatar_url == f"/api/users/{user_id}/avatar"
+        default_avatar = user_client.get(avatar_url)
+        assert default_avatar.status_code == 200
+        assert default_avatar.headers["content-type"].startswith("image/jpeg")
+        assert default_avatar.content == DEFAULT_AVATAR_BYTES
+        assert public_client.get(avatar_url).status_code == 401
+        assert user_client.get(avatar_url, headers={"If-None-Match": default_avatar.headers["etag"]}).status_code == 304
+        avatar_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        assert user_client.put("/api/auth/avatar", json={"data_url": "data:image/png;base64,non-valida"}).status_code == 422
+        avatar_update = user_client.put("/api/auth/avatar", json={"data_url": avatar_data})
+        assert avatar_update.status_code == 200
+        assert avatar_update.json()["avatarUrl"].startswith(f"./api/users/{user_id}/avatar?v=")
+        custom_avatar = user_client.get(avatar_url)
+        assert custom_avatar.headers["content-type"].startswith("image/png")
+        assert custom_avatar.content.startswith(b"\x89PNG")
+        personal_export_with_avatar = user_client.get("/api/account/data-export").json()
+        assert personal_export_with_avatar["profilePhoto"]["mime"] == "image/png"
+        assert personal_export_with_avatar["profilePhoto"]["dataUrl"] == avatar_data
+        removed_avatar = user_client.delete("/api/auth/avatar")
+        assert removed_avatar.status_code == 200
+        assert user_client.get(avatar_url).content == DEFAULT_AVATAR_BYTES
+        assert user_client.put("/api/auth/avatar", json={"data_url": avatar_data}).status_code == 200
         challenge_state = user_client.get("/api/auth/me").json()["user"]["state"]
         assert challenge_state["sessions"][-1]["type"] == "daily-challenge"
         assert challenge_state["dailyChallengeRecordedDates"] == [challenge_date]
@@ -316,7 +339,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert reported_question_id in [item["id"] for item in preserved_challenge.json()["result"]["questions"]]
         assert admin_client.get("/api/admin/settings").json()["dailyChallengeConfig"] == challenge_settings.json()["config"]
 
-        logo_data = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="
+        logo_data = avatar_data
         logo = admin_client.post("/api/admin/branding/logo", json={"data_url": logo_data})
         assert logo.status_code == 200
         assert logo.json()["logoCustomized"] is True
@@ -396,7 +419,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.7.0"
+        assert update_status.json()["currentVersion"] == "3.8.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -515,7 +538,10 @@ def test_complete_cloud_account_and_statistics_flow():
         backup = admin_client.get("/api/admin/backup")
         assert backup.status_code == 200
         assert backup.json()["app"] == "Quiz 400 VVF 2026 Cloud"
+        assert backup.json()["version"] == 4
         assert len(backup.json()["users"]) == 2
+        backup_mario = next(item for item in backup.json()["users"] if item["id"] == user_id)
+        assert backup_mario["avatar"]["mime"] == "image/png"
         assert len(backup.json()["dailyChallenges"]) == 1
         assert len(backup.json()["dailyChallengeAttempts"]) == 2
         assert len(backup.json()["questionReports"]) == 2
@@ -540,6 +566,9 @@ def test_complete_cloud_account_and_statistics_flow():
         assert restored.status_code == 204
         restored_admin = TestClient(app)
         assert login(restored_admin, "admin", "Admin-Sicura-2026!").status_code == 200
+        restored_user = TestClient(app)
+        assert login(restored_user, "mario.rossi", "Mario-Nuova-2026!").status_code == 200
+        assert restored_user.get(avatar_url).headers["content-type"].startswith("image/png")
         restored_moderation = restored_admin.get("/api/admin/question-reports")
         assert len(restored_moderation.json()["pending"]) == 0
         assert restored_moderation.json()["disabled"][0]["questionId"] == reported_question_id
