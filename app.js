@@ -1,13 +1,13 @@
 import {categories} from './data.js';
-import {applyLearningOutcome,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=63';
-import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=63';
-import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=63';
-import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=63';
-import {renderNotes} from './notes-ui.js?v=63';
-import {allStudyResources,studyPaths} from './study-paths.js?v=63';
-import {checkpointQuestionPool} from './study-checkpoint.js?v=63';
-import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=63';
-import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=63';
+import {applyLearningOutcome,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=64';
+import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=64';
+import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=64';
+import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=64';
+import {renderNotes} from './notes-ui.js?v=64';
+import {allStudyResources,studyPaths} from './study-paths.js?v=64';
+import {checkpointQuestionPool} from './study-checkpoint.js?v=64';
+import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=64';
+import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=64';
 
 const app=document.querySelector('#app'),toast=document.querySelector('#toast');
 const USERS='fq-users-v2',SESSION='fq-session-v2',DATA='fuocoquiz-data-v1',CONFIG='q400vvf-config-v1',ACTIVE_QUIZZES='q400vvf-active-quizzes-v1';
@@ -19,7 +19,7 @@ const DEFAULT_EXAM_PLAN={storia:8,logica:12,fisica:6,chimica:6,informatica:4,ing
 const DEFAULT_LOGIC_PLAN={deduzioni:2,serie:2,verbale:2,calcolo:1,figure:1,insiemi:1,relazioni:1,ordinamenti:1,brani:0,mista:1};
 const EXAM_ORDER=['storia','logica','fisica','chimica','informatica','inglese'];
 const LOGIC_CATEGORY_IDS=new Set(['logica','brani','insiemi']);
-const RELEASE_NOTES_VERSION='3.8.0';
+const RELEASE_NOTES_VERSION='3.8.1';
 let examConfig=JSON.parse(localStorage.getItem(CONFIG)||'null')||{examPlan:{...DEFAULT_EXAM_PLAN},logicPlan:{...DEFAULT_LOGIC_PLAN}};
 let quiz=null,timerHandle=null,deferredInstall=null,updateCheckedFor=null,updateCheckTimer=null,updatePromptedVersion=null,lastUpdateCheckAt=0;
 const EXAM_SECONDS=40*60;
@@ -447,7 +447,7 @@ const homeBeforeDatasetCount=home;
 home=function(){homeBeforeDatasetCount();const label=app.querySelector('.hero .eyebrow');if(label)label.textContent=`400 Vigili del Fuoco · ${allQuestions().length.toLocaleString('it')} quesiti`};
 enhanceTrainerCard=function(){};
 
-maybeShowReleaseNotes=function(){if(!currentUser||currentUser.mustChangePassword)return;const notes=runtimeConfig.releaseNotes||{},version=notes.version||RELEASE_NOTES_VERSION,state=userState();if(notes.showToUsers!==true){maybeShowDeepLearningIntro();return}if(state.releaseNotesSeen===version){maybeShowDeepLearningIntro();return}if(document.querySelector('.update-dialog-backdrop,.install-dialog-backdrop,.delivery-confirm,.learning-intro-backdrop,.release-notes-backdrop')){setTimeout(maybeShowReleaseNotes,900);return}const items=Array.isArray(notes.items)&&notes.items.length?notes.items:['Aggiornamento disponibile.'],overlay=document.createElement('div');overlay.className='install-dialog-backdrop release-notes-backdrop';overlay.innerHTML=`<section class="card install-dialog release-notes-dialog" role="dialog" aria-modal="true" aria-labelledby="releaseNotesTitle"><div class="deep-intro-icon" aria-hidden="true">✓</div><div class="eyebrow">Aggiornamento ${esc(version)}</div><h2 id="releaseNotesTitle">${esc(notes.title||'Novità del portale')}</h2><p class="install-lead">${esc(notes.summary||'Sono disponibili nuove funzioni.')}</p><ul class="release-notes-list">${items.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>${notes.footnote?`<p class="meta">${esc(notes.footnote)}</p>`:''}<div class="quiz-actions"><button class="primary" type="button" data-release-notes-close>Ho capito</button></div></section>`;document.body.append(overlay);const close=()=>{state.releaseNotesSeen=version;saveUsers();document.removeEventListener('keydown',onKey);overlay.remove();setTimeout(maybeShowDeepLearningIntro,300)},onKey=event=>{if(event.key==='Escape')close()};overlay.querySelector('[data-release-notes-close]').onclick=close;overlay.onclick=event=>{if(event.target===overlay)close()};document.addEventListener('keydown',onKey);overlay.querySelector('[data-release-notes-close]').focus()};
+maybeShowReleaseNotes=function(){if(!currentUser||currentUser.mustChangePassword)return;const notes=runtimeConfig.releaseNotes||{},version=notes.version||RELEASE_NOTES_VERSION,state=userState();if(notes.showToUsers!==true){maybeShowDeepLearningIntro();return}if(state.releaseNotesSeen===version){maybeShowDeepLearningIntro();return}if(quiz||document.querySelector('.update-dialog-backdrop,.install-dialog-backdrop,.delivery-confirm,.learning-intro-backdrop,.release-notes-backdrop')){setTimeout(maybeShowReleaseNotes,1200);return}const items=Array.isArray(notes.items)&&notes.items.length?notes.items:['Aggiornamento disponibile.'],actionHash=/^#[a-z0-9/_-]+$/i.test(notes.actionHash||'')?notes.actionHash:'',overlay=document.createElement('div');overlay.className='install-dialog-backdrop release-notes-backdrop';overlay.innerHTML=`<section class="card install-dialog release-notes-dialog" role="dialog" aria-modal="true" aria-labelledby="releaseNotesTitle"><div class="deep-intro-icon" aria-hidden="true">✓</div><div class="eyebrow">Aggiornamento ${esc(version)}</div><h2 id="releaseNotesTitle">${esc(notes.title||'Novità del portale')}</h2><p class="install-lead">${esc(notes.summary||'Sono disponibili nuove funzioni.')}</p><ul class="release-notes-list">${items.map(item=>`<li>${esc(item)}</li>`).join('')}</ul>${notes.footnote?`<p class="meta">${esc(notes.footnote)}</p>`:''}<div class="quiz-actions">${actionHash?`<button class="secondary" type="button" data-release-notes-action>${esc(notes.actionLabel||'Apri')}</button>`:''}<button class="primary" type="button" data-release-notes-close>Ho capito</button></div></section>`;document.body.append(overlay);const close=()=>{state.releaseNotesSeen=version;saveUsers();document.removeEventListener('keydown',onKey);overlay.remove();setTimeout(maybeShowDeepLearningIntro,300)},onKey=event=>{if(event.key==='Escape')close()};overlay.querySelector('[data-release-notes-close]').onclick=close;overlay.querySelector('[data-release-notes-action]')?.addEventListener('click',()=>{close();location.hash=actionHash});overlay.onclick=event=>{if(event.target===overlay)close()};document.addEventListener('keydown',onKey);overlay.querySelector('[data-release-notes-action], [data-release-notes-close]').focus()};
 
 const currentTutorAnalysis=()=>buildTutorAnalysis(allQuestions(),userState().progress,userState().sessions);
 const tutorTrackPool=trackKey=>allQuestions().filter(question=>tutorTrackForQuestion(question)?.key===trackKey);

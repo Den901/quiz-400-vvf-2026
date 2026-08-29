@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.8.1 - 2026-08-29
+
+- Attivato per tutti gli utenti un popup informativo, mostrato una sola volta, sulla nuova foto profilo.
+- Il popup spiega dove caricare la foto e offre il pulsante diretto **Apri Account**.
+- La comunicazione viene rimandata se è in corso un quiz o una simulazione.
+- Cache PWA aggiornata alla revisione 64.
+
 ## 3.8.0 - 2026-08-29
 
 - Aggiunta la foto profilo personale nella schermata **Account**, con anteprima, ottimizzazione automatica e possibilità di rimozione.

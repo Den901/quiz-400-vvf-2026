@@ -1,15 +1,15 @@
 {
-  "version": "3.8.0",
-  "showToUsers": false,
-  "title": "Foto profilo nella classifica",
-  "summary": "Ogni utente può scegliere una foto profilo, visibile accanto al nome nella classifica della Sfida del giorno.",
+  "version": "3.8.1",
+  "showToUsers": true,
+  "title": "Aggiungi la tua foto profilo",
+  "summary": "Personalizza il tuo account: la foto scelta apparirà accanto al tuo nome nella classifica della Sfida del giorno.",
   "items": [
-    "Nuovo gestore della foto profilo nella schermata Account, con anteprima, ottimizzazione e rimozione.",
-    "Le foto profilo appaiono nella classifica della Sfida del giorno su desktop, tablet e smartphone.",
-    "Chi non carica una foto visualizza automaticamente l'avatar neutro predefinito.",
-    "Le immagini sono accessibili soltanto agli utenti autenticati e vengono incluse nei backup PostgreSQL e nei backup esportabili.",
-    "L'esportazione personale comprende anche l'eventuale foto profilo; cancellando l'account viene cancellata anche l'immagine.",
-    "Aggiornata l'informativa privacy per descrivere visibilità, facoltatività e rimozione della foto profilo."
+    "Apri Account e premi Scegli foto nella nuova sezione Foto profilo.",
+    "La foto viene ottimizzata automaticamente per smartphone, tablet e desktop.",
+    "Se non carichi una foto vedrai l'avatar neutro predefinito.",
+    "Puoi sostituire o rimuovere la foto in qualsiasi momento."
   ],
-  "footnote": "Nessun popup di changelog viene inviato automaticamente agli utenti."
+  "actionLabel": "Apri Account",
+  "actionHash": "#account",
+  "footnote": "La foto è facoltativa ed è visibile soltanto agli utenti autenticati nella classifica interna."
 }
