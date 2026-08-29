@@ -19,7 +19,7 @@ from contextlib import asynccontextmanager
 from datetime import UTC, date, datetime, timedelta
 from email.message import EmailMessage
 from pathlib import Path
-from typing import Any, Generator, Literal
+from typing import Any, AsyncGenerator, Literal
 from urllib.parse import urlparse
 from zoneinfo import ZoneInfo
 
@@ -239,6 +239,11 @@ class DisabledQuestion(Base):
 engine_options: dict[str, Any] = {"pool_pre_ping": True}
 if DATABASE_URL.startswith("sqlite"):
     engine_options["connect_args"] = {"check_same_thread": False}
+else:
+    # Keep enough headroom for concurrent PWA API calls (including leaderboard
+    # avatars). Dependency cleanup runs on the event loop below, so a saturated
+    # worker pool cannot strand checked-out database connections.
+    engine_options.update({"pool_size": 20, "max_overflow": 20, "pool_timeout": 10, "pool_recycle": 1800})
 engine = create_engine(DATABASE_URL, **engine_options)
 SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 
@@ -291,9 +296,12 @@ DEFAULT_SETTINGS: dict[str, Any] = {
 SECRET_SETTING_KEYS = {"duckdns_token", "smtp_password"}
 
 
-def get_db() -> Generator[Session, None, None]:
-    with SessionLocal() as db:
+async def get_db() -> AsyncGenerator[Session, None]:
+    db = SessionLocal()
+    try:
         yield db
+    finally:
+        db.close()
 
 
 def get_setting(db: Session, key: str) -> Any:

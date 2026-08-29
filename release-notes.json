@@ -1,15 +1,14 @@
 {
-  "version": "3.8.1",
-  "showToUsers": true,
-  "title": "Aggiungi la tua foto profilo",
-  "summary": "Personalizza il tuo account: la foto scelta apparirà accanto al tuo nome nella classifica della Sfida del giorno.",
+  "version": "3.8.2",
+  "showToUsers": false,
+  "title": "Stabilità Sfida del giorno",
+  "summary": "Correzione tecnica della gestione delle connessioni al database.",
   "items": [
-    "Apri Account e premi Scegli foto nella nuova sezione Foto profilo.",
-    "La foto viene ottimizzata automaticamente per smartphone, tablet e desktop.",
-    "Se non carichi una foto vedrai l'avatar neutro predefinito.",
-    "Puoi sostituire o rimuovere la foto in qualsiasi momento."
+    "Risolto il blocco della Sfida del giorno sulla schermata Preparazione.",
+    "Aumentata la capacità di gestire richieste simultanee e foto della classifica.",
+    "La sfida e i risultati già registrati restano invariati."
   ],
-  "actionLabel": "Apri Account",
-  "actionHash": "#account",
-  "footnote": "La foto è facoltativa ed è visibile soltanto agli utenti autenticati nella classifica interna."
+  "actionLabel": "Apri Sfida",
+  "actionHash": "#challenge",
+  "footnote": "Aggiornamento tecnico senza popup automatico agli utenti."
 }

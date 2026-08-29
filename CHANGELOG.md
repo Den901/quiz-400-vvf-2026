@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.8.2 - 2026-08-29
+
+- Risolto il blocco della **Sfida del giorno** sulla schermata “Preparazione…” causato dall'esaurimento delle connessioni PostgreSQL.
+- Resa affidabile la chiusura delle sessioni database anche con numerose richieste contemporanee.
+- Aumentata la capacità del pool per classifica, foto profilo e chiamate PWA parallele.
+- Nessuna modifica alle domande, alle partecipazioni o alla classifica della sfida in corso; nessun popup automatico agli utenti.
+
 ## 3.8.1 - 2026-08-29
 
 - Attivato per tutti gli utenti un popup informativo, mostrato una sola volta, sulla nuova foto profilo.

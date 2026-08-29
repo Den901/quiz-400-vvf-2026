@@ -19,7 +19,7 @@ const DEFAULT_EXAM_PLAN={storia:8,logica:12,fisica:6,chimica:6,informatica:4,ing
 const DEFAULT_LOGIC_PLAN={deduzioni:2,serie:2,verbale:2,calcolo:1,figure:1,insiemi:1,relazioni:1,ordinamenti:1,brani:0,mista:1};
 const EXAM_ORDER=['storia','logica','fisica','chimica','informatica','inglese'];
 const LOGIC_CATEGORY_IDS=new Set(['logica','brani','insiemi']);
-const RELEASE_NOTES_VERSION='3.8.1';
+const RELEASE_NOTES_VERSION='3.8.2';
 let examConfig=JSON.parse(localStorage.getItem(CONFIG)||'null')||{examPlan:{...DEFAULT_EXAM_PLAN},logicPlan:{...DEFAULT_LOGIC_PLAN}};
 let quiz=null,timerHandle=null,deferredInstall=null,updateCheckedFor=null,updateCheckTimer=null,updatePromptedVersion=null,lastUpdateCheckAt=0;
 const EXAM_SECONDS=40*60;
