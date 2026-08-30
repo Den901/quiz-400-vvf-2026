@@ -225,6 +225,8 @@ class QuestionReport(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow, index=True)
     reviewed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     reviewed_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    reply: Mapped[str | None] = mapped_column(Text, nullable=True)
+    reply_read_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
 class DisabledQuestion(Base):
@@ -730,6 +732,11 @@ class QuestionReportInput(BaseModel):
 
 class QuestionModerationInput(BaseModel):
     reason: str = Field(default="", max_length=1500)
+    reply: str = Field(default="", max_length=4000)
+
+
+class QuestionReportReplyInput(BaseModel):
+    reply: str = Field(default="", max_length=4000)
 
 
 def numeric_value(value: Any) -> float | None:
@@ -919,6 +926,8 @@ def serialize_question_report(report: QuestionReport, db: Session) -> dict[str, 
         "createdAt": aware_utc(report.created_at).isoformat(),
         "reviewedAt": aware_utc(report.reviewed_at).isoformat() if report.reviewed_at else None,
         "reviewedBy": reviewer.display_name if reviewer else None,
+        "reply": report.reply,
+        "replyReadAt": aware_utc(report.reply_read_at).isoformat() if report.reply_read_at else None,
     }
 
 
@@ -1878,6 +1887,26 @@ def create_question_report(payload: QuestionReportInput, request: Request, user:
     return JSONResponse({"report": serialize_question_report(report, db), "duplicate": False, "message": "Segnalazione inviata all'amministratore."}, status_code=201)
 
 
+@app.get("/api/question-reports/replies")
+def question_report_replies(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    rows = db.scalars(select(QuestionReport).where(
+        QuestionReport.user_id == user.id, QuestionReport.status != "pending",
+        QuestionReport.reply.is_not(None), QuestionReport.reply_read_at.is_(None),
+    ).order_by(QuestionReport.reviewed_at.asc()).limit(20)).all()
+    return {"replies": [serialize_question_report(row, db) for row in rows]}
+
+
+@app.post("/api/question-reports/{report_id}/read")
+def read_question_report_reply(report_id: str, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, bool]:
+    row = db.get(QuestionReport, report_id)
+    if not row or row.user_id != user.id or row.reply is None or row.status == "pending":
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Risposta non trovata.")
+    if row.reply_read_at is None:
+        row.reply_read_at = utcnow()
+        db.commit()
+    return {"ok": True}
+
+
 @app.get("/api/admin/question-reports")
 def admin_question_reports(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     pending = db.scalars(select(QuestionReport).where(QuestionReport.status == "pending").order_by(QuestionReport.created_at.desc())).all()
@@ -1890,12 +1919,14 @@ def admin_question_reports(_: User = Depends(require_admin), db: Session = Depen
 
 
 @app.post("/api/admin/question-reports/{report_id}/dismiss")
-def dismiss_question_report(report_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def dismiss_question_report(report_id: str, request: Request, payload: QuestionReportReplyInput = QuestionReportReplyInput(), admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     report = db.get(QuestionReport, report_id)
     if not report:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Segnalazione non trovata.")
     if report.status == "pending":
         report.status = "dismissed"
+        report.reply = payload.reply.strip() or "Il quesito è stato verificato e risulta corretto. Consulta la risposta corretta e la spiegazione riportate qui sotto."
+        report.reply_read_at = None
         report.reviewed_at = utcnow()
         report.reviewed_by_user_id = admin.id
         audit(db, "admin.question_report_dismissed", request, actor=admin.id, target=report.user_id, questionId=report.question_id, reportId=report.id)
@@ -1918,6 +1949,8 @@ def disable_question(question_id: str, payload: QuestionModerationInput, request
     reports = db.scalars(select(QuestionReport).where(QuestionReport.question_id == question_id, QuestionReport.status == "pending")).all()
     for report in reports:
         report.status = "resolved"
+        report.reply = payload.reply.strip() or "La tua segnalazione è stata accolta: il quesito è stato escluso dalle nuove esercitazioni. Grazie per il tuo contributo."
+        report.reply_read_at = None
         report.reviewed_at = row.disabled_at
         report.reviewed_by_user_id = admin.id
     audit(db, "admin.question_disabled", request, actor=admin.id, target=admin.id, questionId=question_id, reportsResolved=len(reports))
@@ -2530,7 +2563,7 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
         "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
-        "questionReports": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "reason": row.reason, "note": row.note, "status": row.status, "createdAt": aware_utc(row.created_at).isoformat(), "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None, "reviewedByUserId": row.reviewed_by_user_id} for row in report_rows],
+        "questionReports": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "reason": row.reason, "note": row.note, "status": row.status, "createdAt": aware_utc(row.created_at).isoformat(), "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None, "reviewedByUserId": row.reviewed_by_user_id, "reply": row.reply, "replyReadAt": aware_utc(row.reply_read_at).isoformat() if row.reply_read_at else None} for row in report_rows],
         "disabledQuestions": [{"questionId": row.question_id, "reason": row.reason, "disabledAt": aware_utc(row.disabled_at).isoformat(), "disabledByUserId": row.disabled_by_user_id} for row in disabled_rows],
     }
     headers = {"Content-Disposition": f'attachment; filename="quiz-400-vvf-cloud-backup-{utcnow().date().isoformat()}.json"'}
@@ -2604,7 +2637,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     for item in data.get("questionReports", []):
         if not isinstance(item, dict) or not item.get("id") or not item.get("questionId"):
             continue
-        db.add(QuestionReport(id=str(item["id"]), question_id=str(item["questionId"]), user_id=item.get("userId"), reason=str(item.get("reason") or "other"), note=str(item.get("note") or ""), status=str(item.get("status") or "pending"), created_at=datetime.fromisoformat(item["createdAt"]), reviewed_at=datetime.fromisoformat(item["reviewedAt"]) if item.get("reviewedAt") else None, reviewed_by_user_id=item.get("reviewedByUserId")))
+        db.add(QuestionReport(id=str(item["id"]), question_id=str(item["questionId"]), user_id=item.get("userId"), reason=str(item.get("reason") or "other"), note=str(item.get("note") or ""), status=str(item.get("status") or "pending"), created_at=datetime.fromisoformat(item["createdAt"]), reviewed_at=datetime.fromisoformat(item["reviewedAt"]) if item.get("reviewedAt") else None, reviewed_by_user_id=item.get("reviewedByUserId"), reply=item.get("reply"), reply_read_at=datetime.fromisoformat(item["replyReadAt"]) if item.get("replyReadAt") else None))
     for key, value in data["settings"].items():
         if key in DEFAULT_SETTINGS:
             row = db.get(Setting, key)

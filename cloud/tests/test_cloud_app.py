@@ -44,8 +44,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.8.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.8.2"
+        assert runtime.json()["version"] == "3.9.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.9.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
         assert runtime.json()["registrationEnabled"] is True
@@ -298,9 +298,24 @@ def test_complete_cloud_account_and_statistics_flow():
         assert moderation.json()["pendingCount"] == 1
         assert moderation.json()["pending"][0]["question"]["id"] == reported_question_id
         assert "correct" in moderation.json()["pending"][0]["question"]
-        dismissed = admin_client.post(f"/api/admin/question-reports/{report_id}/dismiss")
+        assert user_client.get('/api/question-reports/replies').json()['replies'] == []
+        assert user_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'Non autorizzato'}).status_code == 403
+        assert admin_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'x' * 4001}).status_code == 422
+        reply_text = 'Il quesito è corretto: ecco i passaggi della soluzione.\nSecondo passaggio.'
+        dismissed = admin_client.post(f"/api/admin/question-reports/{report_id}/dismiss", json={'reply': reply_text})
         assert dismissed.status_code == 200
         assert dismissed.json()["report"]["status"] == "dismissed"
+        inbox = user_client.get('/api/question-reports/replies').json()['replies']
+        assert len(inbox) == 1
+        assert inbox[0]['reply'] == reply_text
+        assert inbox[0]['question']['id'] == reported_question_id
+        assert admin_client.get('/api/question-reports/replies').json()['replies'] == []
+        assert admin_client.post(f'/api/question-reports/{report_id}/read').status_code == 404
+        assert user_client.post(f'/api/question-reports/{report_id}/read').status_code == 200
+        assert user_client.post(f'/api/question-reports/{report_id}/read').status_code == 200
+        assert user_client.get('/api/question-reports/replies').json()['replies'] == []
+        admin_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'Non sovrascrivere'})
+        assert user_client.get('/api/question-reports/replies').json()['replies'] == []
         reported_again = user_client.post("/api/question-reports", json={**report_payload, "reason": "explanation"})
         assert reported_again.status_code == 201
         disabled = admin_client.post(
@@ -310,6 +325,9 @@ def test_complete_cloud_account_and_statistics_flow():
         assert disabled.status_code == 200
         assert disabled.json()["currentChallengesPreserved"] is True
         assert disabled.json()["reportsResolved"] == 1
+        accepted_reply = user_client.get('/api/question-reports/replies').json()['replies'][0]
+        assert accepted_reply['status'] == 'resolved'
+        assert 'accolta' in accepted_reply['reply']
         assert user_client.post("/api/question-reports", json=report_payload).status_code == 409
         availability = user_client.get("/api/questions/availability")
         assert availability.status_code == 200
@@ -420,7 +438,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.8.2"
+        assert update_status.json()["currentVersion"] == "3.9.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -547,6 +565,9 @@ def test_complete_cloud_account_and_statistics_flow():
         assert len(backup.json()["dailyChallengeAttempts"]) == 2
         assert len(backup.json()["questionReports"]) == 2
         assert backup.json()["disabledQuestions"][0]["questionId"] == reported_question_id
+        backed_reply = next(r for r in backup.json()['questionReports'] if r['id'] == report_id)
+        assert backed_reply['reply'] == reply_text
+        assert backed_reply['replyReadAt'] is not None
         enabled = admin_client.delete(f"/api/admin/questions/{reported_question_id}/disable")
         assert enabled.status_code == 200
         assert reported_question_id not in admin_client.get("/api/questions/availability").json()["disabledQuestionIds"]

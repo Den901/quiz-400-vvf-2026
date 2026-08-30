@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.9.0 - 2026-08-30
+
+- Risposta personale dell’admin alle segnalazioni: quesito corretto con spiegazione oppure segnalazione accolta con disabilitazione.
+- Popup riservato al destinatario con quesito, alternative ed esito; nessuna interruzione delle prove in corso.
+- Pulsanti «Ho letto» e «Più tardi», con lettura condivisa tra dispositivi e rinvio di cinque minuti.
+- Risposte e conferme di lettura incluse nei backup; migrazione additiva del database senza modifiche a statistiche o classifiche.
+- Protezione del testo in scrittura nel pannello admin durante il ricaricamento automatico.
+- Cache PWA revisione 65. Nessun popup generale di changelog agli utenti.
+
 ## 3.8.2 - 2026-08-29
 
 - Risolto il blocco della **Sfida del giorno** sulla schermata “Preparazione…” causato dall'esaurimento delle connessioni PostgreSQL.

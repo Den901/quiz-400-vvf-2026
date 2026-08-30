@@ -1,12 +1,12 @@
 {
-  "version": "3.8.2",
+  "version": "3.9.0",
   "showToUsers": false,
-  "title": "Stabilità Sfida del giorno",
-  "summary": "Correzione tecnica della gestione delle connessioni al database.",
+  "title": "Risposte alle segnalazioni",
+  "summary": "L’amministratore può rispondere alle segnalazioni con una spiegazione personale.",
   "items": [
-    "Risolto il blocco della Sfida del giorno sulla schermata Preparazione.",
-    "Aumentata la capacità di gestire richieste simultanee e foto della classifica.",
-    "La sfida e i risultati già registrati restano invariati."
+    "L’admin può confermare che un quesito è corretto e spiegare la soluzione, oppure accogliere la segnalazione e disabilitarlo.",
+    "Il destinatario riceve un popup personale con domanda, alternative, esito e risposta dell’admin, senza interrompere una prova.",
+    "Conferme di lettura e risposte sono conservate nel database e nei backup; statistiche e classifiche restano invariate."
   ],
   "actionLabel": "Apri Sfida",
   "actionHash": "#challenge",

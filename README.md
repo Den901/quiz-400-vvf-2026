@@ -183,3 +183,21 @@ Il file risultante è `outputs/Quiz-400-VVF-2026-Server.zip`. Il costruttore esc
 - dati persistenti: volume PostgreSQL separato dal codice e dai pacchetti.
 
 Prima di aprire il portale al pubblico occorre predisporre una propria informativa privacy e verificare di avere titolo per usare e distribuire banca dati, spiegazioni, immagini e marchi.
+## Risposte alle segnalazioni
+
+Nel pannello Admin → Segnalazioni quesiti, scrivi una risposta prima di selezionare
+«Quesito corretto: invia spiegazione». «Accogli e disabilita quesito» esclude invece
+la domanda dalle nuove esercitazioni e avvisa tutti gli autori delle segnalazioni
+ancora in attesa per quel quesito, con la tua risposta o un messaggio standard.
+
+Ogni destinatario riceve un popup personale con domanda, alternative, esito e
+risposta dell’amministratore. Il controllo avviene all’accesso e ogni 30 secondi
+quando il portale è aperto; il popup attende la fine di una prova in corso.
+«Ho letto» registra la lettura nel database anche per gli altri dispositivi;
+«Più tardi» rimanda di cinque minuti. Non si tratta di una notifica push a portale chiuso.
+
+Risposte e letture sono incluse nei backup cloud. Prima di avviare questa versione
+su un database esistente è necessaria la migrazione Alembic `20260830_0008`
+(`alembic -c cloud/alembic.ini upgrade head`), eseguita automaticamente dal container.
+La migrazione non cambia prove, statistiche o classifiche e non notifica le vecchie
+segnalazioni già archiviate senza risposta.
