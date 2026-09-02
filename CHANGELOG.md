@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.10.1 - 2026-09-02
+
+- Corretta la rotazione della Sfida del giorno: i quesiti già comparsi nei giorni precedenti vengono esclusi finché il relativo gruppo non è esaurito.
+- Quando occorre riciclare un gruppo, vengono preferiti i quesiti meno utilizzati e meno recenti.
+- Le sfide già pubblicate e le relative classifiche non vengono rigenerate.
+- Nessun popup generale di changelog agli utenti.
+
 ## 3.10.0 - 2026-09-02
 
 - Introdotta nei quiz ordinati e guidati per materia la scala ★ Facile, ★★ Media, ★★★ Difficile.

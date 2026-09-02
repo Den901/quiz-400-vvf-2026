@@ -30,11 +30,27 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today
+from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions
 
 
 def login(client: TestClient, username: str, password: str):
     return client.post("/api/auth/login", json={"username": username, "password": password})
+
+
+def test_daily_challenge_rotation_prefers_unseen_then_oldest_questions():
+    source = [{"id": question_id} for question_id in ("a", "b", "c", "d")]
+    today = challenge_today()
+    usage = {
+        "a": (1, today - timedelta(days=3)),
+        "b": (1, today - timedelta(days=1)),
+        "d": (2, today - timedelta(days=4)),
+    }
+
+    selected = rotating_daily_questions(source, 2, "rotation-test", usage)
+    selected_ids = [row["id"] for row in selected]
+
+    assert selected_ids[0] == "c"
+    assert selected_ids[1] == "a"
 
 
 def test_complete_cloud_account_and_statistics_flow():
@@ -44,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.10.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.10.0"
-        assert runtime.json()["releaseNotes"]["showToUsers"] is True
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
+        assert runtime.json()["version"] == "3.10.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.10.1"
+        assert runtime.json()["releaseNotes"]["showToUsers"] is False
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -455,7 +471,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.10.0"
+        assert update_status.json()["currentVersion"] == "3.10.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

@@ -972,6 +972,48 @@ def deterministic_questions(source: list[dict[str, Any]], count: int, seed: str)
     return sorted(source, key=lambda row: hashlib.sha256(f"{seed}|{row['id']}".encode("utf-8")).digest())[:count]
 
 
+def daily_challenge_question_usage(challenge_date: date, db: Session) -> dict[str, tuple[int, date]]:
+    usage: dict[str, tuple[int, date]] = {}
+    previous_challenges = db.scalars(
+        select(DailyChallenge)
+        .where(DailyChallenge.challenge_date < challenge_date)
+        .order_by(DailyChallenge.challenge_date)
+    ).all()
+    for challenge in previous_challenges:
+        for question_id in challenge.question_ids:
+            normalized_id = str(question_id)
+            count, _ = usage.get(normalized_id, (0, challenge.challenge_date))
+            usage[normalized_id] = (count + 1, challenge.challenge_date)
+    return usage
+
+
+def rotating_daily_questions(
+    source: list[dict[str, Any]],
+    count: int,
+    seed: str,
+    usage: dict[str, tuple[int, date]],
+) -> list[dict[str, Any]]:
+    if len(source) < count:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La banca dati non contiene abbastanza quesiti per creare la sfida giornaliera.")
+
+    never_used = [row for row in source if str(row["id"]) not in usage]
+    selected = deterministic_questions(never_used, min(count, len(never_used)), seed) if never_used else []
+    remaining = count - len(selected)
+    if not remaining:
+        return selected
+
+    selected_ids = {str(row["id"]) for row in selected}
+    previously_used = [row for row in source if str(row["id"]) not in selected_ids]
+    previously_used.sort(
+        key=lambda row: (
+            usage.get(str(row["id"]), (0, date.min))[0],
+            usage.get(str(row["id"]), (0, date.min))[1],
+            hashlib.sha256(f"{seed}|riciclo|{row['id']}".encode("utf-8")).digest(),
+        )
+    )
+    return selected + previously_used[:remaining]
+
+
 def challenge_logic_topic(question: dict[str, Any]) -> str:
     category = str(question.get("category") or "")
     if category == "insiemi":
@@ -1042,6 +1084,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     plan = composition["examPlan"]
     logic_plan = composition["logicPlan"]
     active_bank = available_question_bank(db)
+    usage = daily_challenge_question_usage(challenge_date, db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
     for category, count in plan.items():
@@ -1049,13 +1092,13 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
             continue
         if category != "logica":
             source = [row for row in active_bank if macro_question_category(row.get("category")) == category]
-            selected.extend(deterministic_questions(source, count, f"{seed}|{category}"))
+            selected.extend(rotating_daily_questions(source, count, f"{seed}|{category}", usage))
             continue
         logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]
         for topic, topic_count in logic_plan.items():
             if topic_count:
                 source = [row for row in logic_source if challenge_logic_topic(row) == topic]
-                selected.extend(deterministic_questions(source, topic_count, f"{seed}|logica|{topic}"))
+                selected.extend(rotating_daily_questions(source, topic_count, f"{seed}|logica|{topic}", usage))
     if len(selected) != 40 or len({str(row["id"]) for row in selected}) != 40:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
     ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())
