@@ -1,14 +1,14 @@
 {
-  "version": "3.9.0",
-  "showToUsers": false,
-  "title": "Risposte alle segnalazioni",
-  "summary": "L’amministratore può rispondere alle segnalazioni con una spiegazione personale.",
+  "version": "3.10.0",
+  "showToUsers": true,
+  "title": "Valuta la difficoltà dei quesiti",
+  "summary": "Nei quiz per materia puoi aiutare la community a classificare ogni domanda.",
   "items": [
-    "L’admin può confermare che un quesito è corretto e spiegare la soluzione, oppure accogliere la segnalazione e disabilitarlo.",
-    "Il destinatario riceve un popup personale con domanda, alternative, esito e risposta dell’admin, senza interrompere una prova.",
-    "Conferme di lettura e risposte sono conservate nel database e nei backup; statistiche e classifiche restano invariate."
+    "Assegna ★ Facile, ★★ Media oppure ★★★ Difficile alle domande dei quiz ordinati e guidati per materia.",
+    "Ogni utente ha un solo voto per quesito e può modificarlo; vedrai la media della community e il numero di votanti.",
+    "La valutazione non compare nella Sfida del giorno, nelle simulazioni da 40 o nel Tutor. I voti raccolti permetteranno in futuro medie per materia e sottoargomento."
   ],
-  "actionLabel": "Apri Sfida",
-  "actionHash": "#challenge",
-  "footnote": "Aggiornamento tecnico senza popup automatico agli utenti."
+  "actionLabel": "Apri i quiz per materia",
+  "actionHash": "#categories",
+  "footnote": "La media mostra solo dati aggregati: non vengono indicati i nomi dei votanti."
 }

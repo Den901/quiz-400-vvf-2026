@@ -9,7 +9,7 @@ from pathlib import Path
 from unittest.mock import AsyncMock, MagicMock, patch
 
 
-TEST_DB = Path(__file__).resolve().parents[2] / "tmp" / "cloud-test.sqlite3"
+TEST_DB = Path(__file__).resolve().parents[2] / "tmp" / "cloud-test-ratings.sqlite3"
 TEST_DB.parent.mkdir(parents=True, exist_ok=True)
 TEST_DB.unlink(missing_ok=True)
 PORT_CONTROL_DIR = TEST_DB.parent / "cloud-port-control-test"
@@ -44,10 +44,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.9.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.9.0"
-        assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
+        assert runtime.json()["version"] == "3.10.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.10.0"
+        assert runtime.json()["releaseNotes"]["showToUsers"] is True
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -298,6 +298,22 @@ def test_complete_cloud_account_and_statistics_flow():
         assert moderation.json()["pendingCount"] == 1
         assert moderation.json()["pending"][0]["question"]["id"] == reported_question_id
         assert "correct" in moderation.json()["pending"][0]["question"]
+        unrated = user_client.get(f"/api/question-ratings?question_ids={reported_question_id}")
+        assert unrated.status_code == 200
+        assert unrated.json()["ratings"][0] == {"questionId": reported_question_id, "average": None, "count": 0, "userRating": None}
+        assert user_client.put(f"/api/question-ratings/{reported_question_id}", json={"rating": 0}).status_code == 422
+        first_rating = user_client.put(f"/api/question-ratings/{reported_question_id}", json={"rating": 1})
+        assert first_rating.status_code == 200
+        assert first_rating.json()["rating"]["average"] == 1.0
+        admin_rating = admin_client.put(f"/api/question-ratings/{reported_question_id}", json={"rating": 3})
+        assert admin_rating.status_code == 200
+        community = user_client.get(f"/api/question-ratings?question_ids={reported_question_id}").json()["ratings"][0]
+        assert community["average"] == 2.0 and community["count"] == 2 and community["userRating"] == 1
+        updated_rating = user_client.put(f"/api/question-ratings/{reported_question_id}", json={"rating": 2}).json()["rating"]
+        assert updated_rating["average"] == 2.5 and updated_rating["count"] == 2 and updated_rating["userRating"] == 2
+        personal_export = user_client.get("/api/account/data-export").json()
+        assert personal_export["questionDifficultyRatings"][0]["questionId"] == reported_question_id
+        assert personal_export["questionDifficultyRatings"][0]["rating"] == 2
         assert user_client.get('/api/question-reports/replies').json()['replies'] == []
         assert user_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'Non autorizzato'}).status_code == 403
         assert admin_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'x' * 4001}).status_code == 422
@@ -329,6 +345,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert accepted_reply['status'] == 'resolved'
         assert 'accolta' in accepted_reply['reply']
         assert user_client.post("/api/question-reports", json=report_payload).status_code == 409
+        assert user_client.put(f"/api/question-ratings/{reported_question_id}", json={"rating": 1}).status_code == 409
         availability = user_client.get("/api/questions/availability")
         assert availability.status_code == 200
         assert reported_question_id in availability.json()["disabledQuestionIds"]
@@ -438,7 +455,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.9.0"
+        assert update_status.json()["currentVersion"] == "3.10.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -557,7 +574,7 @@ def test_complete_cloud_account_and_statistics_flow():
         backup = admin_client.get("/api/admin/backup")
         assert backup.status_code == 200
         assert backup.json()["app"] == "Quiz 400 VVF 2026 Cloud"
-        assert backup.json()["version"] == 4
+        assert backup.json()["version"] == 5
         assert len(backup.json()["users"]) == 2
         backup_mario = next(item for item in backup.json()["users"] if item["id"] == user_id)
         assert backup_mario["avatar"]["mime"] == "image/png"
@@ -565,6 +582,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert len(backup.json()["dailyChallengeAttempts"]) == 2
         assert len(backup.json()["questionReports"]) == 2
         assert backup.json()["disabledQuestions"][0]["questionId"] == reported_question_id
+        assert len(backup.json()["questionRatings"]) == 2
         backed_reply = next(r for r in backup.json()['questionReports'] if r['id'] == report_id)
         assert backed_reply['reply'] == reply_text
         assert backed_reply['replyReadAt'] is not None

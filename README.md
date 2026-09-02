@@ -201,3 +201,12 @@ su un database esistente è necessaria la migrazione Alembic `20260830_0008`
 (`alembic -c cloud/alembic.ini upgrade head`), eseguita automaticamente dal container.
 La migrazione non cambia prove, statistiche o classifiche e non notifica le vecchie
 segnalazioni già archiviate senza risposta.
+
+## Valutazione comunitaria della difficoltà
+
+Nei quiz ordinati e guidati per materia ogni utente può assegnare ★ Facile,
+★★ Media o ★★★ Difficile. Il voto è unico e modificabile; il portale mostra agli
+altri utenti soltanto media e numero di voti. La funzione è intenzionalmente
+assente dalla Sfida del giorno, dalle prove da 40 e dal Tutor. I dati sono inclusi
+nei backup e nell’esportazione personale e potranno alimentare riepiloghi futuri
+per materia e sottoargomento.

@@ -229,6 +229,18 @@ class QuestionReport(Base):
     reply_read_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
 
+class QuestionRating(Base):
+    __tablename__ = "question_ratings"
+    __table_args__ = (UniqueConstraint("question_id", "user_id", name="uq_question_rating_user"),)
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
+    question_id: Mapped[str] = mapped_column(String(100), index=True)
+    user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    rating: Mapped[int] = mapped_column(Integer)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
+
+
 class DisabledQuestion(Base):
     __tablename__ = "disabled_questions"
 
@@ -737,6 +749,10 @@ class QuestionModerationInput(BaseModel):
 
 class QuestionReportReplyInput(BaseModel):
     reply: str = Field(default="", max_length=4000)
+
+
+class QuestionRatingInput(BaseModel):
+    rating: int = Field(ge=1, le=3)
 
 
 def numeric_value(value: Any) -> float | None:
@@ -1680,6 +1696,7 @@ def export_personal_data(user: User = Depends(require_user), db: Session = Depen
         .order_by(AuditLog.created_at.asc())
     ).all()
     reports = db.scalars(select(QuestionReport).where(QuestionReport.user_id == user.id).order_by(QuestionReport.created_at.asc())).all()
+    ratings = db.scalars(select(QuestionRating).where(QuestionRating.user_id == user.id).order_by(QuestionRating.created_at.asc())).all()
     payload = {
         "app": "Quiz 400 VVF 2026",
         "exportedAt": utcnow().isoformat(),
@@ -1696,6 +1713,10 @@ def export_personal_data(user: User = Depends(require_user), db: Session = Depen
                 "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None,
             }
             for row in reports
+        ],
+        "questionDifficultyRatings": [
+            {"questionId": row.question_id, "rating": row.rating, "createdAt": aware_utc(row.created_at).isoformat(), "updatedAt": aware_utc(row.updated_at).isoformat()}
+            for row in ratings
         ],
         "activityLog": [
             {
@@ -1866,6 +1887,53 @@ def question_availability(_: User = Depends(require_user), db: Session = Depends
         "disabledQuestionIds": [row.question_id for row in rows],
         "revision": f"{len(rows)}:{latest.isoformat() if latest else '0'}",
     }
+
+
+def question_rating_payload(question_id: str, user_id: str, db: Session) -> dict[str, Any]:
+    count, average = db.execute(
+        select(func.count(QuestionRating.id), func.avg(QuestionRating.rating))
+        .where(QuestionRating.question_id == question_id)
+    ).one()
+    own = db.scalar(select(QuestionRating).where(
+        QuestionRating.question_id == question_id, QuestionRating.user_id == user_id
+    ))
+    return {
+        "questionId": question_id,
+        "average": round(float(average), 2) if average is not None else None,
+        "count": int(count or 0),
+        "userRating": own.rating if own else None,
+    }
+
+
+@app.get("/api/question-ratings")
+def question_ratings(question_ids: str = "", user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    ids = list(dict.fromkeys(item.strip() for item in question_ids.split(",") if item.strip()))
+    if not ids or len(ids) > 100 or any(len(item) > 100 for item in ids):
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Richiedi da 1 a 100 quesiti validi.")
+    if any(item not in questions_by_id for item in ids):
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Quesito non trovato.")
+    return {"ratings": [question_rating_payload(item, user.id, db) for item in ids]}
+
+
+@app.put("/api/question-ratings/{question_id}")
+def rate_question(question_id: str, payload: QuestionRatingInput, request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    enforce_rate_limit(request, "question-rating", 300, 3600)
+    question_id = str(question_id).strip()
+    if question_id not in questions_by_id:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Quesito non trovato.")
+    if db.get(DisabledQuestion, question_id):
+        raise HTTPException(status.HTTP_409_CONFLICT, "Il quesito non è più disponibile.")
+    row = db.scalar(select(QuestionRating).where(
+        QuestionRating.question_id == question_id, QuestionRating.user_id == user.id
+    ))
+    if row:
+        row.rating = payload.rating
+        row.updated_at = utcnow()
+    else:
+        db.add(QuestionRating(question_id=question_id, user_id=user.id, rating=payload.rating))
+    audit(db, "question.difficulty_rated", request, actor=user.id, target=user.id, questionId=question_id, rating=payload.rating)
+    db.commit()
+    return {"rating": question_rating_payload(question_id, user.id, db), "message": "Valutazione aggiornata."}
 
 
 @app.post("/api/question-reports", status_code=201)
@@ -2549,6 +2617,7 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
     attempt_rows = db.scalars(select(DailyChallengeAttempt).order_by(DailyChallengeAttempt.challenge_date, DailyChallengeAttempt.started_at)).all()
     report_rows = db.scalars(select(QuestionReport).order_by(QuestionReport.created_at)).all()
     disabled_rows = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at)).all()
+    rating_rows = db.scalars(select(QuestionRating).order_by(QuestionRating.created_at)).all()
     backup_users = []
     for row in users_rows:
         avatar = db.get(UserAvatar, row.id)
@@ -2558,13 +2627,14 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
             "avatar": ({"data": avatar.data, "mime": avatar.mime, "updatedAt": aware_utc(avatar.updated_at).isoformat()} if avatar else None),
         })
     payload = {
-        "app": "Quiz 400 VVF 2026 Cloud", "version": 4, "createdAt": utcnow().isoformat(),
+        "app": "Quiz 400 VVF 2026 Cloud", "version": 5, "createdAt": utcnow().isoformat(),
         "users": backup_users,
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
         "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
         "questionReports": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "reason": row.reason, "note": row.note, "status": row.status, "createdAt": aware_utc(row.created_at).isoformat(), "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None, "reviewedByUserId": row.reviewed_by_user_id, "reply": row.reply, "replyReadAt": aware_utc(row.reply_read_at).isoformat() if row.reply_read_at else None} for row in report_rows],
         "disabledQuestions": [{"questionId": row.question_id, "reason": row.reason, "disabledAt": aware_utc(row.disabled_at).isoformat(), "disabledByUserId": row.disabled_by_user_id} for row in disabled_rows],
+        "questionRatings": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "rating": row.rating, "createdAt": aware_utc(row.created_at).isoformat(), "updatedAt": aware_utc(row.updated_at).isoformat()} for row in rating_rows],
     }
     headers = {"Content-Disposition": f'attachment; filename="quiz-400-vvf-cloud-backup-{utcnow().date().isoformat()}.json"'}
     return JSONResponse(payload, headers=headers)
@@ -2578,6 +2648,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     if data.get("app") != "Quiz 400 VVF 2026 Cloud" or not isinstance(data.get("users"), list) or not isinstance(data.get("settings"), dict):
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Backup non valido.")
     restore_admin_id = admin.id
+    db.execute(QuestionRating.__table__.delete())
     db.execute(QuestionReport.__table__.delete())
     db.execute(DisabledQuestion.__table__.delete())
     db.execute(DailyChallengeAttempt.__table__.delete())
@@ -2638,6 +2709,13 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
         if not isinstance(item, dict) or not item.get("id") or not item.get("questionId"):
             continue
         db.add(QuestionReport(id=str(item["id"]), question_id=str(item["questionId"]), user_id=item.get("userId"), reason=str(item.get("reason") or "other"), note=str(item.get("note") or ""), status=str(item.get("status") or "pending"), created_at=datetime.fromisoformat(item["createdAt"]), reviewed_at=datetime.fromisoformat(item["reviewedAt"]) if item.get("reviewedAt") else None, reviewed_by_user_id=item.get("reviewedByUserId"), reply=item.get("reply"), reply_read_at=datetime.fromisoformat(item["replyReadAt"]) if item.get("replyReadAt") else None))
+    for item in data.get("questionRatings", []):
+        if not isinstance(item, dict) or not item.get("id") or not item.get("questionId") or not item.get("userId"):
+            continue
+        rating = int(item.get("rating") or 0)
+        if rating not in (1, 2, 3):
+            continue
+        db.add(QuestionRating(id=str(item["id"]), question_id=str(item["questionId"]), user_id=str(item["userId"]), rating=rating, created_at=datetime.fromisoformat(item["createdAt"]), updated_at=datetime.fromisoformat(item["updatedAt"])))
     for key, value in data["settings"].items():
         if key in DEFAULT_SETTINGS:
             row = db.get(Setting, key)

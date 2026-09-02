@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.10.0 - 2026-09-02
+
+- Introdotta nei quiz ordinati e guidati per materia la scala ★ Facile, ★★ Media, ★★★ Difficile.
+- Un solo voto modificabile per utente e quesito, con media comunitaria e numero di voti.
+- Valutazioni escluse da Sfida del giorno, simulazioni da 40 e Tutor.
+- Voti compresi nell’esportazione personale e nei backup completi; cancellazione automatica con l’account.
+- Informativa privacy aggiornata per chiarire che agli altri utenti sono visibili soltanto media e conteggio aggregati.
+- Popup informativo attivo per tutti gli utenti. Cache PWA revisione 66.
+
 ## 3.9.0 - 2026-08-30
 
 - Risposta personale dell’admin alle segnalazioni: quesito corretto con spiegazione oppure segnalazione accolta con disabilitazione.
