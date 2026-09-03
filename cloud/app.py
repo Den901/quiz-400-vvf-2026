@@ -204,6 +204,7 @@ class DailyChallengeAttempt(Base):
     challenge_date: Mapped[date] = mapped_column(ForeignKey("daily_challenges.challenge_date", ondelete="CASCADE"), index=True)
     user_id: Mapped[str] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"), index=True)
     answers: Mapped[list[int | None]] = mapped_column(JSON, default=list)
+    question_seconds: Mapped[list[int] | None] = mapped_column(JSON, nullable=True)
     started_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     submitted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, index=True)
     correct: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -649,6 +650,7 @@ class StateInput(BaseModel):
 
 class DailyChallengeAnswersInput(BaseModel):
     answers: list[int | None] = Field(min_length=40, max_length=40)
+    questionSeconds: list[int] | None = Field(default=None, min_length=40, max_length=40)
 
 
 class AdminUserInput(RegistrationInput):
@@ -1182,6 +1184,19 @@ def challenge_expiry(attempt: DailyChallengeAttempt) -> datetime:
     return aware_utc(attempt.started_at) + timedelta(seconds=CHALLENGE_SECONDS)
 
 
+def validate_challenge_question_seconds(values: list[int] | None, question_count: int) -> list[int] | None:
+    if values is None:
+        return None
+    if len(values) != question_count:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "I tempi delle domande non sono completi.")
+    normalized: list[int] = []
+    for value in values:
+        if isinstance(value, bool) or not isinstance(value, int) or value < 0 or value > CHALLENGE_SECONDS:
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Uno dei tempi delle domande non è valido.")
+        normalized.append(value)
+    return normalized
+
+
 def finalize_challenge_attempt(attempt: DailyChallengeAttempt, challenge: DailyChallenge, submitted_at: datetime | None = None) -> DailyChallengeAttempt:
     if attempt.submitted_at:
         return attempt
@@ -1203,15 +1218,19 @@ def finalize_challenge_attempt(attempt: DailyChallengeAttempt, challenge: DailyC
 
 def challenge_result_details(attempt: DailyChallengeAttempt, challenge: DailyChallenge) -> list[dict[str, Any]]:
     details = []
-    for answer, question in zip(attempt.answers, challenge_questions(challenge), strict=True):
+    questions = challenge_questions(challenge)
+    question_seconds = attempt.question_seconds if isinstance(attempt.question_seconds, list) and len(attempt.question_seconds) == len(questions) else [None] * len(questions)
+    for answer, question, response_seconds in zip(attempt.answers, questions, question_seconds, strict=True):
         correct_index = int(question["correct"])
         details.append({
             **public_challenge_question(question),
+            "questionNumber": len(details) + 1,
             "correct": correct_index,
             "explanation": str(question.get("explanation") or ""),
             "choice": answer,
             "blank": answer is None,
             "isCorrect": answer is not None and answer == correct_index,
+            "responseSeconds": response_seconds,
         })
     return details
 
@@ -1354,6 +1373,7 @@ def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallenge
     if not attempt.submitted_at:
         payload["questions"] = [public_challenge_question(question) for question in challenge_questions(challenge)]
         payload["answers"] = list(attempt.answers)
+        payload["questionSeconds"] = list(attempt.question_seconds or [0] * len(challenge.question_ids))
         return payload
     payload.update({
         "submittedAt": aware_utc(attempt.submitted_at).isoformat(),
@@ -2141,7 +2161,7 @@ def start_today_challenge(request: Request, user: User = Depends(require_user), 
     challenge = get_or_create_daily_challenge(challenge_today(), db)
     attempt = user_challenge_attempt(db, challenge.challenge_date, user.id)
     if not attempt:
-        attempt = DailyChallengeAttempt(challenge_date=challenge.challenge_date, user_id=user.id, answers=[None] * len(challenge.question_ids))
+        attempt = DailyChallengeAttempt(challenge_date=challenge.challenge_date, user_id=user.id, answers=[None] * len(challenge.question_ids), question_seconds=[0] * len(challenge.question_ids))
         db.add(attempt)
         try:
             db.flush()
@@ -2171,6 +2191,9 @@ def save_challenge_answers(challenge_date: str, payload: DailyChallengeAnswersIn
             db.commit()
         return serialize_daily_challenge(challenge, attempt, db, user)
     attempt.answers = validate_challenge_answers(challenge, payload.answers)
+    question_seconds = validate_challenge_question_seconds(payload.questionSeconds, len(challenge.question_ids))
+    if question_seconds is not None:
+        attempt.question_seconds = question_seconds
     db.commit()
     return {
         "status": "active",
@@ -2189,6 +2212,9 @@ def submit_challenge(challenge_date: str, payload: DailyChallengeAnswersInput, r
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
     if not attempt.submitted_at:
         now = utcnow()
+        question_seconds = validate_challenge_question_seconds(payload.questionSeconds, len(challenge.question_ids))
+        if question_seconds is not None:
+            attempt.question_seconds = question_seconds
         if now < challenge_expiry(attempt):
             attempt.answers = validate_challenge_answers(challenge, payload.answers)
             finalize_challenge_attempt(attempt, challenge, now)
@@ -2729,7 +2755,7 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
         "users": backup_users,
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
-        "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
+        "dailyChallengeAttempts": [{"id": row.id, "date": row.challenge_date.isoformat(), "userId": row.user_id, "answers": row.answers, "questionSeconds": row.question_seconds, "startedAt": aware_utc(row.started_at).isoformat(), "submittedAt": aware_utc(row.submitted_at).isoformat() if row.submitted_at else None, "correct": row.correct, "wrong": row.wrong, "blank": row.blank, "scoreX100": row.score_x100, "durationSeconds": row.duration_seconds} for row in attempt_rows],
         "questionReports": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "reason": row.reason, "note": row.note, "status": row.status, "createdAt": aware_utc(row.created_at).isoformat(), "reviewedAt": aware_utc(row.reviewed_at).isoformat() if row.reviewed_at else None, "reviewedByUserId": row.reviewed_by_user_id, "reply": row.reply, "replyReadAt": aware_utc(row.reply_read_at).isoformat() if row.reply_read_at else None} for row in report_rows],
         "disabledQuestions": [{"questionId": row.question_id, "reason": row.reason, "disabledAt": aware_utc(row.disabled_at).isoformat(), "disabledByUserId": row.disabled_by_user_id} for row in disabled_rows],
         "questionRatings": [{"id": row.id, "questionId": row.question_id, "userId": row.user_id, "rating": row.rating, "createdAt": aware_utc(row.created_at).isoformat(), "updatedAt": aware_utc(row.updated_at).isoformat()} for row in rating_rows],
@@ -2798,7 +2824,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
     for item in data.get("dailyChallengeAttempts", []):
         if not isinstance(item, dict):
             continue
-        db.add(DailyChallengeAttempt(id=str(item["id"]), challenge_date=date.fromisoformat(item["date"]), user_id=str(item["userId"]), answers=list(item.get("answers") or [None] * 40), started_at=datetime.fromisoformat(item["startedAt"]), submitted_at=datetime.fromisoformat(item["submittedAt"]) if item.get("submittedAt") else None, correct=item.get("correct"), wrong=item.get("wrong"), blank=item.get("blank"), score_x100=item.get("scoreX100"), duration_seconds=item.get("durationSeconds")))
+        db.add(DailyChallengeAttempt(id=str(item["id"]), challenge_date=date.fromisoformat(item["date"]), user_id=str(item["userId"]), answers=list(item.get("answers") or [None] * 40), question_seconds=item.get("questionSeconds"), started_at=datetime.fromisoformat(item["startedAt"]), submitted_at=datetime.fromisoformat(item["submittedAt"]) if item.get("submittedAt") else None, correct=item.get("correct"), wrong=item.get("wrong"), blank=item.get("blank"), score_x100=item.get("scoreX100"), duration_seconds=item.get("durationSeconds")))
     for item in data.get("disabledQuestions", []):
         if not isinstance(item, dict) or not item.get("questionId"):
             continue

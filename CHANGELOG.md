@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.13.0 - 2026-09-03
+
+- La Sfida del giorno registra il tempo cumulativo dedicato a ogni singola domanda, anche dopo ritorni e cambi di domanda.
+- «Apri prova» mostra all’admin il tempo per quesito mantenendo numero e ordine originali della prova.
+- Il selettore Sbagliate / Non risposte / Giuste non rimane più fissato a metà della finestra amministrativa, su desktop, tablet e mobile.
+- Le prove già concluse prima di questa versione restano consultabili, ma non hanno tempi retroattivi.
+- Nessuna modifica a punteggi o classifiche e nessun popup generale agli utenti.
+
 ## 3.12.0 - 2026-09-03
 
 - Aggiunto nella classifica il pulsante amministrativo «Apri prova».
