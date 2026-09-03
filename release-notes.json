@@ -1,14 +1,14 @@
 {
-  "version": "3.11.0",
+  "version": "3.11.1",
   "showToUsers": false,
-  "title": "Sfida del giorno obbligatoria",
-  "summary": "L’amministratore può richiedere il completamento della sfida prima di sbloccare le risorse.",
+  "title": "Valutazione automatica della difficoltà",
+  "summary": "Nei quiz per materia una risposta corretta assegna automaticamente la valutazione Facile.",
   "items": [
-    "Nuova opzione amministrativa, inizialmente disattivata, nella configurazione della Sfida del giorno.",
-    "Gli utenti devono consegnare la sfida quotidiana per accedere a quiz, simulazioni, Tutor, Appunti e Percorsi.",
-    "Amministratori, account personale, informativa privacy e logout restano sempre accessibili."
+    "Una risposta corretta nei quiz ordinati o guidati per materia assegna automaticamente ★ Facile.",
+    "Una risposta errata non assegna automaticamente alcuna difficoltà: decide l’utente.",
+    "Ogni valutazione automatica o manuale può essere modificata in qualsiasi momento."
   ],
-  "actionLabel": "Apri la Sfida del giorno",
-  "actionHash": "#challenge",
-  "footnote": "Non serve superare la prova: il portale si sblocca subito dopo la consegna."
+  "actionLabel": "Apri i quiz per materia",
+  "actionHash": "#categories",
+  "footnote": "La funzione resta esclusa da Sfida del giorno, prove da 40 e Tutor."
 }

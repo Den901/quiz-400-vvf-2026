@@ -28,3 +28,11 @@ test('le soglie della media comunitaria sono coerenti',()=>{
   assert.equal(vm.runInContext('ratingDifficultyLabel(2)',context),'Media');
   assert.equal(vm.runInContext('ratingDifficultyLabel(2.6)',context),'Difficile');
 });
+test('una risposta corretta per materia assegna automaticamente Facile',()=>{
+  const context=vm.createContext({Map,cloudMode:true,currentUser:{id:'u1'},quiz:{kind:'study'},disabledQuestionIds:new Set(),esc:String,app:{},notify(){},cloudApi(){}});
+  vm.runInContext(code,context);
+  assert.equal(vm.runInContext("shouldAutoRateEasy({id:'q1',correct:2},2)",context),true);
+  assert.equal(vm.runInContext("shouldAutoRateEasy({id:'q1',correct:2},1)",context),false);
+  vm.runInContext("quiz={kind:'daily-challenge',mode:'daily-challenge'}",context);
+  assert.equal(vm.runInContext("shouldAutoRateEasy({id:'q1',correct:2},2)",context),false);
+});

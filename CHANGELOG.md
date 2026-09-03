@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.11.1 - 2026-09-03
+
+- Nei quiz ordinati e guidati per materia, una risposta corretta assegna automaticamente ★ Facile.
+- Le risposte errate restano senza valutazione automatica e possono essere classificate dall’utente.
+- Il voto automatico o manuale rimane sempre modificabile.
+- Sfida del giorno, prove da 40 e Tutor restano esclusi; nessun popup generale agli utenti.
+
 ## 3.11.0 - 2026-09-03
 
 - Aggiunta l’opzione amministrativa disattivabile «Sfida del giorno obbligatoria».
