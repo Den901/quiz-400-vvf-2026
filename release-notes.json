@@ -1,12 +1,12 @@
 {
-  "version": "3.15.0",
+  "version": "3.15.1",
   "showToUsers": false,
-  "title": "Candidati nelle fasce di preparazione",
-  "summary": "Le fasce della Dashboard sono interattive e mostrano i candidati che ne fanno parte.",
+  "title": "Admin inclusi nella preparazione globale",
+  "summary": "Gli amministratori che svolgono quiz sono conteggiati come candidati normali.",
   "items": [
-    "Cliccando una fascia si apre l’elenco riservato all’amministratore.",
-    "Ogni candidato mostra foto profilo, nome, username, media e numero di prove.",
-    "L’elenco è ordinato dalla media più alta alla più bassa ed è adattato a desktop e mobile."
+    "Le prove degli admin entrano in medie, fasce, campione e confronto con lo sbarramento.",
+    "Nel popup della fascia gli account amministrativi hanno il badge Admin.",
+    "Il calcolo resta identico per tutti gli account attivi e approvati."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",

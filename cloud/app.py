@@ -2311,7 +2311,7 @@ def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, flo
 @app.get("/api/admin/dashboard")
 def admin_population_dashboard(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     theoretical_cutoff = 14.71
-    candidates = db.scalars(select(User).where(User.role == "user", User.active.is_(True), User.approved.is_(True))).all()
+    candidates = db.scalars(select(User).where(User.active.is_(True), User.approved.is_(True))).all()
     attempts: list[dict[str, Any]] = []
     candidate_scores: list[dict[str, Any]] = []
     by_type: dict[str, list[dict[str, Any]]] = defaultdict(list)
@@ -2344,14 +2344,14 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
                 item["blank"] += cat_blank
                 item["attempts"] += 1
         if rows:
-            candidate_scores.append({"id": candidate.id, "name": candidate.display_name, "username": candidate.username, "avatarUrl": f"./api/users/{candidate.id}/avatar", "attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
+            candidate_scores.append({"id": candidate.id, "name": candidate.display_name, "username": candidate.username, "role": candidate.role, "avatarUrl": f"./api/users/{candidate.id}/avatar", "attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
 
     reliable = [item for item in candidate_scores if item["attempts"] >= 3]
     band_defs = [("Molto preparati · 32–40", 32, 41), ("Buona preparazione · 28–31,99", 28, 32), ("In consolidamento · 24–27,99", 24, 28), ("Da rafforzare · meno di 24", -100, 24)]
     bands = []
     for label, low, high in band_defs:
         members = sorted((item for item in candidate_scores if low <= item["average"] < high), key=lambda item: item["average"], reverse=True)
-        bands.append({"label": label, "count": len(members), "candidates": [{"id": item["id"], "name": item["name"], "username": item["username"], "avatarUrl": item["avatarUrl"], "averageScore": round(item["average"], 2), "attempts": item["attempts"]} for item in members]})
+        bands.append({"label": label, "count": len(members), "candidates": [{"id": item["id"], "name": item["name"], "username": item["username"], "role": item["role"], "avatarUrl": item["avatarUrl"], "averageScore": round(item["average"], 2), "attempts": item["attempts"]} for item in members]})
     type_labels = {"exam": "Simulazioni ufficiali", "guided-exam": "Prove guidate 40", "daily-challenge": "Sfide del giorno"}
     type_stats = [{"type": key, "label": type_labels[key], **session_group_statistics(by_type.get(key, []))} for key in type_labels]
     categories = []

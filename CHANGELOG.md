@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.15.1 - 2026-09-03
+
+- Gli amministratori attivi e approvati che svolgono prove da 40 sono inclusi come candidati normali nella Dashboard.
+- Le loro prove incidono su medie, fasce, affidabilità e sbarramento teorico.
+- Nel popup della fascia gli account amministrativi sono riconoscibili dal badge «Admin».
+- Nessun popup generale agli utenti.
+
 ## 3.15.0 - 2026-09-03
 
 - Le fasce della Dashboard admin sono ora selezionabili.
