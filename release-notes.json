@@ -1,12 +1,12 @@
 {
-  "version": "3.14.3",
+  "version": "3.15.0",
   "showToUsers": false,
-  "title": "Correzione Dashboard amministrativa",
-  "summary": "Il riquadro dello sbarramento teorico viene mostrato una sola volta.",
+  "title": "Candidati nelle fasce di preparazione",
+  "summary": "Le fasce della Dashboard sono interattive e mostrano i candidati che ne fanno parte.",
   "items": [
-    "Eliminato il duplicato visivo dello sbarramento teorico.",
-    "Nessuna modifica ai dati, alle medie o alle statistiche.",
-    "La soglia teorica resta fissata a 14,71/40."
+    "Cliccando una fascia si apre l’elenco riservato all’amministratore.",
+    "Ogni candidato mostra foto profilo, nome, username, media e numero di prove.",
+    "L’elenco è ordinato dalla media più alta alla più bassa ed è adattato a desktop e mobile."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",

@@ -60,8 +60,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.14.3"
-        assert runtime.json()["releaseNotes"]["version"] == "3.14.3"
+        assert runtime.json()["version"] == "3.15.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.15.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
@@ -206,6 +206,10 @@ def test_complete_cloud_account_and_statistics_flow():
         assert dashboard.json()["summary"]["candidatesBelowCutoff"] == 0
         assert sum(item["count"] for item in dashboard.json()["bands"]) == 1
         assert dashboard.json()["bands"][0]["label"] == "Molto preparati · 32–40"
+        populated_band = next(item for item in dashboard.json()["bands"] if item["count"])
+        assert populated_band["candidates"][0]["username"] == "mario.rossi"
+        assert populated_band["candidates"][0]["averageScore"] == 29.52
+        assert populated_band["candidates"][0]["attempts"] == 2
         assert len(dashboard.json()["trend"]) == 14
         assert user_client.get("/api/admin/dashboard").status_code == 403
         assert users.json()["totals"]["fortyQuizzes"] == 2
@@ -512,7 +516,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.14.3"
+        assert update_status.json()["currentVersion"] == "3.15.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

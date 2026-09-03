@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.15.0 - 2026-09-03
+
+- Le fasce della Dashboard admin sono ora selezionabili.
+- Il popup della fascia mostra foto profilo, nome, username, media da 40 e numero di prove di ogni candidato.
+- Candidati ordinati per media decrescente; popup responsive e accessibile anche da tastiera.
+- Dati nominativi disponibili soltanto agli amministratori.
+- Nessun popup generale agli utenti.
+
 ## 3.14.3 - 2026-09-03
 
 - Corretto il caricamento simultaneo che poteva mostrare due volte il riquadro «Sbarramento teorico».
