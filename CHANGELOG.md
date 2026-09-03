@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.12.0 - 2026-09-03
+
+- Aggiunto nella classifica il pulsante amministrativo «Apri prova».
+- L’admin può consultare tutte le 40 domande con risposta data, soluzione, esito e spiegazione.
+- Endpoint protetto per ruolo amministratore; gli utenti ordinari non ricevono identificativi o dettagli delle prove altrui.
+- Consultazione in sola lettura, senza modifiche a punteggi e classifiche; nessun popup generale.
+
 ## 3.11.1 - 2026-09-03
 
 - Nei quiz ordinati e guidati per materia, una risposta corretta assegna automaticamente ★ Facile.

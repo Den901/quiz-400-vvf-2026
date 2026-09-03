@@ -1299,7 +1299,7 @@ def record_challenge_in_user_state(user: User, attempt: DailyChallengeAttempt, c
         user.state.updated_at = utcnow()
 
 
-def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: str) -> dict[str, Any]:
+def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: str, include_attempt_ids: bool = False) -> dict[str, Any]:
     rows = db.execute(
         select(DailyChallengeAttempt, User)
         .join(User, User.id == DailyChallengeAttempt.user_id)
@@ -1318,6 +1318,7 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
             "durationSeconds": attempt.duration_seconds,
             "submittedAt": aware_utc(attempt.submitted_at).isoformat(),
             "isCurrentUser": attempt.user_id == current_user_id,
+            **({"attemptId": attempt.id} if include_attempt_ids else {}),
         }
         for index, (attempt, user) in enumerate(ordered)
     ]
@@ -1341,7 +1342,7 @@ def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallenge
         "durationSeconds": CHALLENGE_SECONDS,
         "questionCount": len(challenge.question_ids),
         "composition": challenge.composition,
-        "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id),
+        "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id, user.role == "admin"),
     }
     if not attempt:
         return payload
@@ -2204,7 +2205,33 @@ def daily_challenge_leaderboard(challenge_date: str, user: User = Depends(requir
     selected_date = parsed_challenge_date(challenge_date)
     if not db.get(DailyChallenge, selected_date):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata.")
-    return challenge_leaderboard(db, selected_date, user.id)
+    return challenge_leaderboard(db, selected_date, user.id, user.role == "admin")
+
+
+@app.get("/api/admin/challenges/{challenge_date}/attempts/{attempt_id}")
+def admin_daily_challenge_attempt(challenge_date: str, attempt_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    selected_date = parsed_challenge_date(challenge_date)
+    challenge = db.get(DailyChallenge, selected_date)
+    attempt = db.get(DailyChallengeAttempt, attempt_id)
+    if not challenge or not attempt or attempt.challenge_date != selected_date or not attempt.submitted_at:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Prova completata non trovata.")
+    participant = db.get(User, attempt.user_id)
+    if not participant:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Utente della prova non trovato.")
+    return {
+        "attemptId": attempt.id,
+        "date": selected_date.isoformat(),
+        "participant": {"name": participant.display_name, "username": participant.username, "avatarUrl": f"./api/users/{participant.id}/avatar"},
+        "result": {
+            "correct": attempt.correct,
+            "wrong": attempt.wrong,
+            "blank": attempt.blank,
+            "score": challenge_score(attempt),
+            "durationSeconds": attempt.duration_seconds,
+            "submittedAt": aware_utc(attempt.submitted_at).isoformat(),
+            "questions": challenge_result_details(attempt, challenge),
+        },
+    }
 
 
 @app.get("/api/admin/users")

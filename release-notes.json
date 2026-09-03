@@ -1,14 +1,14 @@
 {
-  "version": "3.11.1",
+  "version": "3.12.0",
   "showToUsers": false,
-  "title": "Valutazione automatica della difficoltà",
-  "summary": "Nei quiz per materia una risposta corretta assegna automaticamente la valutazione Facile.",
+  "title": "Dettaglio prove per gli amministratori",
+  "summary": "L’amministratore può aprire dalla classifica le risposte complete di ogni Sfida del giorno.",
   "items": [
-    "Una risposta corretta nei quiz ordinati o guidati per materia assegna automaticamente ★ Facile.",
-    "Una risposta errata non assegna automaticamente alcuna difficoltà: decide l’utente.",
-    "Ogni valutazione automatica o manuale può essere modificata in qualsiasi momento."
+    "Nuovo pulsante Apri prova accanto a ogni partecipante, visibile soltanto agli amministratori.",
+    "Il dettaglio mostra le 40 domande, risposta fornita, soluzione corretta, esito e spiegazione.",
+    "La consultazione è in sola lettura e non modifica punteggi, tentativi o classifiche."
   ],
-  "actionLabel": "Apri i quiz per materia",
-  "actionHash": "#categories",
-  "footnote": "La funzione resta esclusa da Sfida del giorno, prove da 40 e Tutor."
+  "actionLabel": "Apri la Sfida del giorno",
+  "actionHash": "#challenge",
+  "footnote": "I dettagli delle risposte altrui non sono disponibili agli utenti ordinari."
 }

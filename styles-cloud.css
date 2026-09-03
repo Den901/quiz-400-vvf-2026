@@ -97,6 +97,7 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 .daily-leaderboard{margin-top:18px}
 .daily-ranking{display:grid;gap:5px;margin:16px 0;overflow-x:auto}
 .daily-ranking-head,.daily-ranking-row{display:grid;grid-template-columns:52px minmax(160px,1.7fr) 88px minmax(130px,1fr) 110px;gap:12px;align-items:center;min-width:620px;padding:10px 12px;border-radius:12px}
+.daily-ranking-head.admin,.daily-ranking-row.admin{grid-template-columns:52px minmax(160px,1.7fr) 88px minmax(130px,1fr) 110px 110px;min-width:750px}.admin-attempt-dialog{width:min(1120px,calc(100vw - 28px));max-height:92vh;overflow:auto}.admin-attempt-review{margin-top:16px}
 .daily-ranking-head{color:var(--muted);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
 .daily-ranking-row{background:var(--surface-soft,#f7f7f7);border:1px solid transparent}
 .daily-ranking-row.current{background:#fff3cd;border-color:#e5ad28}

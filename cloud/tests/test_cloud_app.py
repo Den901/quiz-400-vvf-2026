@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.11.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.11.1"
+        assert runtime.json()["version"] == "3.12.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.12.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -283,6 +283,14 @@ def test_complete_cloud_account_and_statistics_flow():
         assert ranking.json()["participants"] == 1
         assert ranking.json()["entries"][0]["displayName"] == "Mario Rossi"
         assert ranking.json()["entries"][0]["rank"] == 1
+        attempt_id = ranking.json()["entries"][0]["attemptId"]
+        assert "attemptId" not in user_client.get(f"/api/challenges/{challenge_date}/leaderboard").json()["entries"][0]
+        assert user_client.get(f"/api/admin/challenges/{challenge_date}/attempts/{attempt_id}").status_code == 403
+        opened_attempt = admin_client.get(f"/api/admin/challenges/{challenge_date}/attempts/{attempt_id}")
+        assert opened_attempt.status_code == 200
+        assert opened_attempt.json()["participant"]["username"] == "mario.rossi"
+        assert len(opened_attempt.json()["result"]["questions"]) == 40
+        assert opened_attempt.json()["result"]["score"] == submitted.json()["result"]["score"]
         avatar_url = ranking.json()["entries"][0]["avatarUrl"].removeprefix(".")
         assert avatar_url == f"/api/users/{user_id}/avatar"
         default_avatar = user_client.get(avatar_url)
@@ -487,7 +495,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.11.1"
+        assert update_status.json()["currentVersion"] == "3.12.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
