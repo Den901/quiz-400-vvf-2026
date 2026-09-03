@@ -266,6 +266,7 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "site_name": "Quiz 400 VVF 2026",
     "registration_enabled": True,
     "daily_challenge_enabled": True,
+    "daily_challenge_required": False,
     "public_url": "",
     "session_days": 30,
     "reset_token_minutes": 30,
@@ -470,6 +471,7 @@ def public_settings(db: Session) -> dict[str, Any]:
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
+        "dailyChallengeRequired": bool(get_setting(db, "daily_challenge_required")),
         "emailResetEnabled": bool(get_setting(db, "smtp_enabled") and get_setting(db, "smtp_host")),
         "privacyNotice": get_setting(db, "privacy_notice"),
         "privacy": privacy,
@@ -524,6 +526,26 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         payload["state"] = user.state.data if user.state else empty_state()
         payload["revision"] = user.state.revision if user.state else 0
     return payload
+
+
+def daily_challenge_gate_payload(user: User, db: Session) -> dict[str, Any]:
+    today = challenge_today()
+    enabled = bool(get_setting(db, "daily_challenge_enabled"))
+    required = enabled and bool(get_setting(db, "daily_challenge_required")) and user.role != "admin"
+    attempt = user_challenge_attempt(db, today, user.id)
+    if attempt and not attempt.submitted_at:
+        challenge = db.get(DailyChallenge, today)
+        if challenge and utcnow() >= challenge_expiry(attempt):
+            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+            record_challenge_in_user_state(user, attempt, challenge)
+            db.commit()
+    status_value = "completed" if attempt and attempt.submitted_at else "active" if attempt else "not_started"
+    return {
+        "required": required,
+        "completed": not required or status_value == "completed",
+        "date": today.isoformat(),
+        "status": status_value,
+    }
 
 
 def token_hash(token: str) -> str:
@@ -668,6 +690,7 @@ class CloudSettingsInput(BaseModel):
     site_name: str = Field(min_length=3, max_length=100)
     registration_enabled: bool
     daily_challenge_enabled: bool = True
+    daily_challenge_required: bool = False
     daily_challenge_config: dict[str, Any] | None = None
     public_url: str = Field(default="", max_length=300)
     session_days: int = Field(ge=1, le=365)
@@ -717,6 +740,7 @@ class CloudSettingsInput(BaseModel):
 
 class DailyChallengeSettingsInput(BaseModel):
     enabled: bool = True
+    required: bool = False
     config: dict[str, Any]
 
 
@@ -1711,7 +1735,7 @@ def login(payload: LoginInput, request: Request, response: Response, db: Session
     create_session(db, user, request, response)
     audit(db, "auth.login", request, actor=user.id, target=user.id)
     db.commit()
-    return {"user": serialize_user(user, include_state=True), "config": get_setting(db, "exam_config")}
+    return {"user": serialize_user(user, include_state=True), "config": get_setting(db, "exam_config"), "challengeGate": daily_challenge_gate_payload(user, db)}
 
 
 @app.post("/api/auth/logout", status_code=204)
@@ -1728,7 +1752,7 @@ def logout(request: Request, response: Response, db: Session = Depends(get_db)) 
 
 @app.get("/api/auth/me")
 def me(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
-    return {"user": serialize_user(user, include_state=True), "config": get_setting(db, "exam_config")}
+    return {"user": serialize_user(user, include_state=True), "config": get_setting(db, "exam_config"), "challengeGate": daily_challenge_gate_payload(user, db)}
 
 
 @app.get("/api/account/data-export")
@@ -2328,6 +2352,7 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "siteName": get_setting(db, "site_name"),
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
+        "dailyChallengeRequired": bool(get_setting(db, "daily_challenge_required")),
         "dailyChallengeConfig": normalized_challenge_composition(db),
         "publicUrl": get_setting(db, "public_url"),
         "sessionDays": get_setting(db, "session_days"),
@@ -2575,7 +2600,7 @@ def save_admin_settings(payload: CloudSettingsInput, request: Request, admin: Us
         daily_challenge_config = normalize_daily_challenge_config(payload.daily_challenge_config, strict=True)
         validate_daily_challenge_capacity(daily_challenge_config, db)
     values = {
-        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "daily_challenge_enabled": payload.daily_challenge_enabled, "daily_challenge_config": daily_challenge_config, "public_url": payload.public_url,
+        "site_name": payload.site_name.strip(), "registration_enabled": payload.registration_enabled, "daily_challenge_enabled": payload.daily_challenge_enabled, "daily_challenge_required": payload.daily_challenge_required, "daily_challenge_config": daily_challenge_config, "public_url": payload.public_url,
         "session_days": payload.session_days, "reset_token_minutes": payload.reset_token_minutes, "privacy_notice": payload.privacy_notice.strip(),
         "privacy_controller_name": payload.privacy_controller_name.strip(), "privacy_controller_address": payload.privacy_controller_address.strip(),
         "privacy_contact_email": str(payload.privacy_contact_email or ""), "privacy_pec_email": str(payload.privacy_pec_email or ""),
@@ -2609,6 +2634,7 @@ def save_daily_challenge_settings(payload: DailyChallengeSettingsInput, request:
     config = normalize_daily_challenge_config(payload.config, strict=True)
     validate_daily_challenge_capacity(config, db)
     set_setting(db, "daily_challenge_enabled", payload.enabled)
+    set_setting(db, "daily_challenge_required", payload.required)
     set_setting(db, "daily_challenge_config", config)
     current_challenge = db.get(DailyChallenge, challenge_today())
     audit(
@@ -2618,10 +2644,12 @@ def save_daily_challenge_settings(payload: DailyChallengeSettingsInput, request:
         actor=admin.id,
         target=admin.id,
         currentChallengePreserved=bool(current_challenge),
+        required=payload.required,
     )
     db.commit()
     return {
         "enabled": payload.enabled,
+        "required": payload.required,
         "config": config,
         "currentChallengePreserved": bool(current_challenge),
         "message": "Configurazione salvata. La sfida eventualmente già creata oggi e la sua classifica non sono state modificate.",

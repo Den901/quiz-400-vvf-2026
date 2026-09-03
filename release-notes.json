@@ -1,14 +1,14 @@
 {
-  "version": "3.10.1",
+  "version": "3.11.0",
   "showToUsers": false,
-  "title": "Rotazione della Sfida del giorno",
-  "summary": "Le nuove sfide evitano i quesiti già utilizzati nei giorni precedenti.",
+  "title": "Sfida del giorno obbligatoria",
+  "summary": "L’amministratore può richiedere il completamento della sfida prima di sbloccare le risorse.",
   "items": [
-    "Il generatore usa prima i quesiti mai comparsi nelle sfide precedenti.",
-    "Un quesito viene recuperato soltanto quando il relativo gruppo disponibile è stato esaurito.",
-    "Sfide già pubblicate, tentativi e classifiche restano invariati."
+    "Nuova opzione amministrativa, inizialmente disattivata, nella configurazione della Sfida del giorno.",
+    "Gli utenti devono consegnare la sfida quotidiana per accedere a quiz, simulazioni, Tutor, Appunti e Percorsi.",
+    "Amministratori, account personale, informativa privacy e logout restano sempre accessibili."
   ],
   "actionLabel": "Apri la Sfida del giorno",
   "actionHash": "#challenge",
-  "footnote": "La modifica entra in funzione dalla prima sfida creata dopo l’aggiornamento."
+  "footnote": "Non serve superare la prova: il portale si sblocca subito dopo la consegna."
 }

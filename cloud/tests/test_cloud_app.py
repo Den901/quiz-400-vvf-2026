@@ -60,8 +60,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.10.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.10.1"
+        assert runtime.json()["version"] == "3.11.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.11.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
         assert runtime.json()["registrationEnabled"] is True
@@ -237,6 +237,20 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_challenge.json()["composition"]["logicPlan"]["brani"] == 0
         original_challenge_composition = user_challenge.json()["composition"]
 
+        required_setting = admin_client.put(
+            "/api/admin/challenge-settings",
+            json={"enabled": True, "required": True, "config": original_challenge_composition},
+        )
+        assert required_setting.status_code == 200
+        assert required_setting.json()["required"] is True
+        assert user_client.get("/api/auth/me").json()["challengeGate"] == {
+            "required": True,
+            "completed": False,
+            "date": challenge_today().isoformat(),
+            "status": "not_started",
+        }
+        assert admin_client.get("/api/auth/me").json()["challengeGate"]["required"] is False
+
         user_start = user_client.post("/api/challenges/today/start", json={})
         admin_start = admin_client.post("/api/challenges/today/start", json={})
         assert user_start.status_code == admin_start.status_code == 200
@@ -255,6 +269,7 @@ def test_complete_cloud_account_and_statistics_flow():
         submitted = user_client.post(f"/api/challenges/{challenge_date}/submit", json={"answers": answers})
         assert submitted.status_code == 200
         assert submitted.json()["status"] == "completed"
+        assert user_client.get("/api/auth/me").json()["challengeGate"]["completed"] is True
         assert submitted.json()["result"]["correct"] + submitted.json()["result"]["wrong"] + submitted.json()["result"]["blank"] == 40
         assert len(submitted.json()["result"]["questions"]) == 40
         assert all("correct" in item and "isCorrect" in item for item in submitted.json()["result"]["questions"])
@@ -376,7 +391,7 @@ def test_complete_cloud_account_and_statistics_flow():
         }
         challenge_settings = admin_client.put(
             "/api/admin/challenge-settings",
-            json={"enabled": True, "config": future_challenge_config},
+            json={"enabled": True, "required": False, "config": future_challenge_config},
         )
         assert user_client.put("/api/admin/challenge-settings", json={"enabled": True, "config": future_challenge_config}).status_code == 403
         assert challenge_settings.status_code == 200
@@ -414,6 +429,7 @@ def test_complete_cloud_account_and_statistics_flow():
             "site_name": "Quiz VVF Cloud Test",
             "registration_enabled": False,
             "daily_challenge_enabled": False,
+            "daily_challenge_required": False,
             "public_url": "https://quiz-test.duckdns.org",
             "session_days": 14,
             "reset_token_minutes": 45,
@@ -471,7 +487,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.10.1"
+        assert update_status.json()["currentVersion"] == "3.11.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

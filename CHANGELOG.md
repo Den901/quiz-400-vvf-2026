@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.11.0 - 2026-09-03
+
+- Aggiunta l’opzione amministrativa disattivabile «Sfida del giorno obbligatoria».
+- Gli utenti che non hanno ancora consegnato la sfida vengono indirizzati alla prova prima di accedere alle risorse didattiche.
+- Amministratori esclusi dal vincolo; account, privacy e logout rimangono disponibili.
+- Sblocco immediato dopo la consegna e controllo automatico al login, al cambio di giornata e durante l’uso della PWA.
+- Impostazione inizialmente disattivata e nessun popup generale agli utenti.
+
 ## 3.10.1 - 2026-09-02
 
 - Corretta la rotazione della Sfida del giorno: i quesiti già comparsi nei giorni precedenti vengono esclusi finché il relativo gruppo non è esaurito.
