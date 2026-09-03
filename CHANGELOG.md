@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.1 - 2026-09-03
+
+- Nella Dashboard amministrativa ogni fascia mostra direttamente il proprio intervallo di punteggio.
+- Restano visibili nello stesso riquadro numero dei candidati e proporzione grafica.
+- Nessun popup generale agli utenti.
+
 ## 3.14.0 - 2026-09-03
 
 - Nuova Dashboard amministrativa dedicata alla preparazione globale dei candidati.

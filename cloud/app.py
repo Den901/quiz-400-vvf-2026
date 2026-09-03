@@ -2346,7 +2346,7 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
             candidate_scores.append({"attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
 
     reliable = [item for item in candidate_scores if item["attempts"] >= 3]
-    band_defs = [("Molto preparati", 32, 41), ("Buona preparazione", 28, 32), ("In consolidamento", 24, 28), ("Da rafforzare", -100, 24)]
+    band_defs = [("Molto preparati · 32–40", 32, 41), ("Buona preparazione · 28–31,99", 28, 32), ("In consolidamento · 24–27,99", 24, 28), ("Da rafforzare · meno di 24", -100, 24)]
     bands = [{"label": label, "count": sum(1 for item in candidate_scores if low <= item["average"] < high)} for label, low, high in band_defs]
     type_labels = {"exam": "Simulazioni ufficiali", "guided-exam": "Prove guidate 40", "daily-challenge": "Sfide del giorno"}
     type_stats = [{"type": key, "label": type_labels[key], **session_group_statistics(by_type.get(key, []))} for key in type_labels]

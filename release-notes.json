@@ -1,12 +1,12 @@
 {
-  "version": "3.14.0",
+  "version": "3.14.1",
   "showToUsers": false,
-  "title": "Dashboard preparazione candidati",
-  "summary": "Una nuova analisi amministrativa aggrega i risultati reali delle prove da 40.",
+  "title": "Fasce di preparazione più leggibili",
+  "summary": "La Dashboard mostra subito gli intervalli numerici associati a ogni fascia.",
   "items": [
-    "Medie separate per prova, candidato e candidati con almeno tre tentativi.",
-    "Fasce di preparazione, affidabilità del campione e composizione media delle risposte.",
-    "Confronto tra modalità, andamento degli ultimi 14 giorni e materie globalmente più deboli."
+    "Molto preparati: da 32 a 40 punti.",
+    "Buona preparazione: da 28 a 31,99; in consolidamento: da 24 a 27,99.",
+    "Da rafforzare: meno di 24 punti."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",
