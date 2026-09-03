@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.13.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.13.0"
+        assert runtime.json()["version"] == "3.14.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.14.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -195,6 +195,15 @@ def test_complete_cloud_account_and_statistics_flow():
         assert mario["statistics"]["averageSubjectScore"] == 4.84
         assert mario["statistics"]["averageSubjectAccuracy"] == 75.0
         assert mario["statistics"]["averageScore"] == 28.35
+        dashboard = admin_client.get("/api/admin/dashboard")
+        assert dashboard.status_code == 200
+        assert dashboard.json()["summary"]["eligibleCandidates"] == 1
+        assert dashboard.json()["summary"]["participants"] == 1
+        assert dashboard.json()["summary"]["attempts"] == 2
+        assert dashboard.json()["summary"]["averageAttemptScore"] == 29.52
+        assert sum(item["count"] for item in dashboard.json()["bands"]) == 1
+        assert len(dashboard.json()["trend"]) == 14
+        assert user_client.get("/api/admin/dashboard").status_code == 403
         assert users.json()["totals"]["fortyQuizzes"] == 2
         assert users.json()["totals"]["averageFortyScore"] == 29.52
         assert users.json()["totals"]["subjectQuizzes"] == 2
@@ -499,7 +508,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.13.0"
+        assert update_status.json()["currentVersion"] == "3.14.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

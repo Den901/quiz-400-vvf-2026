@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.14.0 - 2026-09-03
+
+- Nuova Dashboard amministrativa dedicata alla preparazione globale dei candidati.
+- Medie distinte per singola prova, per candidato e per candidati con almeno tre prove, per evitare distorsioni dovute agli utenti più assidui.
+- Fasce di preparazione indicative, numerosità e affidabilità del campione, giuste/sbagliate/non risposte medie.
+- Confronto tra simulazioni, guidate e Sfida del giorno, andamento su 14 giorni e materie collettivamente più deboli.
+- Endpoint aggregato accessibile soltanto agli amministratori; nessuna soglia viene presentata come previsione ufficiale.
+- Nessun popup generale agli utenti.
+- Ampliata su desktop la finestra «Apri prova» della Sfida del giorno ed eliminata la barra di scorrimento orizzontale superflua.
+
 ## 3.13.0 - 2026-09-03
 
 - La Sfida del giorno registra il tempo cumulativo dedicato a ogni singola domanda, anche dopo ritorni e cambi di domanda.

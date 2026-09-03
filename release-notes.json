@@ -1,14 +1,14 @@
 {
-  "version": "3.13.0",
+  "version": "3.14.0",
   "showToUsers": false,
-  "title": "Tempi per domanda nel dettaglio amministratore",
-  "summary": "Apri prova mostra quanto tempo è stato dedicato a ciascuna domanda della Sfida del giorno.",
+  "title": "Dashboard preparazione candidati",
+  "summary": "Una nuova analisi amministrativa aggrega i risultati reali delle prove da 40.",
   "items": [
-    "Il tempo viene sommato correttamente anche quando l’utente torna più volte sulla stessa domanda.",
-    "Nel dettaglio admin ogni quesito mostra il proprio tempo, oltre a risposta, soluzione, esito e spiegazione.",
-    "Corretto il selettore Sbagliate, Non risposte e Giuste: non resta più sospeso durante lo scorrimento della finestra."
+    "Medie separate per prova, candidato e candidati con almeno tre tentativi.",
+    "Fasce di preparazione, affidabilità del campione e composizione media delle risposte.",
+    "Confronto tra modalità, andamento degli ultimi 14 giorni e materie globalmente più deboli."
   ],
-  "actionLabel": "Apri la Sfida del giorno",
-  "actionHash": "#challenge",
-  "footnote": "I dettagli delle risposte altrui non sono disponibili agli utenti ordinari."
+  "actionLabel": "Apri Dashboard",
+  "actionHash": "#dashboard",
+  "footnote": "La stima è riservata agli amministratori e non rappresenta una soglia ufficiale del concorso."
 }

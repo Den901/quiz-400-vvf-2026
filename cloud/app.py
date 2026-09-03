@@ -2293,6 +2293,87 @@ def admin_pending_users_count(_: User = Depends(require_admin), db: Session = De
     return {"pendingCount": int(pending_count)}
 
 
+def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, float, float]]:
+    payload = session.get("perCategory")
+    if not isinstance(payload, dict):
+        return []
+    rows: list[tuple[str, float, float, float]] = []
+    for category, values in payload.items():
+        if not isinstance(values, dict):
+            continue
+        correct = numeric_value(values.get("correct")) or 0
+        wrong = numeric_value(values.get("wrong")) or 0
+        blank = numeric_value(values.get("blank")) or 0
+        rows.append((macro_question_category(category), correct, wrong, blank))
+    return rows
+
+
+@app.get("/api/admin/dashboard")
+def admin_population_dashboard(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    candidates = db.scalars(select(User).where(User.role == "user", User.active.is_(True), User.approved.is_(True))).all()
+    attempts: list[dict[str, Any]] = []
+    candidate_scores: list[dict[str, Any]] = []
+    by_type: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    by_category: dict[str, dict[str, float]] = defaultdict(lambda: {"correct": 0, "wrong": 0, "blank": 0, "attempts": 0})
+    by_day: dict[str, list[float]] = defaultdict(list)
+    for candidate in candidates:
+        state_data = candidate.state.data if candidate.state and isinstance(candidate.state.data, dict) else {}
+        sessions = state_data.get("sessions", []) if isinstance(state_data.get("sessions"), list) else []
+        rows: list[dict[str, Any]] = []
+        for session in sessions:
+            if not isinstance(session, dict) or session.get("type") not in {"exam", "guided-exam", "daily-challenge"}:
+                continue
+            score = session_score(session)
+            if score is None:
+                continue
+            correct = numeric_value(session.get("correct")) or 0
+            wrong = numeric_value(session.get("wrong")) or 0
+            blank = numeric_value(session.get("blank")) or max(0, 40 - correct - wrong)
+            row = {"score": score, "correct": correct, "wrong": wrong, "blank": blank, "type": str(session.get("type"))}
+            rows.append(row)
+            attempts.append(row)
+            by_type[row["type"]].append(row)
+            at = str(session.get("at") or "")[:10]
+            if re.fullmatch(r"\d{4}-\d{2}-\d{2}", at):
+                by_day[at].append(score)
+            for category, cat_correct, cat_wrong, cat_blank in session_category_rows(session):
+                item = by_category[category]
+                item["correct"] += cat_correct
+                item["wrong"] += cat_wrong
+                item["blank"] += cat_blank
+                item["attempts"] += 1
+        if rows:
+            candidate_scores.append({"attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
+
+    reliable = [item for item in candidate_scores if item["attempts"] >= 3]
+    band_defs = [("Molto preparati", 32, 41), ("Buona preparazione", 28, 32), ("In consolidamento", 24, 28), ("Da rafforzare", -100, 24)]
+    bands = [{"label": label, "count": sum(1 for item in candidate_scores if low <= item["average"] < high)} for label, low, high in band_defs]
+    type_labels = {"exam": "Simulazioni ufficiali", "guided-exam": "Prove guidate 40", "daily-challenge": "Sfide del giorno"}
+    type_stats = [{"type": key, "label": type_labels[key], **session_group_statistics(by_type.get(key, []))} for key in type_labels]
+    categories = []
+    for category, values in by_category.items():
+        answered = values["correct"] + values["wrong"]
+        total = answered + values["blank"]
+        categories.append({"category": category, "attempts": int(values["attempts"]), "accuracy": round(values["correct"] / answered * 100, 1) if answered else None, "correctRate": round(values["correct"] / total * 100, 1) if total else None})
+    categories.sort(key=lambda item: (item["accuracy"] is None, item["accuracy"] or 0))
+    today = challenge_today()
+    trend = []
+    for offset in range(13, -1, -1):
+        day = (today - timedelta(days=offset)).isoformat()
+        scores = by_day.get(day, [])
+        trend.append({"date": day, "attempts": len(scores), "averageScore": average(scores)})
+    confidence = "alta" if len(reliable) >= 30 and len(attempts) >= 100 else "media" if len(reliable) >= 10 and len(attempts) >= 30 else "bassa"
+    avg = lambda key: average([float(item[key]) for item in attempts], 1)
+    return {
+        "generatedAt": utcnow().isoformat(),
+        "summary": {"eligibleCandidates": len(candidates), "participants": len(candidate_scores), "reliableCandidates": len(reliable), "attempts": len(attempts), "averageAttemptScore": average([item["score"] for item in attempts]), "averageCandidateScore": average([item["average"] for item in candidate_scores]), "reliableAverageScore": average([item["average"] for item in reliable]), "averageCorrect": avg("correct"), "averageWrong": avg("wrong"), "averageBlank": avg("blank"), "confidence": confidence},
+        "bands": bands,
+        "types": type_stats,
+        "categories": categories,
+        "trend": trend,
+    }
+
+
 @app.get("/api/admin/users/{user_id}/statistics")
 def admin_user_statistics(user_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     target = db.get(User, user_id)

@@ -31,6 +31,7 @@ html[data-theme="dark"] .review-answer.correct-text{background:#123125;color:var
 html[data-theme="dark"] .review-explanation,html[data-theme="dark"] .score-formula,html[data-theme="dark"] .tablet-install-note{background:#242125;color:var(--ink);border-color:#494148}
 html[data-theme="dark"] .review-tabs{background:var(--cream)}html[data-theme="dark"] .review-tabs a{background:#242125;color:var(--ink);border-color:var(--line)}
 html[data-theme="dark"] .review-response-time{background:#202b3c}
+html[data-theme="dark"] .dashboard-answer-split .correct{background:#123125;color:#91e4b5}html[data-theme="dark"] .dashboard-answer-split .wrong{background:#3a1b1d;color:#ffaaa4}html[data-theme="dark"] .dashboard-answer-split .blank{background:#302d31;color:#d4cdd6}html[data-theme="dark"] .dashboard-bands i,html[data-theme="dark"] .admin-dashboard-bar i{background:#343036}
 html[data-theme="dark"] .history-counts .correct{background:#153a2b;color:#8ee6b5}html[data-theme="dark"] .history-counts .wrong{background:#48201f;color:#ffaaa4}html[data-theme="dark"] .history-counts .blank{background:#302d31;color:#d4cdd6}
 html[data-theme="dark"] .release-notes-list li{background:#242125;border-color:var(--line)}html[data-theme="dark"] .release-notes-list li:before{background:#153a2b;color:#8ee6b5}
 html[data-theme="dark"] .mastery-summary{background:linear-gradient(135deg,#171719,#21191a)}html[data-theme="dark"] .mastery-pie::before{background:var(--card)}
