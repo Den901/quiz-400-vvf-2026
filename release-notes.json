@@ -1,12 +1,12 @@
 {
-  "version": "3.14.1",
+  "version": "3.14.2",
   "showToUsers": false,
-  "title": "Fasce di preparazione più leggibili",
-  "summary": "La Dashboard mostra subito gli intervalli numerici associati a ogni fascia.",
+  "title": "Sbarramento teorico nella Dashboard",
+  "summary": "La Dashboard confronta le medie dei candidati con il riferimento teorico di 14,71 punti.",
   "items": [
-    "Molto preparati: da 32 a 40 punti.",
-    "Buona preparazione: da 28 a 31,99; in consolidamento: da 24 a 27,99.",
-    "Da rafforzare: meno di 24 punti."
+    "Nuovo riquadro Sbarramento teorico: 14,71 punti su 40.",
+    "Conteggio immediato dei candidati con media sopra e sotto il riferimento.",
+    "Il dato resta esplicitamente indicativo e non viene presentato come soglia ufficiale."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",

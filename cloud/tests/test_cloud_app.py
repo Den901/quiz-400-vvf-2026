@@ -60,8 +60,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.14.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.14.1"
+        assert runtime.json()["version"] == "3.14.2"
+        assert runtime.json()["releaseNotes"]["version"] == "3.14.2"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
@@ -201,6 +201,9 @@ def test_complete_cloud_account_and_statistics_flow():
         assert dashboard.json()["summary"]["participants"] == 1
         assert dashboard.json()["summary"]["attempts"] == 2
         assert dashboard.json()["summary"]["averageAttemptScore"] == 29.52
+        assert dashboard.json()["summary"]["theoreticalCutoff"] == 14.71
+        assert dashboard.json()["summary"]["candidatesAboveCutoff"] == 1
+        assert dashboard.json()["summary"]["candidatesBelowCutoff"] == 0
         assert sum(item["count"] for item in dashboard.json()["bands"]) == 1
         assert dashboard.json()["bands"][0]["label"] == "Molto preparati · 32–40"
         assert len(dashboard.json()["trend"]) == 14
@@ -509,7 +512,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.14.1"
+        assert update_status.json()["currentVersion"] == "3.14.2"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

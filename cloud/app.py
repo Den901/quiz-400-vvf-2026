@@ -2310,6 +2310,7 @@ def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, flo
 
 @app.get("/api/admin/dashboard")
 def admin_population_dashboard(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    theoretical_cutoff = 14.71
     candidates = db.scalars(select(User).where(User.role == "user", User.active.is_(True), User.approved.is_(True))).all()
     attempts: list[dict[str, Any]] = []
     candidate_scores: list[dict[str, Any]] = []
@@ -2366,7 +2367,7 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
     avg = lambda key: average([float(item[key]) for item in attempts], 1)
     return {
         "generatedAt": utcnow().isoformat(),
-        "summary": {"eligibleCandidates": len(candidates), "participants": len(candidate_scores), "reliableCandidates": len(reliable), "attempts": len(attempts), "averageAttemptScore": average([item["score"] for item in attempts]), "averageCandidateScore": average([item["average"] for item in candidate_scores]), "reliableAverageScore": average([item["average"] for item in reliable]), "averageCorrect": avg("correct"), "averageWrong": avg("wrong"), "averageBlank": avg("blank"), "confidence": confidence},
+        "summary": {"eligibleCandidates": len(candidates), "participants": len(candidate_scores), "reliableCandidates": len(reliable), "attempts": len(attempts), "averageAttemptScore": average([item["score"] for item in attempts]), "averageCandidateScore": average([item["average"] for item in candidate_scores]), "reliableAverageScore": average([item["average"] for item in reliable]), "averageCorrect": avg("correct"), "averageWrong": avg("wrong"), "averageBlank": avg("blank"), "confidence": confidence, "theoreticalCutoff": theoretical_cutoff, "candidatesAboveCutoff": sum(1 for item in candidate_scores if item["average"] >= theoretical_cutoff), "candidatesBelowCutoff": sum(1 for item in candidate_scores if item["average"] < theoretical_cutoff)},
         "bands": bands,
         "types": type_stats,
         "categories": categories,

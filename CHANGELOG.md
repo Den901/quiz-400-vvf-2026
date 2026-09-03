@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.14.2 - 2026-09-03
+
+- Aggiunta alla Dashboard admin la soglia di sbarramento teorica di 14,71/40.
+- Mostrati candidati sopra e sotto la soglia, con percentuale sul campione che ha svolto almeno una prova.
+- Il riferimento è dichiarato come stima teorica e non come soglia ufficiale del concorso.
+- Nessun popup generale agli utenti.
+
 ## 3.14.1 - 2026-09-03
 
 - Nella Dashboard amministrativa ogni fascia mostra direttamente il proprio intervallo di punteggio.
