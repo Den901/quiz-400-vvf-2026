@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.14.3 - 2026-09-03
+
+- Corretto il caricamento simultaneo che poteva mostrare due volte il riquadro «Sbarramento teorico».
+- Nessuna duplicazione era presente nel database e nessun valore statistico è stato modificato.
+- Nessun popup generale agli utenti.
+
 ## 3.14.2 - 2026-09-03
 
 - Aggiunta alla Dashboard admin la soglia di sbarramento teorica di 14,71/40.

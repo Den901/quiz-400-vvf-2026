@@ -1,12 +1,12 @@
 {
-  "version": "3.14.2",
+  "version": "3.14.3",
   "showToUsers": false,
-  "title": "Sbarramento teorico nella Dashboard",
-  "summary": "La Dashboard confronta le medie dei candidati con il riferimento teorico di 14,71 punti.",
+  "title": "Correzione Dashboard amministrativa",
+  "summary": "Il riquadro dello sbarramento teorico viene mostrato una sola volta.",
   "items": [
-    "Nuovo riquadro Sbarramento teorico: 14,71 punti su 40.",
-    "Conteggio immediato dei candidati con media sopra e sotto il riferimento.",
-    "Il dato resta esplicitamente indicativo e non viene presentato come soglia ufficiale."
+    "Eliminato il duplicato visivo dello sbarramento teorico.",
+    "Nessuna modifica ai dati, alle medie o alle statistiche.",
+    "La soglia teorica resta fissata a 14,71/40."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",
