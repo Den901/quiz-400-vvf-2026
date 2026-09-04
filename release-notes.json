@@ -1,12 +1,12 @@
 {
-  "version": "3.17.0",
+  "version": "3.18.0",
   "showToUsers": false,
-  "title": "Dashboard su prove comparabili",
-  "summary": "Le medie globali considerano soltanto le Sfide del giorno, uguali per tutti.",
+  "title": "Storico Sfide nella Dashboard",
+  "summary": "L'admin può aprire le Sfide di ogni candidato ed eliminare un tentativo registrato per errore.",
   "items": [
-    "Simulazioni personali e prove guidate non incidono più sulla Dashboard globale.",
-    "Medie, fasce e sbarramento derivano soltanto dalle Sfide del giorno.",
-    "Statistiche personali, cronologie e classifiche restano invariate."
+    "Ogni candidato dispone di una tendina con data, punteggio, esito e durata delle Sfide.",
+    "Il pulsante Elimina prova richiede conferma ed è riservato agli amministratori.",
+    "La rimozione ricalcola Dashboard, classifica, storico e progresso personale."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",

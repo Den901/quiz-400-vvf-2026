@@ -2392,6 +2392,70 @@ def save_dashboard_settings(payload: DashboardSettingsInput, request: Request, a
     return {"theoreticalCutoff": value}
 
 
+@app.get("/api/admin/dashboard/candidates/{user_id}/challenges")
+def admin_candidate_challenges(user_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    target = db.get(User, user_id)
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Utente non trovato.")
+    attempts = db.scalars(
+        select(DailyChallengeAttempt)
+        .where(DailyChallengeAttempt.user_id == user_id, DailyChallengeAttempt.submitted_at.is_not(None))
+        .order_by(DailyChallengeAttempt.challenge_date.desc())
+    ).all()
+    return {
+        "candidate": {"id": target.id, "name": target.display_name, "username": target.username, "avatarUrl": f"./api/users/{target.id}/avatar"},
+        "attempts": [{
+            "id": attempt.id,
+            "date": attempt.challenge_date.isoformat(),
+            "score": challenge_score(attempt),
+            "correct": attempt.correct,
+            "wrong": attempt.wrong,
+            "blank": attempt.blank,
+            "durationSeconds": attempt.duration_seconds,
+            "timedOut": aware_utc(attempt.submitted_at) == challenge_expiry(attempt),
+        } for attempt in attempts],
+    }
+
+
+@app.delete("/api/admin/dashboard/challenges/{attempt_id}")
+def delete_candidate_challenge(attempt_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> Response:
+    attempt = db.get(DailyChallengeAttempt, attempt_id)
+    if not attempt or not attempt.submitted_at:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Prova giornaliera conclusa non trovata.")
+    target = db.get(User, attempt.user_id)
+    challenge = db.get(DailyChallenge, attempt.challenge_date)
+    if not target or not challenge:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Dati della prova non trovati.")
+    state_data = dict(target.state.data if target.state and isinstance(target.state.data, dict) else empty_state())
+    key = attempt.challenge_date.isoformat()
+    state_data["sessions"] = [item for item in list(state_data.get("sessions") or []) if not (isinstance(item, dict) and item.get("type") == "daily-challenge" and item.get("challengeDate") == key)]
+    state_data["dailyChallengeRecordedDates"] = [value for value in list(state_data.get("dailyChallengeRecordedDates") or []) if value != key]
+    progress = dict(state_data.get("progress") or {})
+    for answer, question in zip(list(attempt.answers or []), challenge_questions(challenge), strict=False):
+        question_id = str(question["id"])
+        item = dict(progress.get(question_id) or {})
+        if not item:
+            continue
+        if answer is None:
+            item["skipped"] = max(0, int(item.get("skipped", 0) or 0) - 1)
+        else:
+            item["attempts"] = max(0, int(item.get("attempts", 0) or 0) - 1)
+            field = "correct" if answer == int(question["correct"]) else "wrong"
+            item[field] = max(0, int(item.get(field, 0) or 0) - 1)
+        attempts_left = int(item.get("attempts", 0) or 0)
+        item["status"] = "unanswered" if attempts_left == 0 else "review" if int(item.get("wrong", 0) or 0) > 0 else "known"
+        progress[question_id] = item
+    state_data["progress"] = progress
+    if target.state:
+        target.state.data = state_data
+        target.state.revision += 1
+        target.state.updated_at = utcnow()
+    audit(db, "admin.daily_challenge_deleted", request, actor=admin.id, target=target.id, attemptId=attempt.id, challengeDate=key, score=challenge_score(attempt))
+    db.delete(attempt)
+    db.commit()
+    return Response(status_code=204)
+
+
 @app.get("/api/admin/users/{user_id}/statistics")
 def admin_user_statistics(user_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     target = db.get(User, user_id)

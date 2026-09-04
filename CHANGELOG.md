@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.18.0 - 2026-09-04
+
+- Tendina per ogni candidato nella Dashboard con lo storico delle Sfide del giorno.
+- Dettaglio di punteggio, risposte, durata ed eventuale chiusura per tempo scaduto.
+- Eliminazione amministrativa protetta con ricalcolo di Dashboard, classifica, storico e progresso.
+
 ## 3.17.0 - 2026-09-04
 
 - Dashboard globale calcolata esclusivamente sulle Sfide del giorno.

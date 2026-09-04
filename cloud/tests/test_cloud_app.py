@@ -60,8 +60,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.17.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.17.0"
+        assert runtime.json()["version"] == "3.18.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.18.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
@@ -530,7 +530,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.17.0"
+        assert update_status.json()["currentVersion"] == "3.18.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -687,3 +687,14 @@ def test_complete_cloud_account_and_statistics_flow():
         restored_moderation = restored_admin.get("/api/admin/question-reports")
         assert len(restored_moderation.json()["pending"]) == 0
         assert restored_moderation.json()["disabled"][0]["questionId"] == reported_question_id
+        candidate_challenges = restored_admin.get(f"/api/admin/dashboard/candidates/{user_id}/challenges")
+        assert candidate_challenges.status_code == 200
+        assert len(candidate_challenges.json()["attempts"]) == 1
+        saved_attempt = candidate_challenges.json()["attempts"][0]
+        assert saved_attempt["date"] == challenge_date
+        assert saved_attempt["score"] == submitted.json()["result"]["score"]
+        assert restored_user.get(f"/api/admin/dashboard/candidates/{user_id}/challenges").status_code == 403
+        assert restored_admin.delete(f"/api/admin/dashboard/challenges/{saved_attempt['id']}").status_code == 204
+        assert restored_admin.get(f"/api/admin/dashboard/candidates/{user_id}/challenges").json()["attempts"] == []
+        assert restored_admin.get("/api/admin/dashboard").json()["summary"]["attempts"] == 0
+        assert challenge_date not in restored_user.get("/api/auth/me").json()["user"]["state"]["dailyChallengeRecordedDates"]

@@ -30,3 +30,10 @@ test('daily leaderboard does not force a horizontal scrollbar on desktop and tab
   assert.match(cloudStyles, /daily-ranking-head\.admin,[^{]+\{[^}]*min-width:0/);
   assert.match(cloudStyles, /daily-cutoff-line\.admin\{min-width:0/);
 });
+
+test('admin candidate dropdown exposes daily history and guarded deletion', () => {
+  assert.match(source, /dashboard-candidate-details/);
+  assert.match(source, /dashboard\/candidates\/\$\{encodeURIComponent\(candidate\.id\)\}\/challenges/);
+  assert.match(source, /data-delete-dashboard-attempt/);
+  assert.match(source, /Eliminare definitivamente questa prova/);
+});
