@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.15.2 - 2026-09-04
+
+- Salvataggio immediato della risposta selezionata nella Sfida del giorno.
+- Salvataggio di sicurezza al refresh o alla chiusura della pagina.
+- Avviso esplicito: la prova riprende dopo il refresh, mentre il limite dei 40 minuti continua a scorrere.
+
 ## 3.15.1 - 2026-09-03
 
 - Gli amministratori attivi e approvati che svolgono prove da 40 sono inclusi come candidati normali nella Dashboard.

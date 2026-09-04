@@ -1,14 +1,14 @@
 {
-  "version": "3.15.1",
+  "version": "3.15.2",
   "showToUsers": false,
-  "title": "Admin inclusi nella preparazione globale",
-  "summary": "Gli amministratori che svolgono quiz sono conteggiati come candidati normali.",
+  "title": "Ripresa affidabile delle prove",
+  "summary": "Le risposte della Sfida vengono salvate subito e resistono al refresh della pagina.",
   "items": [
-    "Le prove degli admin entrano in medie, fasce, campione e confronto con lo sbarramento.",
-    "Nel popup della fascia gli account amministrativi hanno il badge Admin.",
-    "Il calcolo resta identico per tutti gli account attivi e approvati."
+    "Ogni risposta selezionata nella Sfida del giorno viene salvata immediatamente.",
+    "Refresh e chiusura della pagina effettuano un ultimo salvataggio di sicurezza.",
+    "Un messaggio ricorda che il cronometro continua a scorrere anche fuori dalla pagina."
   ],
-  "actionLabel": "Apri Dashboard",
-  "actionHash": "#dashboard",
-  "footnote": "La stima è riservata agli amministratori e non rappresenta una soglia ufficiale del concorso."
+  "actionLabel": "Apri Sfida",
+  "actionHash": "#challenge",
+  "footnote": "Il limite resta di 40 minuti effettivi dal momento dell'avvio."
 }
