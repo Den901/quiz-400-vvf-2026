@@ -101,6 +101,8 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 .daily-ranking-head.admin,.daily-ranking-row.admin{grid-template-columns:52px minmax(160px,1.7fr) 88px minmax(130px,1fr) 110px 110px;min-width:750px}.admin-attempt-dialog{width:min(1240px,calc(100vw - 40px));max-width:none;max-height:92vh;overflow-x:hidden;overflow-y:auto}.admin-attempt-dialog *{max-width:100%}.admin-attempt-review{margin-top:16px}.admin-attempt-dialog .review-tabs{position:static}.review-response-time{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-top:12px;padding:11px 14px;border-radius:12px;background:#eef4ff}.review-response-time span{color:var(--muted);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
 .daily-ranking-head{color:var(--muted);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.04em}
 .daily-ranking-row{background:var(--surface-soft,#f7f7f7);border:1px solid transparent}
+.daily-cutoff-line{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-width:620px;margin:7px 0 3px;padding:9px 12px;border-top:3px solid #b42318;border-radius:4px 4px 10px 10px;background:#fff0ef;color:#8d1c14;font-weight:900}
+.daily-cutoff-line.admin{min-width:750px}.daily-cutoff-line small{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em}.daily-ranking-row.below-cutoff{opacity:.82}
 .daily-ranking-row.current{background:#fff3cd;border-color:#e5ad28}
 .daily-ranking-row>strong:first-child{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#272727;color:#fff}
 .daily-ranking-row:nth-child(2)>strong:first-child{background:#c99300}
@@ -146,6 +148,7 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 
 html[data-theme="dark"] .daily-challenge-quick,html[data-theme="dark"] .daily-challenge-rules{background:linear-gradient(145deg,#2d240f,#181819);border-color:#725a24}
 html[data-theme="dark"] .daily-composition span,html[data-theme="dark"] .daily-rule-row span,html[data-theme="dark"] .daily-ranking-row,html[data-theme="dark"] .daily-current-rank,html[data-theme="dark"] .daily-rank-highlight{background:#242426;border-color:#5d4b21;color:var(--ink)}
+html[data-theme="dark"] .daily-cutoff-line{background:#351817;color:#ffaaa3;border-color:#e75045}
 html[data-theme="dark"] .daily-rule-row span,html[data-theme="dark"] .daily-ranking-row.current{background:#33290f;border-color:#8b6d25}
 html[data-theme="dark"] .daily-test-details>summary,html[data-theme="dark"] .daily-challenge-admin-settings,html[data-theme="dark"] .daily-admin-logic{background:#1c1b1d;border-color:#725a24!important}
 html[data-theme="dark"] .daily-gate-notice{background:#2b2415;border-color:#8b6f2b;color:#ffe7a0}

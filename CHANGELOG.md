@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.16.1 - 2026-09-04
+
+- La classifica della Sfida mostra la linea dello sbarramento configurato.
+- I candidati con punteggio inferiore sono visualizzati sotto la linea.
+- Aspetto verificato anche per tema scuro e vista amministratore.
+
 ## 3.16.0 - 2026-09-04
 
 - Lo sbarramento teorico della Dashboard è modificabile dalle Impostazioni admin.

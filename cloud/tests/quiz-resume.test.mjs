@@ -16,3 +16,10 @@ test('page exit preserves both daily and regular forty-question quizzes', () => 
   assert.match(source, /if\(isTimedFortyQuiz\(\)\)saveActiveQuiz\(\)/);
   assert.match(source, /window\.addEventListener\('pagehide',preserveQuizBeforePageExit\)/);
 });
+
+test('daily leaderboard separates candidates below the configured cutoff', () => {
+  assert.match(source, /board\?\.theoreticalCutoff/);
+  assert.match(source, /Number\(entry\.score\)<cutoff/);
+  assert.match(source, /daily-cutoff-line/);
+  assert.match(source, /Sotto lo sbarramento/);
+});

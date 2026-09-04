@@ -1347,7 +1347,7 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
         for index, (attempt, user) in enumerate(ordered)
     ]
     current = next((entry for entry in entries if entry["isCurrentUser"]), None)
-    return {"date": challenge_date.isoformat(), "participants": len(entries), "entries": entries[:50], "currentUser": current}
+    return {"date": challenge_date.isoformat(), "participants": len(entries), "entries": entries[:50], "currentUser": current, "theoreticalCutoff": round(float(get_setting(db, "theoretical_cutoff")), 2)}
 
 
 def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallengeAttempt | None, db: Session, user: User) -> dict[str, Any]:

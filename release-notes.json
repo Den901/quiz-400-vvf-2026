@@ -1,14 +1,14 @@
 {
-  "version": "3.16.0",
+  "version": "3.16.1",
   "showToUsers": false,
-  "title": "Sbarramento configurabile",
-  "summary": "L'amministratore può modificare dalla schermata Impostazioni la soglia teorica della Dashboard.",
+  "title": "Sbarramento nella Sfida",
+  "summary": "La classifica giornaliera mostra la linea dello sbarramento e separa chi resta sotto soglia.",
   "items": [
-    "Nuovo riquadro Sbarramento teorico nelle Impostazioni admin.",
-    "Il nuovo valore aggiorna conteggi sopra e sotto soglia nella Dashboard.",
-    "La modifica non altera punteggi, prove o classifiche."
+    "Linea dello sbarramento visibile direttamente nella classifica giornaliera.",
+    "I candidati sotto soglia vengono raggruppati sotto la linea.",
+    "La soglia usata è la stessa configurata dall'admin nelle Impostazioni."
   ],
-  "actionLabel": "Apri Impostazioni",
-  "actionHash": "#settings",
+  "actionLabel": "Apri Sfida",
+  "actionHash": "#challenge",
   "footnote": "La soglia resta una stima interna e non rappresenta uno sbarramento ufficiale."
 }
