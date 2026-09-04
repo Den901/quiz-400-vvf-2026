@@ -1,12 +1,12 @@
 {
-  "version": "3.16.1",
+  "version": "3.16.2",
   "showToUsers": false,
-  "title": "Sbarramento nella Sfida",
-  "summary": "La classifica giornaliera mostra la linea dello sbarramento e separa chi resta sotto soglia.",
+  "title": "Classifica più ordinata",
+  "summary": "La classifica giornaliera si adatta allo spazio disponibile senza barra orizzontale su desktop e tablet.",
   "items": [
-    "Linea dello sbarramento visibile direttamente nella classifica giornaliera.",
-    "I candidati sotto soglia vengono raggruppati sotto la linea.",
-    "La soglia usata è la stessa configurata dall'admin nelle Impostazioni."
+    "Rimossa la barra di scorrimento orizzontale non necessaria su desktop e tablet.",
+    "Le colonne della vista admin si ridimensionano automaticamente.",
+    "Conservata la linea dello sbarramento con i candidati sotto soglia."
   ],
   "actionLabel": "Apri Sfida",
   "actionHash": "#challenge",

@@ -103,6 +103,7 @@ html[data-theme="dark"] .privacy-ack{background:#151416}html[data-theme="dark"] 
 .daily-ranking-row{background:var(--surface-soft,#f7f7f7);border:1px solid transparent}
 .daily-cutoff-line{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;min-width:620px;margin:7px 0 3px;padding:9px 12px;border-top:3px solid #b42318;border-radius:4px 4px 10px 10px;background:#fff0ef;color:#8d1c14;font-weight:900}
 .daily-cutoff-line.admin{min-width:750px}.daily-cutoff-line small{font-size:.76rem;text-transform:uppercase;letter-spacing:.05em}.daily-ranking-row.below-cutoff{opacity:.82}
+@media (min-width:700px){.daily-ranking{overflow-x:visible}.daily-ranking-head,.daily-ranking-row{grid-template-columns:48px minmax(130px,1.7fr) 76px minmax(112px,1fr) 102px;min-width:0;gap:9px}.daily-ranking-head.admin,.daily-ranking-row.admin{grid-template-columns:48px minmax(130px,1.7fr) 76px minmax(112px,1fr) 102px minmax(96px,auto);min-width:0}.daily-cutoff-line,.daily-cutoff-line.admin{min-width:0}}
 .daily-ranking-row.current{background:#fff3cd;border-color:#e5ad28}
 .daily-ranking-row>strong:first-child{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#272727;color:#fff}
 .daily-ranking-row:nth-child(2)>strong:first-child{background:#c99300}

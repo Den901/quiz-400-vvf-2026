@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.16.2 - 2026-09-04
+
+- Rimossa la barra orizzontale della classifica su desktop e tablet.
+- Colonne admin adattive anche nelle schede meno larghe.
+- Mantenuto lo scorrimento soltanto sui telefoni con spazio insufficiente.
+
 ## 3.16.1 - 2026-09-04
 
 - La classifica della Sfida mostra la linea dello sbarramento configurato.
