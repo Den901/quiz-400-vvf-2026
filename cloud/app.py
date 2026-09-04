@@ -268,6 +268,7 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "registration_enabled": True,
     "daily_challenge_enabled": True,
     "daily_challenge_required": False,
+    "theoretical_cutoff": 14.71,
     "public_url": "",
     "session_days": 30,
     "reset_token_minutes": 30,
@@ -686,6 +687,10 @@ class UpdateInstallInput(BaseModel):
 
 class BrandLogoInput(BaseModel):
     data_url: str = Field(min_length=32, max_length=1_500_000)
+
+
+class DashboardSettingsInput(BaseModel):
+    theoretical_cutoff: float = Field(ge=-13.2, le=40)
 
 
 class CloudSettingsInput(BaseModel):
@@ -2310,7 +2315,7 @@ def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, flo
 
 @app.get("/api/admin/dashboard")
 def admin_population_dashboard(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
-    theoretical_cutoff = 14.71
+    theoretical_cutoff = round(float(get_setting(db, "theoretical_cutoff")), 2)
     candidates = db.scalars(select(User).where(User.active.is_(True), User.approved.is_(True))).all()
     attempts: list[dict[str, Any]] = []
     candidate_scores: list[dict[str, Any]] = []
@@ -2376,6 +2381,15 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
         "categories": categories,
         "trend": trend,
     }
+
+
+@app.put("/api/admin/dashboard/settings")
+def save_dashboard_settings(payload: DashboardSettingsInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    value = round(payload.theoretical_cutoff, 2)
+    set_setting(db, "theoretical_cutoff", value)
+    audit(db, "admin.dashboard_settings_updated", request, actor=admin.id, target=admin.id, theoreticalCutoff=value)
+    db.commit()
+    return {"theoreticalCutoff": value}
 
 
 @app.get("/api/admin/users/{user_id}/statistics")
@@ -2491,6 +2505,7 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
         "dailyChallengeRequired": bool(get_setting(db, "daily_challenge_required")),
+        "theoreticalCutoff": float(get_setting(db, "theoretical_cutoff")),
         "dailyChallengeConfig": normalized_challenge_composition(db),
         "publicUrl": get_setting(db, "public_url"),
         "sessionDays": get_setting(db, "session_days"),

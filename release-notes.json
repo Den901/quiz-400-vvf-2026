@@ -1,14 +1,14 @@
 {
-  "version": "3.15.2",
+  "version": "3.16.0",
   "showToUsers": false,
-  "title": "Ripresa affidabile delle prove",
-  "summary": "Le risposte della Sfida vengono salvate subito e resistono al refresh della pagina.",
+  "title": "Sbarramento configurabile",
+  "summary": "L'amministratore può modificare dalla schermata Impostazioni la soglia teorica della Dashboard.",
   "items": [
-    "Ogni risposta selezionata nella Sfida del giorno viene salvata immediatamente.",
-    "Refresh e chiusura della pagina effettuano un ultimo salvataggio di sicurezza.",
-    "Un messaggio ricorda che il cronometro continua a scorrere anche fuori dalla pagina."
+    "Nuovo riquadro Sbarramento teorico nelle Impostazioni admin.",
+    "Il nuovo valore aggiorna conteggi sopra e sotto soglia nella Dashboard.",
+    "La modifica non altera punteggi, prove o classifiche."
   ],
-  "actionLabel": "Apri Sfida",
-  "actionHash": "#challenge",
-  "footnote": "Il limite resta di 40 minuti effettivi dal momento dell'avvio."
+  "actionLabel": "Apri Impostazioni",
+  "actionHash": "#settings",
+  "footnote": "La soglia resta una stima interna e non rappresenta uno sbarramento ufficiale."
 }

@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.15.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.15.2"
+        assert runtime.json()["version"] == "3.16.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.16.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#settings"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -213,6 +213,14 @@ def test_complete_cloud_account_and_statistics_flow():
         assert populated_band["candidates"][0]["attempts"] == 2
         assert len(dashboard.json()["trend"]) == 14
         assert user_client.get("/api/admin/dashboard").status_code == 403
+        cutoff_update = admin_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 16.25})
+        assert cutoff_update.status_code == 200
+        assert cutoff_update.json()["theoreticalCutoff"] == 16.25
+        assert admin_client.get("/api/admin/settings").json()["theoreticalCutoff"] == 16.25
+        updated_dashboard = admin_client.get("/api/admin/dashboard").json()
+        assert updated_dashboard["summary"]["theoreticalCutoff"] == 16.25
+        assert user_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 14.71}).status_code == 403
+        assert admin_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 40.01}).status_code == 422
         assert users.json()["totals"]["fortyQuizzes"] == 2
         assert users.json()["totals"]["averageFortyScore"] == 29.52
         assert users.json()["totals"]["subjectQuizzes"] == 2
@@ -517,7 +525,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.15.2"
+        assert update_status.json()["currentVersion"] == "3.16.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

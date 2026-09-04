@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.16.0 - 2026-09-04
+
+- Lo sbarramento teorico della Dashboard è modificabile dalle Impostazioni admin.
+- La nuova soglia aggiorna in tempo reale i candidati sopra e sotto il valore scelto.
+- Validazione da −13,20 a 40 punti, senza effetti su prove e classifiche.
+
 ## 3.15.2 - 2026-09-04
 
 - Salvataggio immediato della risposta selezionata nella Sfida del giorno.
