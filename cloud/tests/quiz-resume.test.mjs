@@ -15,6 +15,14 @@ test('quiz per materia consente di scorrere senza cambiare lo stato delle domand
   assert.match(extraStyles, /\.study-question-browser/);
 });
 
+test('moderatore vede dashboard e prove ma non i controlli distruttivi', () => {
+  assert.match(source, /data-dashboard-nav/);
+  assert.match(source, /currentUser\?\.role==='moderator'/);
+  assert.match(source, /data-cloud-role-select/);
+  assert.match(source, /data-cloud-user-search/);
+  assert.match(source, /if\(currentUser\?\.role==='moderator'\)details\.querySelectorAll\('\[data-delete-dashboard-attempt\]'/);
+});
+
 test('daily challenge saves a selected answer immediately', () => {
   const functionBody = source.match(/function dailySelectAnswer\(choice\)\{([^}]+)\}/)?.[1] || '';
   assert.match(functionBody, /dailyCommitCurrent\(\)/);

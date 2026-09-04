@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.20.0 - 2026-09-04
+
+- Nuovo ruolo Moderatore, assegnabile dal pannello Utenti.
+- Dashboard, classifica e dettaglio delle Sfide disponibili ai moderatori in sola lettura.
+- Sfida del giorno obbligatoria per i moderatori esattamente come per gli utenti.
+- Cancellazioni, gestione account, soglia e impostazioni protette lato server e riservate agli admin.
+- Ricerca utenti istantanea per nome, username, email e testo parziale.
+
 ## 3.19.1 - 2026-09-04
 
 - Frecce precedente e successiva nei quiz per materia.

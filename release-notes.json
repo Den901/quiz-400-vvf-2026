@@ -1,14 +1,14 @@
 {
-  "version": "3.19.1",
+  "version": "3.20.0",
   "showToUsers": false,
-  "title": "Navigazione rapida nei quiz per materia",
-  "summary": "Aggiunte due frecce per scorrere velocemente le domande senza rispondere.",
+  "title": "Moderatori e ricerca utenti",
+  "summary": "Nuovo ruolo di sola lettura per Dashboard e prove giornaliere, con ricerca rapida degli account.",
   "items": [
-    "Le frecce precedente e successiva sono disponibili sopra ogni domanda dei quiz per materia.",
-    "Lo scorrimento non segna la domanda come svolta, non risposta o da ripetere.",
-    "Comandi adattati a desktop, tablet e mobile."
+    "I moderatori partecipano obbligatoriamente alla Sfida e possono consultare Dashboard e prove concluse.",
+    "Cancellazioni, modifiche, utenti e impostazioni restano accessibili esclusivamente agli amministratori.",
+    "Gli amministratori possono cercare gli utenti per nome, username, email o singola lettera."
   ],
-  "actionLabel": "Apri Quiz",
-  "actionHash": "#categories",
+  "actionLabel": "Apri Utenti",
+  "actionHash": "#users",
   "footnote": "L’aggiornamento non modifica quiz, statistiche, classifiche o progressi personali."
 }

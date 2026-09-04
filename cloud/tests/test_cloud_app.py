@@ -30,7 +30,7 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions
+from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
 
 
 def login(client: TestClient, username: str, password: str):
@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.19.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.19.1"
+        assert runtime.json()["version"] == "3.20.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.20.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#users"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -85,6 +85,27 @@ def test_complete_cloud_account_and_statistics_flow():
         assert admin_login.status_code == 200
         assert admin_login.json()["user"]["role"] == "admin"
         assert "passwordHash" not in admin_login.text
+
+        moderator_created = admin_client.post(
+            "/api/admin/users",
+            json={"username": "moderatore", "name": "Moderatore Test", "email": "moderatore@example.com", "password": "Moderatore-2026!", "role": "moderator"},
+        )
+        assert moderator_created.status_code == 201
+        moderator_client = TestClient(app)
+        moderator_login = login(moderator_client, "moderatore", "Moderatore-2026!")
+        assert moderator_login.status_code == 200
+        assert moderator_login.json()["user"]["role"] == "moderator"
+        with SessionLocal() as db:
+            set_setting(db, "daily_challenge_required", True)
+            db.commit()
+        assert moderator_client.get("/api/auth/me").json()["challengeGate"]["required"] is True
+        with SessionLocal() as db:
+            set_setting(db, "daily_challenge_required", False)
+            db.commit()
+        assert moderator_client.get("/api/admin/dashboard").status_code == 200
+        assert moderator_client.get("/api/admin/users").status_code == 403
+        assert moderator_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 20}).status_code == 403
+        assert moderator_client.delete("/api/admin/dashboard/challenges/inesistente").status_code == 403
 
         registration = public_client.post(
             "/api/auth/register",
@@ -197,7 +218,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert mario["statistics"]["averageScore"] == 28.35
         dashboard = admin_client.get("/api/admin/dashboard")
         assert dashboard.status_code == 200
-        assert dashboard.json()["summary"]["eligibleCandidates"] == 2
+        assert dashboard.json()["summary"]["eligibleCandidates"] == 3
         assert dashboard.json()["summary"]["participants"] == 0
         assert dashboard.json()["summary"]["attempts"] == 0
         assert dashboard.json()["summary"]["averageAttemptScore"] is None
@@ -530,7 +551,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.19.1"
+        assert update_status.json()["currentVersion"] == "3.20.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -650,7 +671,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert backup.status_code == 200
         assert backup.json()["app"] == "Quiz 400 VVF 2026 Cloud"
         assert backup.json()["version"] == 5
-        assert len(backup.json()["users"]) == 2
+        assert len(backup.json()["users"]) == 3
         backup_mario = next(item for item in backup.json()["users"] if item["id"] == user_id)
         assert backup_mario["avatar"]["mime"] == "image/png"
         assert len(backup.json()["dailyChallenges"]) == 1

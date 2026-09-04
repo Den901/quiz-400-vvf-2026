@@ -590,6 +590,12 @@ def require_admin(user: User = Depends(require_user)) -> User:
     return user
 
 
+def require_dashboard_reader(user: User = Depends(require_user)) -> User:
+    if user.role not in {"admin", "moderator"}:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Permessi Dashboard richiesti.")
+    return user
+
+
 rate_buckets: dict[str, deque[float]] = defaultdict(deque)
 rate_lock = threading.Lock()
 
@@ -660,7 +666,7 @@ class AdminUserInput(RegistrationInput):
     @field_validator("role")
     @classmethod
     def role_is_valid(cls, value: str) -> str:
-        if value not in {"user", "admin"}:
+        if value not in {"user", "moderator", "admin"}:
             raise ValueError("Ruolo non valido.")
         return value
 
@@ -2236,11 +2242,11 @@ def daily_challenge_leaderboard(challenge_date: str, user: User = Depends(requir
     selected_date = parsed_challenge_date(challenge_date)
     if not db.get(DailyChallenge, selected_date):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata.")
-    return challenge_leaderboard(db, selected_date, user.id, user.role == "admin")
+    return challenge_leaderboard(db, selected_date, user.id, user.role in {"admin", "moderator"})
 
 
 @app.get("/api/admin/challenges/{challenge_date}/attempts/{attempt_id}")
-def admin_daily_challenge_attempt(challenge_date: str, attempt_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def admin_daily_challenge_attempt(challenge_date: str, attempt_id: str, _: User = Depends(require_dashboard_reader), db: Session = Depends(get_db)) -> dict[str, Any]:
     selected_date = parsed_challenge_date(challenge_date)
     challenge = db.get(DailyChallenge, selected_date)
     attempt = db.get(DailyChallengeAttempt, attempt_id)
@@ -2283,6 +2289,7 @@ def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db))
         "active": sum(1 for row in rows if row.active),
         "pendingApproval": sum(1 for row in rows if not row.approved),
         "admins": sum(1 for row in rows if row.role == "admin"),
+        "moderators": sum(1 for row in rows if row.role == "moderator"),
         "simulations": sum(item["statistics"]["simulations"] for item in users_payload),
         "fortyQuizzes": forty_count,
         "subjectQuizzes": subject_count,
@@ -2314,7 +2321,7 @@ def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, flo
 
 
 @app.get("/api/admin/dashboard")
-def admin_population_dashboard(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def admin_population_dashboard(_: User = Depends(require_dashboard_reader), db: Session = Depends(get_db)) -> dict[str, Any]:
     theoretical_cutoff = round(float(get_setting(db, "theoretical_cutoff")), 2)
     candidates = db.scalars(select(User).where(User.active.is_(True), User.approved.is_(True))).all()
     attempts: list[dict[str, Any]] = []
@@ -2393,7 +2400,7 @@ def save_dashboard_settings(payload: DashboardSettingsInput, request: Request, a
 
 
 @app.get("/api/admin/dashboard/candidates/{user_id}/challenges")
-def admin_candidate_challenges(user_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def admin_candidate_challenges(user_id: str, _: User = Depends(require_dashboard_reader), db: Session = Depends(get_db)) -> dict[str, Any]:
     target = db.get(User, user_id)
     if not target:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Utente non trovato.")
@@ -2504,7 +2511,7 @@ def admin_patch_user(user_id: str, payload: AdminUserPatch, request: Request, ad
             raise HTTPException(status.HTTP_409_CONFLICT, "Email già utilizzata.")
         target.email = email
     if payload.role is not None:
-        if payload.role not in {"user", "admin"}:
+        if payload.role not in {"user", "moderator", "admin"}:
             raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Ruolo non valido.")
         if target.role == "admin" and payload.role != "admin" and db.scalar(select(func.count(User.id)).where(User.role == "admin", User.active.is_(True))) <= 1:
             raise HTTPException(status.HTTP_409_CONFLICT, "Deve rimanere almeno un amministratore attivo.")
