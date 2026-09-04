@@ -181,3 +181,5 @@ html[data-theme="dark"] .question-rating{background:#181719}html[data-theme="dar
 .dashboard-admin-badge{display:inline-block;margin-left:6px;padding:3px 6px;border-radius:99px;background:#25100e;color:#fff;font-size:9px;font-style:normal;text-transform:uppercase;vertical-align:middle}
 .cloud-user-search{display:grid;grid-template-columns:auto minmax(220px,1fr) auto;gap:12px;align-items:center;margin:14px 0}.cloud-user-search label{font-weight:800}.cloud-user-search input{width:100%}.cloud-user-search small{color:var(--muted)}.cloud-role-select{display:flex;align-items:center;gap:6px}.cloud-role-select select{min-height:36px;padding:6px 28px 6px 9px}
 @media(max-width:650px){.cloud-user-search{grid-template-columns:1fr}.cloud-role-select{width:100%}.cloud-role-select select{flex:1}}
+.dashboard-band-dialog,.admin-attempt-dialog,.dashboard-band-candidates article,.dashboard-candidate-details{background:var(--card);color:var(--ink)}
+.dashboard-candidate-attempt{background:var(--surface-soft,var(--card))!important;color:var(--ink)}

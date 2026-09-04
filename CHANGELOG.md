@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.20.1 - 2026-09-04
+
+- Corretto l’accesso dei moderatori alla Dashboard e al dettaglio delle prove concluse.
+- Il ruolo viene aggiornato automaticamente nelle sessioni già aperte.
+- Uniformati al tema attivo i colori dei popup delle fasce candidati e delle prove.
+
 ## 3.20.0 - 2026-09-04
 
 - Nuovo ruolo Moderatore, assegnabile dal pannello Utenti.

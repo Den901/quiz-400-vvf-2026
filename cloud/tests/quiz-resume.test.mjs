@@ -21,6 +21,8 @@ test('moderatore vede dashboard e prove ma non i controlli distruttivi', () => {
   assert.match(source, /data-cloud-role-select/);
   assert.match(source, /data-cloud-user-search/);
   assert.match(source, /if\(currentUser\?\.role==='moderator'\)details\.querySelectorAll\('\[data-delete-dashboard-attempt\]'/);
+  assert.match(source, /async function refreshCurrentRole\(\)/);
+  assert.match(source, /visibilitychange/);
 });
 
 test('daily challenge saves a selected answer immediately', () => {

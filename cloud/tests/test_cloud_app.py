@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.20.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.20.0"
+        assert runtime.json()["version"] == "3.20.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.20.1"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#users"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -337,6 +337,11 @@ def test_complete_cloud_account_and_statistics_flow():
         assert ranking.json()["entries"][0]["displayName"] == "Mario Rossi"
         assert ranking.json()["entries"][0]["rank"] == 1
         attempt_id = ranking.json()["entries"][0]["attemptId"]
+        moderator_today = moderator_client.get("/api/challenges/today")
+        assert moderator_today.status_code == 200
+        assert moderator_today.json()["leaderboard"]["entries"][0]["attemptId"] == attempt_id
+        assert moderator_client.get(f"/api/admin/challenges/{challenge_date}/attempts/{attempt_id}").status_code == 200
+        assert moderator_client.delete(f"/api/admin/dashboard/challenges/{attempt_id}").status_code == 403
         assert "attemptId" not in user_client.get(f"/api/challenges/{challenge_date}/leaderboard").json()["entries"][0]
         assert user_client.get(f"/api/admin/challenges/{challenge_date}/attempts/{attempt_id}").status_code == 403
         opened_attempt = admin_client.get(f"/api/admin/challenges/{challenge_date}/attempts/{attempt_id}")
@@ -551,7 +556,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.20.0"
+        assert update_status.json()["currentVersion"] == "3.20.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

@@ -1,14 +1,14 @@
 {
-  "version": "3.20.0",
+  "version": "3.20.1",
   "showToUsers": false,
-  "title": "Moderatori e ricerca utenti",
-  "summary": "Nuovo ruolo di sola lettura per Dashboard e prove giornaliere, con ricerca rapida degli account.",
+  "title": "Correzione accesso moderatori",
+  "summary": "Ripristinata l’apertura della Dashboard e delle prove concluse della Sfida del giorno per i moderatori.",
   "items": [
-    "I moderatori partecipano obbligatoriamente alla Sfida e possono consultare Dashboard e prove concluse.",
-    "Cancellazioni, modifiche, utenti e impostazioni restano accessibili esclusivamente agli amministratori.",
-    "Gli amministratori possono cercare gli utenti per nome, username, email o singola lettera."
+    "Il pulsante Apri prova è ora disponibile ai moderatori nella classifica giornaliera.",
+    "Il ruolo aggiornato viene riconosciuto automaticamente anche nelle sessioni già aperte.",
+    "I colori dei popup Dashboard e prove sono uniformi al tema chiaro o scuro."
   ],
-  "actionLabel": "Apri Utenti",
-  "actionHash": "#users",
+  "actionLabel": "Apri Dashboard",
+  "actionHash": "#dashboard",
   "footnote": "L’aggiornamento non modifica quiz, statistiche, classifiche o progressi personali."
 }

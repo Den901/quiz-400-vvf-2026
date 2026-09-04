@@ -1372,7 +1372,7 @@ def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallenge
         "durationSeconds": CHALLENGE_SECONDS,
         "questionCount": len(challenge.question_ids),
         "composition": challenge.composition,
-        "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id, user.role == "admin"),
+        "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id, user.role in {"admin", "moderator"}),
     }
     if not attempt:
         return payload
