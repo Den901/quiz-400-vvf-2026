@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.17.0 - 2026-09-04
+
+- Dashboard globale calcolata esclusivamente sulle Sfide del giorno.
+- Escluse dalle stime aggregate simulazioni personali e prove guidate con selezione adattiva.
+- Fasce, andamento, materie deboli e confronto con lo sbarramento ora usano prove uguali per tutti.
+
 ## 3.16.2 - 2026-09-04
 
 - Rimossa la barra orizzontale della classifica su desktop e tablet.

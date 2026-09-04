@@ -60,10 +60,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.16.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.16.2"
+        assert runtime.json()["version"] == "3.17.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.17.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#challenge"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
@@ -198,19 +198,17 @@ def test_complete_cloud_account_and_statistics_flow():
         dashboard = admin_client.get("/api/admin/dashboard")
         assert dashboard.status_code == 200
         assert dashboard.json()["summary"]["eligibleCandidates"] == 2
-        assert dashboard.json()["summary"]["participants"] == 1
-        assert dashboard.json()["summary"]["attempts"] == 2
-        assert dashboard.json()["summary"]["averageAttemptScore"] == 29.52
+        assert dashboard.json()["summary"]["participants"] == 0
+        assert dashboard.json()["summary"]["attempts"] == 0
+        assert dashboard.json()["summary"]["averageAttemptScore"] is None
         assert dashboard.json()["summary"]["theoreticalCutoff"] == 14.71
-        assert dashboard.json()["summary"]["candidatesAboveCutoff"] == 1
+        assert dashboard.json()["summary"]["candidatesAboveCutoff"] == 0
         assert dashboard.json()["summary"]["candidatesBelowCutoff"] == 0
-        assert sum(item["count"] for item in dashboard.json()["bands"]) == 1
+        assert sum(item["count"] for item in dashboard.json()["bands"]) == 0
         assert dashboard.json()["bands"][0]["label"] == "Molto preparati · 32–40"
-        populated_band = next(item for item in dashboard.json()["bands"] if item["count"])
-        assert populated_band["candidates"][0]["username"] == "mario.rossi"
-        assert populated_band["candidates"][0]["role"] == "user"
-        assert populated_band["candidates"][0]["averageScore"] == 29.52
-        assert populated_band["candidates"][0]["attempts"] == 2
+        assert len(dashboard.json()["types"]) == 1
+        assert dashboard.json()["types"][0]["type"] == "daily-challenge"
+        assert dashboard.json()["types"][0]["count"] == 0
         assert len(dashboard.json()["trend"]) == 14
         assert user_client.get("/api/admin/dashboard").status_code == 403
         cutoff_update = admin_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 16.25})
@@ -304,6 +302,12 @@ def test_complete_cloud_account_and_statistics_flow():
         assert repeated_submit.status_code == 200
         assert repeated_submit.json()["result"]["score"] == submitted.json()["result"]["score"]
         assert user_client.put(f"/api/challenges/{challenge_date}/answers", json={"answers": [1] * 40}).json()["status"] == "completed"
+
+        challenge_dashboard = admin_client.get("/api/admin/dashboard").json()
+        assert challenge_dashboard["summary"]["attempts"] == 1
+        assert challenge_dashboard["summary"]["participants"] == 1
+        assert challenge_dashboard["summary"]["averageAttemptScore"] == submitted.json()["result"]["score"]
+        assert challenge_dashboard["types"][0]["count"] == 1
 
         ranking = admin_client.get(f"/api/challenges/{challenge_date}/leaderboard")
         assert ranking.json()["theoreticalCutoff"] == 16.25
@@ -526,7 +530,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.16.2"
+        assert update_status.json()["currentVersion"] == "3.17.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

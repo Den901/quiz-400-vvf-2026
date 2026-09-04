@@ -2327,7 +2327,7 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
         sessions = state_data.get("sessions", []) if isinstance(state_data.get("sessions"), list) else []
         rows: list[dict[str, Any]] = []
         for session in sessions:
-            if not isinstance(session, dict) or session.get("type") not in {"exam", "guided-exam", "daily-challenge"}:
+            if not isinstance(session, dict) or session.get("type") != "daily-challenge":
                 continue
             score = session_score(session)
             if score is None:
@@ -2357,7 +2357,7 @@ def admin_population_dashboard(_: User = Depends(require_admin), db: Session = D
     for label, low, high in band_defs:
         members = sorted((item for item in candidate_scores if low <= item["average"] < high), key=lambda item: item["average"], reverse=True)
         bands.append({"label": label, "count": len(members), "candidates": [{"id": item["id"], "name": item["name"], "username": item["username"], "role": item["role"], "avatarUrl": item["avatarUrl"], "averageScore": round(item["average"], 2), "attempts": item["attempts"]} for item in members]})
-    type_labels = {"exam": "Simulazioni ufficiali", "guided-exam": "Prove guidate 40", "daily-challenge": "Sfide del giorno"}
+    type_labels = {"daily-challenge": "Sfide del giorno"}
     type_stats = [{"type": key, "label": type_labels[key], **session_group_statistics(by_type.get(key, []))} for key in type_labels]
     categories = []
     for category, values in by_category.items():

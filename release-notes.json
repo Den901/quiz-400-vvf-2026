@@ -1,14 +1,14 @@
 {
-  "version": "3.16.2",
+  "version": "3.17.0",
   "showToUsers": false,
-  "title": "Classifica più ordinata",
-  "summary": "La classifica giornaliera si adatta allo spazio disponibile senza barra orizzontale su desktop e tablet.",
+  "title": "Dashboard su prove comparabili",
+  "summary": "Le medie globali considerano soltanto le Sfide del giorno, uguali per tutti.",
   "items": [
-    "Rimossa la barra di scorrimento orizzontale non necessaria su desktop e tablet.",
-    "Le colonne della vista admin si ridimensionano automaticamente.",
-    "Conservata la linea dello sbarramento con i candidati sotto soglia."
+    "Simulazioni personali e prove guidate non incidono più sulla Dashboard globale.",
+    "Medie, fasce e sbarramento derivano soltanto dalle Sfide del giorno.",
+    "Statistiche personali, cronologie e classifiche restano invariate."
   ],
-  "actionLabel": "Apri Sfida",
-  "actionHash": "#challenge",
+  "actionLabel": "Apri Dashboard",
+  "actionHash": "#dashboard",
   "footnote": "La soglia resta una stima interna e non rappresenta uno sbarramento ufficiale."
 }
