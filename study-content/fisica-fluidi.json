@@ -1,1 +1,256 @@
-{"id":"fisica-fluidi","title":"Fluidi","pageCount":16,"wordCount":1341,"visualCount":6,"sections":[{"id":"section-2","title":"Stati della materia","blocks":[{"type":"paragraph","text":"La materia si trova essenzialmente in 3 stati di aggregazione: Al variare di temperatura e pressione la materia può transitare da uno stato di aggregazione ad un altro, effettuando un PASSAGGIO DI STATO:"},{"type":"list","items":["Solido: Forma e Volume proprio","Liquido: Forma del recipiente e Volume proprio","Gassoso o Aeriforme: Forma e Volume del recipiente Invece un liquido può scorrere e quindi assume la forma del recipiente;"]},{"type":"paragraph","text":"tuttavia, ha anch’esso un volume proprio ed è difficile da comprimere. Anche un gas può scorrere, ma, a differenza di un liquido, occupa sempre tutto il volume interno del recipiente ed è facilmente comprimibile. Per la loro proprietà di scorrere, cioè di fluire, i liquidi e i gas sono detti fluidi."}]},{"id":"section-3","title":"Pressione","blocks":[{"type":"paragraph","text":"Data una forza F esercitata su una superficie S, si definisce PRESSIONE il rapporto fra il modulo della componente perpendicolare alla superficie della forza e l’area della superficie su cui la forza agisce, ossia"},{"type":"heading","text":"𝐹"},{"type":"paragraph","text":"(cid:2884)"},{"type":"heading","text":"𝑃 (cid:3404)"},{"type":"heading","text":"𝑆"},{"type":"paragraph","text":"La pressione è una grandezza scalare. Fissata la forza, pressione e superficie sono inversamente proporzionali. Nel S.I. l’unità di misura della pressione è il Pascal 𝑃𝑎 (cid:3404) (cid:3015)⁄ (cid:3040)(cid:3118)"}]},{"id":"section-4","title":"Densità","blocks":[{"type":"paragraph","text":"La densità 𝜌 (si legge «rho») di un materiale omogeneo è il rapporto tra la massa m e il volume V di un suo campione, ossia 𝑚 𝜌 (cid:3404)"},{"type":"heading","text":"𝑉"}],"visual":"study-content/visuals/fisica-fluidi-figure-p4.jpg","visualAlt":"Schema ed esempio visuale: Densità"},{"id":"section-5","title":"Legge di Stevino","blocks":[{"type":"paragraph","text":"La pressione p esercitata da un fluido su una superficie è dovuta al peso della parte di fluido che si trova più in alto, oltre che alla pressione 𝑝 a cui è (cid:2868) sottoposta la superficie superiore del fluido stesso. Perciò, p è maggiore se la profondità h entro il fluido è maggiore. In altre parole, la pressione è direttamente proporzionale alla profondità misurata rispetto alla superficie libera del fluido. Per la Legge di Stevino si ha 𝑝 (cid:3404) 𝑝 (cid:3397) 𝜌𝑔ℎ (cid:2868) La differenza 𝑝 (cid:3398) 𝑝 è la pressione dovuta al peso del liquido, chiamata (cid:2868) pressione idrostatica. La legge di Stevino dice che la pressione in un liquido dipende dalla profondità h, ma non dal volume del liquido né dalla forma del recipiente."}]},{"id":"section-6","title":"Esempio: vasi comunicanti","blocks":[{"type":"paragraph","text":"Il principio dei vasi comunicanti deriva dalla legge di Stevino e attesta che un liquido contenuto in due o più contenitori comunicanti tra loro raggiunge lo stesso livello, dando vita ad un'unica superficie equipotenziale. Nel caso in cui nei vasi siano presenti due liquidi con densità diverse e non miscibili in base a tale principio i liquidi si attesteranno su altezze diverse, correlate alla relative densità"}],"visual":"study-content/visuals/fisica-fluidi-figure-p6.jpg","visualAlt":"Schema ed esempio visuale: Esempio: vasi comunicanti"},{"id":"section-7","title":"Legge di Pascal","blocks":[{"type":"paragraph","text":"Ogni fluido esercita la sua pressione non solo sul fondo del recipiente, ma su tutte le pareti che lo confinano e su tutte le porzioni di superficie dei corpi immersi. I liquidi in equilibrio, in particolare, trasmettono in tutte le direzioni ogni variazione di pressione, in accordo con la Legge di Pascal: Una variazione di pressione prodotta su qualunque superficie a contatto con un liquido in equilibrio, completamente racchiuso da pareti, si trasmette inalterata a ogni altra superficie a contatto con il liquido. Con qualche restrizione, la legge di Pascal vale anche per i gas all’equilibrio: è applicabile se la quantità di gas considerata è sufficientemente piccola, in modo che al suo interno le differenze di densità dovute al peso siano trascurabili."}]},{"id":"section-8","title":"Esempio: torchio idraulico","blocks":[{"type":"heading","text":"Il torchio idraulico è"},{"type":"paragraph","text":"costituito da due cilindri contenenti un liquido (solitamente un olio) collegati da un tubo."},{"type":"heading","text":"Funziona in base al"},{"type":"paragraph","text":"teorema di Pascal in quanto la pressione esercitata su uno dei due pistoni si trasmette interamente in tutto il liquido e quindi anche all'altro pistone."}],"visual":"study-content/visuals/fisica-fluidi-figure-p8.jpg","visualAlt":"Schema ed esempio visuale: Esempio: torchio idraulico"},{"id":"section-9","title":"Principio di Archimede","blocks":[{"type":"paragraph","text":"Un corpo immerso in un fluido riceve una spinta dal basso verso l'alto pari al peso del fluido spostato."},{"type":"heading","text":"La spinta di Archimede è anche detta"},{"type":"paragraph","text":"Spinta Idrostatica."},{"type":"heading","text":"Un corpo affonda, rimane in equilibrio o"},{"type":"paragraph","text":"sale a galla quando la sua densità media è rispettivamente maggiore, uguale o minore di quella del liquido in cui è immerso."}]},{"id":"section-10","title":"| F,=m,:g=d,Vc:8 Fi ——. E","blocks":[{"type":"paragraph","text":"| F,=m,:g=d,Vc:8 Fi ——. E.."},{"type":"heading","text":"A"},{"type":"heading","text":"F, = Forza di Archimede (Spinta)"},{"type":"heading","text":"F, = Forza Peso"},{"type":"paragraph","text":"m, = Massa delliquido (fluido) î m, = Massa del corpo °° 14, = Densità delliquido (fluido) d. = Densità del corpo"},{"type":"heading","text":"F. = Volume del corpo"},{"type":"paragraph","text":"£ = Accelerazione di gravità = 9,8171/s? = 9,81N/kg"},{"type":"heading","text":"F,>F,@ d,>d, © GALLEGGIAM ENTO"},{"type":"heading","text":"F,=F,&d,=d, © EQUILIBRIO"},{"type":"heading","text":"F,<F,@&d,<d,@& AFFONDAMEN TO"}]},{"id":"section-11","title":"Pressione atmosferica: esperimento di Torricelli","blocks":[{"type":"paragraph","text":"Un tubo lungo circa 80-90 cm e di diametro di un cm e sigillato a una estremità, viene riempito di mercurio e posto, con l'apertura Li verso il basso tenuta chiusa, in una bacinella He anch'essa riempita di mercurio. -.-"},{"type":"heading","text":"Aprendo l'imboccatura inferiore del tubo, si Ba"},{"type":"paragraph","text":"crea un sistema di vasi comunicanti, per il quale _- 760mm la pressione del liquido all'interno del tubo e' {pa uguale alla pressione esercitata dall'atmosfera sul mercurio contenuto nella vaschetta:infatti il fé sa mercurio contenuto nel tubo non e' soggetto P. alla pressione esterna, al contrario di quello & nella vaschetta. Fissando il tubo a un apposito sostegno, si potrà notare che il mercurio contenuto nel tubo scende un dato livello, chiamato h, che equivale a 760mm. AI livello della vaschetta agiscono dunque due forze, che sono la pressione atmosferica (dal basso verso l'alto) e la pressione idrostatica della colonnina di mercurio(dall'alto verso l'alto) che sono uguali e contrarie e quindi sono in equilibro."}],"visual":"study-content/visuals/fisica-fluidi-figure-p11.jpg","visualAlt":"Schema ed esempio visuale: Pressione atmosferica: esperimento di Torricelli"},{"id":"section-12","title":"Applicando la legge di Stevino possiamo calcolare il valore della…","blocks":[{"type":"paragraph","text":"Applicando la legge di Stevino possiamo calcolare il valore della pressione atmosferica: p=d-g-h=13600 kg/m -9,8N/kg -0,760m = 1,01-10° Pa [ eilibor | inmbar=i0*bar=i0Pa 1 torr=1mmy,= 133,3 Pa latm=760 mmy,= 760 torr= 1,013 - 10° Pa"}],"visual":"study-content/visuals/fisica-fluidi-figure-p12.jpg","visualAlt":"Schema ed esempio visuale: Fluidi"},{"id":"section-13","title":"Fluidodinamica","blocks":[{"type":"paragraph","text":"La fluidodinamica, cioè la descrizione dei moti dei fluidi in relazione alle forze che li determinano, è in generale molto complessa. Tuttavia, alcuni casi particolari possono essere trattati in modo semplice. Si definisce PORTATA la quantità di fluido che attraversa una sezione di un tubo. Si definisce CORRENTE STAZIONARIA quando la velocità del fluido è costante in ogni punto della sostanza, anche se può essere diversa in diversi punti del tubo. In condizioni stazionarie, il volume di fluido che in un dato tempo attraversa la sezione trasversale del condotto in un tratto è uguale a quello che, nello stesso tempo, la attraversa in ogni altro tratto."}]},{"id":"section-14","title":"Equazione di continuità","blocks":[{"type":"paragraph","text":"In una corrente stazionaria la velocità aumenta quando il fluido passa da una parte più larga del condotto a una parte più stretta e, viceversa, diminuisce dove il condotto si allarga. Precisamente, la velocità di un fluido e l’area della sezione trasversale del condotto sono legate da una relazione di proporzionalità inversa. Se S1 è l’area in un tratto del condotto e v1 è la velocità del fluido nello stesso tratto, e se S2 e v2 sono l’area e la velocità in un altro tratto, vale la seguente relazione, detta equazione di continuità:"},{"type":"heading","text":"𝑆 𝑣 (cid:3404) 𝑆 𝑣"},{"type":"paragraph","text":"(cid:2869) (cid:2869) (cid:2870) (cid:2870)"}]},{"id":"section-15","title":"Effetto Venturi","blocks":[{"type":"paragraph","text":"In una corrente stazionaria si verifica il cosiddetto effetto Venturi, cioè si osserva che: nei punti in cui la velocità del fluido è maggiore (per esempio in corrispondenza di una strozzatura del condotto, se il fluido scorre in un condotto), la pressione è minore. Se tieni un foglio di carta davanti alla bocca e soffi in orizzontale al di sopra del foglio, il foglio si alza. Ciò avviene perché la pressione dell’aria in movimento lungo la faccia superiore del foglio è minore della pressione dell’aria ferma al di sotto."}]},{"id":"section-16","title":"Effetto Venturi","blocks":[{"type":"heading","text":"Una differenza di pressione prodotta dal"},{"type":"paragraph","text":"fluire dell’aria è anche all’origine della portanza, cioè della forza che fa salire e sostiene in aria gli aeroplani. Nel sistema di riferimento dell’aereo, l’aereo è fermo e l’aria si muove. Il profilo dell’ala è disegnato in modo che la corrente d’aria sia più lenta sotto e più veloce sopra e, di conseguenza, la pressione sia maggiore sulla superficie inferiore dell’ala che su quella superiore. Il risultato, quando l’aereo e l’aria sono in moto relativo, è una forza rivolta verso l’alto."}],"visual":"study-content/visuals/fisica-fluidi-figure-p16.jpg","visualAlt":"Schema ed esempio visuale: Effetto Venturi"}],"remainingBrokenCharacters":0}
+{
+  "id": "fisica-fluidi",
+  "title": "Fluidi",
+  "pageCount": 16,
+  "wordCount": 1341,
+  "visualCount": 6,
+  "sections": [
+    {
+      "id": "section-2",
+      "title": "Stati della materia",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La materia si trova essenzialmente in 3 stati di aggregazione: Al variare di temperatura e pressione la materia può transitare da uno stato di aggregazione ad un altro, effettuando un PASSAGGIO DI STATO:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Solido: Forma e Volume proprio",
+            "Liquido: Forma del recipiente e Volume proprio",
+            "Gassoso o Aeriforme: Forma e Volume del recipiente Invece un liquido può scorrere e quindi assume la forma del recipiente;"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "tuttavia, ha anch’esso un volume proprio ed è difficile da comprimere. Anche un gas può scorrere, ma, a differenza di un liquido, occupa sempre tutto il volume interno del recipiente ed è facilmente comprimibile. Per la loro proprietà di scorrere, cioè di fluire, i liquidi e i gas sono detti fluidi."
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "title": "Pressione",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Data una forza F esercitata su una superficie S, si definisce PRESSIONE il rapporto fra il modulo della componente perpendicolare alla superficie della forza e l’area della superficie su cui la forza agisce, ossia"
+        },
+        {
+          "type": "heading",
+          "text": "p = F⊥/S"
+        },
+        {
+          "type": "paragraph",
+          "text": ""
+        },
+        {
+          "type": "heading",
+          "text": "Nel S.I. 1 Pa = 1 N/m²."
+        },
+        {
+          "type": "heading",
+          "text": "𝑆"
+        },
+        {
+          "type": "paragraph",
+          "text": "La pressione è una grandezza scalare. Fissata la forza, pressione e superficie sono inversamente proporzionali. Nel S.I. l’unità di misura della pressione è il Pascal 𝑃𝑎 ⁄"
+        }
+      ]
+    },
+    {
+      "id": "section-4",
+      "title": "Densità",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La densità ρ (si legge «rho») di un materiale omogeneo è il rapporto tra la massa m e il volume V: ρ = m/V. Nel S.I. si misura in kg/m³."
+        },
+        {
+          "type": "heading",
+          "text": "𝑉"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p4.jpg",
+      "visualAlt": "Schema ed esempio visuale: Densità"
+    },
+    {
+      "id": "section-5",
+      "title": "Legge di Stevino",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In un fluido omogeneo in equilibrio la pressione aumenta con la profondità. La legge di Stevino è p = p₀ + ρgh, dove p₀ è la pressione sulla superficie libera, ρ la densità del fluido, g l’accelerazione di gravità e h la profondità. La differenza p − p₀ = ρgh è la pressione idrostatica e non dipende dalla forma del recipiente."
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "title": "Esempio: vasi comunicanti",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Il principio dei vasi comunicanti deriva dalla legge di Stevino e attesta che un liquido contenuto in due o più contenitori comunicanti tra loro raggiunge lo stesso livello, dando vita ad un'unica superficie equipotenziale. Nel caso in cui nei vasi siano presenti due liquidi con densità diverse e non miscibili in base a tale principio i liquidi si attesteranno su altezze diverse, correlate alla relative densità"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p6.jpg",
+      "visualAlt": "Schema ed esempio visuale: Esempio: vasi comunicanti"
+    },
+    {
+      "id": "section-7",
+      "title": "Legge di Pascal",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ogni fluido esercita la sua pressione non solo sul fondo del recipiente, ma su tutte le pareti che lo confinano e su tutte le porzioni di superficie dei corpi immersi. I liquidi in equilibrio, in particolare, trasmettono in tutte le direzioni ogni variazione di pressione, in accordo con la Legge di Pascal: Una variazione di pressione prodotta su qualunque superficie a contatto con un liquido in equilibrio, completamente racchiuso da pareti, si trasmette inalterata a ogni altra superficie a contatto con il liquido. Con qualche restrizione, la legge di Pascal vale anche per i gas all’equilibrio: è applicabile se la quantità di gas considerata è sufficientemente piccola, in modo che al suo interno le differenze di densità dovute al peso siano trascurabili."
+        }
+      ]
+    },
+    {
+      "id": "section-8",
+      "title": "Esempio: torchio idraulico",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Il torchio idraulico è"
+        },
+        {
+          "type": "paragraph",
+          "text": "costituito da due cilindri contenenti un liquido (solitamente un olio) collegati da un tubo."
+        },
+        {
+          "type": "heading",
+          "text": "Funziona in base al"
+        },
+        {
+          "type": "paragraph",
+          "text": "teorema di Pascal in quanto la pressione esercitata su uno dei due pistoni si trasmette interamente in tutto il liquido e quindi anche all'altro pistone."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p8.jpg",
+      "visualAlt": "Schema ed esempio visuale: Esempio: torchio idraulico"
+    },
+    {
+      "id": "section-9",
+      "title": "Principio di Archimede",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Un corpo immerso in un fluido riceve una spinta dal basso verso l'alto pari al peso del fluido spostato."
+        },
+        {
+          "type": "heading",
+          "text": "La spinta di Archimede è anche detta"
+        },
+        {
+          "type": "paragraph",
+          "text": "Spinta Idrostatica."
+        },
+        {
+          "type": "heading",
+          "text": "Un corpo affonda, rimane in equilibrio o"
+        },
+        {
+          "type": "paragraph",
+          "text": "sale a galla quando la sua densità media è rispettivamente maggiore, uguale o minore di quella del liquido in cui è immerso."
+        }
+      ]
+    },
+    {
+      "id": "section-10",
+      "title": "Galleggiamento, equilibrio e affondamento",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La spinta di Archimede vale FA = ρfluido·g·Vimmerso e la forza peso vale Fp = mcorpo·g. Un corpo lasciato libero sale se FA > Fp, resta in equilibrio se FA = Fp e affonda se FA < Fp. Per un corpo omogeneo completamente immerso, ciò equivale a confrontare le densità: galleggia se ρcorpo < ρfluido, è in equilibrio se sono uguali e affonda se ρcorpo > ρfluido. Vicino alla superficie terrestre g ≈ 9,81 m/s²."
+        }
+      ]
+    },
+    {
+      "id": "section-11",
+      "title": "Pressione atmosferica: esperimento di Torricelli",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Un tubo lungo circa 80-90 cm e di diametro di un cm e sigillato a una estremità, viene riempito di mercurio e posto, con l'apertura Li verso il basso tenuta chiusa, in una bacinella He anch'essa riempita di mercurio. -.-"
+        },
+        {
+          "type": "heading",
+          "text": "Aprendo l'imboccatura inferiore del tubo, si Ba"
+        },
+        {
+          "type": "paragraph",
+          "text": "crea un sistema di vasi comunicanti, per il quale _- 760mm la pressione del liquido all'interno del tubo e' {pa uguale alla pressione esercitata dall'atmosfera sul mercurio contenuto nella vaschetta:infatti il fé sa mercurio contenuto nel tubo non e' soggetto P. alla pressione esterna, al contrario di quello & nella vaschetta. Fissando il tubo a un apposito sostegno, si potrà notare che il mercurio contenuto nel tubo scende un dato livello, chiamato h, che equivale a 760mm. AI livello della vaschetta agiscono dunque due forze, che sono la pressione atmosferica (dal basso verso l'alto) e la pressione idrostatica della colonnina di mercurio(dall'alto verso l'alto) che sono uguali e contrarie e quindi sono in equilibro."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p11.jpg",
+      "visualAlt": "Schema ed esempio visuale: Pressione atmosferica: esperimento di Torricelli"
+    },
+    {
+      "id": "section-12",
+      "title": "Pressione atmosferica e unità di misura",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Dall’esperimento di Torricelli: p = ρgh ≈ 13.600 kg/m³ · 9,81 m/s² · 0,760 m ≈ 1,013×10⁵ Pa. Valgono inoltre 1 atm = 760 mmHg = 760 torr ≈ 1,013×10⁵ Pa; 1 torr ≈ 133,3 Pa; 1 bar = 10⁵ Pa."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p12.jpg",
+      "visualAlt": "Schema ed esempio visuale: Fluidi"
+    },
+    {
+      "id": "section-13",
+      "title": "Fluidodinamica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La fluidodinamica, cioè la descrizione dei moti dei fluidi in relazione alle forze che li determinano, è in generale molto complessa. Tuttavia, alcuni casi particolari possono essere trattati in modo semplice. Si definisce PORTATA la quantità di fluido che attraversa una sezione di un tubo. Si definisce CORRENTE STAZIONARIA quando la velocità del fluido è costante in ogni punto della sostanza, anche se può essere diversa in diversi punti del tubo. In condizioni stazionarie, il volume di fluido che in un dato tempo attraversa la sezione trasversale del condotto in un tratto è uguale a quello che, nello stesso tempo, la attraversa in ogni altro tratto."
+        }
+      ]
+    },
+    {
+      "id": "section-14",
+      "title": "Equazione di continuità",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In una corrente stazionaria la velocità aumenta quando il fluido passa da una parte più larga del condotto a una parte più stretta e, viceversa, diminuisce dove il condotto si allarga. Precisamente, la velocità di un fluido e l’area della sezione trasversale del condotto sono legate da una relazione di proporzionalità inversa. Se S1 è l’area in un tratto del condotto e v1 è la velocità del fluido nello stesso tratto, e se S2 e v2 sono l’area e la velocità in un altro tratto, vale la seguente relazione, detta equazione di continuità:"
+        },
+        {
+          "type": "heading",
+          "text": "S₁v₁ = S₂v₂"
+        },
+        {
+          "type": "paragraph",
+          "text": ""
+        }
+      ]
+    },
+    {
+      "id": "section-15",
+      "title": "Effetto Venturi",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In una corrente stazionaria si verifica il cosiddetto effetto Venturi, cioè si osserva che: nei punti in cui la velocità del fluido è maggiore (per esempio in corrispondenza di una strozzatura del condotto, se il fluido scorre in un condotto), la pressione è minore. Se tieni un foglio di carta davanti alla bocca e soffi in orizzontale al di sopra del foglio, il foglio si alza. Ciò avviene perché la pressione dell’aria in movimento lungo la faccia superiore del foglio è minore della pressione dell’aria ferma al di sotto."
+        }
+      ]
+    },
+    {
+      "id": "section-16",
+      "title": "Effetto Venturi",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Una differenza di pressione prodotta dal"
+        },
+        {
+          "type": "paragraph",
+          "text": "fluire dell’aria è anche all’origine della portanza, cioè della forza che fa salire e sostiene in aria gli aeroplani. Nel sistema di riferimento dell’aereo, l’aereo è fermo e l’aria si muove. Il profilo dell’ala è disegnato in modo che la corrente d’aria sia più lenta sotto e più veloce sopra e, di conseguenza, la pressione sia maggiore sulla superficie inferiore dell’ala che su quella superiore. Il risultato, quando l’aereo e l’aria sono in moto relativo, è una forza rivolta verso l’alto."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-fluidi-figure-p16.jpg",
+      "visualAlt": "Schema ed esempio visuale: Effetto Venturi"
+    }
+  ],
+  "remainingBrokenCharacters": 0
+}

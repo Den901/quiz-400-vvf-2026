@@ -1,14 +1,14 @@
 {
-  "version": "3.18.0",
+  "version": "3.19.0",
   "showToUsers": false,
-  "title": "Storico Sfide nella Dashboard",
-  "summary": "L'admin può aprire le Sfide di ogni candidato ed eliminare un tentativo registrato per errore.",
+  "title": "Percorsi di studio corretti",
+  "summary": "Ripuliti caratteri illeggibili, formule e definizioni nelle dispense digitali.",
   "items": [
-    "Ogni candidato dispone di una tendina con data, punteggio, esito e durata delle Sfide.",
-    "Il pulsante Elimina prova richiede conferma ed è riservato agli amministratori.",
-    "La rimozione ricalcola Dashboard, classifica, storico e progresso personale."
+    "Eliminati i codici CID e i quadrati provenienti dalla conversione dei documenti.",
+    "Ricostruite formule e spiegazioni di vettori, dinamica, fluidi, energia, statica e termodinamica.",
+    "Corrette definizioni ed esempi incoerenti in chimica e informatica."
   ],
-  "actionLabel": "Apri Dashboard",
-  "actionHash": "#dashboard",
-  "footnote": "La soglia resta una stima interna e non rappresenta uno sbarramento ufficiale."
+  "actionLabel": "Apri Percorsi",
+  "actionHash": "#study-paths",
+  "footnote": "L’aggiornamento non modifica quiz, statistiche, classifiche o progressi personali."
 }

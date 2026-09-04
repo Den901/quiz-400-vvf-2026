@@ -1,1 +1,544 @@
-{"id":"fisica-termodinamica","title":"Termodinamica","pageCount":35,"wordCount":2115,"visualCount":8,"sections":[{"id":"section-2","title":"Temperatura","blocks":[{"type":"paragraph","text":"Le particelle che compongono ogni tipo di sostanza presente in natura, sono in continuo movimento. Tale fenomeno si chiama agitazione termica. La temperatura è un indice del grado di agitazione termica: quanto maggiore è l’agitazione termica, tanto maggiore è la temperatura di una sostanza. E’ una delle 7 grandezze fisiche fondamentali. Nel S.I. l’unità di misura della temperatura è il Kelvin e si indica con K. Gli strumenti per misurare la temperatura sono i termometri, basati sul fenomeno della dilatazione termica."}]},{"id":"section-3","title":"Scale termometriche","blocks":[{"type":"paragraph","text":"Esisto no d ive rse sca | e scala Kelvin scala Celsius scala Fahrenheit termometriche. SORA +» = =| 100 °C |! 212-9F | ACOO —_ sp 273,15 K 0°C = 37°0F OK | -273,15 °C -459,67 ec _S ì"},{"type":"heading","text":"Ì ;"},{"type":"paragraph","text":"N.B. 1 unità Celsius = 1 unità Kelvin = 1,8 unità Fahrenheit"},{"type":"heading","text":"N.B. 9/5=1,8"},{"type":"paragraph","text":"È per questo motivo che per passare dalla scala Celsius a quella Fahrenheit bisogna moltiplicare per 1,8."}],"visual":"study-content/visuals/fisica-termodinamica-figure-p3.jpg","visualAlt":"Schema ed esempio visuale: Scale termometriche"},{"id":"section-4","title":"Tabella di conversione","blocks":[{"type":"heading","text":"Temperatura in + \"C °F"},{"type":"heading","text":"Per ottenere"},{"type":"paragraph","text":"l| }; \"i | Ò; \" | finan]"}],"visual":"study-content/visuals/fisica-termodinamica-figure-p4.jpg","visualAlt":"Schema ed esempio visuale: Tabella di conversione"},{"id":"section-5","title":"Stati di aggregazione","blocks":[{"type":"paragraph","text":"La materia si trova essenzialmente in 3 stati di aggregazione: oSolido: Forma e Volume proprio oLiquido: Forma del recipiente e Volume proprio oGassoso o Aeriforme: Forma e Volume del recipiente"}]},{"id":"section-6","title":"Dilatazione termica","blocks":[{"type":"paragraph","text":"Si definisce dilatazione termica il fenomeno fisico per cui in un corpo si verifica un aumento di volume all'aumentare della temperatura. Qualitativamente questo fenomeno si può giustificare nel seguente modo: qualsiasi aumento di temperatura di un corpo è accompagnato da un aumento dell’agitazione termica delle sue molecole. Ciò determina un incremento della distanza tra le molecole, per cui il risultato finale si traduce in un aumento del volume. Nel caso di una diminuzione della temperatura la situazione risulta perfettamente simmetrica a quella appena descritta ed il risultato finale consiste in una diminuzione del volume del corpo."}]},{"id":"section-7","title":"Dilatazione termica","blocks":[{"type":"paragraph","text":"Ogni solido ha sempre 3 dimensioni, ma può accadere che una delle dimensioni sia preponderante rispetto alle altre (si pensi ad es. ad un filo), in tal caso anche la dilatazione avviene prevalentemente in quella dimensione e si parla quindi di dilatazione lineare."}]},{"id":"section-8","title":"Dilatazione termica","blocks":[{"type":"paragraph","text":"Quando il solido si sviluppa in modo omogeneo nelle 3 dimensioni la dilatazione avviene in tutte le direzioni, si parla quindi di dilatazione volumica. La dilatazione termica agisce anche nei liquidi e nei gas, seguendo la stessa legge della dilatazione volumica dei solidi. Da notare che il coefficiente k è, per il liquidi e ancor più per i gas, maggiore di quello dei solidi."}]},{"id":"section-9","title":"Comportamento anomalo dell’acqua","blocks":[{"type":"paragraph","text":"L’acqua ha un comportamento anomalo nel tratto di temperatura che va da 0°C a 4°C, infatti, si comporta in maniera diversa dalle altre sostanze. Mentre tutte le sostanze all’aumentare della temperatura aumentano il loro volume, si dilatano, il che vuol dire che la loro densità diminuisce, l’acqua invece ha un comportamento strano: infatti man mano che aumenta la temperatura dell’acqua da 0°C a 4°C, il volume dell’acqua diminuisce; infatti a 4°C il volume dell’acqua è il minimo valore che può assumere. Ciò vuol dire che in questo intervallo diminuisce il volume e aumenta la densità. Oltre i 4°C l’acqua si comporta normalmente, cioè ad un aumento di temperatura corrisponde un aumento di volume. In particolare a 4°C l’acqua raggiunge la massima densità e il minimo volume. Inoltre, assumendo la massima densità, diventa più pesante dell’acqua sottostante e scende in profondità (Principio di Archimede). Ma se l’aria esterna arriva a 0°C, il nuovo strato d’acqua si ghiaccia facendo da isolante all’acqua sottostante che resta a 4°C, che resta sotto essendo più densa e quindi più pesante."}]},{"id":"section-10","title":"Calore","blocks":[{"type":"paragraph","text":"Il calore è una forma di energia la cui proprietà principale è quella di passare da un corpo più caldo ad un altro corpo meno caldo. Il riscaldamento di un corpo è un trasferimento di energia, che può avvenire:"},{"type":"list","items":["tramite il lavoro delle forze di attrito;","per passaggio di calore Compiere lavoro e cedere calore e sono due modi equivalenti per fornire energia a un sistema."]}]},{"id":"section-11","title":"Caloria","blocks":[{"type":"paragraph","text":"L’unità di misura nel S.I. è il joule. La caloria (cal) è un’unità di misura che non appartiene al SI, ma è usata spesso: 1 cal equivale alla quantità di calore che fa aumentare di 1 °C (da 14,5 °C a 15,5 °C) la temperatura di 1 g di acqua distillata alla pressione di 1 atm. 1 cal = 4,186 J"}]},{"id":"section-12","title":"Capacità Termica","blocks":[{"type":"paragraph","text":"La quantità di calore Q che bisogna fornire a un corpo per aumentare di ∆T la sua temperatura è direttamente proporzionale a ∆T. Il rapporto C tra Q e ∆T è chiamato capacità termica ed è una costante caratteristica del corpo."},{"type":"heading","text":"𝑄"},{"type":"heading","text":"𝐶 (cid:3404)"},{"type":"heading","text":"∆𝑇"},{"type":"paragraph","text":"La sua unità di misura nel S.I. è il J/K."}]},{"id":"section-13","title":"Calore Specifico","blocks":[{"type":"paragraph","text":"La capacità termica C è direttamente proporzionale alla massa m del corpo. La costante c è il calore specifico."},{"type":"heading","text":"𝐶 𝑄"},{"type":"paragraph","text":"𝑐 (cid:3404) (cid:3404) 𝑚 𝑚∆𝑇 L’unità di misura del calore specifico è J/(kg · K). Dalle precedenti formule segue che il calore si calcola"},{"type":"heading","text":"𝑄 (cid:3404) 𝑐𝑚∆𝑇"}]},{"id":"section-14","title":"Osservazioni","blocks":[{"type":"list","items":["Se la temperatura del corpo considerato aumenta (∆T positiva), Q è positivo, cioè il corpo assorbe effettivamente calore dall’ambiente;","Se la temperatura diminuisce (∆T negativa), Q è negativo, cioè il corpo cede calore all’ambiente."]}]},{"id":"section-15","title":"Equilibrio termico","blocks":[{"type":"paragraph","text":"Se mettiamo a contatto due corpi con temperature, calori specifici e masse diverse, che scambiano calore fra loro ma non con l’ambiente, si porteranno ad una temperatura di equilibrio, ossia equilibrio termico. La legge che rappresenta il processo dell’equilibrio termico è la seguente: Quando due corpi a diversa temperatura sono messi a contatto si genera un flusso di calore, dal corpo più caldo verso quello più freddo, che dura sino a quando i due corpi non arrivano alla stessa temperatura intermedia tra le due temperature iniziali."}],"visual":"study-content/visuals/fisica-termodinamica-figure-p15.jpg","visualAlt":"Schema ed esempio visuale: Equilibrio termico"},{"id":"section-16","title":"Principio zero della termodinamica","blocks":[{"type":"paragraph","text":"L’equilibrio termico è strettamente connesso al cosiddetto Principio zero della termodinamica, secondo cui Se due corpi A e B sono separatamente in equilibrio termico con un corpo C, allora sono in equilibrio termico tra loro."}]},{"id":"section-17","title":"Passaggi di stato","blocks":[{"type":"paragraph","text":"La materia può cambiare il proprio stato di aggregazione assorbendo o liberando energia. Al variare di temperatura e pressione la materia può transitare da uno stato ad un altro, effettuando un PASSAGGIO DI STATO."}],"visual":"study-content/visuals/fisica-termodinamica-figure-p17.jpg","visualAlt":"Schema ed esempio visuale: Passaggi di stato"},{"id":"section-18","title":"Osservazioni","blocks":[{"type":"paragraph","text":"Durante i passaggi di stato la temperatura dei corpi è costante, ad esempio se in un bicchiere abbiamo acqua e ghiaccio la temperatura è 0°C sino a quando tutto il ghiaccio non è diventato acqua. Il calore assorbito (o ceduto) dal corpo durante il passaggio di stato si chiama Calore Latente ed è utilizzato dal corpo solo ed esclusivamente per effettuare il passaggio di stato stesso, quindi non produce un aumento (o diminuzione) della temperatura del corpo."}]},{"id":"section-19","title":"Propagazione del Calore","blocks":[{"type":"list","items":["Conduzione: E’ la trasmissione di calore da un corpo ad un altro senza spostamento delle sue molecole. Un caso tipico è il riscaldamento di un’asta metallica mediante una fiamma applicata alle sue estremità. L’energia termica si trasmette per contatto da molecola a molecola dall’estremità a più alta temperatura verso quella fredda. La conduzione è tipica dei solidi.","Convezione: E’ la trasmissione di calore che avviene nei fluidi (liquidi e gas) con spostamento delle molecole. Se un corpo caldo riscalda l’aria, questa diventa sempre più leggera e sale verso l’alto; tale movimento richiama altra aria verso il corpo caldo e così via. La spinta naturale di salita dell’aria, origina un movimento lento della stessa (moti convettivi), riscaldando l’ambiente."]}]},{"id":"section-20","title":"Propagazione del calore","blocks":[{"type":"list","items":["Irraggiamento: E’ la trasmissione di calore senza contatto. In questo caso si trasmette il calore mediante onde o radiazioni. Un esempio è il calore che percepiamo da una lampadina accesa quando avviciniamo la mano. Questo è il modo in cui il Sole riscalda la Terra."]}]},{"id":"section-21","title":"Gas ideali (o perfetti)","blocks":[{"type":"paragraph","text":"I gas naturali non sono facilmente descrivibili. Pertanto è stato formulato un modello di gas, i gas ideali o perfetti, su cui elaborare delle leggi. Per gas ideale o perfetto si intende una sostanza costituita da un enorme numero di particelle identiche, pensate come sferette rigide, indeformabili e puntiformi. Le direzioni in cui si muovono le particelle si suppongono uguali e non ci sono forze d’interazione tra esse. Inoltre, gli urti tra esse e le pareti del contenitore sono perfettamente elastici (si conserva l’energia cinetica). L’idrogeno si comporta come un gas ideale. Per poter valutare il comportamento del gas dobbiamo inserirlo in un recipiente chiuso che ci permetta di agire e di controllare gli andamenti delle grandezze fisiche PRESSIONE, VOLUME e TEMPERATURA."}]},{"id":"section-22","title":"Le trasformazioni dei gas","blocks":[{"type":"paragraph","text":"Le trasformazioni più interessanti che può subire un gas sono quelle che si ottengono tenendo costante una delle tre grandezze p, V, T e facendo variare le altre due. Una trasformazione si dice reversibile se è possibile portare il sistema dallo stato finale allo stato iniziale e viceversa. Una trasformazione si dice irreversibile se non è reversibile."}]},{"id":"section-23","title":"Prima Legge di Gay-Lussac (legge di Charles)","blocks":[{"type":"paragraph","text":"In una trasformazione isobara (p costante) la variazione di volume ∆V è direttamente proporzionale alla variazione di temperatura ∆t, ossia"}]},{"id":"section-24","title":"Seconda Legge di Gay-Lussac","blocks":[{"type":"paragraph","text":"In una trasformazione isocora (V costante) la variazione di pressione ∆p è direttamente proporzionale alla variazione di temperatura ∆t, ossia"}],"visual":"study-content/visuals/fisica-termodinamica-figure-p24.jpg","visualAlt":"Schema ed esempio visuale: Seconda Legge di Gay-Lussac"},{"id":"section-25","title":"Legge di Boyle","blocks":[{"type":"paragraph","text":"In una trasformazione isoterma (T costante) la pressione p e il volume V del gas sono inversamente proporzionali, cioè variano mantenendo costante il loro prodotto, ossia"}]},{"id":"section-26","title":"Equazione di Stato dei Gas Perfetti","blocks":[{"type":"paragraph","text":"p'V=n-R-T n= Numero di moli di gas dove J"},{"type":"heading","text":"R=8,31 —— (Costante Universale dei Gas)"},{"type":"paragraph","text":"mol-K L'equazione di stato dei gas perfetti racchiude le tre leggi dei gas: ISOBARE [p costante] > pV=n:RT3SV MRI = cost-7"},{"type":"heading","text":"P"},{"type":"paragraph","text":"ISOCORE |V costante] > pV=nRT= p3\" EI cost."},{"type":"heading","text":"ISOTERME [7 costante] > pWV=n:RT23>pV=cost"}],"visual":"study-content/visuals/fisica-termodinamica-figure-p26.jpg","visualAlt":"Schema ed esempio visuale: Equazione di Stato dei Gas Perfetti"},{"id":"section-27","title":"Legge di Van der Waals","blocks":[{"type":"paragraph","text":"Rappresenta un'estensione della legge dei gas perfetti ai gas reali. con l'introduzione di due valori a e b (dette costanti di van der Waals) che dipendono dalla sostanza in esame."}]},{"id":"section-28","title":"Varie definizioni","blocks":[{"type":"paragraph","text":"Un sistema termodinamico può essere:"},{"type":"list","items":["Isolato: se non scambia con l’esterno né materia né energia.","Chiuso: se può scambiare energia ma non materia.","Aperto: se può scambiare sia materia che energia Una trasformazione adiabatica è una trasformazione che avviene senza scambio di calore con l’esterno."]},{"type":"paragraph","text":"Le trasformazioni cicliche sono le trasformazioni che riportano il gas nelle condizioni iniziali di pressione, volume e temperatura. Energia interna in un gas perfetto: è l’energia somma di tutte le energie cinetiche, direttamente proporzionale alla temperatura assoluta."}]},{"id":"section-29","title":"Primo Principio della Termodinamica","blocks":[{"type":"paragraph","text":"La variazione di energia interna ΔU è uguale alla differenza tra il calore scambiato ed il lavoro scambiato tra sistema e ambiente. Si assume positivo il calore assorbito dal sistema (+Q). Si assume negativo il calore ceduto all’ambiente (-Q). E’ positivo il lavoro compiuto dal sistema (+L). E’ negativo il lavoro fatto sul sistema (-L)."}]},{"id":"section-30","title":"Osservazioni","blocks":[{"type":"paragraph","text":"L'ENERGIA INTERNA posseduta da un gas è direttamente proporzionale alla variazione di"},{"type":"heading","text":"TEMPERATURA:"},{"type":"heading","text":"AU >05 AT >0"},{"type":"heading","text":"AU=05AT=0"},{"type":"heading","text":"AU<0OSAT<0"},{"type":"paragraph","text":"IL LAVORO esercitato dal o sul gas è direttamente proporzionale al VOLUME:"},{"type":"heading","text":"L>Q095A4V>0"},{"type":"heading","text":"L=05A4V=0"},{"type":"heading","text":"L<065AV<0"}],"visual":"study-content/visuals/fisica-termodinamica-figure-p30.jpg","visualAlt":"Schema ed esempio visuale: Osservazioni"},{"id":"section-31","title":"Macchina termica","blocks":[{"type":"paragraph","text":"Una macchina termica è un dispositivo che compie un processo ciclico, durante il quale il calore viene trasformato in parte in lavoro meccanico. Si considerino due serbatoi, uno a T fredda e uno a T calda."},{"type":"heading","text":"Calore assorbito dal serbatoio caldo: Q"},{"type":"paragraph","text":"c"},{"type":"heading","text":"Calore ceduto al serbatoio freddo: Q"},{"type":"paragraph","text":"f"},{"type":"heading","text":"Viene compiuto il lavoro L= Q –Q"},{"type":"paragraph","text":"c f Si definisce rendimento di una macchina termica il rapporto tra la quantità di calore che viene trasformata in lavoro e la quantità di calore che la macchina assorbe dalla sorgente più calda, ossia"}]},{"id":"section-32","title":"Ciclo di Carnot","blocks":[{"type":"paragraph","text":"La macchina di Carnot è una macchina termica ideale che compie un ciclo reversibile formato da due trasformazioni isoterme e due adiabatiche. Il rendimento della macchina di Carnot è il massimo raggiungibile, nonostante sia sempre minore di 1."},{"type":"heading","text":"Teorema di Carnot"},{"type":"paragraph","text":"Non è possibile che una macchina termica operante tra due sorgenti di calore poste a due temperature differenti abbia un rendimento superiore a quello di una macchina di Carnot che opera seguendo un ciclo reversibile."}]},{"id":"section-33","title":"Macchina di Carnot","blocks":[],"visual":"study-content/visuals/fisica-termodinamica-figure-p33.jpg","visualAlt":"Schema ed esempio visuale: Macchina di Carnot"},{"id":"section-34","title":"Secondo Principio della Termodinamica","blocks":[{"type":"heading","text":"Enunciato di Clausius"},{"type":"paragraph","text":"E’ impossibile che avvenga uno scambio di calore da un corpo freddo ad un corpo caldo. Il passaggio da un corpo freddo ad uno caldo può avvenire con l’impiego di un lavoro esterno."},{"type":"heading","text":"Enunciato di Kelvin"},{"type":"paragraph","text":"E’ impossibile realizzare un trasformazione ciclica che trasformi completamente in lavoro il calore assorbito da una sorgente. (Può avvenire il contrario)"}]},{"id":"section-35","title":"Entropia","blocks":[{"type":"paragraph","text":"L’entropia è indice del “disordine” che c’è tra le particelle in un sistema."},{"type":"heading","text":"𝑄"},{"type":"paragraph","text":"∆𝑆 (cid:3404)"},{"type":"heading","text":"𝑇"},{"type":"paragraph","text":"La sua unità di misura nel S.I. è J/K."},{"type":"heading","text":"Osservazioni"},{"type":"paragraph","text":" In ogni trasformazione c’è una variazione di entropia, eccetto che in un’adiabatica.  In un ciclo reversibile (fatto da tutte trasformazioni reversibili) la variazione di entropia è nulla.  In un ciclo irreversibile (fatto almeno da una trasformazione irreversibile) l’entropia aumenta."}]}],"remainingBrokenCharacters":0}
+{
+  "id": "fisica-termodinamica",
+  "title": "Termodinamica",
+  "pageCount": 35,
+  "wordCount": 2115,
+  "visualCount": 8,
+  "sections": [
+    {
+      "id": "section-2",
+      "title": "Temperatura",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Le particelle che compongono ogni tipo di sostanza presente in natura, sono in continuo movimento. Tale fenomeno si chiama agitazione termica. La temperatura è un indice del grado di agitazione termica: quanto maggiore è l’agitazione termica, tanto maggiore è la temperatura di una sostanza. È una delle 7 grandezze fisiche fondamentali. Nel S.I. l’unità di misura della temperatura è il Kelvin e si indica con K. Gli strumenti per misurare la temperatura sono i termometri, basati sul fenomeno della dilatazione termica."
+        }
+      ]
+    },
+    {
+      "id": "section-3",
+      "title": "Scale termometriche",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Esisto no d ive rse sca | e scala Kelvin scala Celsius scala Fahrenheit termometriche. SORA +» = =| 100 °C |! 212-9F | ACOO —_ sp 273,15 K 0°C = 37°0F OK | -273,15 °C -459,67 ec _S ì"
+        },
+        {
+          "type": "heading",
+          "text": "Ì"
+        },
+        {
+          "type": "paragraph",
+          "text": "N.B. 1 unità Celsius = 1 unità Kelvin = 1,8 unità Fahrenheit"
+        },
+        {
+          "type": "heading",
+          "text": "N.B. 9/5=1,8"
+        },
+        {
+          "type": "paragraph",
+          "text": "È per questo motivo che per passare dalla scala Celsius a quella Fahrenheit bisogna moltiplicare per 1,8."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p3.jpg",
+      "visualAlt": "Schema ed esempio visuale: Scale termometriche"
+    },
+    {
+      "id": "section-4",
+      "title": "Tabella di conversione",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Temperatura in + \"C °F"
+        },
+        {
+          "type": "heading",
+          "text": "Per ottenere"
+        },
+        {
+          "type": "paragraph",
+          "text": "l| }; \"i | Ò; \" | finan]"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p4.jpg",
+      "visualAlt": "Schema ed esempio visuale: Tabella di conversione"
+    },
+    {
+      "id": "section-5",
+      "title": "Stati di aggregazione",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La materia si trova essenzialmente in 3 stati di aggregazione: oSolido: Forma e Volume proprio oLiquido: Forma del recipiente e Volume proprio oGassoso o Aeriforme: Forma e Volume del recipiente"
+        }
+      ]
+    },
+    {
+      "id": "section-6",
+      "title": "Dilatazione termica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Si definisce dilatazione termica il fenomeno fisico per cui in un corpo si verifica un aumento di volume all'aumentare della temperatura. Qualitativamente questo fenomeno si può giustificare nel seguente modo: qualsiasi aumento di temperatura di un corpo è accompagnato da un aumento dell’agitazione termica delle sue molecole. Ciò determina un incremento della distanza tra le molecole, per cui il risultato finale si traduce in un aumento del volume. Nel caso di una diminuzione della temperatura la situazione risulta perfettamente simmetrica a quella appena descritta ed il risultato finale consiste in una diminuzione del volume del corpo."
+        }
+      ]
+    },
+    {
+      "id": "section-7",
+      "title": "Dilatazione termica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Ogni solido ha sempre 3 dimensioni, ma può accadere che una delle dimensioni sia preponderante rispetto alle altre (si pensi ad es. ad un filo), in tal caso anche la dilatazione avviene prevalentemente in quella dimensione e si parla quindi di dilatazione lineare."
+        }
+      ]
+    },
+    {
+      "id": "section-8",
+      "title": "Dilatazione termica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Quando il solido si sviluppa in modo omogeneo nelle 3 dimensioni la dilatazione avviene in tutte le direzioni, si parla quindi di dilatazione volumica. La dilatazione termica agisce anche nei liquidi e nei gas, seguendo la stessa legge della dilatazione volumica dei solidi. Da notare che il coefficiente k è, per il liquidi e ancor più per i gas, maggiore di quello dei solidi."
+        }
+      ]
+    },
+    {
+      "id": "section-9",
+      "title": "Comportamento anomalo dell’acqua",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "L’acqua ha un comportamento anomalo nel tratto di temperatura che va da 0°C a 4°C, infatti, si comporta in maniera diversa dalle altre sostanze. Mentre tutte le sostanze all’aumentare della temperatura aumentano il loro volume, si dilatano, il che vuol dire che la loro densità diminuisce, l’acqua invece ha un comportamento strano: infatti man mano che aumenta la temperatura dell’acqua da 0°C a 4°C, il volume dell’acqua diminuisce; infatti a 4°C il volume dell’acqua è il minimo valore che può assumere. Ciò vuol dire che in questo intervallo diminuisce il volume e aumenta la densità. Oltre i 4°C l’acqua si comporta normalmente, cioè ad un aumento di temperatura corrisponde un aumento di volume. In particolare a 4°C l’acqua raggiunge la massima densità e il minimo volume. Inoltre, assumendo la massima densità, diventa più pesante dell’acqua sottostante e scende in profondità (Principio di Archimede). Ma se l’aria esterna arriva a 0°C, il nuovo strato d’acqua si ghiaccia facendo da isolante all’acqua sottostante che resta a 4°C, che resta sotto essendo più densa e quindi più pesante."
+        }
+      ]
+    },
+    {
+      "id": "section-10",
+      "title": "Calore",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Il calore è una forma di energia la cui proprietà principale è quella di passare da un corpo più caldo ad un altro corpo meno caldo. Il riscaldamento di un corpo è un trasferimento di energia, che può avvenire:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "tramite il lavoro delle forze di attrito;",
+            "per passaggio di calore Compiere lavoro e cedere calore e sono due modi equivalenti per fornire energia a un sistema."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-11",
+      "title": "Caloria",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "L’unità di misura nel S.I. è il joule. La caloria (cal) è un’unità di misura che non appartiene al SI, ma è usata spesso: 1 cal equivale alla quantità di calore che fa aumentare di 1 °C (da 14,5 °C a 15,5 °C) la temperatura di 1 g di acqua distillata alla pressione di 1 atm. 1 cal = 4,186 J"
+        }
+      ]
+    },
+    {
+      "id": "section-12",
+      "title": "Capacità Termica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La quantità di calore Q che bisogna fornire a un corpo per aumentare di ∆T la sua temperatura è direttamente proporzionale a ∆T. Il rapporto C tra Q e ∆T è chiamato capacità termica ed è una costante caratteristica del corpo."
+        },
+        {
+          "type": "heading",
+          "text": "C = Q/ΔT"
+        },
+        {
+          "type": "paragraph",
+          "text": "La sua unità di misura nel S.I. è il J/K."
+        }
+      ]
+    },
+    {
+      "id": "section-13",
+      "title": "Calore Specifico",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La capacità termica C è direttamente proporzionale alla massa m del corpo. La costante c è il calore specifico."
+        },
+        {
+          "type": "heading",
+          "text": "c = C/m = Q/(mΔT)"
+        },
+        {
+          "type": "paragraph",
+          "text": "L’unità di misura del calore specifico è J/(kg·K). Se non avvengono cambiamenti di stato, il calore scambiato si calcola con:"
+        },
+        {
+          "type": "heading",
+          "text": "Q = mcΔT"
+        }
+      ]
+    },
+    {
+      "id": "section-14",
+      "title": "Osservazioni",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Se la temperatura del corpo considerato aumenta (∆T positiva), Q è positivo, cioè il corpo assorbe effettivamente calore dall’ambiente;",
+            "Se la temperatura diminuisce (∆T negativa), Q è negativo, cioè il corpo cede calore all’ambiente."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-15",
+      "title": "Equilibrio termico",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Se mettiamo a contatto due corpi con temperature, calori specifici e masse diverse, che scambiano calore fra loro ma non con l’ambiente, si porteranno ad una temperatura di equilibrio, ossia equilibrio termico. La legge che rappresenta il processo dell’equilibrio termico è la seguente: Quando due corpi a diversa temperatura sono messi a contatto si genera un flusso di calore, dal corpo più caldo verso quello più freddo, che dura sino a quando i due corpi non arrivano alla stessa temperatura intermedia tra le due temperature iniziali."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p15.jpg",
+      "visualAlt": "Schema ed esempio visuale: Equilibrio termico"
+    },
+    {
+      "id": "section-16",
+      "title": "Principio zero della termodinamica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "L’equilibrio termico è strettamente connesso al cosiddetto Principio zero della termodinamica, secondo cui Se due corpi A e B sono separatamente in equilibrio termico con un corpo C, allora sono in equilibrio termico tra loro."
+        }
+      ]
+    },
+    {
+      "id": "section-17",
+      "title": "Passaggi di stato",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La materia può cambiare il proprio stato di aggregazione assorbendo o liberando energia. Al variare di temperatura e pressione la materia può transitare da uno stato ad un altro, effettuando un PASSAGGIO DI STATO."
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p17.jpg",
+      "visualAlt": "Schema ed esempio visuale: Passaggi di stato"
+    },
+    {
+      "id": "section-18",
+      "title": "Osservazioni",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Durante i passaggi di stato la temperatura dei corpi è costante, ad esempio se in un bicchiere abbiamo acqua e ghiaccio la temperatura è 0°C sino a quando tutto il ghiaccio non è diventato acqua. Il calore assorbito (o ceduto) dal corpo durante il passaggio di stato si chiama Calore Latente ed è utilizzato dal corpo solo ed esclusivamente per effettuare il passaggio di stato stesso, quindi non produce un aumento (o diminuzione) della temperatura del corpo."
+        }
+      ]
+    },
+    {
+      "id": "section-19",
+      "title": "Propagazione del Calore",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Conduzione: È la trasmissione di calore da un corpo ad un altro senza spostamento delle sue molecole. Un caso tipico è il riscaldamento di un’asta metallica mediante una fiamma applicata alle sue estremità. L’energia termica si trasmette per contatto da molecola a molecola dall’estremità a più alta temperatura verso quella fredda. La conduzione è tipica dei solidi.",
+            "Convezione: È la trasmissione di calore che avviene nei fluidi (liquidi e gas) con spostamento delle molecole. Se un corpo caldo riscalda l’aria, questa diventa sempre più leggera e sale verso l’alto; tale movimento richiama altra aria verso il corpo caldo e così via. La spinta naturale di salita dell’aria, origina un movimento lento della stessa (moti convettivi), riscaldando l’ambiente."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-20",
+      "title": "Propagazione del calore",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            "Irraggiamento: È la trasmissione di calore senza contatto. In questo caso si trasmette il calore mediante onde o radiazioni. Un esempio è il calore che percepiamo da una lampadina accesa quando avviciniamo la mano. Questo è il modo in cui il Sole riscalda la Terra."
+          ]
+        }
+      ]
+    },
+    {
+      "id": "section-21",
+      "title": "Gas ideali (o perfetti)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "I gas naturali non sono facilmente descrivibili. Pertanto è stato formulato un modello di gas, i gas ideali o perfetti, su cui elaborare delle leggi. Per gas ideale o perfetto si intende una sostanza costituita da un enorme numero di particelle identiche, pensate come sferette rigide, indeformabili e puntiformi. Le direzioni in cui si muovono le particelle si suppongono uguali e non ci sono forze d’interazione tra esse. Inoltre, gli urti tra esse e le pareti del contenitore sono perfettamente elastici (si conserva l’energia cinetica). L’idrogeno si comporta come un gas ideale. Per poter valutare il comportamento del gas dobbiamo inserirlo in un recipiente chiuso che ci permetta di agire e di controllare gli andamenti delle grandezze fisiche PRESSIONE, VOLUME e TEMPERATURA."
+        }
+      ]
+    },
+    {
+      "id": "section-22",
+      "title": "Le trasformazioni dei gas",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Le trasformazioni più interessanti che può subire un gas sono quelle che si ottengono tenendo costante una delle tre grandezze p, V, T e facendo variare le altre due. Una trasformazione si dice reversibile se è possibile portare il sistema dallo stato finale allo stato iniziale e viceversa. Una trasformazione si dice irreversibile se non è reversibile."
+        }
+      ]
+    },
+    {
+      "id": "section-23",
+      "title": "Prima Legge di Gay-Lussac (legge di Charles)",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In una trasformazione isobara (p costante) la variazione di volume ∆V è direttamente proporzionale alla variazione di temperatura ∆t, ossia"
+        }
+      ]
+    },
+    {
+      "id": "section-24",
+      "title": "Seconda Legge di Gay-Lussac",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In una trasformazione isocora (V costante) la variazione di pressione ∆p è direttamente proporzionale alla variazione di temperatura ∆t, ossia"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p24.jpg",
+      "visualAlt": "Schema ed esempio visuale: Seconda Legge di Gay-Lussac"
+    },
+    {
+      "id": "section-25",
+      "title": "Legge di Boyle",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "In una trasformazione isoterma (T costante) la pressione p e il volume V del gas sono inversamente proporzionali, cioè variano mantenendo costante il loro prodotto, ossia"
+        }
+      ]
+    },
+    {
+      "id": "section-26",
+      "title": "Equazione di Stato dei Gas Perfetti",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "p'V=n-R-T n= Numero di moli di gas dove J"
+        },
+        {
+          "type": "heading",
+          "text": "R=8,31 —— (Costante Universale dei Gas)"
+        },
+        {
+          "type": "paragraph",
+          "text": "mol-K L'equazione di stato dei gas perfetti racchiude le tre leggi dei gas: ISOBARE [p costante] > pV=n:RT3SV MRI = cost-7"
+        },
+        {
+          "type": "heading",
+          "text": "P"
+        },
+        {
+          "type": "paragraph",
+          "text": "ISOCORE |V costante] > pV=nRT= p3\" EI cost."
+        },
+        {
+          "type": "heading",
+          "text": "ISOTERME [7 costante] > pWV=n:RT23>pV=cost"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p26.jpg",
+      "visualAlt": "Schema ed esempio visuale: Equazione di Stato dei Gas Perfetti"
+    },
+    {
+      "id": "section-27",
+      "title": "Legge di Van der Waals",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Rappresenta un'estensione della legge dei gas perfetti ai gas reali. con l'introduzione di due valori a e b (dette costanti di van der Waals) che dipendono dalla sostanza in esame."
+        }
+      ]
+    },
+    {
+      "id": "section-28",
+      "title": "Varie definizioni",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Un sistema termodinamico può essere:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Isolato: se non scambia con l’esterno né materia né energia.",
+            "Chiuso: se può scambiare energia ma non materia.",
+            "Aperto: se può scambiare sia materia che energia Una trasformazione adiabatica è una trasformazione che avviene senza scambio di calore con l’esterno."
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "Le trasformazioni cicliche sono le trasformazioni che riportano il gas nelle condizioni iniziali di pressione, volume e temperatura. Energia interna in un gas perfetto: è l’energia somma di tutte le energie cinetiche, direttamente proporzionale alla temperatura assoluta."
+        }
+      ]
+    },
+    {
+      "id": "section-29",
+      "title": "Primo Principio della Termodinamica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La variazione di energia interna ΔU è uguale alla differenza tra il calore scambiato ed il lavoro scambiato tra sistema e ambiente. Si assume positivo il calore assorbito dal sistema (+Q). Si assume negativo il calore ceduto all’ambiente (-Q). È positivo il lavoro compiuto dal sistema (+L). È negativo il lavoro fatto sul sistema (-L)."
+        }
+      ]
+    },
+    {
+      "id": "section-30",
+      "title": "Osservazioni",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "L'ENERGIA INTERNA posseduta da un gas è direttamente proporzionale alla variazione di"
+        },
+        {
+          "type": "heading",
+          "text": "TEMPERATURA:"
+        },
+        {
+          "type": "heading",
+          "text": "AU >05 AT >0"
+        },
+        {
+          "type": "heading",
+          "text": "AU=05AT=0"
+        },
+        {
+          "type": "heading",
+          "text": "AU<0OSAT<0"
+        },
+        {
+          "type": "paragraph",
+          "text": "IL LAVORO esercitato dal o sul gas è direttamente proporzionale al VOLUME:"
+        },
+        {
+          "type": "heading",
+          "text": "L>Q095A4V>0"
+        },
+        {
+          "type": "heading",
+          "text": "L=05A4V=0"
+        },
+        {
+          "type": "heading",
+          "text": "L<065AV<0"
+        }
+      ],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p30.jpg",
+      "visualAlt": "Schema ed esempio visuale: Osservazioni"
+    },
+    {
+      "id": "section-31",
+      "title": "Macchina termica",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Una macchina termica è un dispositivo che compie un processo ciclico, durante il quale il calore viene trasformato in parte in lavoro meccanico. Si considerino due serbatoi, uno a T fredda e uno a T calda."
+        },
+        {
+          "type": "heading",
+          "text": "Calore assorbito dal serbatoio caldo: Q"
+        },
+        {
+          "type": "paragraph",
+          "text": "c"
+        },
+        {
+          "type": "heading",
+          "text": "Calore ceduto al serbatoio freddo: Q"
+        },
+        {
+          "type": "paragraph",
+          "text": "f"
+        },
+        {
+          "type": "heading",
+          "text": "Viene compiuto il lavoro L= Q –Q"
+        },
+        {
+          "type": "paragraph",
+          "text": "c f Si definisce rendimento di una macchina termica il rapporto tra la quantità di calore che viene trasformata in lavoro e la quantità di calore che la macchina assorbe dalla sorgente più calda, ossia"
+        }
+      ]
+    },
+    {
+      "id": "section-32",
+      "title": "Ciclo di Carnot",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "La macchina di Carnot è una macchina termica ideale che compie un ciclo reversibile formato da due trasformazioni isoterme e due adiabatiche. Il rendimento della macchina di Carnot è il massimo raggiungibile, nonostante sia sempre minore di 1."
+        },
+        {
+          "type": "heading",
+          "text": "Teorema di Carnot"
+        },
+        {
+          "type": "paragraph",
+          "text": "Non è possibile che una macchina termica operante tra due sorgenti di calore poste a due temperature differenti abbia un rendimento superiore a quello di una macchina di Carnot che opera seguendo un ciclo reversibile."
+        }
+      ]
+    },
+    {
+      "id": "section-33",
+      "title": "Macchina di Carnot",
+      "blocks": [],
+      "visual": "study-content/visuals/fisica-termodinamica-figure-p33.jpg",
+      "visualAlt": "Schema ed esempio visuale: Macchina di Carnot"
+    },
+    {
+      "id": "section-34",
+      "title": "Secondo Principio della Termodinamica",
+      "blocks": [
+        {
+          "type": "heading",
+          "text": "Enunciato di Clausius"
+        },
+        {
+          "type": "paragraph",
+          "text": "È impossibile che avvenga uno scambio di calore da un corpo freddo ad un corpo caldo. Il passaggio da un corpo freddo ad uno caldo può avvenire con l’impiego di un lavoro esterno."
+        },
+        {
+          "type": "heading",
+          "text": "Enunciato di Kelvin"
+        },
+        {
+          "type": "paragraph",
+          "text": "È impossibile realizzare un trasformazione ciclica che trasformi completamente in lavoro il calore assorbito da una sorgente. (Può avvenire il contrario)"
+        }
+      ]
+    },
+    {
+      "id": "section-35",
+      "title": "Entropia",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "L’entropia è indice del “disordine” che c’è tra le particelle in un sistema."
+        },
+        {
+          "type": "paragraph",
+          "text": "Per una trasformazione reversibile infinitesima: dS = δQrev/T. Per uno scambio reversibile isotermo: ΔS = Qrev/T."
+        },
+        {
+          "type": "paragraph",
+          "text": "La sua unità di misura nel S.I. è J/K."
+        },
+        {
+          "type": "heading",
+          "text": "Osservazioni"
+        },
+        {
+          "type": "paragraph",
+          "text": "L’entropia di un sistema isolato non diminuisce: resta costante nei processi reversibili e aumenta in quelli irreversibili. In una trasformazione adiabatica reversibile l’entropia resta costante; una trasformazione adiabatica irreversibile può invece aumentarla. In qualunque ciclo completo la variazione di entropia del sistema è nulla perché il sistema torna allo stato iniziale, mentre nei cicli irreversibili aumenta l’entropia complessiva di sistema e ambiente."
+        }
+      ]
+    }
+  ],
+  "remainingBrokenCharacters": 0
+}

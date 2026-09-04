@@ -26,7 +26,10 @@ test('tutte le dispense hanno una lezione digitale leggibile',()=>{
   assert.equal(content.id,resource.id);
   assert.ok(content.sections.length>0,resource.id);
   assert.equal('source' in content,false,`${resource.id}: riferimento PDF esposto`);
-  assert.equal(JSON.stringify(content).includes('\ufffd'),false,resource.id);
+  const serialized=JSON.stringify(content);
+  assert.equal(serialized.includes('\ufffd'),false,resource.id);
+  assert.equal(/\(cid:\d+\)/i.test(serialized),false,`${resource.id}: codice CID non convertito`);
+  assert.equal(/[]/.test(serialized),false,`${resource.id}: simbolo elenco non convertito`);
   assert.ok(content.sections.every(section=>section.visual||(section.blocks||[]).length),`${resource.id}: sezione vuota`);
   for(const section of content.sections)if(section.visual)assert.ok(fs.existsSync(path.join(root,section.visual)),section.visual);
  }

@@ -1,1 +1,40 @@
-{"id":"logica-combinatorio-schema","title":"Schema del calcolo combinatorio","pageCount":1,"wordCount":93,"visualCount":1,"sections":[{"id":"section-1","title":"Se non l'avete già fatto vi consiglio vivamente di leggere…","blocks":[{"type":"paragraph","text":"Se non l'avete già fatto vi consiglio vivamente di leggere almeno una volta le singole lezioni correlate, che spiegano nel dettaglio le caratteristiche di ogni metodo del Calcolo Combinatorio e che presentano svariati esempi."},{"type":"heading","text":"Come riconoscere la formula da usare"},{"type":"paragraph","text":"Veniamo ora al vivo della lezione. Come capire quale formula usare? Con il seguente schemino arriverete in un batter d'occhio alla soluzione:"},{"type":"list","items":["Innanzitutto leggiamo con attenzione il testo del problema ed individuiamo (cid:1) n: numero totale degli elementi;"]},{"type":"paragraph","text":"(cid:1) k: numero degli elementi coi quali dobbiamo formare i raggruppamenti;"}],"visual":"study-content/visuals/logica-combinatorio-schema-figure-p1.jpg","visualAlt":"Schema ed esempio visuale: Schema del calcolo combinatorio"}],"remainingBrokenCharacters":0}
+{
+  "id": "logica-combinatorio-schema",
+  "title": "Schema del calcolo combinatorio",
+  "pageCount": 1,
+  "wordCount": 93,
+  "visualCount": 1,
+  "sections": [
+    {
+      "id": "section-1",
+      "title": "Se non l'avete già fatto vi consiglio vivamente di leggere…",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "text": "Se non l'avete già fatto vi consiglio vivamente di leggere almeno una volta le singole lezioni correlate, che spiegano nel dettaglio le caratteristiche di ogni metodo del Calcolo Combinatorio e che presentano svariati esempi."
+        },
+        {
+          "type": "heading",
+          "text": "Come riconoscere la formula da usare"
+        },
+        {
+          "type": "paragraph",
+          "text": "Veniamo ora al vivo della lezione. Come capire quale formula usare? Con il seguente schemino arriverete in un batter d'occhio alla soluzione:"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Innanzitutto leggiamo con attenzione il testo del problema ed individuiamo n: numero totale degli elementi;"
+          ]
+        },
+        {
+          "type": "paragraph",
+          "text": "k: numero degli elementi coi quali dobbiamo formare i raggruppamenti;"
+        }
+      ],
+      "visual": "study-content/visuals/logica-combinatorio-schema-figure-p1.jpg",
+      "visualAlt": "Schema ed esempio visuale: Schema del calcolo combinatorio"
+    }
+  ],
+  "remainingBrokenCharacters": 0
+}

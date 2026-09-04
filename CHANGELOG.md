@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.19.0 - 2026-09-04
+
+- Revisione completa dell’integrità testuale dei Percorsi di studio.
+- Eliminati codici CID, quadrati e simboli elenco non convertiti dalle dispense.
+- Ricostruite le formule principali di vettori, dinamica, fluidi, lavoro ed energia, statica e termodinamica.
+- Corrette definizioni ed esempi incoerenti in chimica, reti, Access ed Excel.
+- Aggiunto un test automatico che impedisce di pubblicare nuovamente caratteri corrotti.
+
 ## 3.18.0 - 2026-09-04
 
 - Tendina per ogni candidato nella Dashboard con lo storico delle Sfide del giorno.
