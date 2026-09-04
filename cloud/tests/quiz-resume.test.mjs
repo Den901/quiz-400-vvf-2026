@@ -4,6 +4,7 @@ import test from 'node:test';
 
 const source = await readFile(new URL('../../app.js', import.meta.url), 'utf8');
 const cloudStyles = await readFile(new URL('../../styles-cloud.css', import.meta.url), 'utf8');
+const themeStyles = await readFile(new URL('../../styles-theme.css', import.meta.url), 'utf8');
 const extraStyles = await readFile(new URL('../../styles-extra.css', import.meta.url), 'utf8');
 
 test('quiz per materia consente di scorrere senza cambiare lo stato delle domande', () => {
@@ -23,6 +24,7 @@ test('moderatore vede dashboard e prove ma non i controlli distruttivi', () => {
   assert.match(source, /if\(currentUser\?\.role==='moderator'\)details\.querySelectorAll\('\[data-delete-dashboard-attempt\]'/);
   assert.match(source, /async function refreshCurrentRole\(\)/);
   assert.match(source, /visibilitychange/);
+  assert.match(themeStyles, /dashboard-candidate-details\[open\]>summary/);
 });
 
 test('daily challenge saves a selected answer immediately', () => {

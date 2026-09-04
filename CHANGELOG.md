@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.20.2 - 2026-09-04
+
+- Corretto lo sfondo bianco del nome candidato nello storico delle fasce in modalità scura.
+- Uniformati intestazione del candidato e tentativi al tema attivo.
+- Corretto il contrasto del riquadro informativo e del contatore nella pagina Utenti.
+
 ## 3.20.1 - 2026-09-04
 
 - Corretto l’accesso dei moderatori alla Dashboard e al dettaglio delle prove concluse.

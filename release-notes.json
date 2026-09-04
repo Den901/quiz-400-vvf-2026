@@ -1,12 +1,12 @@
 {
-  "version": "3.20.1",
+  "version": "3.20.2",
   "showToUsers": false,
-  "title": "Correzione accesso moderatori",
-  "summary": "Ripristinata l’apertura della Dashboard e delle prove concluse della Sfida del giorno per i moderatori.",
+  "title": "Colori Dashboard uniformati",
+  "summary": "Corretto lo sfondo del nome candidato quando si apre lo storico della fascia.",
   "items": [
-    "Il pulsante Apri prova è ora disponibile ai moderatori nella classifica giornaliera.",
-    "Il ruolo aggiornato viene riconosciuto automaticamente anche nelle sessioni già aperte.",
-    "I colori dei popup Dashboard e prove sono uniformi al tema chiaro o scuro."
+    "Il nome del candidato mantiene i colori corretti quando viene aperto.",
+    "Le righe dei tentativi e l’intestazione usano lo stesso tema.",
+    "Anche il riquadro informativo Utenti e il contatore hanno colori leggibili."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",
