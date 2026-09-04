@@ -1,14 +1,14 @@
 {
-  "version": "3.19.0",
+  "version": "3.19.1",
   "showToUsers": false,
-  "title": "Percorsi di studio corretti",
-  "summary": "Ripuliti caratteri illeggibili, formule e definizioni nelle dispense digitali.",
+  "title": "Navigazione rapida nei quiz per materia",
+  "summary": "Aggiunte due frecce per scorrere velocemente le domande senza rispondere.",
   "items": [
-    "Eliminati i codici CID e i quadrati provenienti dalla conversione dei documenti.",
-    "Ricostruite formule e spiegazioni di vettori, dinamica, fluidi, energia, statica e termodinamica.",
-    "Corrette definizioni ed esempi incoerenti in chimica e informatica."
+    "Le frecce precedente e successiva sono disponibili sopra ogni domanda dei quiz per materia.",
+    "Lo scorrimento non segna la domanda come svolta, non risposta o da ripetere.",
+    "Comandi adattati a desktop, tablet e mobile."
   ],
-  "actionLabel": "Apri Percorsi",
-  "actionHash": "#study-paths",
+  "actionLabel": "Apri Quiz",
+  "actionHash": "#categories",
   "footnote": "L’aggiornamento non modifica quiz, statistiche, classifiche o progressi personali."
 }

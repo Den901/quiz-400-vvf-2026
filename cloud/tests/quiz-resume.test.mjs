@@ -4,6 +4,16 @@ import test from 'node:test';
 
 const source = await readFile(new URL('../../app.js', import.meta.url), 'utf8');
 const cloudStyles = await readFile(new URL('../../styles-cloud.css', import.meta.url), 'utf8');
+const extraStyles = await readFile(new URL('../../styles-extra.css', import.meta.url), 'utf8');
+
+test('quiz per materia consente di scorrere senza cambiare lo stato delle domande', () => {
+  assert.match(source, /data-study-browse="-1"/);
+  assert.match(source, /data-study-browse="1"/);
+  const functionBody = source.match(/function browseStudyQuestion\(direction\)\{(.+?)\}\nfunction/s)?.[1] || '';
+  assert.match(functionBody, /quiz\.index=target/);
+  assert.doesNotMatch(functionBody, /progressFor|history\[[^\]]+\]\s*=|rememberSubjectCursor|persist/);
+  assert.match(extraStyles, /\.study-question-browser/);
+});
 
 test('daily challenge saves a selected answer immediately', () => {
   const functionBody = source.match(/function dailySelectAnswer\(choice\)\{([^}]+)\}/)?.[1] || '';

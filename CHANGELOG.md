@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.19.1 - 2026-09-04
+
+- Frecce precedente e successiva nei quiz per materia.
+- Navigazione veloce senza modificare risposta, stato o statistiche della domanda.
+- Barra di scorrimento compatta e adattiva su desktop, tablet e mobile.
+
 ## 3.19.0 - 2026-09-04
 
 - Revisione completa dell’integrità testuale dei Percorsi di studio.
