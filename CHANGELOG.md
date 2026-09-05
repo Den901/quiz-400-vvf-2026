@@ -1,11 +1,5 @@
 # Changelog
 
-## 3.21.0 - 2026-09-06
-
-- La Sfida del giorno privilegia per il 70% i quesiti che la comunità sbaglia o lascia più spesso.
-- Il calcolo usa gli esiti reali con una correzione statistica, evitando che poche risposte falsino la difficoltà.
-- Il restante 30% resta variabile; composizione, esclusione dei brani e rotazione anti-ripetizione non cambiano.
-
 ## 3.20.2 - 2026-09-04
 
 - Corretto lo sfondo bianco del nome candidato nello storico delle fasce in modalità scura.

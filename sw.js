@@ -1,4 +1,4 @@
-const CACHE='quiz400vvf-v86';
+const CACHE='quiz400vvf-v85';
 const ASSETS=['./','./index.html','./styles.css?v=83','./styles-extra.css?v=83','./styles-guided.css?v=83','./styles-official.css?v=83','./styles-cloud.css?v=83','./styles-theme.css?v=83','./styles-notes.css?v=83','./styles-study-paths.css?v=83','./app.js?v=83','./challenge-reminders.js?v=83','./quiz-selection.js?v=83','./logic-topics.js?v=83','./subject-topics.js?v=83','./tutor.js?v=83','./notes-ui.js?v=83','./study-notes.js?v=83','./practice-notes.js?v=83','./element-properties.js?v=83','./study-paths.js?v=83','./study-paths-ui.js?v=83','./study-content-ui.js?v=83','./study-checkpoint.js?v=83','./data.js','./quiz-dataset.json','./manifest.webmanifest','./logo-vvf.jpg'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(async c=>{await c.addAll(ASSETS);try{const list=await fetch('./quiz-images.json').then(r=>r.json());await c.addAll(['./quiz-images.json',...list])}catch{}}).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
