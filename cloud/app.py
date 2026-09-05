@@ -1009,6 +1009,57 @@ def deterministic_questions(source: list[dict[str, Any]], count: int, seed: str)
     return sorted(source, key=lambda row: hashlib.sha256(f"{seed}|{row['id']}".encode("utf-8")).digest())[:count]
 
 
+def community_question_difficulty(db: Session) -> dict[str, tuple[float, int]]:
+    """Estimate difficulty from real answers, with a conservative Bayesian prior."""
+    totals: dict[str, list[int]] = {}
+    for state in db.scalars(select(UserState.data)).all():
+        progress = state.get("progress") if isinstance(state, dict) else None
+        if not isinstance(progress, dict):
+            continue
+        for question_id, item in progress.items():
+            if not isinstance(item, dict):
+                continue
+            correct = max(0, int(item.get("correct", 0) or 0))
+            wrong = max(0, int(item.get("wrong", 0) or 0))
+            skipped = max(0, int(item.get("skipped", 0) or 0))
+            if not correct and not wrong and not skipped:
+                continue
+            aggregate = totals.setdefault(str(question_id), [0, 0, 0])
+            aggregate[0] += correct
+            aggregate[1] += wrong
+            aggregate[2] += skipped
+    result: dict[str, tuple[float, int]] = {}
+    for question_id, (correct, wrong, skipped) in totals.items():
+        observations = correct + wrong + skipped
+        # Prior: 35% di errore su quattro risposte; uno storico minimo non domina la selezione.
+        score = (wrong + skipped * 0.5 + 1.4) / (observations + 4)
+        result[question_id] = (score, observations)
+    return result
+
+
+def difficulty_aware_questions(
+    source: list[dict[str, Any]],
+    count: int,
+    seed: str,
+    difficulty: dict[str, tuple[float, int]],
+) -> list[dict[str, Any]]:
+    if len(source) < count:
+        raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La banca dati non contiene abbastanza quesiti per creare la sfida giornaliera.")
+    hard_count = min(count, max(1, round(count * 0.7)))
+    ranked = sorted(
+        source,
+        key=lambda row: (
+            -difficulty.get(str(row["id"]), (0.35, 0))[0],
+            -min(difficulty.get(str(row["id"]), (0.35, 0))[1], 20),
+            hashlib.sha256(f"{seed}|difficolta|{row['id']}".encode("utf-8")).digest(),
+        ),
+    )
+    hard = ranked[:hard_count]
+    hard_ids = {str(row["id"]) for row in hard}
+    varied = deterministic_questions([row for row in source if str(row["id"]) not in hard_ids], count - hard_count, f"{seed}|varieta")
+    return hard + varied
+
+
 def daily_challenge_question_usage(challenge_date: date, db: Session) -> dict[str, tuple[int, date]]:
     usage: dict[str, tuple[int, date]] = {}
     previous_challenges = db.scalars(
@@ -1029,12 +1080,13 @@ def rotating_daily_questions(
     count: int,
     seed: str,
     usage: dict[str, tuple[int, date]],
+    difficulty: dict[str, tuple[float, int]],
 ) -> list[dict[str, Any]]:
     if len(source) < count:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La banca dati non contiene abbastanza quesiti per creare la sfida giornaliera.")
 
     never_used = [row for row in source if str(row["id"]) not in usage]
-    selected = deterministic_questions(never_used, min(count, len(never_used)), seed) if never_used else []
+    selected = difficulty_aware_questions(never_used, min(count, len(never_used)), seed, difficulty) if never_used else []
     remaining = count - len(selected)
     if not remaining:
         return selected
@@ -1045,6 +1097,7 @@ def rotating_daily_questions(
         key=lambda row: (
             usage.get(str(row["id"]), (0, date.min))[0],
             usage.get(str(row["id"]), (0, date.min))[1],
+            -difficulty.get(str(row["id"]), (0.35, 0))[0],
             hashlib.sha256(f"{seed}|riciclo|{row['id']}".encode("utf-8")).digest(),
         )
     )
@@ -1122,6 +1175,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     logic_plan = composition["logicPlan"]
     active_bank = available_question_bank(db)
     usage = daily_challenge_question_usage(challenge_date, db)
+    difficulty = community_question_difficulty(db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
     for category, count in plan.items():
@@ -1129,13 +1183,13 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
             continue
         if category != "logica":
             source = [row for row in active_bank if macro_question_category(row.get("category")) == category]
-            selected.extend(rotating_daily_questions(source, count, f"{seed}|{category}", usage))
+            selected.extend(rotating_daily_questions(source, count, f"{seed}|{category}", usage, difficulty))
             continue
         logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]
         for topic, topic_count in logic_plan.items():
             if topic_count:
                 source = [row for row in logic_source if challenge_logic_topic(row) == topic]
-                selected.extend(rotating_daily_questions(source, topic_count, f"{seed}|logica|{topic}", usage))
+                selected.extend(rotating_daily_questions(source, topic_count, f"{seed}|logica|{topic}", usage, difficulty))
     if len(selected) != 40 or len({str(row["id"]) for row in selected}) != 40:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
     ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())

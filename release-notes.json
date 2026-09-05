@@ -1,12 +1,12 @@
 {
-  "version": "3.20.2",
+  "version": "3.21.0",
   "showToUsers": false,
-  "title": "Colori Dashboard uniformati",
-  "summary": "Corretto lo sfondo del nome candidato quando si apre lo storico della fascia.",
+  "title": "Sfida del giorno più impegnativa",
+  "summary": "La selezione privilegia i quesiti che risultano più difficili in base agli errori reali della comunità.",
   "items": [
-    "Il nome del candidato mantiene i colori corretti quando viene aperto.",
-    "Le righe dei tentativi e l’intestazione usano lo stesso tema.",
-    "Anche il riquadro informativo Utenti e il contatore hanno colori leggibili."
+    "Il 70% della selezione di ogni materia privilegia i quesiti con maggiore difficoltà osservata.",
+    "Il restante 30% mantiene varietà e imprevedibilità.",
+    "Restano attivi il divieto di brani e la rotazione anti-ripetizione."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",

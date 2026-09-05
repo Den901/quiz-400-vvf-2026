@@ -30,7 +30,7 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
+from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, difficulty_aware_questions, rotating_daily_questions, set_setting
 
 
 def login(client: TestClient, username: str, password: str):
@@ -46,11 +46,22 @@ def test_daily_challenge_rotation_prefers_unseen_then_oldest_questions():
         "d": (2, today - timedelta(days=4)),
     }
 
-    selected = rotating_daily_questions(source, 2, "rotation-test", usage)
+    selected = rotating_daily_questions(source, 2, "rotation-test", usage, {})
     selected_ids = [row["id"] for row in selected]
 
     assert selected_ids[0] == "c"
     assert selected_ids[1] == "a"
+
+
+def test_daily_challenge_prefers_harder_questions_but_keeps_variety():
+    source = [{"id": str(index)} for index in range(10)]
+    difficulty = {str(index): (index / 10, 10) for index in range(10)}
+
+    selected = difficulty_aware_questions(source, 5, "difficulty-test", difficulty)
+    selected_ids = {row["id"] for row in selected}
+
+    assert {"9", "8", "7", "6"}.issubset(selected_ids)
+    assert len(selected_ids) == 5
 
 
 def test_complete_cloud_account_and_statistics_flow():
@@ -60,8 +71,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.20.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.20.2"
+        assert runtime.json()["version"] == "3.21.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.21.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
@@ -556,7 +567,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.20.2"
+        assert update_status.json()["currentVersion"] == "3.21.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
