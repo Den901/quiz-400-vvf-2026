@@ -1,0 +1,47 @@
+{
+  "sourceQuestions": 364,
+  "imported": 356,
+  "skipped": 8,
+  "skippedItems": [
+    {
+      "quizId": 849360359,
+      "reason": "duplicato della banca dati",
+      "question": "Sandro Pertini fu Presidente della Repubblica Italiana negli anni:"
+    },
+    {
+      "quizId": 84784832,
+      "reason": "duplicato della banca dati",
+      "question": "Quali direttive di politica estera adottò Antonio Rudinì nel marzo del 1896, quando fu incaricato di sostituire Francesco Crispi alla guida dell'Esecutivo?"
+    },
+    {
+      "quizId": 84784838,
+      "reason": "duplicato della banca dati",
+      "question": "Quali \"richieste\" erano espresse dal movimento dei Fasci siciliani?"
+    },
+    {
+      "quizId": 84784880,
+      "reason": "duplicato della banca dati",
+      "question": "Alla morte del Cavour, nel 1861, chi gli succedette alla direzione del Governo dello Stato?"
+    },
+    {
+      "quizId": 84784888,
+      "reason": "duplicato della banca dati",
+      "question": "Chi fu il \"generale\" scelto dal re Umberto I come Primo Ministro nel 1898?"
+    },
+    {
+      "quizId": 84784893,
+      "reason": "duplicato della banca dati",
+      "question": "Quale fu la causa delle \"dimissioni\" di Crispi nel 1896?"
+    },
+    {
+      "quizId": 84784897,
+      "reason": "duplicato della banca dati",
+      "question": "Dopo l'arresto, nel 1867, dove fu trasferito e tenuto prigioniero Garibaldi?"
+    },
+    {
+      "quizId": 84784903,
+      "reason": "duplicato della banca dati",
+      "question": "Dove si costituirono i \"Fasci dei lavoratori\"?"
+    }
+  ]
+}

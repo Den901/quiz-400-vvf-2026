@@ -1,14 +1,14 @@
 {
-  "version": "3.20.2",
+  "version": "3.21.1",
   "showToUsers": false,
-  "title": "Colori Dashboard uniformati",
-  "summary": "Corretto lo sfondo del nome candidato quando si apre lo storico della fascia.",
+  "title": "Banca dati di storia ampliata",
+  "summary": "Aggiunte 356 nuove domande di storia, distribuite nei sottoargomenti esistenti.",
   "items": [
-    "Il nome del candidato mantiene i colori corretti quando viene aperto.",
-    "Le righe dei tentativi e l’intestazione usano lo stesso tema.",
-    "Anche il riquadro informativo Utenti e il contatore hanno colori leggibili."
+    "Importate tutte le domande valide presenti nel file fornito.",
+    "Esclusi automaticamente 8 quesiti già presenti nella banca dati.",
+    "Risposte corrette e testi sono stati verificati prima della pubblicazione."
   ],
-  "actionLabel": "Apri Dashboard",
-  "actionHash": "#dashboard",
-  "footnote": "L’aggiornamento non modifica quiz, statistiche, classifiche o progressi personali."
+  "actionLabel": "Apri Storia",
+  "actionHash": "#category/storia",
+  "footnote": "L’aggiornamento non modifica statistiche, classifiche o progressi personali."
 }

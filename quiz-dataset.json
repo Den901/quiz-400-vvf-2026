@@ -197647,5 +197647,4844 @@
     "correct": 0,
     "explanation": "Soluzione verificata: la risposta corretta è “Figura 1”.",
     "image": "quiz-images/logic-2026/logic-4dc525a9502d098c6ceefb68.png"
+  },
+  {
+    "id": "simone-history-65906",
+    "category": "storia",
+    "text": "La «Legge delle Guarentigie» del 1871:",
+    "answers": [
+      "disponeva la confisca dei beni della Chiesa",
+      "sopprimeva la libertà di culto",
+      "riconosceva al papa il libero esercizio delle sue funzioni di capo della Chiesa",
+      "limitava il libero esercizio del potere pontificio"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: riconosceva al papa il libero esercizio delle sue funzioni di capo della Chiesa",
+    "image": ""
+  },
+  {
+    "id": "simone-history-8439259",
+    "category": "storia",
+    "text": "Cosa prevedeva la Convenzione di settembre del 1864?",
+    "answers": [
+      "L'invio di truppe francesi a Roma per difendere il papa.",
+      "Il trasferimento della capitale d'Italia a Firenze.",
+      "La spedizione dei Mille.",
+      "Il trasferimento della capitale d'Italia a Roma."
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Il trasferimento della capitale d'Italia a Firenze.",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784835",
+    "category": "storia",
+    "text": "Quali istituti amministrativi furono adottati dal Regno d'Italia all'indomani dell'unità?",
+    "answers": [
+      "quelli già esistenti nel Regno di Sardegna",
+      "quelli già esistenti nei Ducati di Parma e Piacenza",
+      "quelli già esistenti nel Regno delle due Sicilie",
+      "quelli già esistenti nel Granducato di Toscana"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: quelli già esistenti nel Regno di Sardegna",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784842",
+    "category": "storia",
+    "text": "In che anno fu firmato il patto della Triplice Alleanza?",
+    "answers": [
+      "1939",
+      "1882",
+      "1789",
+      "1815"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1882",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777833",
+    "category": "storia",
+    "text": "CHI ERA ALLA GUIDA DEL GOVERNO CHE, NELL'ESTATE DEL 1862, PRESE LA DECISIONE DI INVIARE L'ESERCITO CONTRO GARIBALDI, CHE MUOVEVA ALLA VOLTA DI ROMA PER LIBERARLA?",
+    "answers": [
+      "URBANO RATTAZZI",
+      "GIOVANNI LANZA",
+      "MARCO MINGHETTI",
+      "BETTINO RICASOLI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: URBANO RATTAZZI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777834",
+    "category": "storia",
+    "text": "QUALE RISULTATO ECONOMICO RIUSCI' AD OTTENERE LA DESTRA STORICA NEL 1876?",
+    "answers": [
+      "LA RIDUZIONE DELLA PRESSIONE FISCALE SULLE CAMPAGNE",
+      "IL PAREGGIO DEL BILANCIO",
+      "UNA FORTE RIDUZIONE DEL DEBITO PUBBLICO",
+      "UN FORTE INCREMENTO DELLE ESPORTAZIONI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL PAREGGIO DEL BILANCIO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777835",
+    "category": "storia",
+    "text": "IL 3 GENNAIO 1863 USCI' A MILANO IL PRIMO NUMERO DI UN PICCOLO GIORNALE OPERAIO, PER INIZIATIVA DI MAZZINI. COME SI CHIAMAVA?",
+    "answers": [
+      "L'ITALIA DEL POPOLO",
+      "IL DOVERE",
+      "FEDE E AVVENIRE",
+      "LA RAGIONE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FEDE E AVVENIRE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777836",
+    "category": "storia",
+    "text": "CHI FU IL GUARDASIGILLI A CUI SI DEVE L'ELABORAZIONE DEL CODICE CIVILE DEL 1865?",
+    "answers": [
+      "MICHELE PIRONTI",
+      "GIUSEPPE PISANELLI",
+      "PASQUALE STANISLAO MANCINI",
+      "ENRICO PESSINA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIUSEPPE PISANELLI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777837",
+    "category": "storia",
+    "text": "COME CAMBIO' LA COMPOSIZIONE DEL SENATO DEL REGNO NELLA PRIMA LEGISLATURA POSTUNITARIA?",
+    "answers": [
+      "I SENATORI DIMINUIRONO PER IL SEMPRE MINORE PESO POLITICO DELLA CAMERA ALTA",
+      "FU STABILITO IL NUMERO MINIMO DI 200 SENATORI",
+      "FU STABILITO IL NUMERO MASSIMO DI 300 SENATORI",
+      "I SENATORI AUMENTARONO PER LA NOMINA DI PERSONALITA' DELLE NUOVE PROVINCE ANNESSE"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: I SENATORI AUMENTARONO PER LA NOMINA DI PERSONALITA' DELLE NUOVE PROVINCE ANNESSE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777838",
+    "category": "storia",
+    "text": "QUALE ESPONENTE DELLA DESTRA STORICA PROPOSE UN PROGETTO DI DECENTRAMENTO AMMINISTRATIVO NEL MARZO 1861?",
+    "answers": [
+      "LUIGI CARLO FARINI",
+      "SILVIO SPAVENTA",
+      "MARCO MINGHETTI",
+      "QUINTINO SELLA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: MARCO MINGHETTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777839",
+    "category": "storia",
+    "text": "A CHI SI CONTRAPPOSE MAZZINI NELL'AMBITO DELLA PRIMA ASSOCIAZIONE INTERNAZIONALE DEI LAVORATORI FONDATA A LONDRA NEL 1864?",
+    "answers": [
+      "A MARX",
+      "A OWEN",
+      "A PROUDHON",
+      "A FOURIER"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: A MARX",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777840",
+    "category": "storia",
+    "text": "QUALE PATRIOTA MORI' A CASTAGNOLA DI LUGANO NEL FEBBRAIO 1869?",
+    "answers": [
+      "FRANCESCO DE SANCTIS",
+      "GIUSEPPE MAZZINI",
+      "MASSIMO D'AZEGLIO",
+      "CARLO CATTANEO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: CARLO CATTANEO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777841",
+    "category": "storia",
+    "text": "CHI FU IL SUCCESSORE DI MENABREA ALLA GUIDA DEL GOVERNO NEL DICEMBRE 1869?",
+    "answers": [
+      "MARCO MINGHETTI",
+      "GIOVANNI LANZA",
+      "AGOSTINO DEPRETIS",
+      "QUINTINO SELLA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIOVANNI LANZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777842",
+    "category": "storia",
+    "text": "PER QUALE MOTIVO IL GOVERNO LANZA SI DIMISE NEL 1873?",
+    "answers": [
+      "PER IL RIFIUTO DELLA CAMERA DI DISCUTERE IMMEDIATAMENTE I PROVVEDIMENTI FINANZIARI DEL MINISTRO SELLA",
+      "PER UN DISSIDIO CON IL RE SUI RAPPORTI CON IL PAPA",
+      "PER LO STALLO DELLE TRATTATIVE CON LA SANTA SEDE",
+      "PER I CONTRASTI TRA LANZA E SELLA SULLA POLITICA ECONOMICA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: PER IL RIFIUTO DELLA CAMERA DI DISCUTERE IMMEDIATAMENTE I PROVVEDIMENTI FINANZIARI DEL MINISTRO SELLA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777843",
+    "category": "storia",
+    "text": "IN QUALE DATA SI TENNE A TORINO LA PRIMA SEDUTA DEL PARLAMENTO NAZIONALE?",
+    "answers": [
+      "6 GIUGNO 1861",
+      "17 MARZO 1861",
+      "18 FEBBRAIO 1861",
+      "27 GENNAIO 1861"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 18 FEBBRAIO 1861",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777844",
+    "category": "storia",
+    "text": "QUALE NUMERAZIONE FU ADOTTATA PER LE LEGISLATURE DEL REGNO D'ITALIA?",
+    "answers": [
+      "FU PROSEGUITA LA NUMERAZIONE DI QUELLE DEL PARLAMENTO SUBALPINO",
+      "FU INIZIATA UNA NUOVA NUMERAZIONE DELLE LEGISLATURE",
+      "IN UN PRIMO TEMPO FU PROSEGUITA LA NUMERAZIONE SUBALPINA, MA DALLA PRESA DI ROMA FU INIZIATA UNA NUOVA NUMERAZIONE",
+      "LA NUMERAZIONE CESSÒ PERCHÉ FU ADOTTATA LA LEGISLATURA PERMANENTE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU PROSEGUITA LA NUMERAZIONE DI QUELLE DEL PARLAMENTO SUBALPINO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777845",
+    "category": "storia",
+    "text": "IN QUALE DATA FU PROMULGATA LA LEGGE CHE RICONOSCEVA A VITTORIO EMANUELE II IL TITOLO DI RE D'ITALIA?",
+    "answers": [
+      "18 FEBBRAIO 1862",
+      "17 MARZO 1861",
+      "20 SETTEMBRE 1870",
+      "21 OTTOBRE 1860"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 17 MARZO 1861",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777847",
+    "category": "storia",
+    "text": "IN CHE GIORNO EBBE LUOGO ALLA CAMERA DEI DEPUTATI LA COSIDDETTA \"RIVOLUZIONE PARLAMENTARE\" CHE SEGNÒ IL PASSAGGIO DALLA DESTRA ALLA SINISTRA NELLA GUIDA DEL PAESE?",
+    "answers": [
+      "23 GENNAIO 1871",
+      "2 GIUGNO 1882",
+      "8 NOVEMBRE 1874",
+      "18 MARZO 1876"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: 18 MARZO 1876",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777848",
+    "category": "storia",
+    "text": "IN QUALE ANNO SI COMBATTÉ LA TERZA GUERRA DI INDIPENDENZA CHE SI CONCLUSE CON L'ANNESSIONE DEL VENETO?",
+    "answers": [
+      "1870",
+      "1867",
+      "1862",
+      "1866"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1866",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777850",
+    "category": "storia",
+    "text": "CHI FU ELETTO PRESIDENTE DELLA CAMERA DEI DEPUTATI ALL'AVVIO DELLA PRIMA LEGISLATURA UNITARIA?",
+    "answers": [
+      "LORENZO PARETO",
+      "URBANO RATTAZZI",
+      "LUIGI CARLO FARINI",
+      "ADRIANO MARI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: URBANO RATTAZZI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777851",
+    "category": "storia",
+    "text": "IN QUALE LOCALITÀ MONTANA NEL 1862 L'ESERCITO REGIO BLOCCÒ GARIBALDI CHE INTENDEVA RISALIRE LA PENISOLA FINO A ROMA?",
+    "answers": [
+      "SUL POLLINO",
+      "SULLA SILA",
+      "SULL'ASPROMONTE",
+      "SUL MATESE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: SULL'ASPROMONTE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777853",
+    "category": "storia",
+    "text": "QUALE SISTEMA ELETTORALE FU ADOTTATO PER IL PRIMO PARLAMENTO NAZIONALE NEL 1861?",
+    "answers": [
+      "MAGGIORITARIO CON COLLEGI UNINOMINALI",
+      "PROPORZIONALE CON COLLEGI UNINOMINALI",
+      "MAGGIORITARIO CON COLLEGI PLURINOMINALI",
+      "PROPORZIONALE CON COLLEGI PLURINOMINALI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: MAGGIORITARIO CON COLLEGI UNINOMINALI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777854",
+    "category": "storia",
+    "text": "QUANTI DEPUTATI FURONO CHIAMATI A COMPORRE LA CAMERA NELLA PRIMA LEGISLATURA UNITARIA?",
+    "answers": [
+      "315",
+      "443",
+      "630",
+      "508"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 443",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777855",
+    "category": "storia",
+    "text": "A QUALE ISTITUZIONE FU AFFIDATO IL GOVERNO DEL MEZZOGIORNO IN VIA PROVVISORIA DOPO L'ANNESSIONE DETERMINATA DAL PLEBISCITO?",
+    "answers": [
+      "AD UN VICERE NELLA PERSONA DI EUGENIO SAVOIA CARIGNANO",
+      "AD UN GOVERNATORE MILITARE NELLA PERSONA DI ENRICO CIALDINI",
+      "AD UNA PREFETTURA GENERALE AFFIDATA A SILVIO SPAVENTA",
+      "AD UNA LUOGOTENENZA GENERALE AFFIDATA A LUIGI CARLO FARINI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: AD UNA LUOGOTENENZA GENERALE AFFIDATA A LUIGI CARLO FARINI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777857",
+    "category": "storia",
+    "text": "A QUALE PRINCIPIO SI ISPIRÒ L'ELETTORATO CATTOLICO NELLE CONSULTAZIONI DEL 1861?",
+    "answers": [
+      "NÉ ELETTI, NÉ ELETTORI",
+      "ELETTI ED ELETTORI",
+      "ASTENSIONISMO SOLO PASSIVO",
+      "ASTENSIONISMO SOLO ATTIVO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: NÉ ELETTI, NÉ ELETTORI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777859",
+    "category": "storia",
+    "text": "QUALE FU L'ASSE FERROVIARIO ALLA CUI COSTRUZIONE PIÙ CELERE SI DEDICARONO I PRIMI GOVERNI POST-UNITARI?",
+    "answers": [
+      "ASSE TRANSAPPENNINICO",
+      "ASSE TIRRENICO",
+      "ASSE TRANSALPINO",
+      "ASSE ADRIATICO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: ASSE ADRIATICO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777860",
+    "category": "storia",
+    "text": "CHE COSA PREVEDEVA LA LEGGE BANCARIA FATTA APPROVARE DA MINGHETTI NEL 1874?",
+    "answers": [
+      "CREAVA UNA BANCA POPOLARE IN OGNI PROVINCIA DEL REGNO",
+      "UNIFORMAVA LA DISCIPLINA DEGLI ISTITUTI DI EMISSIONE",
+      "NAZIONALIZZAVA TUTTO IL SISTEMA BANCARIO",
+      "ISTITUIVA LA BANCA CENTRALE UNICA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: UNIFORMAVA LA DISCIPLINA DEGLI ISTITUTI DI EMISSIONE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777861",
+    "category": "storia",
+    "text": "QUALE SETTORE INDUSTRIALE SI SVILUPPÒ MAGGIORMENTE NEI PRIMI DUE DECENNI UNITARI?",
+    "answers": [
+      "L'INDUSTRIA TIPOGRAFICA",
+      "L'INDUSTRIA TESSILE",
+      "L'INDUSTRIA MECCANICA",
+      "L'INDUSTRIA SIDERURGICA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'INDUSTRIA TESSILE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777862",
+    "category": "storia",
+    "text": "CHE TIPO DI RIPERCUSSIONI EBBE SULL'ECONOMIA ITALIANA LA CRISI SCOPPIATA ALLA BORSA DI VIENNA NEL MAGGIO 1873 RISPETTO AGLI ALTRI PAESI EUROPEI?",
+    "answers": [
+      "LE CONSEGUENZE FURONO MOLTO PIÙ GRAVI, CON IL RISCHIO DELLA BANCAROTTA",
+      "LE CONSEGUENZE FURONO PIÙ GRAVI, CON IL FALLIMENTO DELLE PRINCIPALI BANCHE",
+      "LE CONSEGUENZE FURONO ALTRETTANTO GRAVI, CON LA SVALUTAZIONE MONETARIA",
+      "LE CONSEGUENZE FURONO MENO GRAVI, ANCHE SE FALLIRONO NUMEROSE SOCIETÀ"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LE CONSEGUENZE FURONO MENO GRAVI, ANCHE SE FALLIRONO NUMEROSE SOCIETÀ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777863",
+    "category": "storia",
+    "text": "QUALE PERCENTUALE DI ANALFABETISMO FU REGISTRATA DAL CENSIMENTO DEL 1861?",
+    "answers": [
+      "68%",
+      "55%",
+      "85%",
+      "78%"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: 78%",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777864",
+    "category": "storia",
+    "text": "QUALE COMPAGNIA DI NAVIGAZIONE AVEVA ACQUISTATO LA BAIA DI ASSAB CON L'AIUTO DEL GOVERNO ITALIANO TRA IL 1869 E IL 1870?",
+    "answers": [
+      "LA FLORIO",
+      "LA RUBATTINO",
+      "LA PIAGGIO",
+      "LA RAGGIO"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA RUBATTINO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777865",
+    "category": "storia",
+    "text": "QUAL ERA IL CONTENUTO PRINCIPALE DEL \"SILLABO\" PUBBLICATO DA PIO IX NEL 1864?",
+    "answers": [
+      "LA CONDANNA DEL LUTERANESIMO",
+      "LA CONDANNA DELL'ULTRAMONTANISMO",
+      "LA CONDANNA DEL LIBERALISMO",
+      "LA CONDANNA DEL LEGITTIMISMO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA CONDANNA DEL LIBERALISMO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777866",
+    "category": "storia",
+    "text": "IN QUALE ANNO FU ISTITUITA LA TASSA SULLA MACINAZIONE DEL GRANO, MEGLIO CONOSCIUTA COME \"TASSA SUL MACINATO\"?",
+    "answers": [
+      "1870",
+      "1868",
+      "1874",
+      "1866"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1868",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777867",
+    "category": "storia",
+    "text": "QUALE PATRIOTA SI DISTACCÒ IRRIMEDIABILMENTE DA MAZZINI NEL 1864 PRONUNCIANDO LA CELEBRE FASE: \"LA MONARCHIA CI UNISCE, LA REPUBBLICA CI DIVIDEREBBE\"?",
+    "answers": [
+      "AURELIO SAFFI",
+      "BENEDETTO CAIROLI",
+      "GIUSEPPE GARIBALDI",
+      "FRANCESCO CRISPI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCESCO CRISPI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777869",
+    "category": "storia",
+    "text": "QUALE ATTEGGIAMENTO ASSUNSE GARIBALDI NEI CONFRONTI DELLA COMUNE DI PARIGI?",
+    "answers": [
+      "LA CRITICÒ, RIALLINEANDOSI A MAZZINI",
+      "INTERVENNE DI PERSONA NELLA CAPITALE FRANCESE, DOPO LA BATTAGLIA DI DIGIONE",
+      "L'APPROVÒ, AVVICINANDOSI ALL'INTERNAZIONALE",
+      "PREFERÌ IGNORARLA, PER RESTARE AL DI SOPRA DELLE PARTI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'APPROVÒ, AVVICINANDOSI ALL'INTERNAZIONALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777870",
+    "category": "storia",
+    "text": "COSA COMPORTAVA PER GLI ELETTORI CATTOLICI IL \"NON EXPEDIT\" SANCITO DALLA PENITENZIERIA APOSTOLICA NEL 1874?",
+    "answers": [
+      "DIVIETO ASSOLUTO DI ESSERE ELETTI DEPUTATI, MA LIBERTÀ DI VOTARE",
+      "DIVIETO ASSOLUTO DI PARTECIPAZIONE ALLE ELEZIONI POLITICHE",
+      "POSSIBILITÀ DI VOTARE AL SOLO FINE DI IMPEDIRE L'ELEZIONE DI UN DEPUTATO ANTICLERICALE",
+      "POSSIBILITÀ DI CANDIDARSI AL SOLO FINE DI IMPEDIRE L'ELEZIONE DI UN DEPUTATO ANTICLERICALE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: DIVIETO ASSOLUTO DI PARTECIPAZIONE ALLE ELEZIONI POLITICHE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777871",
+    "category": "storia",
+    "text": "A CHE COSA SI IMPEGNÒ IL REGNO D'ITALIA FIRMANDO A PARIGI LA CONVENZIONE DI SETTEMBRE IN CAMBIO DEL RITIRO DELLE TRUPPE FRANCESI DA ROMA (1864)?",
+    "answers": [
+      "AL TRASFERIMENTO DELLA CAPITALE",
+      "ALL'IMMEDIATO ARRESTO DI MAZZINI E DI GARIBALDI",
+      "AD UN ULTERIORE RITOCCO DEI CONFNI",
+      "ALLA SMILITARIZZAZIONE DEI CONFINI CON LO STATO DELLA CHIESA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: AL TRASFERIMENTO DELLA CAPITALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777872",
+    "category": "storia",
+    "text": "COME FU ACCOLTA A TORINO LA NOTIZIA DELLA FIRMA DELLA CONVENZIONE DI SETTEMBRE CHE AVREBBE COMPORTATO IL TRASFERIMENTO DELLA CAPITALE A FIRENZE?",
+    "answers": [
+      "LE SOCIETÀ OPERAIE PROCLAMARONO LO SCIOPERO GENERALE",
+      "LE AUTORITÀ MUNICIPALI PROCLAMARONO IL LUTTO CITTADINO",
+      "CI FURONO MOTI DI PIAZZA REPRESSI SEVERAMENTE",
+      "IL SENATO SUBALPINO ELEVÒ UNA PROTESTA FORMALE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: CI FURONO MOTI DI PIAZZA REPRESSI SEVERAMENTE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777873",
+    "category": "storia",
+    "text": "QUALE INNOVAZIONE FU INTRODOTTA IN MATERIA MATRIMONIALE DAL CODICE CIVILE DEL 1865?",
+    "answers": [
+      "IL MATRIMONIO CIVILE",
+      "IL MATRIMONIO CONCORDATARIO",
+      "LA PARITÀ TRA I CONIUGI",
+      "IL DIVORZIO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL MATRIMONIO CIVILE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777874",
+    "category": "storia",
+    "text": "QUALE EMINENTE GIURISTA MERIDIONALE SI BATTÉ INVANO PER L'ABOLIZIONE DELLA PENA DI MORTE IN TUTTA ITALIA, SEGUENDO L'ESEMPIO TOSCANO, TRA IL 1864 E IL 1865?",
+    "answers": [
+      "GIUSEPPE PISANELLI",
+      "ENRICO PESSINA",
+      "ANTONIO SCIALOJA",
+      "PASQUALE STANISLAO MANCINI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: PASQUALE STANISLAO MANCINI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777875",
+    "category": "storia",
+    "text": "A QUALE PERCENTUALE AMMONTAVA IL DEBITO EREDITATO DAL REGNO DI SARDEGNA SUL TOTALE DELL'INDEBITAMENTO DEL NUOVO STATO?",
+    "answers": [
+      "AL 65%",
+      "AL 55%",
+      "AL 75%",
+      "AL 45%"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: AL 55%",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777876",
+    "category": "storia",
+    "text": "QUALE FU L'ESITO POLITICO DELLE ELEZIONI DEL 1865 PER LA IX LEGISLATURA?",
+    "answers": [
+      "I CONSERVATORI RADDOPPIARONO I LORO SEGGI",
+      "LA MAGGIORANZA MODERATA FU RIDIMENSIONATA",
+      "I CONSERVATORI SPARIRONO DALLA CAMERA DEI DEPUTATI",
+      "LA MAGGIORANZA MODERATA ACCREBBE LA SUA CONSISTENZA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA MAGGIORANZA MODERATA FU RIDIMENSIONATA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777877",
+    "category": "storia",
+    "text": "COME SI CONCLUSE LA TERZA GUERRA DI INDIPENDENZA COMBATTUTA NEL 1866?",
+    "answers": [
+      "CON L'ANNESSIONE DELLE TRE VENEZIE",
+      "CON LA RINASCITA DELLA REPUBBLICA VENETA",
+      "CON L'ANNESSIONE DEL VENETO",
+      "SENZA MUTAMENTI TERRITORIALI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: CON L'ANNESSIONE DEL VENETO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777878",
+    "category": "storia",
+    "text": "QUALE IMPORTANTE PROVVEDIMENTO IN MATERIA ECONOMICA FU ADOTTATO A SEGUITO DELLA CRISI FINANZIARIA DELLA PRIMAVERA DEL 1866?",
+    "answers": [
+      "FU RIDOTTA CONSIDEREVOLMENTE LA PRESSIONE FISCALE",
+      "FU RISTRUTTURATO IL DEBITO PUBBLICO",
+      "FU INTRODOTTO IL \"CORSO FORZOSO\" DELLA CARTA MONETA",
+      "FU ISTITUITA LA TASSA SULLA RICCHEZZA MOBILE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU INTRODOTTO IL \"CORSO FORZOSO\" DELLA CARTA MONETA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777879",
+    "category": "storia",
+    "text": "IN QUALE LOCALITA' GARIBALDI OTTENNE UN INIZIALE SUCCESSO MILITARE NEL CORSO DELLA CAMPAGNA DEL 1867?",
+    "answers": [
+      "A TIVOLI",
+      "A MENTANA",
+      "A MONTEROTONDO",
+      "A PASSO CORESE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: A MONTEROTONDO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777880",
+    "category": "storia",
+    "text": "IN QUALE LOCALITÀ FU SCONFITTO L'ULTIMO TENTATIVO GARIBALDINO DI LIBERARE ROMA NEL 1867?",
+    "answers": [
+      "A PASSO CORESE",
+      "A MONTEROTONDO",
+      "A TIVOLI",
+      "A MENTANA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: A MENTANA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777881",
+    "category": "storia",
+    "text": "IN QUALE REGIONE SUSCITÒ PIÙ VIOLENTE PROTESTE L'INTRODUZIONE DELLA TASSA SUL MACINATO DA PARTE DELLA DESTRA STORICA?",
+    "answers": [
+      "IN PUGLIA",
+      "IN EMILIA",
+      "IN TOSCANA",
+      "IN LOMBARDIA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: IN EMILIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777882",
+    "category": "storia",
+    "text": "QUALE DRASTICA MISURA FU ADOTTATA CON LA LEGGE PICA PER SCONFIGGERE IL BRIGANTAGGIO NELLE PROVINCE MERIDIONALI?",
+    "answers": [
+      "IL DEFERIMENTO DEI BRIGANTI AI TRIBUNALI MILITARI",
+      "LA SOSPENSIONE DELLE LIBERTÀ STATUTARIE IN TUTTO L'EX REGNO DELLE DUE SICILIE",
+      "LA CONDANNA DEI BRIGANTI SENZA PROCESSO ANCHE OVE NON AVESSERO OPPOSTO RESISTENZA",
+      "LO STATO D'ASSEDIO IN TUTTO IL MEZZOGIORNO CONTINENTALE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL DEFERIMENTO DEI BRIGANTI AI TRIBUNALI MILITARI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777883",
+    "category": "storia",
+    "text": "CHE COSA RACCOMANDAVA AL GOVERNO LA COMMISSIONE PARLAMENTARE DI INCHIESTA SUL BRIGANTAGGIO FORMATA NEL 1863?",
+    "answers": [
+      "LA PROCLAMAZIONE DELLO STATO D'ASSEDIO IN TUTTO L'EX REGNO DELLE DUE SICILIE",
+      "LA PROCLAMAZIONE DELLO STATO D'ASSEDIO IN TUTTO IL REGNO D'ITALIA",
+      "L'ADOZIONE DI UNA LEGGE SPECIALE REPRESSIVA UNITAMENTE AL TRASFERIMENTO COATTO AL NORD DEI DISOCCUPATI MERIDIONALI",
+      "L'ADOZIONE DI UNA LEGGE SPECIALE REPRESSIVA UNITAMENTE A PROVVEDIMENTI ECONOMICO-SOCIALI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ADOZIONE DI UNA LEGGE SPECIALE REPRESSIVA UNITAMENTE A PROVVEDIMENTI ECONOMICO-SOCIALI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777884",
+    "category": "storia",
+    "text": "QUALE ERA L'OGGETTO DELLA MOZIONE LA CUI RICHIESTA DI SOSPENSIVA DA PARTE DEL GOVERNO FU RESPINTA DALLA CAMERA DEI DEPUTATI PROVOCANDO LA CADUTA DELLA DESTRA STORICA?",
+    "answers": [
+      "IL RECUPERO DELL'IMPOSTA FONDIARIA",
+      "LA RIDUZIONE DELL'IMPOSTA SULLA RICCHEZZA MOBILE",
+      "LA RIMODULAZIONE DELLA TASSA SUL SALE",
+      "LA RISCOSSIONE DELLA TASSA SUL MACINATO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA RISCOSSIONE DELLA TASSA SUL MACINATO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777885",
+    "category": "storia",
+    "text": "SU QUALE PROGETTO SI ARENÒ L'ULTIMO GOVERNO DELLA DESTRA STORICA?",
+    "answers": [
+      "ADOZIONE DEL PROTEZIONISMO",
+      "TRATTATIVA CON LA SANTA SEDE",
+      "ESERCIZIO STATALE DELLE FERROVIE",
+      "ABOLIZIONE DELLA PENA DI MORTE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: ESERCIZIO STATALE DELLE FERROVIE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777886",
+    "category": "storia",
+    "text": "QUALE FU L'ESITO POLITICO COMPLESSIVO DELLE ELEZIONI DEL NOVEMBRE 1874?",
+    "answers": [
+      "RAFFORZAMENTO DEL CENTRO",
+      "RAFFORZAMENTO DELLA SINISTRA",
+      "CONFERMA DEGLI EQUILIBRI DELLA LEGISLATURA PRECEDENTE",
+      "RAFFORZAMENTO DELLA DESTRA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: RAFFORZAMENTO DELLA SINISTRA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777887",
+    "category": "storia",
+    "text": "QUALE CARATTERISTICA EBBE L'ESTENSIONE A ROMA DELLA SOPPRESSIONE DELLE CORPORAZIONI RELIGIOSE APPROVATA DALLA CAMERA IL 27 MAGGIO 1873?",
+    "answers": [
+      "LA PREVISIONE DELL'ASSENSO PREVENTIVO DELLA CAMERA APOSTOLICA",
+      "L'ESENZIONE ACCORDATA ALLA SOLA COMPAGNIA DI GESÙ",
+      "LA CONFERMA INTEGRALE DELLE DISPOSIZIONI PREVIGENTI PER TUTTE LE CORPORAZIONI RELIGIOSE",
+      "LA TUTELA DELLE RAPPRESENTANZE DEGLI ORDINI RELIGIOSI RESIDENTI ALL'ESTERO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA TUTELA DELLE RAPPRESENTANZE DEGLI ORDINI RELIGIOSI RESIDENTI ALL'ESTERO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777888",
+    "category": "storia",
+    "text": "QUALE EVENTO INTERNAZIONALE INDUSSE IL GOVERNO ITALIANO AD OCCUPARE ROMA NEL 1870?",
+    "answers": [
+      "LA DENUNCIA DELLA CONVENZIONE DI SETTEMBRE DA PARTE DI NAPOLEONE III",
+      "LA CELEBRAZIONE DI UN CONGRESSO EUROPEO A BRUXELLES",
+      "IL VIA LIBERA DATO DALL'INGHILTERRA ALL'OPERAZIONE IN CHIAVE ANTI-PAPISTA",
+      "LA SCONFITTA DI NAPOLEONE III NELLA GUERRA FRANCO-PRUSSIANA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA SCONFITTA DI NAPOLEONE III NELLA GUERRA FRANCO-PRUSSIANA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777889",
+    "category": "storia",
+    "text": "QUALE FU LA SORTE DELLA CITTÀ LEONINA DOPO IL PLEBISCITO PER L'ANNESSIONE DEL LAZIO A SEGUITO DELLA BRECCIA DI PORTA PIA?",
+    "answers": [
+      "RESTÒ PROVVISORIAMENTE SOTTO IL GOVERNO DI UN CORPO AMMINISTRATIVO LOCALE",
+      "FU INTEGRATA NEL REGNO D'ITALIA COME IL RESTO DI ROMA",
+      "RESTÒ SOTTO IL GOVERNO DELLA SANTA SEDE ASSIEME AL VATICANO",
+      "FU DICHIARATA TERRITORIO NEUTRALE AMMINISTRATO DA UN COMANDO MILITARE FRANCESE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU INTEGRATA NEL REGNO D'ITALIA COME IL RESTO DI ROMA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777890",
+    "category": "storia",
+    "text": "COME REAGÌ PIO IX ALL'APPROVAZIONE DELLA LEGGE SULLE GUARENTIGIE?",
+    "answers": [
+      "LASCIANDO PER PROTESTA IL SOGLIO PONTIFICIO",
+      "VINCOLANDONE L'ACCETTAZIONE AD UN INCREMENTO DELLA DOTAZIONE FINANZIARIA ANNUA",
+      "PUBBLICANDO UN'ENCICLICA DI RIGETTO",
+      "ACCETTANDO IL COMPROMESSO PROPOSTO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: PUBBLICANDO UN'ENCICLICA DI RIGETTO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777891",
+    "category": "storia",
+    "text": "IN QUALE CITTA' SCOPPIO' UN MOTO POPOLARE NEL SETTEMBRE 1866 CHE FU REPRESSO DALL'ESERCITO?",
+    "answers": [
+      "A NAPOLI",
+      "A TORINO",
+      "A PALERMO",
+      "A GENOVA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: A PALERMO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777892",
+    "category": "storia",
+    "text": "IN QUALE GOVERNO EMILIO VISCONTI VENOSTA RICOPRÌ PER LA PRIMA VOLTA LA CARICA DI MINISTRO DEGLI ESTERI?",
+    "answers": [
+      "NEL GOVERNO LANZA (1869)",
+      "NEL PRIMO GOVERNO DI RUDINI' (1896)",
+      "NEL PRIMO GOVERNO MINGHETTI (1863)",
+      "NEL GOVERNO SARACCO (1900)"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: NEL PRIMO GOVERNO MINGHETTI (1863)",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777893",
+    "category": "storia",
+    "text": "QUALE DEPUTATO FU IL RELATORE DELLA COMMISSIONE DI INCHIESTA SUL BRIGANTAGGIO NEL 1863?",
+    "answers": [
+      "GIUSEPPE MASSARI",
+      "AURELIO SAFFI",
+      "STEFANO ROMEO",
+      "ANTONIO CICCONE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIUSEPPE MASSARI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777894",
+    "category": "storia",
+    "text": "QUALE CARDINALE FU NOMINATO SEGRETARIO DI STATO DA LEONE XIII NEL GIUGNO 1887?",
+    "answers": [
+      "IL CARDINALE RAMPOLLA DEL TINDARO",
+      "IL CARDINALE MERRY DEL VAL",
+      "IL CARDINALE GASPARRI",
+      "IL CARDINALE ANTONELLI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL CARDINALE RAMPOLLA DEL TINDARO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777895",
+    "category": "storia",
+    "text": "CHI FU L'INTERLOCUTORE DI CRISPI NEL TENTATIVO DI AVVIARE LA CONCILIAZIONE TRA STATO E CHIESA NEL 1887?",
+    "answers": [
+      "PADRE GIOACCHINO VENTURA",
+      "L'ABATE LUIGI TOSTI",
+      "L'ARCIVESCOVO DE MERODE",
+      "IL CARDINALE RIARIO SFORZA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ABATE LUIGI TOSTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777896",
+    "category": "storia",
+    "text": "CHI FURONO GLI AUTORI DELL'INCHIESTA IN SICILIA CHE DENUNCIO' NEL 1877 IL MALGOVERNO DELL'ISOLA?",
+    "answers": [
+      "FERRARA E PANTALEONI",
+      "CAVALLOTTI E COLAJANNI",
+      "FRANCHETTI E SONNINO",
+      "BERTANI E BOVIO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCHETTI E SONNINO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777897",
+    "category": "storia",
+    "text": "IL PASSAGGIO DAI GOVERNI DELLA DESTRA A QUELLI DELLA SINISTRA MODIFICÒ IL RUOLO POLITICO DEL RE?",
+    "answers": [
+      "SÌ, FU PIÙ RILEVANTE ANCHE IN POLITICA INTERNA",
+      "SÌ, IN QUANTO FU RISTRETTO ALLE NOMINE DEI NUOVI SENATORI",
+      "NO, RESTÒ LIMITATO AGLI AFFARI MILITARI",
+      "SÌ, SI ACCREBBE MA SEMPRE NELL'AMBITO DELLA POLITICA ESTERA E MILITARE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: SÌ, FU PIÙ RILEVANTE ANCHE IN POLITICA INTERNA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777898",
+    "category": "storia",
+    "text": "QUALE ESPONENTE DELLA SINISTRA FU CHIAMATO A GUIDARE IL GOVERNO DOPO LA COSIDDETTA \"RIVOLUZIONE PARLAMENTARE\"?",
+    "answers": [
+      "AGOSTINO DEPRETIS",
+      "GIOVANNI NICOTERA",
+      "FRANCESCO CRISPI",
+      "BENDETTO CAIROLI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: AGOSTINO DEPRETIS",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777899",
+    "category": "storia",
+    "text": "QUANDO EBBERO LUOGO LE PRIME ELEZIONI POLITICHE DOPO L'AVVENTO AL GOVERNO DELLA SINISTRA STORICA?",
+    "answers": [
+      "MARZO 1874",
+      "NOVEMBRE 1874",
+      "MARZO 1876",
+      "NOVEMBRE 1876"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: NOVEMBRE 1876",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777900",
+    "category": "storia",
+    "text": "QUALE UOMO POLITICO MERIDIONALE FU MINISTRO DELL'INTERNO NEL PRIMO GOVERNO DELLA SINISTRA?",
+    "answers": [
+      "PIETRO LACAVA",
+      "PASQUALE STANISLAO MANCINI",
+      "GIOVANNI NICOTERA",
+      "SILVIO SPAVENTA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIOVANNI NICOTERA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777901",
+    "category": "storia",
+    "text": "QUALE PERCENTUALE FU RAGGIUNTA DAI CANDIDATI DELLA SINISTRA NELLE PRIME ELEZIONI POLITICHE SVOLTESI DOPO L'AVVENTO AL GOVERNO DI DEPRETIS?",
+    "answers": [
+      "60%",
+      "80%",
+      "70%",
+      "50%"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 70%",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777902",
+    "category": "storia",
+    "text": "IN CHE ANNO MORIRONO SIA VITTORIO EMANUELE II CHE PIO IX?",
+    "answers": [
+      "1876",
+      "1878",
+      "1872",
+      "1882"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1878",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777903",
+    "category": "storia",
+    "text": "CHI FU IL SECONDO RE D'ITALIA, SUCCEDENDO AL PADRE, NEL 1878?",
+    "answers": [
+      "UMBERTO II",
+      "VITTORIO EMANUELE III",
+      "UMBERTO I",
+      "VITTORIO EMANUELE II"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: UMBERTO I",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777904",
+    "category": "storia",
+    "text": "QUALE PAPA SUCCESSE A PIO IX?",
+    "answers": [
+      "PIO X",
+      "GREGORO XVI",
+      "BENEDETTO XV",
+      "LEONE XIII"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LEONE XIII",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777906",
+    "category": "storia",
+    "text": "QUALE ORGANO DELLO STATO FU VOLUTO DA CRISPI PER LA PRESIDENZA DELLA GIUNTA PROVINCIALE AMMINISTRATIVA INTRODOTTA DALLA RIFORMA DEGLI ENTI LOCALI DA LUI PROMOSSA?",
+    "answers": [
+      "IL QUESTORE",
+      "IL PROCURATORE DEL RE",
+      "IL PRESIDENTE DEL TRIBUNALE",
+      "IL PREFETTO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL PREFETTO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777907",
+    "category": "storia",
+    "text": "CHI FONDÒ NEL 1877 L'ASSOCIAZIONE PER L'ITALIA IRREDENTA AL FINE DI LIBERARE TRENTO E TRIESTE?",
+    "answers": [
+      "PASQUALE STANISLAO MANCINI",
+      "FRANCESCO CRISPI",
+      "MATTEO RENATO IMBRIANI",
+      "GIUSEPPE GARIBALDI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: MATTEO RENATO IMBRIANI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777908",
+    "category": "storia",
+    "text": "QUALE OBIETTIVO SI RIPROPOSE BENEDETTO CAIROLI ASSUMENDO LA GUIDA DEL GOVERNO NEL 1878, D'INTESA CON IL MINISTRO DELL'INTERNO ZANARDELLI?",
+    "answers": [
+      "SOLUZIONE DELLA QUESTIONE ROMANA",
+      "APPLICAZIONE DELLE LIBERTÀ STATUTARIE",
+      "REPRESSIONE DEL NASCENTE MOVIMENTO OPERAIO",
+      "LOTTA AL BRIGANTAGGIO MERIDIONALE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: APPLICAZIONE DELLE LIBERTÀ STATUTARIE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777909",
+    "category": "storia",
+    "text": "CHE POSIZIONE ASSUNSE L'ITALIA AL CONGRESSO DI BERLINO DEL 1878 CON LA COSIDDETTA POLITICA DELLE \"MANI NETTE\"?",
+    "answers": [
+      "RIVENDICAZIONE DELLA CORSICA",
+      "DIFESA DELLE ASPIRAZIONI RUSSE AI DARDANELLI",
+      "RIVENDICAZIONE DELLA LIBIA",
+      "DIFESA DELLO STATUS QUO NEL MEDITERRANEO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: DIFESA DELLO STATUS QUO NEL MEDITERRANEO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777910",
+    "category": "storia",
+    "text": "QUALE PROVVEDIMENTO DELLA DESTRA FU DEFINITIVAMENTE ABOLITO DALLA SINISTRA A DECORRE DAL PRIMO GENNAIO 1884?",
+    "answers": [
+      "L'EVERSIONE DELL'ASSE ECCLESIASTICO",
+      "LA LEVA OBBLIGATORIA",
+      "IL CORSO FORZOSO",
+      "LA TASSA SUL MACINATO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA TASSA SUL MACINATO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777911",
+    "category": "storia",
+    "text": "SU QUALE QUESTIONE DI POLITICA ESTERA CADDE IL TERZO GOVERNO CAIROLI NEL 1881?",
+    "answers": [
+      "L'OCCUPAZIONE FRANCESE DI TUNISI",
+      "L'ANNESSIONE DELL'ALBANIA DA PARTE AUSTRO-UNGARICA",
+      "L'ANNESSIONE DELLA BOSNIA ERZEGOVINA DA PARTE AUSTRO-UNGARICA",
+      "L'OCCUPAZIONE FRANCESE DI ALGERI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'OCCUPAZIONE FRANCESE DI TUNISI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777912",
+    "category": "storia",
+    "text": "IN QUALI ANNI E PER QUANTI GOVERNI QUASI TUTTI CONSECUTIVI, SEPARATI SOLO DA DUE BREVI INTERRUZIONI DEI GOVERNI CAIROLI, AGOSTINO DEPRETIS FU PRESIDENTE DEL CONSIGLIO?",
+    "answers": [
+      "DAL 1878 AL 1887, PER SETTE GOVERNI",
+      "DAL 1882 AL 1888, PER SEI GOVERNI",
+      "DAL 1876 AL 1887, PER OTTO GOVERNI",
+      "DAL 1881 AL 1887, PER CINQUE GOVERNI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: DAL 1876 AL 1887, PER OTTO GOVERNI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777913",
+    "category": "storia",
+    "text": "QUALE CAMBIAMENTO IN POLITICA ESTERA ERA PROPOSTO DAL PATTO DI ROMA CHE RIUNÌ NEL 1890 L'OPPOSIZIONE A CRISPI DA PARTE DELLA SINISTRA ESTREMA?",
+    "answers": [
+      "IL RAFFORZAMENTO DELLA TRIPLICE ALLEANZA",
+      "LA CONCILIAZIONE CON LA SANTA SEDE",
+      "IL POTENZIAMENTO DELLA POLITICA COLONIALE",
+      "LA FINE DELLA TRIPLICE ALLEANZA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA FINE DELLA TRIPLICE ALLEANZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777914",
+    "category": "storia",
+    "text": "COME SI MODIFICÒ IL CORPO ELETTORALE A SEGUITO DELLA RIFORMA VOLUTA DALLA SINISTRA NEL 1882?",
+    "answers": [
+      "FU QUINTUPLICATO RAGGIUNGENDO I CIRCA 4 MILIONI DI ELETTORI",
+      "FU PIÙ CHE QUADRUPLICATO RAGGIUNGENDO I CIRCA 3 MILIONI DI ELETTORI",
+      "FU PIÙ CHE TRIPLICATO RAGGIUNGENDO I CIRCA 2 MILIONI DI ELETTORI",
+      "FU RADDOPPIATO RAGGIUNGENDO IL MILIONE DI ELETTORI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU PIÙ CHE TRIPLICATO RAGGIUNGENDO I CIRCA 2 MILIONI DI ELETTORI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777915",
+    "category": "storia",
+    "text": "QUALE NUOVO REQUISITO CONSENTÌ DI AMPLIARE IL CORPO ELETTORALE GRAZIE ALLA RIFORMA DEL 1882, OLTRE ALLA RIDUZIONE DELL'ETÀ DA 25 A 21 ANNI?",
+    "answers": [
+      "AVER CONSEGUITO LA LICENZA ELEMENTARE",
+      "AVER CONSEGUITO LA LICENZA GINNASIALE",
+      "AVER FREQUENTATO ALMENTO IL PRIMO ANNO DELLA SCUOLA ELEMENTARE",
+      "AVER SVOLTO IL PRIMO CICLO DELLA SCUOLA ELEMENTARE, TERMINANDO LA SECONDA CLASSE"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: AVER SVOLTO IL PRIMO CICLO DELLA SCUOLA ELEMENTARE, TERMINANDO LA SECONDA CLASSE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777916",
+    "category": "storia",
+    "text": "QUALE SISTEMA ELETTORALE, INTRODOTTO CON LA RIFORMA DEL 1882, FU IN VIGORE SOLO PER UN DECENNIO?",
+    "answers": [
+      "L'UNINOMINALE",
+      "IL PROPORZIONALE",
+      "LO SCRUTINIO DI LISTA",
+      "IL BALLOTTAGGIO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LO SCRUTINIO DI LISTA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777917",
+    "category": "storia",
+    "text": "QUALE ALLEANZA FU STIPULATA DALLA SINISTRA NEL 1882 COME PILASTRO DELLA POLITICA ESTERA ITALIANA?",
+    "answers": [
+      "LA TRIPLICE ALLENZA",
+      "LA QUADRUPLICE ALLEANZA",
+      "LA SANTA ALLEANZA",
+      "LA DUPLICE ALLEANZA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA TRIPLICE ALLENZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777918",
+    "category": "storia",
+    "text": "CHI FU IL PRIMO DEPUTATO A DICHIARARSI SOCIALISTA NEL PARLAMENTO ITALIANO?",
+    "answers": [
+      "FILIPPO TURATI NEL 1892",
+      "ANDREA COSTA NEL 1882",
+      "CARLO PISACANE NEL 1848",
+      "FELICE CAVALLOTTI NEL 1876"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANDREA COSTA NEL 1882",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777919",
+    "category": "storia",
+    "text": "IN QUALE CITTÀ NEL 1878 FALLÌ UN ATTENTATO ALLA VITA DI UMBERTO I ANCHE PER L'INTERPOSIZIONE FISICA DEL PRESIDENTE DEL CONSIGLIO CAIROLI?",
+    "answers": [
+      "GENOVA",
+      "CESENA",
+      "NAPOLI",
+      "MONZA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: NAPOLI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777920",
+    "category": "storia",
+    "text": "CON QUALI STATI L'ITALIA CONCLUSE NEL 1882 L'ALLEANZA STRATEGICA CHE CARATTERIZZÒ L'ETÀ DELLA SINISTRA?",
+    "answers": [
+      "GERMANIA E RUSSIA",
+      "FRANCIA E REGNO UNITO",
+      "AUSTRIA E IMPERO OTTOMANO",
+      "AUSTRIA E GERMANIA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: AUSTRIA E GERMANIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777921",
+    "category": "storia",
+    "text": "IN QUALE PARTE D'ITALIA EBBE LUOGO IL MOTO ANARCHICO DI CAFIERO E MALATESTA NEL 1877?",
+    "answers": [
+      "SUL MATESE",
+      "NELL'IMOLESE",
+      "SULL'AMIATA",
+      "NELLE MARCHE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: SUL MATESE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777922",
+    "category": "storia",
+    "text": "QUALE TREND DEMOGRAFICO FU REGISTRATO DAL TERZO CENSIMENTO GENERALE NEL 1881?",
+    "answers": [
+      "UNA SOSTANZIALE INVARIANZA DELL'ENTITÀ DELLA POPOLAZIONE",
+      "UN INCREMENTO DI CIRCA 2,5 MILIONI DI ABITANTI",
+      "UN INCREMENTO DI CIRCA 1,6 MILIONI DI ABITANTI",
+      "UN DECREMENTO DI CIRCA MEZZO MILIONE DI ABITANTI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: UN INCREMENTO DI CIRCA 1,6 MILIONI DI ABITANTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777923",
+    "category": "storia",
+    "text": "IN QUALE QUINQUENNIO L'EMIGRAZIONE TRANSOCEANICA SUPERÒ PER LA PRIMA VOLTA QUELLA VERSO I PAESI EUROPEI E MEDITERRANEI?",
+    "answers": [
+      "1876-80",
+      "1881-85",
+      "1886-90",
+      "1891-95"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1886-90",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777924",
+    "category": "storia",
+    "text": "QUALE PARLAMENTARE PRESIEDETTE LA COMMISSIONE PER L'INCHIESTA AGRARIA DELIBERATA NEL 1877?",
+    "answers": [
+      "AGOSTINO BERTANI",
+      "GUIDO BACCELLI",
+      "STEFANO JACINI",
+      "ALFREDO BACCARINI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: STEFANO JACINI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777925",
+    "category": "storia",
+    "text": "QUALE PRINCIPALE CARATTERISTICA NEGATIVA DELL'AGRICOLTURA ITALIANA FU EVIDENZIATA DALL'INCHIESTA PARLAMENTARE TRA GLI ANNI SETTANTA E OTTANTA DELL'800?",
+    "answers": [
+      "LA CONCORRENZA DELLA PASTORIZIA",
+      "LA MANCANZA DI MANODOPERA",
+      "LA SCARSA PRODUTTIVITÀ",
+      "LA DIPENDENZA DALL'ESTERO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA SCARSA PRODUTTIVITÀ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777926",
+    "category": "storia",
+    "text": "IN QUALE REGIONE ITALIANA RISULTAVA PIÙ SVILUPPATA L'AGRICOLTURA SECONDO L'INCHIESTA PARLAMENTARE SVOLTASI TRA GLI ANNI SETTANTA E OTTANTA DELL'800?",
+    "answers": [
+      "PIEMONTE",
+      "SICILIA",
+      "LOMBARDIA",
+      "PUGLIA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LOMBARDIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777927",
+    "category": "storia",
+    "text": "IN QUALI SETTORI LA SINISTRA STORICA INCREMENTÒ SIGNIFICATIVAMENTE LA SPESA STATALE?",
+    "answers": [
+      "MARINA MILITARE E MERCANTILE",
+      "EDILIZIA POPOLARE ED ISTRUZIONE OBBLIGATORIA",
+      "AGRICOLTURA E PASTORIZIA",
+      "OPERE PUBBLICHE E FORZE ARMATE"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: OPERE PUBBLICHE E FORZE ARMATE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777928",
+    "category": "storia",
+    "text": "A QUALI CONCLUSIONI GIUNSE LA COMMISSIONE PARLAMENTARE D'INCHIESTA SULLE FERROVIE CHE LAVORÒ DAL 1878 AL 1881?",
+    "answers": [
+      "FAVOREVOLI ALL'ESERCIZIO PRIVATO",
+      "CONTRARIE AD INCREMENTARE ULTERIORMENTE LA RETE FERROVIARIA",
+      "FAVOREVOLI ALL'ESERCIZIO MISTO",
+      "FAVOREVOLI ALL'ESERCIZIO STATALE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: FAVOREVOLI ALL'ESERCIZIO PRIVATO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777929",
+    "category": "storia",
+    "text": "IN QUALE CITTÀ ITALIANA FIN DAL 1871 FU FONDATA UN'ACCIAIERIA DESTINATA A DIVENTARE UNA GRANDE INDUSTRIA NAZIONALE NEL DECENNIO SUCCESSIVO?",
+    "answers": [
+      "TARANTO",
+      "GENOVA",
+      "BRESCIA",
+      "TERNI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: TERNI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777930",
+    "category": "storia",
+    "text": "QUALI CARATTERISTICHE EBBE LA RIFORMA COMMERCIALE DEL 1887?",
+    "answers": [
+      "RIPRISTINO DEL LIBERO SCAMBIO IN TUTTI I SETTORI ECONOMICI",
+      "PROTEZIONE DEI SOLI PRODOTTI AGRICOLI",
+      "RIPRISTINO DEL LIBERO SCAMBIO PER I PRODOTTI AGRICOLI",
+      "PROTEZIONE SIA DELL'INDUSTRIA CHE DELL'AGRICOLTURA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: PROTEZIONE SIA DELL'INDUSTRIA CHE DELL'AGRICOLTURA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777931",
+    "category": "storia",
+    "text": "QUANTI ANNI DI INSEGNAMENTO ELEMENTARE OBBLIGATORIO FURONO PREVISTI DALLA RIFORMA SCOLASTICA DEL 1877?",
+    "answers": [
+      "UN SOLO ANNO",
+      "DUE ANNI",
+      "CINQUE ANNI",
+      "TRE ANNI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: DUE ANNI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777932",
+    "category": "storia",
+    "text": "IN CHE ANNO FU FONDATO A MILANO IL CORRIERE DELLA SERA?",
+    "answers": [
+      "1876",
+      "1892",
+      "1882",
+      "1866"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1876",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777933",
+    "category": "storia",
+    "text": "QUALE FU LA PRINCIPALE RIVISTA DEL MOVIMENTO SOCIALISTA DIRETTA DA FILIPPO TURATI?",
+    "answers": [
+      "RASSEGNA POPOLARE",
+      "CRITICA SOCIALE",
+      "RIVISTA UNIVERSALE",
+      "LA PLEBE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: CRITICA SOCIALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777934",
+    "category": "storia",
+    "text": "QUALE GRANDE INTELLETTUALE ED ESPONENTE POLITICO FU ANCHE AUTORE DI UNA CELEBRE STORIA DELLA LETTERATURA ITALIANA?",
+    "answers": [
+      "PASQUALE VILLARI",
+      "RUGGERO BONGHI",
+      "FRANCESCO DE SANCTIS",
+      "MICHELE AMARI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCESCO DE SANCTIS",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777935",
+    "category": "storia",
+    "text": "QUALE MOVIMENTO FILOSOFICO SI DIFFUSE NELLA CULTURA ITALIANA DEGLI ULTIMI DECENNI DELL'OTTOCENTO?",
+    "answers": [
+      "IL POSITIVISMO",
+      "L'IDEALISMO",
+      "IL PRAGMATISMO",
+      "LO SPIRITUALISMO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL POSITIVISMO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777936",
+    "category": "storia",
+    "text": "QUALE GRANDE INTELLETTUALE ED UOMO POLITICO SCRISSE IL PRIMO TESTO CHE AFFRONTÒ LA QUESTIONE MERIDIONALE NEL 1875?",
+    "answers": [
+      "FRANCESCO DE SANCTIS",
+      "GAETANO SALVEMINI",
+      "BENDETTO CROCE",
+      "PASQUALE VILLARI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: PASQUALE VILLARI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777937",
+    "category": "storia",
+    "text": "CHI FU IL PRINCIPALE COLLABORATORE DI MINGHETTI NELLA PREDISPOSIZIONE DELLA LEGGE BANCARIA DEL 1874?",
+    "answers": [
+      "LUIGI LUZZATTI",
+      "SIDNEY SONNINO",
+      "FRANCESCO FERRARA",
+      "MAFFEO PANTALEONI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: LUIGI LUZZATTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777938",
+    "category": "storia",
+    "text": "QUALE STORICO ESPONENTE DELLA DESTRA E IN CHE ANNO SANZIONÒ LA POLITICA DEL TRASFORMISMO CHE CONSENTÌ A DEPRETIS DI CONSERVARE LA MAGGIORANZA PARLAMENTARE",
+    "answers": [
+      "RICASOLI NEL 1881",
+      "MINGHETTI NEL 1883",
+      "SELLA NEL 1879",
+      "PERUZZI NEL 1876"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: MINGHETTI NEL 1883",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777939",
+    "category": "storia",
+    "text": "CHI FURONO GLI ESPONENTI DELLA COSIDDETTA PENTARCHIA CHE NEL 1883 SI OPPOSE A DEPRETIS?",
+    "answers": [
+      "BACCARINI, BERTANI, CAIROLI, CRISPI, ZANARDELLI",
+      "BACCARINI, CAIROLI, CRISPI, NICOTERA, ZANARDELLI",
+      "BACCARINI, CAIROLI, CRISPI, MANCINI, NICOTERA",
+      "CAIROLI, CAVALLOTTI, CRISPI, MANCINI, NICOTERA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: BACCARINI, CAIROLI, CRISPI, NICOTERA, ZANARDELLI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777940",
+    "category": "storia",
+    "text": "VERSO QUALE CITTÀ ERITREA SI DIRESSE ALL'INIZIO DEL 1885 UNA SPEDIZIONE COLONIALE ITALIANA?",
+    "answers": [
+      "ASSAB",
+      "KEREN",
+      "MASSAUA",
+      "ASMARA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: MASSAUA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777941",
+    "category": "storia",
+    "text": "QUALE CONSEGUENZA POLITICA EBBE LA SCONFITTA DI DOGALI NEL 1887?",
+    "answers": [
+      "LA SOSTITUZIONE DEL MINISTRO DELLA GUERRA",
+      "LO SCIOGLIMENTO DELLA LEGISLATURA",
+      "IL RITORNO DELLA DESTRA STORICA ALLA GUIDA DEL GOVERNO",
+      "LE DIMISSIONI DEL VII GOVERNO DEPRETIS"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LE DIMISSIONI DEL VII GOVERNO DEPRETIS",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777942",
+    "category": "storia",
+    "text": "QUALE ESPONENTE DELLA SINISTRA SUCCESSE A DEPRETIS ALLA GUIDA DEL GOVERNO ALLA SUA MORTE NEL 1887?",
+    "answers": [
+      "GIUSEPPE SARACCO",
+      "GIUSEPPE ZANARDELLI",
+      "MICHELE COPPINO",
+      "FRANCESCO CRISPI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCESCO CRISPI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777943",
+    "category": "storia",
+    "text": "QUALI MINISTERI UNÌ ALLA PRESIDENZA DEL CONSIGLIO FRANCESCO CRISPI SUCCEDENDO AL DEPRETIS?",
+    "answers": [
+      "INTERNI E FINANZE",
+      "INTERNI E AGRICOLTURA",
+      "INTERNI E GIUSTIZIA",
+      "INTERNI ED ESTERI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: INTERNI ED ESTERI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777944",
+    "category": "storia",
+    "text": "CON QUALE PAESE EUROPEO I RAPPORTI DIPLOMATICI DIVENNERO TESI NEI PRIMI ANNI DI GOVERNO CRISPINO?",
+    "answers": [
+      "FRANCIA",
+      "RUSSIA",
+      "INGHILTERRA",
+      "SPAGNA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777945",
+    "category": "storia",
+    "text": "IN CHE ANNO L'ERITREA FU DICHIARATA COLONIA ITALIANA?",
+    "answers": [
+      "1882",
+      "1890",
+      "1880",
+      "1892"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1890",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777946",
+    "category": "storia",
+    "text": "QUALE ORIENTAMENTO ASSUNSE CRISPI, DA CAPO DEL GOVERNO, NEI CONFRONTI DELL'IRREDENTISMO?",
+    "answers": [
+      "SE NE DISINTERESSÒ RITENENDOLO AL DI FUORI DELLE COMPETENZE DEL GOVERNO",
+      "LO OSTEGGIÒ PER FEDELTÀ ALLA TRIPLICE ALLEANZA",
+      "LO CAPEGGIÒ IN OMAGGIO ALLE SUE ASCENDENZE PATRIOTTICHE",
+      "LO FAVORÌ QUALE CONTRALTARE ALLA TRIPLICE ALLEANZA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LO OSTEGGIÒ PER FEDELTÀ ALLA TRIPLICE ALLEANZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777947",
+    "category": "storia",
+    "text": "QUALI FURONO LE PRINCIPALI NOVITÀ DELLA NUOVA LEGGE COMUNALE E PROVINCIALE VARATA DA CRISPI?",
+    "answers": [
+      "ALLARGAMENTO DEL SUFFRAGIO ED AUTONOMIA FISCALE DEI COMUNI",
+      "ALLARGAMENTO DEL SUFFRAGIO ED ELETTIVITÀ DEI SINDACI E PRESIDENTI DELLA PROVINCIA",
+      "ALLARGAMENTO DEL SUFFRAGIO ED ELETTIVITÀ DEI SINDACI MA NON DEI PRESIDENTI DELLA PROVINCIA",
+      "ALLARGAMENTO DEL SUFFRAGIO ED AUTONOMIA FISCALE DELLE PROVINCE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: ALLARGAMENTO DEL SUFFRAGIO ED ELETTIVITÀ DEI SINDACI E PRESIDENTI DELLA PROVINCIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777948",
+    "category": "storia",
+    "text": "QUALE NOVITÀ FU INTRODOTTA DA CRISPI NEL 1889 PER LA GIUSTIZIA AMMINISTRATIVA?",
+    "answers": [
+      "LA RICONDUZIONE DELLA GIUSTIZIA ORDINARIA A QUELLA AMMINISTRATIVA",
+      "L'ISTITUZIONE DI UNA SEZIONE AMMINISTRATIVA NELLA CORTE DI CASSAZIONE",
+      "LA RICONDUZIONE DELLA GIUSTIZIA AMMINISTRATIVA A QUELLA ORDINARIA",
+      "L'ISTITUZIONE DI UNA SEZIONE GIURISDIZIONALE NEL CONSIGLIO DI STATO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ISTITUZIONE DI UNA SEZIONE GIURISDIZIONALE NEL CONSIGLIO DI STATO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777949",
+    "category": "storia",
+    "text": "QUALE NUOVO CODICE ENTRÒ IN VIGORE IL PRIMO GENNAIO 1890 PER OPERA DEL MINISTRO ZANARDELLI DI CUI PRESE IL NOME?",
+    "answers": [
+      "CODICE DI COMMERCIO",
+      "CODICE PENALE",
+      "CODICE DELLA NAVIGAZIONE",
+      "CODICE CIVILE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: CODICE PENALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777950",
+    "category": "storia",
+    "text": "QUALE FU IL PRINCIPIO ISPIRATORE DELLA RIFORMA CRISPINA DELLE OPERE PIE PROMULGATA NEL 1890?",
+    "answers": [
+      "LA NASCITA DI UN MINISTERO AD HOC PER LA PUBBLICA ASSISTENZA",
+      "L'ISTITUZIONE IN OGNI PROVINCIA DI UNA GIUNTA COMPETENTE SULL'ASSISTENZA PUBBLICA",
+      "LA CREAZIONE IN OGNI COMUNE DI UNA CONGREGAZIONE DI CARITÀ",
+      "LA DEVOLUZIONE DELLA BENEFICENZA ALLE DIOCESI COMPETENTI PER TERRITORIO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA CREAZIONE IN OGNI COMUNE DI UNA CONGREGAZIONE DI CARITÀ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777951",
+    "category": "storia",
+    "text": "QUALE OBIETTIVO SI RIPROPOSE GIOVANNI GIOLITTI CHIAMATO DA CRISPI AL MINISTERO DEL TESORO NEL 1889?",
+    "answers": [
+      "L'AUMENTO DEI DAZI",
+      "L'AUMENTO DEL DEBITO PUBBLICO",
+      "LA RIDUZIONE DEL DISAVANZO",
+      "LA RIDUZIONE DELLE TASSE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA RIDUZIONE DEL DISAVANZO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777952",
+    "category": "storia",
+    "text": "A QUALE SISTEMA ECONOMICO GUARDAVA L'ECONOMISTA GIUSEPPE TONIOLO, FONDATORE NEL 1889 DELL'UNIONE CATTOLICA PER GLI STUDI SOCIALI IN ITALIA?",
+    "answers": [
+      "ALLO STATALISMO ACCOMPAGNATO DALLA CONSERVAZIONE DI UNA QUOTA MINIMA DELLA PICCOLA PROPRIETÀ",
+      "AL COLLETTIVISMO ACCOMPAGNATO DALLA CONSERVAZIONE DI UNA QUOTA MINIMA DELLA PICCOLA PROPRIETÀ",
+      "AL CORPORATIVISMO ACCOMPAGNATO DALLA DIFESA DELLA PICCOLA PROPRIETÀ",
+      "AL LIBERISMO ACCOMPAGNATO DALLA DIFESA DELLA PICCOLA PROPRIETÀ"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: AL CORPORATIVISMO ACCOMPAGNATO DALLA DIFESA DELLA PICCOLA PROPRIETÀ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777953",
+    "category": "storia",
+    "text": "PER L'ESERCIZIO DI QUALE ATTIVITÀ FU FONDATA NEL 1888 LA SOCIETÀ MONTECATINI?",
+    "answers": [
+      "INDUSTRIA SIDERURGICA",
+      "INDUSTRIA LANIERA",
+      "INDUSTRIA MINERARIA",
+      "INDUSTRIA CHIMICA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: INDUSTRIA MINERARIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777954",
+    "category": "storia",
+    "text": "CHE COSA FECE IL MINISTRO DELLE FINANZE GRIMALDI NEL 1891?",
+    "answers": [
+      "DECISE IL CONSOLIDAMENTO DEL DEBITO PUBBLICO",
+      "SI DIMISE PER CONTRASTI CON CRISPI",
+      "ANNUNCIO' IL PAREGGIO DI BILANCIO",
+      "PROPOSE UNA SERIE DI INASPRIMENTI FISCALI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: PROPOSE UNA SERIE DI INASPRIMENTI FISCALI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777955",
+    "category": "storia",
+    "text": "CHI SFERRO' NEL 1891 UNA POLEMICA CONTRO LA MEMORIA DEI GOVERNI DELLA DESTRA STORICA ACCUSANDOLI DI AVER PERSEGUITO \"UNA POLITICA SERVILE VERSO LO STRANIERO\"?",
+    "answers": [
+      "NAPOLEONE COLAJANNI",
+      "FRANCESCO CRISPI",
+      "GIOVANNI BOVIO",
+      "FELICE CAVALLOTTI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: FRANCESCO CRISPI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777956",
+    "category": "storia",
+    "text": "PERCHE' IL PRIMO GOVERNO DI RUDINI' SI DIMISE AGLI INIZI DEL 1892?",
+    "answers": [
+      "PER I CONTRASTI NELLA MAGGIORANZA SUL RINNOVO DELLA TRIPLICE ALLEANZA",
+      "PER LA SFIDUCIA PARLAMENTARE AL PROGETTO DI INTRODURRE NUOVE IMPOSTE",
+      "PER L'INDIGNAZIONE SUSCITATA DALLA REPRESSIONE DEI FASCI SICILIANI",
+      "PER LA SCONFITTA MILITARE SUBITA NELL'AVVENTURA COLONIALE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: PER LA SFIDUCIA PARLAMENTARE AL PROGETTO DI INTRODURRE NUOVE IMPOSTE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777957",
+    "category": "storia",
+    "text": "QUALE ATTEGGIAMENTO MOSTRO' GIOLITTI DI FRONTE AL MOVIMENTO DEI FASCI SICILIANI?",
+    "answers": [
+      "NOMINO' UNA COMMISSIONE D'INCHIESTA",
+      "FU RESTIO AD IMPIEGARE LA FORZA",
+      "COOPTO' NEL GOVERNO I CAPI DEL MOVIMENTO",
+      "PROPOSE UNA RIFORMA AGRARIA LIMITATA ALLA SICILIA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU RESTIO AD IMPIEGARE LA FORZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777958",
+    "category": "storia",
+    "text": "ANNA KULISCIOFF FU UNA DELLE POCHE DONNE DIRETTAMENTE IMPEGNATE NELLA POLITICA ITALIANA ALLA FINE DELL'OTTOCENTO. A QUALE AREA POLITICA APPARTENEVA?",
+    "answers": [
+      "AREA CATTOLICA",
+      "AREA LIBERALE",
+      "AREA MAZZINIANA",
+      "AREA SOCIALISTA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: AREA SOCIALISTA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777959",
+    "category": "storia",
+    "text": "IN QUALE LOCALITA' FRANCESE VENNERO UCCISI NEL 1893 NUMEROSI LAVORATORI ITALIANI IMPIEGATI NELLE SALINE?",
+    "answers": [
+      "A MARSIGLIA",
+      "A CANNES",
+      "A NIZZA",
+      "AD AIGUES-MORTES"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: AD AIGUES-MORTES",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777960",
+    "category": "storia",
+    "text": "QUALI BANCHE SORSERO NEL 1894 CON L'APPORTO DI CAPITALI TEDESCHI?",
+    "answers": [
+      "BANCO DI SICILIA E BANCO DI NAPOLI",
+      "BANCA COMMERCIALE E CREDITO ITALIANO",
+      "BANCA ITALIANA DI SCONTO E CREDITO MOBILIARE",
+      "BANCO DI ROMA E MONTE DEI PASCHI DI SIENA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: BANCA COMMERCIALE E CREDITO ITALIANO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777961",
+    "category": "storia",
+    "text": "CHE COSA PROPOSE, TRA L'ALTRO, IL MINISTRO DELLE FINANZE SONNINO NEL 1894, PER FRONTEGGIARE IL DISSESTO FINANZIARIO?",
+    "answers": [
+      "LA RIDUZIONE DEI SUSSIDI AI MENO ABBIENTI",
+      "IL RIPRISTINO DELLA TASSA SUL MACINATO",
+      "L'AUMENTO DEL PREZZO DEL SALE E DEL DAZIO DOGANALE SUL GRANO",
+      "UN PRESTITO FORZOSO DA PARTE DELLE BANCHE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'AUMENTO DEL PREZZO DEL SALE E DEL DAZIO DOGANALE SUL GRANO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777962",
+    "category": "storia",
+    "text": "CHE COSA PREVEDEVANO, TRA L'ALTRO, I PROVVEDIMENTI ANTIANARCHICI PRESENTATI DA CRISPI NEL 1894?",
+    "answers": [
+      "IL RIPRISTINO DELLA LEGISLAZIONE ANTI- BRIGANTAGGIO",
+      "L'ISTITUZIONE DI TRIBUNALI SPECIALI PER I REATI POLITICI",
+      "L'AGGRAVAMENTO DELLE PENE PER L'APOLOGIA DI TERRORISMO E PER L'ISTIGAZIONE DEI MILITARI ALLA DISUBBIDIENZA",
+      "LA FORMAZIONE DI UNO SPECIALE CORPO DI POLIZIA POLITICA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'AGGRAVAMENTO DELLE PENE PER L'APOLOGIA DI TERRORISMO E PER L'ISTIGAZIONE DEI MILITARI ALLA DISUBBIDIENZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777963",
+    "category": "storia",
+    "text": "CHE COSA CARATTERIZZO' LA POLITICA ESTERA ITALIANA DOPO LA CADUTA DI CRISPI PROVOCATA DALLA SCONFITTA DI ADUA?",
+    "answers": [
+      "IL RITIRO DALL'ERITREA SU PRESSIONE INGLESE",
+      "LA DENUNCIA DELLA TRIPLICE ALLEANZA",
+      "LA RIPRESA DELLE RELAZIONI CON LA FRANCIA",
+      "LA RICERCA DELLA RIVINCITA NELLA GUERRA COLONIALE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA RIPRESA DELLE RELAZIONI CON LA FRANCIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777964",
+    "category": "storia",
+    "text": "QUALE SOLUZIONE AUSPICAVA SIDNEY SONNINO NELLA CRISI DI FINE SECOLO?",
+    "answers": [
+      "SOLLECITAVA LA CAMERA DEI DEPUTATI A RECLAMARE MAGGIORI POTERI RISPETTO AL SENATO DEL REGNO",
+      "AUSPICAVA UN RUOLO ATTIVO DELL'ESERCITO NELLA VITA PUBBLICA",
+      "SI APPELLAVA AD UN'INTERPRETAZIONE LETTERALE DELLO STATUTO ALBERTINO CHE RIPORTASSE IL RE AL CENTRO DEL SISTEMA ISTITUZIONALE",
+      "PROPONEVA L'ABOLIZIONE DELLO STATUTO ALBERTINO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: SI APPELLAVA AD UN'INTERPRETAZIONE LETTERALE DELLO STATUTO ALBERTINO CHE RIPORTASSE IL RE AL CENTRO DEL SISTEMA ISTITUZIONALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777965",
+    "category": "storia",
+    "text": "NEL 1898, QUALE CELEBRE PARLAMENTARE VENNE UCCISO IN UN DUELLO?",
+    "answers": [
+      "AURELIO SAFFI",
+      "ANDREA COSTA",
+      "GIOVANNI NICOTERA",
+      "FELICE CAVALLOTTI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: FELICE CAVALLOTTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777966",
+    "category": "storia",
+    "text": "CHE COSA SI RIPROMETTEVA DI RUDINI' CON LE PROPOSTE DI LEGGE DEL GIUGNO 1898?",
+    "answers": [
+      "CONCEDERE L'AMINISTIA PER I TUMULTI DEL MAGGIO 1898",
+      "REALIZZARE UNA RIFORMA AGRARIA PER ALLENTARE LA TENSIONE SOCIALE",
+      "DARE CARATTERE PERMANENTE AI PROVVEDIMENTI PRESI DURANTE LO STATO D'ASSEDIO",
+      "DEPORTARE I RESPONSABILI DEI MOTI POPOLARI NELLE COLONIE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: DARE CARATTERE PERMANENTE AI PROVVEDIMENTI PRESI DURANTE LO STATO D'ASSEDIO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777967",
+    "category": "storia",
+    "text": "PER FRONTEGGIARE I TUMULTI DEL MAGGIO 1898, I MINISTRI DELL'INTERNO E DELLA GUERRA:",
+    "answers": [
+      "FURONO AUTORIZZATI A PROCLAMARE LO STATO D'ASSEDIO NELLE SINGOLE CITTA'",
+      "FURONO AUTORIZZATI A SOSPENDERE LO STATUTO ALBERTINO",
+      "FURONO AUTORIZZATI A CHIEDERE AIUTO MILITARE AI GOVERNI AUSTRO-UNGARICO E TEDESCO",
+      "FURONO AUTORIZZATI A COSTITUIRE CORPI DI VOLONTARI ANTISOMMOSSA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: FURONO AUTORIZZATI A PROCLAMARE LO STATO D'ASSEDIO NELLE SINGOLE CITTA'",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777968",
+    "category": "storia",
+    "text": "CON QUALE PAESE FU FIRMATO, IL 21 NOVEMBRE 1898, UN TRATTATO PER IL COMMERCIO A CONCLUSIONE DI LUNGHE E LABORIOSE TRATTATIVE?",
+    "answers": [
+      "CON LA GERMANIA",
+      "CON LA RUSSIA",
+      "CON LA FRANCIA",
+      "CON GLI STATI UNITI D'AMERICA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: CON LA FRANCIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777969",
+    "category": "storia",
+    "text": "IN QUALE CITTA' FU FONDATA LA FIAT?",
+    "answers": [
+      "TERNI",
+      "TORINO",
+      "GENOVA",
+      "MILANO"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: TORINO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777970",
+    "category": "storia",
+    "text": "QUALE SCIENZIATO ITALIANO INVENTO' LA TELEGRAFIA SENZA FILI, RICEVENDONE NEL 1897 IL RICONOSCIMENTO DEL BREVETTO A LONDRA?",
+    "answers": [
+      "AUGUSTO RIGHI",
+      "GUGLIELMO MARCONI",
+      "ENRICO FERMI",
+      "GALILEO FERRARIS"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: GUGLIELMO MARCONI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777971",
+    "category": "storia",
+    "text": "QUALE FORZA POLITICA RICORSE, PER LA PRIMA VOLTA NELLA STORIA PARLAMENTARE ITALIANA, ALL'OSTRUZIONISMO PER OPPORSI AI PROVVEDIMENTI DEL GOVERNO PELLOUX NELLA CRISI DI FINE SECOLO?",
+    "answers": [
+      "LA CONSORTERIA",
+      "LA PENTARCHIA",
+      "L'ESTREMA SINISTRA",
+      "L'ESTREMA DESTRA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ESTREMA SINISTRA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777972",
+    "category": "storia",
+    "text": "DOPO LO SCIOGLIMENTO DELLA CAMERA DEL LAVORO DI GENOVA, QUALE UOMO POLITICO LIBERALE DIFESE IL DIRITTO DI ASSOCIAZIONE DEI LAVORATORI?",
+    "answers": [
+      "FRANCESCO CRISPI",
+      "GIOVANNI GIOLITTI",
+      "ANTONIO DI RUDINI'",
+      "SIDNEY SONNINO"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIOVANNI GIOLITTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777973",
+    "category": "storia",
+    "text": "COME SI CHIAMAVA IL MILITANTE ANARCHICO CHE ASSASSINO' IL RE D'ITALIA UMBERTO I NEL 1900?",
+    "answers": [
+      "GAETANO BRESCI",
+      "GUGLIELMO OBERDAN",
+      "FELICE ORSINI",
+      "GIOVANNI PASSANANTE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: GAETANO BRESCI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777974",
+    "category": "storia",
+    "text": "L'UNIVERSITÀ DI QUALE CITTÀ ITALIANA CONTAVA IL MAGGIOR NUMERO DI STUDENTI ALLA FINE DELL'OTTOCENTO?",
+    "answers": [
+      "ROMA",
+      "BOLOGNA",
+      "TORINO",
+      "NAPOLI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: NAPOLI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777975",
+    "category": "storia",
+    "text": "QUALE FILOSOFO DIEDE IL MAGGIORE CONTRIBUTO TEORICO AL NASCENTE PARTITO SOCIALISTA ITALIANO?",
+    "answers": [
+      "ACHILLE ARDIGÒ",
+      "BERTRANDO SPAVENTA",
+      "CESARE LOMBROSO",
+      "ANTONIO LABRIOLA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTONIO LABRIOLA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777976",
+    "category": "storia",
+    "text": "A QUALE MODELLO STRANIERO GUARDÒ IL NASCENTE PARTITO SOCIALISTA ITALIANO ANCHE GRAZIE ALL'INFLUENZA DI FILIPPO TURATI?",
+    "answers": [
+      "ALLA SOCIALDEMOCRAZIA TEDESCA",
+      "ALLA COMUNE DI PARIGI",
+      "AL POPULISMO RUSSO",
+      "AL LABURISMO INGLESE"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: ALLA SOCIALDEMOCRAZIA TEDESCA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777977",
+    "category": "storia",
+    "text": "IN QUALE ANNO SI TENNE IL CONGRESSO DI GENOVA DA CUI EBBE ORIGINE IL PARTITO SOCIALISTA?",
+    "answers": [
+      "1902",
+      "1882",
+      "1872",
+      "1892"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1892",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777978",
+    "category": "storia",
+    "text": "IN QUALE CITTÀ ITALIANA FU FONDATA LA PRIMA CAMERA DEL LAVORO NEL 1891 E DA CHI?",
+    "answers": [
+      "A ROMA DA ERNESTO NATHAN",
+      "A BOLOGNA DA ANDREA COSTA",
+      "A MILANO DA OSVALDO GNOCCHI VIANI",
+      "A GENOVA DA FEDERICO CAMPANELLA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: A MILANO DA OSVALDO GNOCCHI VIANI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777979",
+    "category": "storia",
+    "text": "CON QUALE ENCICLICA, PUBBLICATA NEL 1891, LEONE XIII RINNOVÒ LA DOTTRINA SOCIALE DELLA CHIESA CATTOLICA?",
+    "answers": [
+      "CENTESIMUS ANNUS",
+      "CARITATIS STUDIUM",
+      "POPULORUM PROGRESSIO",
+      "RERUM NOVARUM"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: RERUM NOVARUM",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777980",
+    "category": "storia",
+    "text": "QUALE PRINCIPIO FU POSTO DA LEONE XIII A BASE DELLA NUOVA CONCEZIONE CATTOLICA DEL LAVORO DA LUI PROMOSSA CON UN'ENCICLICA NEL 1891?",
+    "answers": [
+      "IL PRINCIPIO DELLA PIENA OCCUPAZIONE A CARICO DELLO STATO",
+      "IL PRINCIPIO DELL'INDENNITÀ DI DISOCCUPAZIONE A CARICO DELLO STATO",
+      "IL PRINCIPIO DELLA PARITÀ SALARIALE DI GENERE",
+      "IL PRINCIPIO DEL SALARIO MINIMO VITALE"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL PRINCIPIO DEL SALARIO MINIMO VITALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777981",
+    "category": "storia",
+    "text": "QUALE UOMO POLITICO DELLA DESTRA SOSTITUÌ CRISPI ALLA GUIDA DEL GOVERNO NEL 1891?",
+    "answers": [
+      "DI RUDINÌ",
+      "LUZZATTI",
+      "SALANDRA",
+      "SONNINO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: DI RUDINÌ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777982",
+    "category": "storia",
+    "text": "QUALE FU IL PRINCIPALE ATTO DI POLITICA ESTERA DEL PRIMO GOVERNO DI RUDINÌ?",
+    "answers": [
+      "ANTICIPO DEL RINNOVO DELLA TRIPLICE ALLEANZA",
+      "TRASFORMAZIONE DELLA TRIPLICE ALLEANZA IN QUADRUPLICE ALLEANZA",
+      "RINVIO DEL RINNOVO DELLA TRIPLICE ALLEANZA",
+      "RECESSO DALLA TRIPLICE ALLEANZA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTICIPO DEL RINNOVO DELLA TRIPLICE ALLEANZA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777983",
+    "category": "storia",
+    "text": "QUALE UOMO POLITICO FU CHIAMATO PER LA PRIMA VOLTA ALLA GUIDA DEL GOVERNO NEL 1892?",
+    "answers": [
+      "ANTONIO DI RUDINÌ",
+      "GIOVANNI GIOLITTI",
+      "SIDNEY SONNINO",
+      "FRANCESCO CRISPI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIOVANNI GIOLITTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777984",
+    "category": "storia",
+    "text": "QUALE FU LA POLITICA ECONOMICA DEL PRIMO GOVERNO GIOLITTI?",
+    "answers": [
+      "ACCRESCERE IL DISAVANZO PER INCENTIVARE LO SVILUPPO INDUSTRIALE",
+      "RICORRERE A NUOVE IMPOSTE PER FAVORIRE LE COSTRUZIONI FERROVIARIE",
+      "ANTEPORRE LE ECONOMIE DI BILANCIO ALLE NUOVE IMPOSTE",
+      "LIMITARE DRASTICAMENTE LE SPESE DELLA LISTA CIVILE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTEPORRE LE ECONOMIE DI BILANCIO ALLE NUOVE IMPOSTE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777985",
+    "category": "storia",
+    "text": "QUALE SISTEMA ELETTORALE FU REINTRODOTTO NELLE ELEZIONI DEL 1892?",
+    "answers": [
+      "PROPORZIONALE",
+      "UNINOMINALE",
+      "LISTA BLOCCATA",
+      "PLURINOMINALE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: UNINOMINALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777986",
+    "category": "storia",
+    "text": "QUALI DEPUTATI RIVELARONO PER PRIMI ALLA CAMERA I FATTI DA CUI PRESE LE MOSSE LO SCANDALO DELLA BANCA ROMANA ALLA FINE DEL 1892?",
+    "answers": [
+      "COLAJANNI E GAVAZZI",
+      "BERTANI E NICOTERA",
+      "CAVALLOTTI E ZANARDELLI",
+      "CRISPI E GRIMALDI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: COLAJANNI E GAVAZZI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777987",
+    "category": "storia",
+    "text": "QUALE IMPORTANTE RIFORMA DEL SISTEMA CREDITIZIO FU ATTUATA NEL 1893 PER FRONTEGGIARE L'AMMANCO DELLA BANCA ROMANA?",
+    "answers": [
+      "LA CONCESSIONE DEL DIRITTO DI EMISSIONE A TUTTE LE BANCHE DEL REGNO RINUNCIANDO DEFINITIVAMENTE ALLA CREAZIONE DI UNA BANCA CENTRALE",
+      "LA FUSIONE DI QUATTRO ISTITUTI DI EMISSIONE NELLA BANCA D'ITALIA",
+      "LA RIDUZIONE A DUE DEGLI ISTITUTI DI EMISSIONE CREANDO UNA BANCA CENTRALE PER IL NORD ED UNA PER IL SUD",
+      "LA STATALIZZAZIONE DI TUTTE LE BANCHE DEL REGNO CON L'ECCEZIONE DELLE CASSE RURALI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA FUSIONE DI QUATTRO ISTITUTI DI EMISSIONE NELLA BANCA D'ITALIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777988",
+    "category": "storia",
+    "text": "QUALE ANTICO PATRIOTA FU CHIAMATO A PRESIEDERE LA COMMISSIONE PARLAMENTARE D'INCHIESTA SULLA BANCA ROMANA?",
+    "answers": [
+      "ANTONIO MORDINI",
+      "GIUSEPPE MARCORA",
+      "ANTONIO DI RUDINÌ",
+      "GIUSEPPE ZANARDELLI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTONIO MORDINI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777989",
+    "category": "storia",
+    "text": "COME REAGÌ CRISPI, TORNATO AL GOVERNO DOPO LO SCANDALO DELLA BANCA ROMANA, AL MOVIMENTO DEI FASCI SICILIANI?",
+    "answers": [
+      "AVVIANDO UNA TRATTATIVA PERSONALE CON I CAPI DEI FASCI CHE ERANO STATI SUOI ANTICHI SOSTENITORI",
+      "COMMISSARIANDO TUTTE LE AMMINISTRAZIONI COMUNALI E PROVINCIALI DELLA SICILIA SENZA RICORRERE TUTTAVIA ALLO STATO D'ASSEDIO",
+      "RICORRENDO ALLO STATO D'ASSEDIO PER TUTTA LA SICILIA",
+      "RICORRENDO ALLO STATO D'ASSEDIO PER LA SICILIA ORIENTALE DOVE IL MOTO SI ERA CONCENTRATO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: RICORRENDO ALLO STATO D'ASSEDIO PER TUTTA LA SICILIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777990",
+    "category": "storia",
+    "text": "OLTRE AI FASCI SICILIANI, QUALE ALTRO MOTO FU REPRESSO DAL CRISPI TORNATO AL GOVERNO DOPO LO SCANDALO DELLA BANCA ROMANA?",
+    "answers": [
+      "IL MOTO REAZIONARIO A ROMA",
+      "IL MOTO ANARCHICO IN LUNIGIANA",
+      "IL MOTO COMUNISTA A LIVORNO",
+      "IL MOTO SOCIALISTA IN ANCONA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL MOTO ANARCHICO IN LUNIGIANA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777991",
+    "category": "storia",
+    "text": "QUALE PROVVEDIMENTO ADOTTÒ CRISPI PER ASSICURARSI LA VITTORIA ALLE ELEZIONI DEL 1895?",
+    "answers": [
+      "UNA REVISIONE STRAORDINARIA DELLE LISTE ELETTORALI",
+      "L'INTRODUZIONE DEL SISTEMA PROPORZIONALE",
+      "IL RIPRISTINO DEL SISTEMA PLURINOMINALE",
+      "UN ULTERIORE ALLARGAMENTO DEL SUFFRAGIO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: UNA REVISIONE STRAORDINARIA DELLE LISTE ELETTORALI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777993",
+    "category": "storia",
+    "text": "QUALE GENERALE COMANDAVA LE TRUPPE ITALIANE NELLA SCONFITTA SUBITA IL PRIMO MARZO 1896 NELLA GUERRA CONTRO L'ETIOPIA?",
+    "answers": [
+      "ORESTE BARATIERI",
+      "ANTONIO BALDISSERA",
+      "LUIGI CADORNA",
+      "LUIGI CAPELLO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: ORESTE BARATIERI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777994",
+    "category": "storia",
+    "text": "CHE COSA PROVOCÒ LA FINE DELLA CARRIERA POLITICA DI FRANCESCO CRISPI?",
+    "answers": [
+      "LO SCOPPIO DEI FASCI SICILIANI",
+      "LO SCANDALO DELLA BANCA ROMANA",
+      "IL FALLIMENTO DELLE TRATTATIVE CON LA SANTA SEDE",
+      "LA SCONFITTA DI ADUA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA SCONFITTA DI ADUA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777995",
+    "category": "storia",
+    "text": "IN CHE ANNO FU FONDATA LA FIAT?",
+    "answers": [
+      "1889",
+      "1899",
+      "1908",
+      "1878"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1899",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777996",
+    "category": "storia",
+    "text": "COME FU GESTITA LA PROTEZIONE GRANARIA NEGLI ANNI '90 DELL'800?",
+    "answers": [
+      "FU MANO A MANO RIDOTTA PER FAVORIRE LA PRODUZIONE INTENSIVA AL NORD",
+      "FU MANO A MANO RIDOTTA PER FAVORIRE LA PRODUZIONE ESTENSIVA AL SUD",
+      "FU PERIODICAMENTE INCREMENTATA, CON LA SOLA ECCEZIONE DOVUTA ALLA CARESTIA DEL 1898",
+      "FU PERIODICAMENTE INCREMENTATA, SENZA SOLUZIONE DI CONTINUITÀ"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: FU PERIODICAMENTE INCREMENTATA, CON LA SOLA ECCEZIONE DOVUTA ALLA CARESTIA DEL 1898",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777997",
+    "category": "storia",
+    "text": "QUALE FU LA MEDIA ANNUA DI COLORO CHE EMIGRARONO NEL QUINQUENNIO 1896-1900?",
+    "answers": [
+      "CIRCA 500.000",
+      "CIRCA 300.000",
+      "CIRCA 150.000",
+      "CIRCA 650.000"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: CIRCA 300.000",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777998",
+    "category": "storia",
+    "text": "VERSO QUALE PAESE SI INDIRIZZÒ LA PIÙ ALTA PERCENTUALE DELL'EMIGRAZIONE TRANSOCEANICA NEL QUINQUENNIO 1896- 1900?",
+    "answers": [
+      "BRASILE",
+      "STATI UNITI",
+      "AUSTRALIA",
+      "ARGENTINA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: STATI UNITI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-777999",
+    "category": "storia",
+    "text": "IN CHE ANNO FU ASSASSINATO A MONZA IL RE UMBERTO I?",
+    "answers": [
+      "1882",
+      "1900",
+      "1898",
+      "1902"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1900",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778000",
+    "category": "storia",
+    "text": "CHI ERA A CAPO DEL GOVERNO QUANDO FU ASSASSINATO IL RE UMBERTO I?",
+    "answers": [
+      "GIUSEPPE ZANARDELLI",
+      "LUIGI PELLOUX",
+      "FRANCESCO CRISPI",
+      "GIUSEPPE SARACCO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIUSEPPE SARACCO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778001",
+    "category": "storia",
+    "text": "QUALE UOMO POLITICO TORNÒ AL POTERE DOPO LA DEFINITIVA CADUTA DI CRISPI?",
+    "answers": [
+      "AGOSTINO DEPRETIS",
+      "ANTONIO DI RUDINÌ",
+      "GIOVANNI GIOLITTI",
+      "BENEDETTO CAIROLI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTONIO DI RUDINÌ",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778002",
+    "category": "storia",
+    "text": "QUALE MIGLIORAMENTO PER I LAVORATORI FU INTRODOTTO DALLA LEGGE DEL 17 MARZO 1898?",
+    "answers": [
+      "L'ASSICURAZIONE OBBLIGATORIA PER I LAVORATORI DELL'INDUSTRIA",
+      "LA RIDUZIONE DELL'ORARIO PER TUTTI I LAVORATORI",
+      "L'ASSICURAZIONE OBBLIGATORIA PER TUTTI I LAVORATORI",
+      "LA RIDUZIONE DELL'ORARIO PER I LAVORATORI DELL'INDUSTRIA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ASSICURAZIONE OBBLIGATORIA PER I LAVORATORI DELL'INDUSTRIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778003",
+    "category": "storia",
+    "text": "SU QUALE RIVISTA SIDNEY SONNINO PUBBLICÒ ANONIMO, IL PRIMO GENNAIO 1897, UN ARTICOLO DESTINATO AD ANIMARE UN INTENSO DIBATTITO POLITICO- COSTITUZIONALE?",
+    "answers": [
+      "CRONACA BIZANTINA",
+      "NUOVA ANTOLOGIA",
+      "CRIITCA SOCIALE",
+      "RASSEGNA SETTIMANALE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: NUOVA ANTOLOGIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778004",
+    "category": "storia",
+    "text": "QUALE ESPONENTE SOCIALISTA FU IL PRIMO DIRETTORE DELL'\"AVANTI!\" FONDATO NEL 1896?",
+    "answers": [
+      "LEONIDA BISSOLATI",
+      "FILIPPO TURATI",
+      "CLAUDIO TREVES",
+      "ANDREA COSTA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: LEONIDA BISSOLATI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778005",
+    "category": "storia",
+    "text": "QUALE TITOLO DIEDE ALLA SUA NUOVA RIVISTA IL SACERDOTE MARCHIGIANO ROMOLO MURRI FONDATA NEL 1898 PER RINNOVARE L'IMPEGNO POLITICO DEI CATTOLICI IN SENSO DEMOCRATICO?",
+    "answers": [
+      "CRITICA SOCIALE",
+      "CULTURA SOCIALE",
+      "CIVILTÀ CATTOLICA",
+      "DOTTRINA CATTOLICA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: CULTURA SOCIALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778006",
+    "category": "storia",
+    "text": "IN QUALE CITTÀ FU PIÙ DURA LA REPRESSIONE DEI MOTI PER IL CAROPANE NEL 1898, ORDINATA DAL GENERALE BAVA BECCARIS?",
+    "answers": [
+      "A ROMA",
+      "A TORINO",
+      "A NAPOLI",
+      "A MILANO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: A MILANO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778007",
+    "category": "storia",
+    "text": "CHI PRESIEDETTE LA CAMERA DEI DEPUTATI, SUCCEDENDO AL DIMISSIONARIO ZANARDELLI, NELLA CRISI OSTRUZIONISTICA DEL GIUGNO 1899?",
+    "answers": [
+      "GIUSEPPE BIANCHERI",
+      "LUIGI CHINAGLIA",
+      "DOMENICO FARINI",
+      "FRANCESCO CRISPI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LUIGI CHINAGLIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778008",
+    "category": "storia",
+    "text": "QUALE ATTEGGIAMENTO ASSUNSERO LE OPPOSIZIONI IN OCCASIONE DEL VOTO FINALE SULLE MODIFICHE DEL REGOLAMENTO PARLAMENTARE VOLUTE DAL PELLOUX NELLA CRISI DI FINE SECOLO?",
+    "answers": [
+      "CHIESERO IL VOTO PER PARTI SEPARATE",
+      "SI APPELLARONO AL RE, ASTENENDOSI DAL VOTO MA RESTANDO IN AULA",
+      "VOTARONO CONTRO",
+      "ABBANDONARONO L'AULA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: ABBANDONARONO L'AULA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778009",
+    "category": "storia",
+    "text": "DOPO LA CADUTA DEL GOVERNO PELLOUX, QUALE POSIZIONE ASSUNSE IL NUOVO PRESIDENTE DEL CONSIGLIO SARACCO CIRCA LE MODIFICHE DEL REGOLAMENTO DELLA CAMERA CHE ERANO STATE APPROVATE A MAGGIORANZA?",
+    "answers": [
+      "LE CONFERMÒ INTEGRALMENTE",
+      "NON LE CONFERMÒ, PROPONENDO TUTTAVIA DI PROCEDERE AD ALCUNE MODIFICHE DEL VECCHIO REGOLAMENTO",
+      "SOSTENNE IL RICHIAMO IN VIGORE DEL VECCHIO REGOLAMENTO SENZA MODIFICARNE ALCUNA PARTE",
+      "NON LE CONFERMÒ, RITIRANDOLE INTEGRALMENTE"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: NON LE CONFERMÒ, PROPONENDO TUTTAVIA DI PROCEDERE AD ALCUNE MODIFICHE DEL VECCHIO REGOLAMENTO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778010",
+    "category": "storia",
+    "text": "IN QUALI REGIONI ITALIANE SI VERIFICARONO I RIPETUTI SCONTRI TRA SCIOPERANTI E FORZE DELL'ORDINE, NOTI COME LA SETTIMANA ROSSA?",
+    "answers": [
+      "PIEMONTE E LOMBARDIA",
+      "EMILIA ROMAGNA E VENETO",
+      "SICILIA E CALABRIA",
+      "MARCHE E ROMAGNA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: MARCHE E ROMAGNA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778011",
+    "category": "storia",
+    "text": "A QUALE AREA POLITICA APPARTENEVANO ALCESTE DE AMBRIS E ARTURO LABRIOLA AL TEMPO DELLA PRIMA GUERRA MONDIALE?",
+    "answers": [
+      "SOCIALISTI RIFORMISTI",
+      "SINDACALISTI RIVOLUZIONARI",
+      "RADICALI",
+      "CATTOLICI DEMOCRATICI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: SINDACALISTI RIVOLUZIONARI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778012",
+    "category": "storia",
+    "text": "QUALE FU IL PRINCIPALE ESPONENTE IN ITALIA DEL MODERNISMO?",
+    "answers": [
+      "LUIGI STURZO",
+      "ERNESTO BUONAIUTI",
+      "FILIPPO MEDA",
+      "GIUSEPPE TONIOLO"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: ERNESTO BUONAIUTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778013",
+    "category": "storia",
+    "text": "IN QUALE ANNO FU FIRMATO IL PATTO DI LONDRA?",
+    "answers": [
+      "NEL 1916",
+      "NEL 1919",
+      "NEL 1912",
+      "NEL 1915"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: NEL 1915",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778014",
+    "category": "storia",
+    "text": "CHE COSA PREVEDEVA IL PATTO DI LONDRA, STIPULATO TRA L'ITALIA E LE POTENZE DELL'INTESA?",
+    "answers": [
+      "L'ENTRATA IN GUERRA DELL'ITALIA ENTRO IL MESE SUCCESSIVO ALLA STIPULA",
+      "LA NEUTRALITA' DELL'ITALIA PER UN SOLO ANNO",
+      "LA NEUTRALITA' DELL'ITALIA PER TUTTA LA DURATA DELLA GUERRA",
+      "L'ENTRATA IN GUERRA DELL'ITALIA ENTRO DUE ANNI DALLA STIPULA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'ENTRATA IN GUERRA DELL'ITALIA ENTRO IL MESE SUCCESSIVO ALLA STIPULA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778015",
+    "category": "storia",
+    "text": "QUALE PAPA CONDANNO' LA PRIMA GUERRA MONDIALE SIN DAL NOVEMBRE 1914?",
+    "answers": [
+      "PIO X",
+      "LEONE XIII",
+      "PIO XI",
+      "BENEDETTO XV"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: BENEDETTO XV",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778016",
+    "category": "storia",
+    "text": "QUALE FU LA POSIZIONE DEL CORRIERE DELLA SERA SULL'ENTRATA DELL'ITALIA NELLA PRIMA GUERRA MONDIALE?",
+    "answers": [
+      "FU FAVOREVOLE AD UNA NEUTRALITA' CONDIZIONATA",
+      "SI SCHIERO' A FAVORE DI UNA NEUTRALITA' ASSOLUTA",
+      "SI SCHIERO' A FAVORE DELL'INTERVENTO",
+      "SI ASTENNE DAL PRENDERE QUALUNQUE POSIZIONE"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: SI SCHIERO' A FAVORE DELL'INTERVENTO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778017",
+    "category": "storia",
+    "text": "QUALE FORZA POLITICA ESPRESSE, NEL 1915, AL MOMENTO DELL'ENTRATA IN GUERRA, UN ATTEGGIAMENTO DEFINITO DALL'ESPRESSIONE \"NE' ADERIRE NE' SABOTARE\"?",
+    "answers": [
+      "IL GRUPPO GIOLITTIANO",
+      "IL PARTITO RADICALE",
+      "IL PARTITO COMUNISTA",
+      "IL PARTITO SOCIALISTA ITALIANO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL PARTITO SOCIALISTA ITALIANO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778018",
+    "category": "storia",
+    "text": "QUALI AVVENIMENTI DEL 1915 VENNERO DEFINITI CON L'ESPRESSIONE \"RADIOSE GIORNATE DI MAGGIO\"?",
+    "answers": [
+      "LE GIORNATE IN CUI FURONO FONDATI I FASCI DI COMBATTIMENTO",
+      "LE GIORNATE DEGLI SCIOPERI ANTIBELLICISTI PROMOSSI DAI SOCIALISTI",
+      "LE GIORNATE IN CUI LE TRUPPE ITALIANE ATTRAVERSARONO IL PIAVE",
+      "LE GIORNATE DELLE MANIFESTAZIONI DI PIAZZA DEGLI INTERVENTISTI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LE GIORNATE DELLE MANIFESTAZIONI DI PIAZZA DEGLI INTERVENTISTI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778019",
+    "category": "storia",
+    "text": "CHI ERA IL DIRETTORE DE \"IL REGNO\", IL PRIMO ORGANO DI STAMPA DEL MOVIMENTO NAZIONALISTA COSTITUITOSI NEL 1910?",
+    "answers": [
+      "GIUSEPPE PREZZOLINI",
+      "GIOVANNI PAPINI",
+      "ENRICO CORRADINI",
+      "LUIGI FEDERZONI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: ENRICO CORRADINI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778020",
+    "category": "storia",
+    "text": "QUALE MINISTRO DEGLI ESTERI DIRESSE LA POLITICA ESTERA ITALIANA DURANTE LA GUERRA DI LIBIA?",
+    "answers": [
+      "EMILIO VISCONTI VENOSTA",
+      "ANTONINO DI SAN GIULIANO",
+      "SIDNEY SONNINO",
+      "TOMMASO TITTONI"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: ANTONINO DI SAN GIULIANO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778021",
+    "category": "storia",
+    "text": "QUALE PROVVEDIMENTO PROVOCO' LA CRISI E LE DIMISSIONI DEL GOVERNO LUZZATTI, NEL 1911?",
+    "answers": [
+      "IL DISEGNO DI LEGGE DI RIFORMA ELETTORALE",
+      "LA RIFORMA DELLA SCUOLA ELEMENTARE",
+      "LA NAZIONALIZZAZIONE DELLE FERROVIE",
+      "IL PROGETTO DI RIORGANIZZAZIONE DELLE CONVENZIONI MARITTIME"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL DISEGNO DI LEGGE DI RIFORMA ELETTORALE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778022",
+    "category": "storia",
+    "text": "QUALI TRA I SEGUENTI ESPONENTI SOCIALISTI RESERO VISITA AL RE NEL 1912, PROVOCANDO UNA SPACCATURA NEL PARTITO?",
+    "answers": [
+      "LABRIOLA E MUSSOLINI",
+      "FERRI E LAZZARI",
+      "BONOMI E BISSOLATI",
+      "TURATI E TREVES"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: BONOMI E BISSOLATI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778023",
+    "category": "storia",
+    "text": "QUALE ORGANIZZAZIONE SINDACALE FU FONDATA NEL 1912, IN POLEMICA CON LA CONFEDERAZIONE GENERALE DEL LAVORO?",
+    "answers": [
+      "LA FIOM",
+      "LA FEDERTERRA",
+      "LA CONFEDERAZIONE ITALIANA DEI SINDACATI DEI LAVORATORI",
+      "L'UNIONE SINDACALE ITALIANA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'UNIONE SINDACALE ITALIANA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778024",
+    "category": "storia",
+    "text": "QUALE IMPORTANTE LEGGE SOCIALE FU APPROVATA NEL 1902?",
+    "answers": [
+      "LA LEGGE DI ABOLIZIONE DEI DAZI AGRICOLI",
+      "LA LEGGE SUL MONOPOLIO STATALE DELLE ASSICURAZIONI SULLA VITA",
+      "LA LEGGE SULLA GIORNATA LAVORATIVA DI OTTO ORE",
+      "LA LEGGE PER LA PROTEZIONE DEL LAVORO FEMMINILE E MINORILE"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA LEGGE PER LA PROTEZIONE DEL LAVORO FEMMINILE E MINORILE",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778025",
+    "category": "storia",
+    "text": "QUALE UOMO POLITICO RESSE IL MINISTERO DEGLI ESTERI DAL 1906 AL 1909, ATTUANDO UNA POLITICA DI FEDELTA' ALLA TRIPLICE ALLEANZA?",
+    "answers": [
+      "EMILIO VISCONTI VENOSTA",
+      "ANTONINO DI SAN GIULIANO",
+      "TOMMASO TITTONI",
+      "SIDNEY SONNINO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: TOMMASO TITTONI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778026",
+    "category": "storia",
+    "text": "IN QUALE CITTA' SVIZZERA FU STABILITA LA PACE ITALO-TURCA IL 18 OTTOBRE 1912, DOPO LA GUERRA DI LIBIA?",
+    "answers": [
+      "BASILEA",
+      "LOSANNA",
+      "GINEVRA",
+      "BERNA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: LOSANNA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778027",
+    "category": "storia",
+    "text": "QUALE ASSOCIAZIONE SINDACALE SI COSTITUI' NEL 1906?",
+    "answers": [
+      "L'UNIONE ITALIANA DEI LAVORATORI",
+      "LA CONFEDERAZIONE ITALIANA DEI SINDACATI DEI LAVORATORI",
+      "LA LEGA ITALIANA DEL LAVORO",
+      "LA CONFEDERAZIONE GENERALE ITALIANA DEL LAVORO"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA CONFEDERAZIONE GENERALE ITALIANA DEL LAVORO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778028",
+    "category": "storia",
+    "text": "QUALE SETTORE ECONOMICO EBBE UN RUOLO TRAINANTE NEL PERIODO GIOLITTIANO?",
+    "answers": [
+      "L'INDUSTRIA SIDERURGICA",
+      "L'AGRICOLTURA",
+      "L'ARTIGIANATO",
+      "L'INDUSTRIA ESTRATTIVA"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'INDUSTRIA SIDERURGICA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778029",
+    "category": "storia",
+    "text": "QUALE SCIENZIATO ITALIANO VINSE IL PREMIO NOBEL PER LA FISICA, NEL 1909?",
+    "answers": [
+      "ENRICO FERMI",
+      "CAMILLO GOLGI",
+      "ANTONIO MEUCCI",
+      "GUGLIELMO MARCONI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: GUGLIELMO MARCONI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778030",
+    "category": "storia",
+    "text": "CHE COSA PREVEDEVA L'ACCORDO ITALO - RUSSO CONCLUSO NEL 1909?",
+    "answers": [
+      "L'ASSENSO RUSSO ALL'INVASIONE DELL'ALBANIA",
+      "L'INGRESSO DELLA RUSSIA NELLA TRIPLICE ALLEANZA",
+      "UNA COMUNE AZIONE MILITARE CONTRO L'IMPERO OTTOMANO",
+      "IL MANTENIMENTO DELLO STATUS QUO NELL'AREA BALCANICA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL MANTENIMENTO DELLO STATUS QUO NELL'AREA BALCANICA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778031",
+    "category": "storia",
+    "text": "QUALI TRA LE SEGUENTI CITTA' FURONO DISTRUTTE DAL TERREMOTO NEL 1908?",
+    "answers": [
+      "AVELLINO E POTENZA",
+      "CATANIA E SIRACUSA",
+      "AVEZZANO E SULMONA",
+      "MESSINA E REGGIO CALABRIA"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: MESSINA E REGGIO CALABRIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778032",
+    "category": "storia",
+    "text": "QUALE PROVVEDIMENTO PROVOCO' LA CADUTA DEL GOVERNO GIOLITTI NEL 1909?",
+    "answers": [
+      "LA PROPOSTA DI INTRODUZIONE DELL'IMPOSTA PROGRESSIVA",
+      "LA PROPOSTA DI RIFORMA ELETTORALE",
+      "LA PROPOSTA DI NAZIONALIZZARE LE FERROVIE",
+      "LA PROPOSTA DI INTERVENTI SPECIALI PER IL MEZZOGIORNO"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: LA PROPOSTA DI INTRODUZIONE DELL'IMPOSTA PROGRESSIVA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778033",
+    "category": "storia",
+    "text": "QUALE ISOLA GRECA FU OCCUPATA NEL 1911 DALL'ITALIA DURANTE LA GUERRA CONTRO LA TURCHIA?",
+    "answers": [
+      "ZANTE",
+      "RODI",
+      "CORFU'",
+      "CEFALONIA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: RODI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778034",
+    "category": "storia",
+    "text": "QUALE GIORNALE FU FONDATO A MILANO DA MUSSOLINI NEL NOVEMBRE 1914?",
+    "answers": [
+      "IL PROGRESSO D'ITALIA",
+      "L'AVVENIRE D'ITALIA",
+      "IL POPOLO D'ITALIA",
+      "IL GIORNALE D'ITALIA"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: IL POPOLO D'ITALIA",
+    "image": ""
+  },
+  {
+    "id": "simone-history-778035",
+    "category": "storia",
+    "text": "QUALE LETTERATO ITALIANO RICEVETTE IL PREMIO NOBEL NEL 1906?",
+    "answers": [
+      "GABRIELE D'ANNUNZIO",
+      "GIOVANNI PASCOLI",
+      "LUIGI PIRANDELLO",
+      "GIOSUE' CARDUCCI"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: GIOSUE' CARDUCCI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849358641",
+    "category": "storia",
+    "text": "In Italia, il periodo che va dagli anni '70 agli inizi degli anni '90 è noto come:",
+    "answers": [
+      "periodo delle stragi",
+      "anni di piombo",
+      "periodo della rivoluzione"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: anni di piombo",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359834",
+    "category": "storia",
+    "text": "Nel 1912 Rodi ed il Dodecaneso divennero possesso di:",
+    "answers": [
+      "Italia",
+      "Germania",
+      "Inghilterra"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Italia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359840",
+    "category": "storia",
+    "text": "Quando fu firmato il Patto Atlantico?",
+    "answers": [
+      "1938",
+      "1961",
+      "1949"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1949",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359863",
+    "category": "storia",
+    "text": "L'assassinio dell'onorevole Moro avvenne nel:",
+    "answers": [
+      "1982",
+      "1978",
+      "1970"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1978",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359866",
+    "category": "storia",
+    "text": "Lo sbarco alleato in Italia avvenne il:",
+    "answers": [
+      "10 luglio 1943",
+      "16 marzo 1943",
+      "15 agosto 1945"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 10 luglio 1943",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359881",
+    "category": "storia",
+    "text": "In quale anno avvenivano i tumulti di Milano repressi da Bava Beccaris?",
+    "answers": [
+      "1898",
+      "1948",
+      "1870"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1898",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359931",
+    "category": "storia",
+    "text": "Allo scoppio della I guerra mondiale il 5 agosto 1914 l'Italia:",
+    "answers": [
+      "intervenne subito al fianco della Triplice Alleanza",
+      "intervenne subito al fianco dell'Intesa",
+      "si dichiarò neutrale"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: si dichiarò neutrale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359937",
+    "category": "storia",
+    "text": "In Italia venne dato inizio alle leggi anti ebraiche nel:",
+    "answers": [
+      "1938",
+      "1942",
+      "1922"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1938",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359964",
+    "category": "storia",
+    "text": "Che cosa si intende per \"questione meridionale\" definizione usata per la prima volta nel 1873 da un deputato al parlamento italiano?",
+    "answers": [
+      "La necessità del trasferimento della capitale d'Italia a Napoli",
+      "La necessità del ritorno dei Borbone a Napoli",
+      "La situazione sociale ed economica del mezzogiorno d'Italia"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: La situazione sociale ed economica del mezzogiorno d'Italia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359982",
+    "category": "storia",
+    "text": "In occasione del rinnovo della Triplice Alleanza nel 1887 fu inserita un'importante clausola in base alla quale:",
+    "answers": [
+      "all'Italia sarebbero spettati \"compensi\" per ogni nuova acquisizione territoriale in Africa da parte della Germania",
+      "eventuali modifiche territoriali nei Balcani sarebbero state oggetto di preventive consultazioni tra l'Italia e l'Austria-Ungheria",
+      "l'Italia avrebbe avuto mano libera sullo scacchiere africano"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: eventuali modifiche territoriali nei Balcani sarebbero state oggetto di preventive consultazioni tra l'Italia e l'Austria-Ungheria",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359993",
+    "category": "storia",
+    "text": "Quale fu la causa dell'indebolimento della Triplice Alleanza e del raffreddamento dei rapporti tra Italia ed Impero austro- ungarico nel 1908?",
+    "answers": [
+      "Una manifestazione irredentista in Trentino",
+      "La rivendicazione della Dalmazia da parte dell'Italia",
+      "L'annessione da parte dell'Austria-Ungheria della Bosnia-Erzegovina, senza preventive consultazioni con l'Italia"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: L'annessione da parte dell'Austria-Ungheria della Bosnia-Erzegovina, senza preventive consultazioni con l'Italia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360001",
+    "category": "storia",
+    "text": "La Costituzione repubblicana è entrata in vigore:",
+    "answers": [
+      "il 30 dicembre 1947",
+      "il 7 gennaio 1948",
+      "il 1 gennaio 1948"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: il 1 gennaio 1948",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360012",
+    "category": "storia",
+    "text": "In seguito a quale legge Pio IX vietò ai cattolici di partecipare alla vita politica della nazione?",
+    "answers": [
+      "Legge delle Guarentigie",
+      "Tassa sul macinato",
+      "Suffragio Universale"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Legge delle Guarentigie",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360013",
+    "category": "storia",
+    "text": "Benedetto XV nel 1917 si rivolse alle potenze in guerra:",
+    "answers": [
+      "auspicando la lotta contro il comunismo nascente in Russia",
+      "auspicando la vittoria dell'Intesa",
+      "implorando la cessazione \"dell'inutile strage\""
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: implorando la cessazione \"dell'inutile strage\"",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360014",
+    "category": "storia",
+    "text": "Durante la seconda guerra mondiale il Ministro degli Esteri italiano fu:",
+    "answers": [
+      "Galeazzo Ciano",
+      "Rodolfo Graziani",
+      "Ivanoe Bonomi"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Galeazzo Ciano",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360021",
+    "category": "storia",
+    "text": "Lo scandalo della Banca romana (1892) portò alle dimissioni di:",
+    "answers": [
+      "Di Rudinì",
+      "Giolitti",
+      "Zanardelli"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giolitti",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360029",
+    "category": "storia",
+    "text": "Il 23 Aprile 1919 i delegati Italiani a Versailles:",
+    "answers": [
+      "ottennero l'intera Dalmazia e Fiume",
+      "ottennero tutti i territori previsti dal Patto di Londra",
+      "abbandonarono la conferenza di pace, in segno di protesta"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: abbandonarono la conferenza di pace, in segno di protesta",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360077",
+    "category": "storia",
+    "text": "Dopo la marcia su Roma, il re Vittorio Emanuele III diede l'incarico di formare il governo a:",
+    "answers": [
+      "Giovanni Giolitti",
+      "Benito Mussolini",
+      "Luigi Facta"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Benito Mussolini",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360090",
+    "category": "storia",
+    "text": "Quale generale guidò le truppe italiane all'inizio della I guerra mondiale?",
+    "answers": [
+      "Francesco Crispi",
+      "Bava Beccaris",
+      "Luigi Cadorna"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Luigi Cadorna",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360091",
+    "category": "storia",
+    "text": "Come si chiamavano gli organismi che rappresentano la volontà unitaria dei partiti antifascisti di combattere i fascisti ed i tedeschi?",
+    "answers": [
+      "Unione per la Libertà",
+      "Comitati di Liberazione Nazionale",
+      "Centri di resistenza antifascista"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Comitati di Liberazione Nazionale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360096",
+    "category": "storia",
+    "text": "La costituzione italiana entrò in vigore il:",
+    "answers": [
+      "1 giugno 1946",
+      "31 dicembre 1947",
+      "1 gennaio 1948"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1 gennaio 1948",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360101",
+    "category": "storia",
+    "text": "L'Italia entrò nella I guerra mondiale nel:",
+    "answers": [
+      "1914",
+      "1915",
+      "1912"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1915",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360111",
+    "category": "storia",
+    "text": "Chi fu il capo del governo dopo le dimissioni di Mussolini nel 1943?",
+    "answers": [
+      "Pietro Badoglio",
+      "Ivanoe Bonomi",
+      "Gaetano Salvemini"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Pietro Badoglio",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360115",
+    "category": "storia",
+    "text": "L'armistizio segreto con gli alleati fu firmato il 3 settembre 1943:",
+    "answers": [
+      "a Lipari",
+      "a Cassibile",
+      "ad Anzio"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: a Cassibile",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360116",
+    "category": "storia",
+    "text": "Quale Papa nel 1917 prese posizione contro \"l'inutile strage\" della guerra?",
+    "answers": [
+      "Clemente V",
+      "Leone XIII",
+      "Benedetto XV"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Benedetto XV",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360122",
+    "category": "storia",
+    "text": "Quando ricopriva la carica di Capo del Governo, quale tattica era solito mettere in atto Giolitti per superare i momenti di grave difficoltà?",
+    "answers": [
+      "Minacciare lo scioglimento della Camera",
+      "Rassegnare le dimissioni per poi riprendere le redini del potere in condizioni più favorevoli",
+      "Offrire incarichi di Governo alle opposizioni"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Rassegnare le dimissioni per poi riprendere le redini del potere in condizioni più favorevoli",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360123",
+    "category": "storia",
+    "text": "Nell'ambito della seconda guerra mondiale, l'armistizio tra l'Italia e gli alleati venne firmato il 3 settembre 1943 a:",
+    "answers": [
+      "Taormina",
+      "S. Agata di Militello",
+      "Cassibile"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Cassibile",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360129",
+    "category": "storia",
+    "text": "Qual è il nome del Ministro degli Esteri italiano che firmò il patto di Londra nel 1915?",
+    "answers": [
+      "Gabriele D'Annunzio",
+      "Benito Mussolini",
+      "Sidney Sonnino"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Sidney Sonnino",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360131",
+    "category": "storia",
+    "text": "Quale evento provocò la caduta di Crispi nel 1896?",
+    "answers": [
+      "La sconfitta delle truppe italiane ad Adua",
+      "La protesta dei Fasci siciliani",
+      "Lo scandalo della Banca romana"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: La sconfitta delle truppe italiane ad Adua",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360141",
+    "category": "storia",
+    "text": "Chi fu il Ministro della Giustizia del primo Governo De Gasperi che attuò nel 1946 una vasta amnistia per i reati politici anche compiuti da fascisti?",
+    "answers": [
+      "Palmiro Togliatti",
+      "Lelio Basso",
+      "Epicarmo Corbino"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Palmiro Togliatti",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360143",
+    "category": "storia",
+    "text": "Chi era il Re nel 1876?",
+    "answers": [
+      "Umberto I",
+      "Vittorio Emanuele III",
+      "Vittorio Emanuele II"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Vittorio Emanuele II",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360144",
+    "category": "storia",
+    "text": "Come venne definita dalle opposizioni di sinistra e di destra la legge elettorale del 1953 che attribuiva un \"premio\" in seggi al partito o alla coalizione che avesse superato il 50% dei voti?",
+    "answers": [
+      "Legge raggiro",
+      "Legge truffa",
+      "Legge inganno"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Legge truffa",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360148",
+    "category": "storia",
+    "text": "Nel 1955 venne approvato un piano decennale presentato dal Ministro del Bilancio Vanoni il cui principale obiettivo era:",
+    "answers": [
+      "creare uno strumento di programmazione economica",
+      "vincolare a certi parametri la produzione industriale",
+      "aumentare progressivamente il gettito fiscale"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: creare uno strumento di programmazione economica",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360150",
+    "category": "storia",
+    "text": "Quale formula riassumeva la posizione dei socialisti italiani di fronte alla decisione del Governo italiano di dichiarare guerra all'Austria-Ungheria il 23 maggio 1915?",
+    "answers": [
+      "Ora o mai più",
+      "Né aderire né sabotare",
+      "La nostra guerra è santa"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Né aderire né sabotare",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360151",
+    "category": "storia",
+    "text": "La \"Repubblica di Salò\", creata da Mussolini nel 1943, tentò di darsi una base popolare con misure di:",
+    "answers": [
+      "aumento di salari e stipendi",
+      "socializzazione di imprese da parte dello Stato",
+      "distribuzione gratuita di alimenti"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: socializzazione di imprese da parte dello Stato",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360153",
+    "category": "storia",
+    "text": "Quale organo dello Stato votò, il 25 luglio 1943, la fine del regime fascista?",
+    "answers": [
+      "Il Gran Consiglio del fascismo",
+      "La Camera dei Fasci e delle Corporazioni",
+      "Il Consiglio della Corona"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Il Gran Consiglio del fascismo",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360162",
+    "category": "storia",
+    "text": "Trieste fu assegnata all'Italia nel:",
+    "answers": [
+      "1945",
+      "1970",
+      "1954"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1954",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360164",
+    "category": "storia",
+    "text": "Nel 1943, subito dopo l'armistizio, fu capitale del Regno d'Italia. Ci riferiamo a:",
+    "answers": [
+      "Matera",
+      "Brindisi",
+      "Taranto"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Brindisi",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360169",
+    "category": "storia",
+    "text": "La Loggia massonica P2 è stata sciolta per legge nel:",
+    "answers": [
+      "1993",
+      "1982",
+      "1950"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1982",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360170",
+    "category": "storia",
+    "text": "Quale quartiere viene edificato a Roma per ospitare l'Esposizione universale del 1942:",
+    "answers": [
+      "Garbatella",
+      "E.U.R.",
+      "Monteverde nuovo"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: E.U.R.",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360171",
+    "category": "storia",
+    "text": "Il 17 marzo 1861 il primo Parlamento nazionale proclamava Vittorio Emanuele II:",
+    "answers": [
+      "Re degli italiani",
+      "Re d'Italia per grazia di Dio e volontà della nazione",
+      "Re della nazione"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Re d'Italia per grazia di Dio e volontà della nazione",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360177",
+    "category": "storia",
+    "text": "Perché nel 1870 poté finalmente compiersi la presa di Roma?",
+    "answers": [
+      "Perché era venuta a mancare la protezione della Francia",
+      "Perché la popolazione aveva cacciato il papa",
+      "Perché il governo lasciò mano libera a Garibaldi"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Perché era venuta a mancare la protezione della Francia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360179",
+    "category": "storia",
+    "text": "La Gazzetta del Mezzogiorno fondata nel 1928 nasce dalla trasformazione:",
+    "answers": [
+      "de La Gazzetta di Puglia",
+      "non nasce da alcuna trasformazione ma sarà un nuovo giornale che non raccolse alcuna eredità da precedenti esperienze",
+      "del Corriere delle Puglie"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: de La Gazzetta di Puglia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360180",
+    "category": "storia",
+    "text": "La strage di Marzabotto avvenne nel:",
+    "answers": [
+      "1950",
+      "1929",
+      "1944"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1944",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360184",
+    "category": "storia",
+    "text": "In che anno si costituirono le \"Brigate rosse\", che divennero il gruppo più numeroso e organizzato del terrorismo di sinistra?",
+    "answers": [
+      "1974",
+      "1970",
+      "1968"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1970",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360186",
+    "category": "storia",
+    "text": "I macchinosi lavori di Camera e Senato, che potevano essere ulteriormente rallentati dall'ostruzionismo di pochi parlamentari, vennero snelliti nell'autunno del 1988 soprattutto a seguito:",
+    "answers": [
+      "del divieto ai parlamentari di presentare più di un certo numero di emendamenti",
+      "del divieto ai parlamentari di presentare proposte di legge con meno di un certo numero di firme di altri parlamentari",
+      "dell'abolizione del voto segreto, salvo pochissime eccezioni"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: dell'abolizione del voto segreto, salvo pochissime eccezioni",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360190",
+    "category": "storia",
+    "text": "Quale fu il più importante fattore dell'eccezionale sviluppo economico registrato dall'economia italiana tra il 1953 e il 1958?",
+    "answers": [
+      "I bassi salari",
+      "L'innovazione tecnologica",
+      "Il basso costo del denaro"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: I bassi salari",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360195",
+    "category": "storia",
+    "text": "Quale compito fu affidato alla costituente del 1946?",
+    "answers": [
+      "Ripristinare lo statuto Albertino",
+      "Stendere un nuova Costituzione",
+      "Ripristinare la Costituzione del regno d'Italia"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Stendere un nuova Costituzione",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360197",
+    "category": "storia",
+    "text": "Il rifiuto di Serrati e della corrente massimalista, al congresso socialista di Livorno del 1921, di sottostare a due delle ventuno condizioni poste da Lenin per l'ammissione dei partiti operai all'Internazionale comunista, fu all'origine:",
+    "answers": [
+      "dell'espulsione di Turati",
+      "dell'espulsione dei \"revisionisti\" Bonomi e Bissolati",
+      "della scissione di una minoranza di sinistra che diede vita al Partito Comunista Italiano"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: della scissione di una minoranza di sinistra che diede vita al Partito Comunista Italiano",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360198",
+    "category": "storia",
+    "text": "Nel gennaio del 1944 le truppe americane sbarcarono a:",
+    "answers": [
+      "Ancona",
+      "Brindisi",
+      "Anzio"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Anzio",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360205",
+    "category": "storia",
+    "text": "Da quale evento ricevette un impulso decisivo la diffusione in Italia delle idee socialiste?",
+    "answers": [
+      "Dalla Comune parigina del 1871",
+      "Dalla costituzione delle prime Trade Unions",
+      "Dalla nascita del partito socialdemocratico tedesco"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Dalla Comune parigina del 1871",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360206",
+    "category": "storia",
+    "text": "La \"Cassa per il Mezzogiorno\", istituita nel 1950, era:",
+    "answers": [
+      "lo strumento attuativo di una legge",
+      "un organismo di credito finanziario della Confindustria",
+      "un organo tecnico di politica finanziaria"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: lo strumento attuativo di una legge",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360207",
+    "category": "storia",
+    "text": "La decisione di convocare nuove elezioni nel maggio 1921 si inquadrò in una strategia liberale che puntava:",
+    "answers": [
+      "alla \"costituzionalizzazione\" del movimento fascista",
+      "a creare le condizioni per un ulteriore sviluppo dei partiti di massa",
+      "alla creazione di un fronte compatto in funzione antifascista"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: alla \"costituzionalizzazione\" del movimento fascista",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360209",
+    "category": "storia",
+    "text": "Nel 1964 viene eletto presidente della Repubblica italiana:",
+    "answers": [
+      "Giuseppe Saragat",
+      "Sandro Pertini",
+      "Luigi Einaudi"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giuseppe Saragat",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360210",
+    "category": "storia",
+    "text": "Il 25 Luglio del 1943 Mussolini fu internato a:",
+    "answers": [
+      "Ponza",
+      "Gaeta",
+      "Roma"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Ponza",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360223",
+    "category": "storia",
+    "text": "Il movimento dei \"Fasci di combattimento\", fondato a Milano il 23 marzo 1919 da Benito Mussolini, si fece promotore di un programma d'impronta:",
+    "answers": [
+      "liberal-conservatrice",
+      "liberal-socialista",
+      "radical-democratica-nazionalista"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: radical-democratica-nazionalista",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360224",
+    "category": "storia",
+    "text": "Nel 1931 il Fascismo impose ai professori universitari:",
+    "answers": [
+      "di partecipare alla stesura della \"enciclopedia italiana\"",
+      "di prestare giuramento di fedeltà al Fascismo",
+      "di iscriversi all'OVRA"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: di prestare giuramento di fedeltà al Fascismo",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360226",
+    "category": "storia",
+    "text": "Già nel 1940 la flotta inglese disponeva di uno strumento che fu decisivo nel confronto con la flotta italiana, che non l'aveva. Si trattava:",
+    "answers": [
+      "del \"radio goniometro\"",
+      "del \"sea detector\"",
+      "del \"radar\""
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: del \"radar\"",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360229",
+    "category": "storia",
+    "text": "La riconciliazione fra Stato e Chiesa avvenne nel 1929 con:",
+    "answers": [
+      "Patti Lateranensi",
+      "Rerum Novarum",
+      "Concilio Vaticano II"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Patti Lateranensi",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360235",
+    "category": "storia",
+    "text": "Al fine di liberare il più possibile il Paese dal peso delle importazioni, soprattutto quelle dei prodotti necessari all'industria bellica, venne imposta nel 1934 dal fascismo una politica detta:",
+    "answers": [
+      "d'indipendenza economica",
+      "d'autosufficienza",
+      "autarchica"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: autarchica",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360236",
+    "category": "storia",
+    "text": "Quale fu la società che nel 1970 pagò tangenti a uomini politici per assicurarsi l'acquisto dei suoi aerei?",
+    "answers": [
+      "Lockheed",
+      "Fokker",
+      "Boeing"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Lockheed",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360237",
+    "category": "storia",
+    "text": "Obiettivo finale e dichiarato delle \"leghe rosse\", riunitesi nel novembre 1901 nella \"Federazione italiana dei lavoratori della terra\" (Federterra), era:",
+    "answers": [
+      "l'intensivizzazione dell'agricoltura",
+      "l'esproprio violento dei grandi proprietari terrieri",
+      "la \"socializzazione\" della terra"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: la \"socializzazione\" della terra",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360245",
+    "category": "storia",
+    "text": "Il 18 giugno 1944 Ivanoe Bonomi formò un governo con i rappresentanti dei partiti antifascisti. A dicembre il governo cadde a causa soprattutto:",
+    "answers": [
+      "dell'opposizione degli alleati",
+      "di manifestazioni popolari",
+      "dei contrasti tra liberali e democristiani da una parte e le sinistre dall'altra, sull'epurazione dei fascisti"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: dei contrasti tra liberali e democristiani da una parte e le sinistre dall'altra, sull'epurazione dei fascisti",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360250",
+    "category": "storia",
+    "text": "Fra il 1900 e il 1914 il flusso migratorio dall'Italia verso Paesi stranieri fece registrare un totale di:",
+    "answers": [
+      "circa 8 milioni di partenze",
+      "circa 5 milioni di partenze",
+      "circa 1 milione di partenze"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: circa 8 milioni di partenze",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360251",
+    "category": "storia",
+    "text": "L'atto di nascita del fascismo agrario viene comunemente individuato:",
+    "answers": [
+      "nell'assalto alla sede dell'\"Avanti\" del 15 aprile 1919",
+      "nell'eccidio di Palazzo d'Accursio del 1920",
+      "nell'assalto di Palazzo Marino a Milano del 1922"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: nell'eccidio di Palazzo d'Accursio del 1920",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360255",
+    "category": "storia",
+    "text": "Quando sono avvenute le prime elezioni amministrative regionali?",
+    "answers": [
+      "1982",
+      "1970",
+      "1968"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1970",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360256",
+    "category": "storia",
+    "text": "Quale dei seguenti provvedimenti fu approvato dal Parlamento durante il \"lungo ministero Giolitti\" (maggio 1906 - dicembre 1909)?",
+    "answers": [
+      "Il riassetto del sistema bancario",
+      "La conversione della rendita",
+      "La \"municipalizzazione\" dei servizi pubblici"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: La conversione della rendita",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360257",
+    "category": "storia",
+    "text": "Il Congresso di Vienna pose l'Italia:",
+    "answers": [
+      "sotto l'influenza francese",
+      "sotto l'influenza austriaca",
+      "in condizione di libertà con l'abolizione di ogni privilegio per l'alta società"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: sotto l'influenza austriaca",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360260",
+    "category": "storia",
+    "text": "Chi fu l'ultimo re d'Italia?",
+    "answers": [
+      "Umberto I",
+      "Umberto II",
+      "Carlo Felice"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Umberto II",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360264",
+    "category": "storia",
+    "text": "Come vennero chiamati gli accordi firmati l'11 febbraio 1929 tra S. Sede e Stato italiano che chiudevano la \"questione romana\"?",
+    "answers": [
+      "Accordi conciliari",
+      "Intese per l'Italia",
+      "Patti Lateranensi"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Patti Lateranensi",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360267",
+    "category": "storia",
+    "text": "A quale partito apparteneva De Gasperi?",
+    "answers": [
+      "DC",
+      "PRI",
+      "PSI"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: DC",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360268",
+    "category": "storia",
+    "text": "La strage alla stazione di Bologna avvenne il:",
+    "answers": [
+      "16 marzo 1978",
+      "23 maggio 1980",
+      "2 agosto 1980"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 2 agosto 1980",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360269",
+    "category": "storia",
+    "text": "Nel 2004 viene istutuita la provincia di:",
+    "answers": [
+      "Bari",
+      "Foggia",
+      "Barletta-Andria-Trani"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Barletta-Andria-Trani",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360271",
+    "category": "storia",
+    "text": "Il 27 settembre 1940 Germania, Italia e Giappone firmarono a Berlino il \"patto tripartito\" col quale vennero tracciate:",
+    "answers": [
+      "le linee di un piano comune di attacco alle democrazie occidentali",
+      "le sfere di influenza di un \"nuovo ordine\" mondiale in Europa e in Asia",
+      "le linee di spartizione dell'Africa"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: le sfere di influenza di un \"nuovo ordine\" mondiale in Europa e in Asia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360273",
+    "category": "storia",
+    "text": "Nell'Ottobre 1940 l'Italia attaccò:",
+    "answers": [
+      "la Grecia",
+      "la Romania",
+      "la Spagna"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: la Grecia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360274",
+    "category": "storia",
+    "text": "Quale fenomeno fu caratteristico degli anni fra il 1896 e il 1907 in Italia?",
+    "answers": [
+      "La Grande Depressione",
+      "Il decollo industriale",
+      "L'aumento della mortalità infantile"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Il decollo industriale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360285",
+    "category": "storia",
+    "text": "La corte costituzionale ha cancellato nel 1971 l'articolo del codice penale che riconosceva come reato:",
+    "answers": [
+      "il commercio di droga",
+      "la violenza sessuale",
+      "l'informazione sui mezzi anticoncezionali"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: l'informazione sui mezzi anticoncezionali",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360289",
+    "category": "storia",
+    "text": "L'Italia occupò l'Albania nel:",
+    "answers": [
+      "1918",
+      "1936",
+      "1939"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1939",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360292",
+    "category": "storia",
+    "text": "La secessione dell'Aventino del 1924 venne guidata da:",
+    "answers": [
+      "Antonio Gramsci",
+      "Sandro Pertini",
+      "Giovanni Amendola"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giovanni Amendola",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360293",
+    "category": "storia",
+    "text": "Prima dello sbarco alleato in Sicilia nel luglio 1943, la crescente opposizione alla guerra fascista si era manifestata con:",
+    "answers": [
+      "tentativi di blocco di treni di prodotti alimentari diretti in Germania",
+      "grandi scioperi operai nei centri industriali del nord",
+      "manifestazioni popolari per la scarsità degli alimenti"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: grandi scioperi operai nei centri industriali del nord",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360295",
+    "category": "storia",
+    "text": "La Camera dei Fasci e delle Corporazioni sostituì nel 1939:",
+    "answers": [
+      "la Camera dei deputati",
+      "l'ordine dei magistrati",
+      "i sindacati dei lavoratori"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: la Camera dei deputati",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360297",
+    "category": "storia",
+    "text": "In che anno Giolitti introdusse il suffragio universale maschile?",
+    "answers": [
+      "1930",
+      "1825",
+      "1912"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1912",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360302",
+    "category": "storia",
+    "text": "Nel 1986 l'Italia era classificata al quinto posto nel mondo tra le potenze economiche avendo superato:",
+    "answers": [
+      "la Gran Bretagna",
+      "gli Stati Uniti D'America",
+      "la Francia"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: la Gran Bretagna",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360303",
+    "category": "storia",
+    "text": "Nel quinquennio 1958-1963, gli anni del \"miracolo economico\", il tasso di sviluppo dell'Italia fu inferiore in Europa solo a quello:",
+    "answers": [
+      "dell'Olanda",
+      "della Germania",
+      "del Belgio"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: della Germania",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360307",
+    "category": "storia",
+    "text": "La bocciatura di quale dei seguenti progetti determinò nel marzo 1876 la caduta della Destra?",
+    "answers": [
+      "Gestione statale delle ferrovie",
+      "Legislazione speciale per il Mezzogiorno",
+      "Allargamento del suffragio su base ancora rigidamente censitaria"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Gestione statale delle ferrovie",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360308",
+    "category": "storia",
+    "text": "Luigi Einaudi nel 1948 scelse:",
+    "answers": [
+      "un totale liberismo",
+      "il comunismo",
+      "il cattolicesimo"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: un totale liberismo",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360309",
+    "category": "storia",
+    "text": "La secessione dell'Aventino comportò:",
+    "answers": [
+      "la separazione del gruppo parlamentare socialista",
+      "l'abbandono dei lavori parlamentari da parte dei fascisti",
+      "l'abbandono dei lavori parlamentari contro il governo fascista"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: l'abbandono dei lavori parlamentari contro il governo fascista",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360312",
+    "category": "storia",
+    "text": "Nel 1892 il partito operaio italiano confluì:",
+    "answers": [
+      "nei movimenti anarchici",
+      "nelle file della Sinistra Storica",
+      "nel PSI"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: nel PSI",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360315",
+    "category": "storia",
+    "text": "Il Protocollo di Kyoto è datato:",
+    "answers": [
+      "1999",
+      "2005",
+      "2015"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 2005",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360316",
+    "category": "storia",
+    "text": "Chi represse i moti di Milano del 1898?",
+    "answers": [
+      "Pelloux",
+      "Barattini",
+      "Bava Beccaris"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Bava Beccaris",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360318",
+    "category": "storia",
+    "text": "I contrasti territoriali italo-jugoslavi sorti nel secondo dopoguerra vennero definitivamente superati nel 1975 con la firma:",
+    "answers": [
+      "del Trattato di Osimo",
+      "della Convenzione di Vienna",
+      "del Trattato di Jesi"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: del Trattato di Osimo",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360320",
+    "category": "storia",
+    "text": "Nel 1951 l'Italia aderisce al:",
+    "answers": [
+      "Mercato comune Europeo",
+      "F.A.O.",
+      "NATO"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: NATO",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360322",
+    "category": "storia",
+    "text": "Al suo ritorno in Sicilia, nel giugno del 1862, Garibaldi rilanciò pubblicamente:",
+    "answers": [
+      "la lotta al brigantaggio",
+      "il progetto di una spedizione contro lo Stato pontificio",
+      "un programma antimonarchico"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: il progetto di una spedizione contro lo Stato pontificio",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360324",
+    "category": "storia",
+    "text": "In che anno morì il Papa Pio XII e gli successe Giovanni XXIII?",
+    "answers": [
+      "1956",
+      "1958",
+      "1960"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1958",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360327",
+    "category": "storia",
+    "text": "La cassa per il Mezzogiorno fu creata nel:",
+    "answers": [
+      "1940",
+      "1960",
+      "1950"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1950",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360328",
+    "category": "storia",
+    "text": "Dove sbarcarono gli alleati il 10 luglio del 1943?",
+    "answers": [
+      "In Sicilia",
+      "In Puglia",
+      "In Liguria"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: In Sicilia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360335",
+    "category": "storia",
+    "text": "Chi erano Nicola Sacco e Bartolomeo Vanzetti?",
+    "answers": [
+      "Politici pugliesi a cui si deve una forte reazione contro la spedizione garibaldina",
+      "Sindacalisti pugliesi, condannati a 10 anni in un gulag sovietico",
+      "Anarchici pugliesi, condannati in America alla sedia elettrica nel 1927"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Anarchici pugliesi, condannati in America alla sedia elettrica nel 1927",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360337",
+    "category": "storia",
+    "text": "Con quali elezioni politiche si affermarono per la prima volta i \"verdi\"?",
+    "answers": [
+      "1979",
+      "1983",
+      "1987"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1987",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360340",
+    "category": "storia",
+    "text": "Quale fu il più importante provvedimento fatto approvare nel 1962 dal Governo Fanfani appoggiato in Parlamento dal Psi e Pri?",
+    "answers": [
+      "La nazionalizzazione dell'industria elettrica",
+      "La riforma della Pubblica Amministrazione",
+      "La programmazione economica"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: La nazionalizzazione dell'industria elettrica",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360341",
+    "category": "storia",
+    "text": "La battaglia di Caporetto fu vinta da:",
+    "answers": [
+      "gli austriaci",
+      "i russi",
+      "gli italiani"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: gli austriaci",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360342",
+    "category": "storia",
+    "text": "Quando nacque il Partito Socialista italiano?",
+    "answers": [
+      "1920",
+      "1892",
+      "1882"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1892",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360343",
+    "category": "storia",
+    "text": "Quale fatto determinò per la prima volta nel 1956 una forte tensione tra Pci e Psi?",
+    "answers": [
+      "La repressione sovietica in Ungheria",
+      "La crisi di Suez",
+      "Il \"rapporto Kruscev\" sullo stalinismo"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: La repressione sovietica in Ungheria",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360349",
+    "category": "storia",
+    "text": "L'eccidio delle Fosse Ardeatine avvenne nel:",
+    "answers": [
+      "1945",
+      "1939",
+      "1944"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1944",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360353",
+    "category": "storia",
+    "text": "Nel corso del 1990 esplose un aperto contrasto, con reciproche accuse di travalicamento dei poteri, tra il Presidente della Repubblica Cossiga e:",
+    "answers": [
+      "il Consiglio Superiore della Magistratura",
+      "il Presidente del Senato",
+      "la Corte Costituzionale"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: il Consiglio Superiore della Magistratura",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360356",
+    "category": "storia",
+    "text": "La riforma Gentile del 1923 riguardava:",
+    "answers": [
+      "l'esercito",
+      "la giustizia",
+      "la scuola"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: la scuola",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360358",
+    "category": "storia",
+    "text": "Chi fondò il Partito Socialista Italiano?",
+    "answers": [
+      "Filippo Turati",
+      "Ernesto Rossi",
+      "Antonio Gramsci"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Filippo Turati",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360362",
+    "category": "storia",
+    "text": "Nel 1967 la FIAT concluse un accordo per la costruzione di una grande fabbrica automobilistica in:",
+    "answers": [
+      "Libia",
+      "Unione Sovietica",
+      "Argentina"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Unione Sovietica",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360364",
+    "category": "storia",
+    "text": "Nella storia d'Italia , nel XIX secolo, col termine \"irredentismo\" si indicò:",
+    "answers": [
+      "il fenomeno delle nascite delle società carbonare",
+      "un movimento patriottico che reclamava la libertà degli italiani dagli Austriaci, in particolare quelli di Trento e Trieste",
+      "un movimento patriottico che reclamava la libertà del sud dai Borboni"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: un movimento patriottico che reclamava la libertà degli italiani dagli Austriaci, in particolare quelli di Trento e Trieste",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360365",
+    "category": "storia",
+    "text": "Nel 1923 la scuola italiana mutò radicalmente rispetto a quella dell'Italia liberale per una riforma che prese nome dal suo ispiratore:",
+    "answers": [
+      "Giovanni Gentile",
+      "Gioacchino Volpe",
+      "Giuseppe Bottai"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giovanni Gentile",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360366",
+    "category": "storia",
+    "text": "Il passaggio dal sistema proporzionale al maggioritario è avvenuto tramite referendum nel:",
+    "answers": [
+      "1989",
+      "1995",
+      "1993"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1993",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360367",
+    "category": "storia",
+    "text": "Chi era Antonio Gramsci?",
+    "answers": [
+      "Fondatore del partito comunista italiano",
+      "Ministro della pubblica istruzione del governo Mussolini",
+      "Fondatore del partito socialista italiano"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Fondatore del partito comunista italiano",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360370",
+    "category": "storia",
+    "text": "La spedizione per la conquista della Libia del 1911 avvenne sotto il governo di:",
+    "answers": [
+      "Giovanni Giolitti",
+      "Francesco Crispi",
+      "Benito Mussolini"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giovanni Giolitti",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360372",
+    "category": "storia",
+    "text": "Per ragioni di politica interna e di prestigio internazionale nel 1926 Mussolini impose una forte rivalutazione della lira che realizzò, oltreché a seguito di una drastica limitazione di credito, grazie:",
+    "answers": [
+      "alla cancellazione dei debiti di guerra dell'Italia da parte degli Usa",
+      "al congelamento dei conti bancari di imprese e società per azioni",
+      "ad un cospicuo prestito da parte di banche americane"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: ad un cospicuo prestito da parte di banche americane",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360373",
+    "category": "storia",
+    "text": "Nel Maggio 1915 l'Italia entrò in guerra:",
+    "answers": [
+      "a fianco della triplice alleanza",
+      "a fianco dell'intesa",
+      "a fianco del Belgio"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: a fianco dell'intesa",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360374",
+    "category": "storia",
+    "text": "Quando entrò nella II guerra mondiale l'Italia?",
+    "answers": [
+      "giugno 1940",
+      "giugno 1945",
+      "maggio 1938"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: giugno 1940",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360375",
+    "category": "storia",
+    "text": "Il monumento in nome di Vittorio Emanuele II a Roma venne inaugurato nel:",
+    "answers": [
+      "1918",
+      "1900",
+      "1911"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1911",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360376",
+    "category": "storia",
+    "text": "Come si chiamò il movimento antifascista fondato nel 1929 da Emilio Lussu e da Carlo Rosselli:",
+    "answers": [
+      "Giustizia e Libertà",
+      "Italia Libera",
+      "Idea e Azione"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Giustizia e Libertà",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360377",
+    "category": "storia",
+    "text": "Il negoziato diretto fra l'Italia e la Jugoslavia conclusosi il 12 novembre 1920 con la firma del Trattato di Rapallo, dichiarava Fiume:",
+    "answers": [
+      "porto franco",
+      "città aperta",
+      "città libera"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: città libera",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360379",
+    "category": "storia",
+    "text": "Nel 1892 fu fondato in Italia:",
+    "answers": [
+      "il partito nazionale fascista",
+      "il partito popolare",
+      "il partito socialista"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: il partito socialista",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360380",
+    "category": "storia",
+    "text": "A chi venne affidato il governo della sinistra nel 1876?",
+    "answers": [
+      "Giovanni Giolitti",
+      "Francesco Crispi",
+      "Agostino Depretis"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Agostino Depretis",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360383",
+    "category": "storia",
+    "text": "Durante la II guerra mondiale il papa era:",
+    "answers": [
+      "Giovanni XXIII",
+      "Paolo VI",
+      "Pio XII"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Pio XII",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360385",
+    "category": "storia",
+    "text": "Le \"quattro giornate \" del Settembre 1943, furono combattute a:",
+    "answers": [
+      "Napoli",
+      "Firenze",
+      "Roma"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Napoli",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360386",
+    "category": "storia",
+    "text": "Nel 1919 nacque:",
+    "answers": [
+      "il Partito monarchico",
+      "il Partito comunista italiano",
+      "il Partito popolare"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: il Partito popolare",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360387",
+    "category": "storia",
+    "text": "Nel 1927 fu emesso dal Gran Consiglio del fascismo un manifesto programmatico che venne chiamato:",
+    "answers": [
+      "Indirizzi di armonia sociale",
+      "Manifesto del corporativismo",
+      "Carta del lavoro"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Carta del lavoro",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360388",
+    "category": "storia",
+    "text": "Quando fu stipulato il patto Gentiloni fra Cattolici e governo Giolitti?",
+    "answers": [
+      "1913",
+      "1938",
+      "1950"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1913",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360392",
+    "category": "storia",
+    "text": "A seguito dell'approvazione, il 13 maggio 1871, della legge \"delle guarentigie\" l'Italia si impegnò, tra le altre cose, a garantire unilateralmente al Pontefice:",
+    "answers": [
+      "le condizioni per il libero svolgimento del suo magistero spirituale",
+      "una dotazione annua pari a quella iscritta nel bilancio del Regno d'Italia",
+      "la piena titolarità del potere sovrano su Roma"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: le condizioni per il libero svolgimento del suo magistero spirituale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360393",
+    "category": "storia",
+    "text": "Quali erano le terre irredente nel 1870?",
+    "answers": [
+      "Il Trentino Alto Adige e la Venezia Giulia",
+      "Il regno Lombardo Veneto",
+      "Le Marche e l'Emilia Romagna"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Il Trentino Alto Adige e la Venezia Giulia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360394",
+    "category": "storia",
+    "text": "Nel 1982 venne ucciso a Palermo:",
+    "answers": [
+      "Salvo Lima",
+      "Licio Gelli",
+      "Carlo Alberto dalla Chiesa"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Carlo Alberto dalla Chiesa",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360398",
+    "category": "storia",
+    "text": "Nel 1946 il Ministro Ugo La Malfa adottò una misura di politica economica che fu determinante per rafforzare i legami con l'Europa più avanzata. Si trattava:",
+    "answers": [
+      "della liberalizzazione degli scambi con l'estero",
+      "dell'allargamento dei crediti per la quotazione delle società in borsa",
+      "del cambio della moneta"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: della liberalizzazione degli scambi con l'estero",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360399",
+    "category": "storia",
+    "text": "Il 3 ottobre 1935, all'inizio della guerra d'Etiopia, il comando delle truppe italiane venne assunto dal generale Emilio De Bono. In novembre venne sostituito da:",
+    "answers": [
+      "Giovanni Messe",
+      "Pietro Badoglio",
+      "Vittorio Ambrosio"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Pietro Badoglio",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360403",
+    "category": "storia",
+    "text": "Di fronte alla crescente tensione sociale ed all'inasprimento delle vertenze nel settore privato, Giolitti, in qualità di Ministro degli Interni del governo Zanardelli (1901-1903), decise di mantenere una linea di:",
+    "answers": [
+      "cauta apertura",
+      "rigorosa intransigenza",
+      "rigorosa neutralità"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: rigorosa neutralità",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360405",
+    "category": "storia",
+    "text": "Chi era il Presidente del Consiglio nel momento della marcia su Roma del '22?",
+    "answers": [
+      "Facta",
+      "Giolitti",
+      "Di Rudinì"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Facta",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360406",
+    "category": "storia",
+    "text": "Mussolini fu obbligato alle dimissioni dal re Vittorio Emanuele III il:",
+    "answers": [
+      "17 ottobre 1942",
+      "6 agosto 1943",
+      "25 luglio 1943"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 25 luglio 1943",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360407",
+    "category": "storia",
+    "text": "In base all'art. 65 dello Statuto Albertino, rimasto in vigore quale legge fondamentale dello Stato fino al 1947, al Re spettava:",
+    "answers": [
+      "la nomina e la revoca dei suoi Ministri",
+      "l'esercizio del solo potere legislativo",
+      "l'esercizio del solo potere esecutivo"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: la nomina e la revoca dei suoi Ministri",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360408",
+    "category": "storia",
+    "text": "Nell'aprile del 1987, il Governo Craxi entrò in crisi a seguito del cosiddetto:",
+    "answers": [
+      "patto della staffetta",
+      "patto di legislatura",
+      "patto di reciprocità"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: patto della staffetta",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360409",
+    "category": "storia",
+    "text": "Carlo Rosselli, uno dei più autorevoli leader antifascisti emigrati, scrisse nel 1930 un libro che ispirò culturalmente e politicamente il tentativo di ricomporre la frattura tra liberalismo e marxismo, il cui titolo è:",
+    "answers": [
+      "Socialismo del nostro tempo",
+      "Idee sulla libertà",
+      "Socialismo liberale"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Socialismo liberale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360412",
+    "category": "storia",
+    "text": "Chi assunse la carica di Ministro degli Esteri nel governo Parri (21 giugno-10 dicembre 1945)?",
+    "answers": [
+      "Giulio Andreotti",
+      "Alcide De Gasperi",
+      "Benedetto Croce"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Alcide De Gasperi",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360413",
+    "category": "storia",
+    "text": "Il patto di Londra fu firmato nel:",
+    "answers": [
+      "1918",
+      "1915",
+      "1930"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1915",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360415",
+    "category": "storia",
+    "text": "Nella primavera del 1923 Mussolini impose le dimissioni dei Ministri popolari e don Sturzo dovette lasciare la segreteria del partito a causa:",
+    "answers": [
+      "di un voto di sfiducia del gruppo parlamentare",
+      "di pressioni del Vaticano",
+      "di un voto di sfiducia della direzione del partito"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: di pressioni del Vaticano",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360416",
+    "category": "storia",
+    "text": "Come si intitolava il celebre articolo pubblicato da Sonnino nel gennaio del 1897 nel quale fu avanzata la richiesta di un sostanziale depotenziamento della Camera elettiva?",
+    "answers": [
+      "La fine del parlamentarismo",
+      "Torniamo allo Statuto",
+      "Che cosa dovrebbe essere un partito in Italia"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Torniamo allo Statuto",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360417",
+    "category": "storia",
+    "text": "Dove si trovava la Repubblica di Salò?",
+    "answers": [
+      "In Veneto",
+      "In Emilia Romagna",
+      "In Lombardia"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: In Lombardia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360419",
+    "category": "storia",
+    "text": "Nell'ottobre del 1989 il Parlamento approvò una riforma che modificava profondamente:",
+    "answers": [
+      "il codice di procedura penale",
+      "l'ordinamento della scuola media superiore",
+      "l'ordinamento degli uffici di collocamento"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: il codice di procedura penale",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360420",
+    "category": "storia",
+    "text": "Quali fatti avviarono l'Italia fascista verso una nuova guerra mondiale?",
+    "answers": [
+      "La politica di riarmo, di espansionismo e di alleanza con la Germania nazista",
+      "La conquista dell'Etiopia",
+      "L'alleanza con l'Inghilterra"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: La politica di riarmo, di espansionismo e di alleanza con la Germania nazista",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849360423",
+    "category": "storia",
+    "text": "La legge elettorale per l'attuazione dell'ordinamento regionale venne approvata dal Parlamento durante il terzo governo Moro nel:",
+    "answers": [
+      "1956",
+      "1962",
+      "1968"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1968",
+    "image": ""
+  },
+  {
+    "id": "simone-history-849359541",
+    "category": "storia",
+    "text": "Mani Pulite è stata:",
+    "answers": [
+      "lo slogan della campagna di prevenzione dell'influenza A/H1N1",
+      "un'indagine giudiziaria contro la corruzione del mondo politico condotta a livello nazionale in Italia",
+      "un'operazione di polizia che ha condotto all'arresto dei mandanti della strage di Capaci in cui fu ucciso il giudice Falcone"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: un'indagine giudiziaria contro la corruzione del mondo politico condotta a livello nazionale in Italia",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784829",
+    "category": "storia",
+    "text": "Quale uomo politico, che aveva stretto con Cavour quell'accordo parlamentare denominato \"connubio\", si battè per l'unificazione nazionale e divenne Primo Ministro nel 1862 e nel 1867?",
+    "answers": [
+      "Giovanni Giolitti",
+      "Agostino Depretis",
+      "Marco Minghetti",
+      "Urbano Rattazzi"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: Urbano Rattazzi",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784871",
+    "category": "storia",
+    "text": "In che anno divampò ufficialmente lo \"scandalo\" della Banca Romana?",
+    "answers": [
+      "Nel 1893",
+      "Nel 1861",
+      "Nel 1887",
+      "Nel 1859"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: Nel 1893",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784894",
+    "category": "storia",
+    "text": "Quale fu il Governo italiano che trattò con la Francia, nel 1864, per un accordo sulla cosiddetta \"questione romana\", stipulando la Convenzione di Settembre?",
+    "answers": [
+      "Il Governo Rattazzi",
+      "Il Governo Lamarmora",
+      "Il Governo Ricasoli",
+      "Il Governo Minghetti"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: Il Governo Minghetti",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784895",
+    "category": "storia",
+    "text": "Qual è l'accordo stipulato tra Italia e Francia nel 1864 per la cosiddetta \"questione romana\"?",
+    "answers": [
+      "Il Trattato di Firenze",
+      "La Convenzione Bilaterale",
+      "La Convenzione di Settembre",
+      "Il Trattato di Roma"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: La Convenzione di Settembre",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784902",
+    "category": "storia",
+    "text": "Dove si tenne il primo congresso delle cosiddette \"Camere del Lavoro\"?",
+    "answers": [
+      "A Parma, nel 1893",
+      "A Venezia, nel 1888",
+      "A Genova, nel 1899",
+      "A Roma, nel 1895"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: A Parma, nel 1893",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784904",
+    "category": "storia",
+    "text": "Chi fu il generale vittorioso nella battaglia di Sadowa del 1866?",
+    "answers": [
+      "Edmond Le Boeuf",
+      "Alfonso La Marmora",
+      "Helmuth von Moltke",
+      "Ludwig von Benedek"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: Helmuth von Moltke",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784906",
+    "category": "storia",
+    "text": "Quali anni sono ricordati nella storia italiana con il nome di \"biennio rosso\"?",
+    "answers": [
+      "1913-1914",
+      "1921-1922",
+      "1919-1920",
+      "1916-1917"
+    ],
+    "correct": 2,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1919-1920",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784913",
+    "category": "storia",
+    "text": "In quale anno si tenne il primo \"Giro d'Italia\"?",
+    "answers": [
+      "1909",
+      "1900",
+      "1922",
+      "1931"
+    ],
+    "correct": 0,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1909",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784915",
+    "category": "storia",
+    "text": "In quali anni fu combattuta la \"guerra italo-turca\"?",
+    "answers": [
+      "Tra il 1908 e il 1913",
+      "Tra il 1911 e il 1912",
+      "Tra il 1915 e il 1917",
+      "Tra il 1903 e il 1905"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: Tra il 1911 e il 1912",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784918",
+    "category": "storia",
+    "text": "Chi era Jacopo Gasparini?",
+    "answers": [
+      "Un Primo Ministro del Regno d'Italia nei primi del '900",
+      "Un poeta socialista, emigrato negli Stati Uniti all'avvento del fascismo",
+      "Il comandante degli \"arditi\" a Fiume",
+      "Un diplomatico che ricoprì la carica di Governatore dell'Eritrea"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: Un diplomatico che ricoprì la carica di Governatore dell'Eritrea",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784919",
+    "category": "storia",
+    "text": "In che anno fu fondato il Partito Popolare Italiano?",
+    "answers": [
+      "1921",
+      "1919",
+      "1934",
+      "1901"
+    ],
+    "correct": 1,
+    "explanation": "La risposta corretta indicata nella banca dati è: 1919",
+    "image": ""
+  },
+  {
+    "id": "simone-history-84784921",
+    "category": "storia",
+    "text": "In quali anni scoppiò la pandemia conosciuta con il nome di “influenza spagnola”, che causò decine di milioni di vittime nel mondo?",
+    "answers": [
+      "Tra il 1926 e il 1927",
+      "Tra il 1902 e il 1908",
+      "Tra il 1907 e il 1910",
+      "Tra il 1918 e il 1920"
+    ],
+    "correct": 3,
+    "explanation": "La risposta corretta indicata nella banca dati è: Tra il 1918 e il 1920",
+    "image": ""
   }
 ]

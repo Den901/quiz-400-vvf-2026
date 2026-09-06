@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.21.1 - 2026-09-07
+
+- Aggiunte 356 nuove domande di storia dal file fornito dall’amministratore.
+- Esclusi automaticamente 8 quesiti già presenti, senza creare duplicati.
+- Mantenute le risposte corrette indicate nella sorgente e ripulito il testo HTML.
+- Distribuite le nuove domande nei sottoargomenti di storia già disponibili.
+- Aggiunti controlli automatici su integrità, risposta corretta e caratteri corrotti.
+
 ## 3.20.2 - 2026-09-04
 
 - Corretto lo sfondo bianco del nome candidato nello storico delle fasce in modalità scura.
