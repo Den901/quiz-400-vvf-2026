@@ -30,7 +30,7 @@ os.environ["PORT_CONTROL_DIR"] = str(PORT_CONTROL_DIR)
 
 from fastapi.testclient import TestClient
 
-from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
+from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_forty_question_bank, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
 
 
 def login(client: TestClient, username: str, password: str):
@@ -60,11 +60,12 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.22.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.22.0"
+        assert runtime.json()["version"] == "3.23.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.23.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
+        assert runtime.json()["additionalQuestionBanks"] == {"nissolinoHistory": True, "modernHistory": True}
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
         assert runtime.json()["privacy"]["complete"] is True
         app_shell = public_client.get("/")
@@ -478,6 +479,22 @@ def test_complete_cloud_account_and_statistics_flow():
         assert reported_question_id in [item["id"] for item in preserved_challenge.json()["result"]["questions"]]
         assert admin_client.get("/api/admin/settings").json()["dailyChallengeConfig"] == challenge_settings.json()["config"]
 
+        bank_settings = admin_client.put(
+            "/api/admin/additional-banks",
+            json={"nissolinoHistory": False, "modernHistory": True},
+        )
+        assert user_client.put("/api/admin/additional-banks", json={"nissolinoHistory": True, "modernHistory": True}).status_code == 403
+        assert bank_settings.status_code == 200
+        assert bank_settings.json()["currentChallengePreserved"] is True
+        assert bank_settings.json()["additionalQuestionBanks"] == {"nissolinoHistory": False, "modernHistory": True}
+        assert public_client.get("/api/runtime").json()["additionalQuestionBanks"] == {"nissolinoHistory": False, "modernHistory": True}
+        with SessionLocal() as bank_db:
+            forty_ids = {str(item["id"]) for item in available_forty_question_bank(bank_db)}
+            assert not any(question_id.startswith("simone-history-") for question_id in forty_ids)
+            assert any(question_id.startswith("modern-history-1990-2026-") for question_id in forty_ids)
+        challenge_after_bank_change = user_client.get("/api/challenges/today").json()
+        assert [item["id"] for item in challenge_after_bank_change["result"]["questions"]] == original_challenge_ids
+
         logo_data = avatar_data
         logo = admin_client.post("/api/admin/branding/logo", json={"data_url": logo_data})
         assert logo.status_code == 200
@@ -559,7 +576,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.22.0"
+        assert update_status.json()["currentVersion"] == "3.23.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

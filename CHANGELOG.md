@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.23.0 - 2026-09-08
+
+- Aggiunge in Impostazioni il menu “Banche dati aggiuntive”.
+- Permette all'amministratore di attivare separatamente “Nissolino Concorsi” e “Storia contemporanea 1990–2026”.
+- Applica la selezione a Sfida del giorno, Simulazione ufficiale e Prova guidata 40, lasciando sempre tutte le domande disponibili in Materie.
+- Mantiene invariata la Sfida del giorno già creata quando viene modificata la selezione.
+
 ## 3.22.0 - 2026-09-08
 
 - Amplia la banca dati di Storia con 117 quesiti verificati sull'Italia contemporanea dal 1990 al 2026.

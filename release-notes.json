@@ -1,14 +1,14 @@
 {
-  "version": "3.22.0",
+  "version": "3.23.0",
   "showToUsers": false,
-  "title": "Storia contemporanea ampliata",
-  "summary": "La banca dati di Storia include nuovi quesiti sull'Italia dal 1990 al 2026.",
+  "title": "Banche dati aggiuntive selezionabili",
+  "summary": "L'amministratore può decidere quali raccolte extra usare nelle prove da 40.",
   "items": [
-    "Aggiunti 117 nuovi quesiti con quattro risposte e una sola soluzione corretta.",
-    "Coperti governi, Presidenti, ministri, scuola, euro, Covid-19 e referendum sulla giustizia.",
-    "Le domande già presenti sono state escluse automaticamente."
+    "Nuova sezione Banche dati aggiuntive nel pannello Impostazioni.",
+    "Interruttori separati per Nissolino Concorsi e Storia contemporanea 1990–2026.",
+    "Le scelte valgono per Sfida del giorno, Simulazione ufficiale e Prova guidata 40."
   ],
   "actionLabel": "Apri Storia",
   "actionHash": "#categories",
-  "footnote": "L'aggiornamento non modifica progressi, statistiche o sfide già create."
+  "footnote": "Le domande restano sempre disponibili in Materie e le sfide già create non vengono modificate."
 }

@@ -268,6 +268,7 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     "registration_enabled": True,
     "daily_challenge_enabled": True,
     "daily_challenge_required": False,
+    "additional_question_banks": {"nissolinoHistory": True, "modernHistory": True},
     "theoretical_cutoff": 14.71,
     "public_url": "",
     "session_days": 30,
@@ -474,6 +475,7 @@ def public_settings(db: Session) -> dict[str, Any]:
         "registrationEnabled": bool(get_setting(db, "registration_enabled")),
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
         "dailyChallengeRequired": bool(get_setting(db, "daily_challenge_required")),
+        "additionalQuestionBanks": normalize_additional_question_banks(get_setting(db, "additional_question_banks")),
         "emailResetEnabled": bool(get_setting(db, "smtp_enabled") and get_setting(db, "smtp_host")),
         "privacyNotice": get_setting(db, "privacy_notice"),
         "privacy": privacy,
@@ -697,6 +699,11 @@ class BrandLogoInput(BaseModel):
 
 class DashboardSettingsInput(BaseModel):
     theoretical_cutoff: float = Field(ge=-13.2, le=40)
+
+
+class AdditionalQuestionBanksInput(BaseModel):
+    nissolinoHistory: bool = True
+    modernHistory: bool = True
 
 
 class CloudSettingsInput(BaseModel):
@@ -949,6 +956,26 @@ def available_question_bank(db: Session) -> list[dict[str, Any]]:
     return [question for question in question_bank if str(question["id"]) not in disabled]
 
 
+def normalize_additional_question_banks(configured: Any) -> dict[str, bool]:
+    defaults = DEFAULT_SETTINGS["additional_question_banks"]
+    configured = configured if isinstance(configured, dict) else {}
+    return {key: bool(configured[key]) if isinstance(configured.get(key), bool) else default for key, default in defaults.items()}
+
+
+def additional_question_bank_key(question: dict[str, Any]) -> str | None:
+    question_id = str(question.get("id") or "")
+    if question_id.startswith("simone-history-"):
+        return "nissolinoHistory"
+    if question_id.startswith("modern-history-1990-2026-"):
+        return "modernHistory"
+    return None
+
+
+def available_forty_question_bank(db: Session) -> list[dict[str, Any]]:
+    enabled = normalize_additional_question_banks(get_setting(db, "additional_question_banks"))
+    return [question for question in available_question_bank(db) if not (bank := additional_question_bank_key(question)) or enabled[bank]]
+
+
 def admin_question_payload(question_id: str) -> dict[str, Any]:
     question = questions_by_id.get(str(question_id))
     if not question:
@@ -1095,7 +1122,7 @@ def normalize_daily_challenge_config(configured: Any, *, strict: bool = False) -
 
 def validate_daily_challenge_capacity(config: dict[str, dict[str, int]], db: Session) -> None:
     plan = config["examPlan"]
-    source_bank = available_question_bank(db)
+    source_bank = available_forty_question_bank(db)
     for category, count in plan.items():
         if not count or category == "logica":
             continue
@@ -1120,7 +1147,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     composition = normalized_challenge_composition(db)
     plan = composition["examPlan"]
     logic_plan = composition["logicPlan"]
-    active_bank = available_question_bank(db)
+    active_bank = available_forty_question_bank(db)
     usage = daily_challenge_question_usage(challenge_date, db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
@@ -2399,6 +2426,20 @@ def save_dashboard_settings(payload: DashboardSettingsInput, request: Request, a
     return {"theoreticalCutoff": value}
 
 
+@app.put("/api/admin/additional-banks")
+def save_additional_question_banks(payload: AdditionalQuestionBanksInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    value = normalize_additional_question_banks(payload.model_dump())
+    set_setting(db, "additional_question_banks", value)
+    current_challenge = db.get(DailyChallenge, challenge_today())
+    audit(db, "admin.additional_question_banks_updated", request, actor=admin.id, target=admin.id, **value, currentChallengePreserved=bool(current_challenge))
+    db.commit()
+    return {
+        "additionalQuestionBanks": value,
+        "currentChallengePreserved": bool(current_challenge),
+        "message": "Banche dati aggiuntive aggiornate. La Sfida del giorno già creata resta invariata.",
+    }
+
+
 @app.get("/api/admin/dashboard/candidates/{user_id}/challenges")
 def admin_candidate_challenges(user_id: str, _: User = Depends(require_dashboard_reader), db: Session = Depends(get_db)) -> dict[str, Any]:
     target = db.get(User, user_id)
@@ -2577,6 +2618,7 @@ def admin_settings(_: User = Depends(require_admin), db: Session = Depends(get_d
         "dailyChallengeEnabled": bool(get_setting(db, "daily_challenge_enabled")),
         "dailyChallengeRequired": bool(get_setting(db, "daily_challenge_required")),
         "theoreticalCutoff": float(get_setting(db, "theoretical_cutoff")),
+        "additionalQuestionBanks": normalize_additional_question_banks(get_setting(db, "additional_question_banks")),
         "dailyChallengeConfig": normalized_challenge_composition(db),
         "publicUrl": get_setting(db, "public_url"),
         "sessionDays": get_setting(db, "session_days"),

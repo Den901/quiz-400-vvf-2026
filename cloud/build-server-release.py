@@ -16,6 +16,7 @@ ROOT_FILES = {
     ".dockerignore",
     "app.js",
     "challenge-reminders.js",
+    "additional-banks.js",
     "logic-topics.js",
     "subject-topics.js",
     "tutor.js",
