@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.22.0 - 2026-09-08
+
+- Amplia la banca dati di Storia con 117 quesiti verificati sull'Italia contemporanea dal 1990 al 2026.
+- Include governi, Presidenti della Repubblica, ministri, riforme scolastiche, passaggio all'euro, Covid-19 e referendum sulla giustizia.
+- Esclude sette quesiti duplicati e raggruppa i nuovi contenuti in “Repubblica e storia contemporanea”.
+- Mantiene invariati progressi, statistiche e Sfida del giorno già generata.
+
 ## 3.21.4 - 2026-09-08
 
 - Normalizzata la scrittura di 195 domande e 656 risposte di Storia importate interamente in maiuscolo.

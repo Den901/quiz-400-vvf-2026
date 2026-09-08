@@ -202486,5 +202486,1643 @@
     "correct": 3,
     "explanation": "La risposta corretta indicata nella banca dati è: Tra il 1918 e il 1920",
     "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-dd9f6a322d38",
+    "category": "storia",
+    "text": "Quale governo era in carica il 1 gennaio 1990?",
+    "answers": [
+      "Ciampi",
+      "Andreotti VII",
+      "Andreotti VI",
+      "Amato I"
+    ],
+    "correct": 2,
+    "explanation": "Il 1 gennaio 1990 era in carica il Governo Andreotti VI, presieduto da Giulio Andreotti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-aaeff3cb3779",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Andreotti VI?",
+    "answers": [
+      "Silvio Berlusconi",
+      "Giulio Andreotti",
+      "Giuliano Amato",
+      "Carlo Azeglio Ciampi"
+    ],
+    "correct": 1,
+    "explanation": "Il Presidente del Consiglio del Governo Andreotti VI era Giulio Andreotti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-c3cf779d41e3",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 28 giugno 1992?",
+    "answers": [
+      "Ciampi",
+      "Berlusconi I",
+      "Dini",
+      "Amato I"
+    ],
+    "correct": 3,
+    "explanation": "Il Governo Amato I, presieduto da Giuliano Amato, entrò in carica il 28 giugno 1992 e rimase in carica fino al 27 aprile 1993.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d36b3bf6d747",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Amato I?",
+    "answers": [
+      "Lamberto Dini",
+      "Silvio Berlusconi",
+      "Giuliano Amato",
+      "Romano Prodi"
+    ],
+    "correct": 2,
+    "explanation": "Il Presidente del Consiglio del Governo Amato I era Giuliano Amato.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-4122061d9e5b",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 28 aprile 1993?",
+    "answers": [
+      "Ciampi",
+      "Dini",
+      "Berlusconi I",
+      "Prodi I"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Ciampi, presieduto da Carlo Azeglio Ciampi, entrò in carica il 28 aprile 1993 e rimase in carica fino al 9 maggio 1994.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-9d6ba627fd5d",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Ciampi?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Lamberto Dini",
+      "Massimo D'Alema",
+      "Romano Prodi"
+    ],
+    "correct": 0,
+    "explanation": "Il Presidente del Consiglio del Governo Ciampi era Carlo Azeglio Ciampi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-1144d3c69c5d",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 10 maggio 1994?",
+    "answers": [
+      "D'Alema I",
+      "Berlusconi I",
+      "Prodi I",
+      "Dini"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Berlusconi I, presieduto da Silvio Berlusconi, entrò in carica il 10 maggio 1994 e rimase in carica fino al 16 gennaio 1995.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-182c34001a57",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Berlusconi I?",
+    "answers": [
+      "Mario Monti",
+      "Silvio Berlusconi",
+      "Romano Prodi",
+      "Massimo D'Alema"
+    ],
+    "correct": 1,
+    "explanation": "Il Presidente del Consiglio del Governo Berlusconi I era Silvio Berlusconi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-ae28a3069a53",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 17 gennaio 1995?",
+    "answers": [
+      "Dini",
+      "Prodi I",
+      "D'Alema I",
+      "D'Alema II"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Dini, presieduto da Lamberto Dini, entrò in carica il 17 gennaio 1995 e rimase in carica fino al 16 maggio 1996.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-56836ac18298",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Dini?",
+    "answers": [
+      "Enrico Letta",
+      "Mario Monti",
+      "Massimo D'Alema",
+      "Lamberto Dini"
+    ],
+    "correct": 3,
+    "explanation": "Il Presidente del Consiglio del Governo Dini era Lamberto Dini.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-2777c5ad1277",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 17 maggio 1996?",
+    "answers": [
+      "Amato II",
+      "Prodi I",
+      "D'Alema II",
+      "D'Alema I"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Prodi I, presieduto da Romano Prodi, entrò in carica il 17 maggio 1996 e rimase in carica fino al 20 ottobre 1998.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-30070c841de4",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Prodi I?",
+    "answers": [
+      "Mario Monti",
+      "Matteo Renzi",
+      "Enrico Letta",
+      "Romano Prodi"
+    ],
+    "correct": 3,
+    "explanation": "Il Presidente del Consiglio del Governo Prodi I era Romano Prodi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-32c3079cae6f",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 26 aprile 2000?",
+    "answers": [
+      "Berlusconi III",
+      "Prodi II",
+      "Berlusconi II",
+      "Amato II"
+    ],
+    "correct": 3,
+    "explanation": "Il Governo Amato II, presieduto da Giuliano Amato, entrò in carica il 26 aprile 2000 e rimase in carica fino al 10 giugno 2001.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-f75e9ef1b525",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 11 giugno 2001?",
+    "answers": [
+      "Berlusconi IV",
+      "Berlusconi II",
+      "Berlusconi III",
+      "Prodi II"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Berlusconi II, presieduto da Silvio Berlusconi, entrò in carica il 11 giugno 2001 e rimase in carica fino al 22 aprile 2005.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-3a37f66053c1",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 17 maggio 2006?",
+    "answers": [
+      "Prodi II",
+      "Letta",
+      "Berlusconi IV",
+      "Monti"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Prodi II, presieduto da Romano Prodi, entrò in carica il 17 maggio 2006 e rimase in carica fino al 6 maggio 2008.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-7eb4d08a3073",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 16 novembre 2011?",
+    "answers": [
+      "Renzi",
+      "Monti",
+      "Letta",
+      "Gentiloni"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Monti, presieduto da Mario Monti, entrò in carica il 16 novembre 2011 e rimase in carica fino al 27 aprile 2013.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-0ca95e66aac5",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Monti?",
+    "answers": [
+      "Giulio Andreotti",
+      "Carlo Azeglio Ciampi",
+      "Mario Monti",
+      "Giuliano Amato"
+    ],
+    "correct": 2,
+    "explanation": "Il Presidente del Consiglio del Governo Monti era Mario Monti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d906431a8168",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 28 aprile 2013?",
+    "answers": [
+      "Letta",
+      "Gentiloni",
+      "Conte I",
+      "Renzi"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Letta, presieduto da Enrico Letta, entrò in carica il 28 aprile 2013 e rimase in carica fino al 21 febbraio 2014.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e78cca6019bd",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Letta?",
+    "answers": [
+      "Giuliano Amato",
+      "Carlo Azeglio Ciampi",
+      "Enrico Letta",
+      "Giulio Andreotti"
+    ],
+    "correct": 2,
+    "explanation": "Il Presidente del Consiglio del Governo Letta era Enrico Letta.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-69b0c6c0eaf5",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 22 febbraio 2014?",
+    "answers": [
+      "Renzi",
+      "Conte II",
+      "Conte I",
+      "Gentiloni"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Renzi, presieduto da Matteo Renzi, entrò in carica il 22 febbraio 2014 e rimase in carica fino al 11 dicembre 2016.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-33bd5b888ac4",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Renzi?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Giulio Andreotti",
+      "Giuliano Amato",
+      "Matteo Renzi"
+    ],
+    "correct": 3,
+    "explanation": "Il Presidente del Consiglio del Governo Renzi era Matteo Renzi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-fddd65f0afa4",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 12 dicembre 2016?",
+    "answers": [
+      "Conte I",
+      "Draghi",
+      "Conte II",
+      "Gentiloni"
+    ],
+    "correct": 3,
+    "explanation": "Il Governo Gentiloni, presieduto da Paolo Gentiloni, entrò in carica il 12 dicembre 2016 e rimase in carica fino al 31 maggio 2018.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-97ea0a3e8839",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Gentiloni?",
+    "answers": [
+      "Giulio Andreotti",
+      "Carlo Azeglio Ciampi",
+      "Paolo Gentiloni",
+      "Giuliano Amato"
+    ],
+    "correct": 2,
+    "explanation": "Il Presidente del Consiglio del Governo Gentiloni era Paolo Gentiloni.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-3a65cce2a3ee",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 1 giugno 2018?",
+    "answers": [
+      "Conte I",
+      "Meloni",
+      "Conte II",
+      "Draghi"
+    ],
+    "correct": 0,
+    "explanation": "Il Governo Conte I, presieduto da Giuseppe Conte, entrò in carica il 1 giugno 2018 e rimase in carica fino al 4 settembre 2019.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-0b9aa72626ce",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Conte I?",
+    "answers": [
+      "Giuliano Amato",
+      "Carlo Azeglio Ciampi",
+      "Giulio Andreotti",
+      "Giuseppe Conte"
+    ],
+    "correct": 3,
+    "explanation": "Il Presidente del Consiglio del Governo Conte I era Giuseppe Conte.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-43ad28ba10e9",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 5 settembre 2019?",
+    "answers": [
+      "Meloni",
+      "Andreotti VI",
+      "Draghi",
+      "Conte II"
+    ],
+    "correct": 3,
+    "explanation": "Il Governo Conte II, presieduto da Giuseppe Conte, entrò in carica il 5 settembre 2019 e rimase in carica fino al 12 febbraio 2021.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-50a70bddb062",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 13 febbraio 2021?",
+    "answers": [
+      "Andreotti VI",
+      "Draghi",
+      "Meloni",
+      "Andreotti VII"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Draghi, presieduto da Mario Draghi, entrò in carica il 13 febbraio 2021 e rimase in carica fino al 21 ottobre 2022.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-91197c6c816a",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Draghi?",
+    "answers": [
+      "Mario Draghi",
+      "Carlo Azeglio Ciampi",
+      "Giulio Andreotti",
+      "Giuliano Amato"
+    ],
+    "correct": 0,
+    "explanation": "Il Presidente del Consiglio del Governo Draghi era Mario Draghi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d476cbd0227a",
+    "category": "storia",
+    "text": "Quale governo entrò in carica il 22 ottobre 2022?",
+    "answers": [
+      "Andreotti VII",
+      "Meloni",
+      "Amato I",
+      "Andreotti VI"
+    ],
+    "correct": 1,
+    "explanation": "Il Governo Meloni, presieduto da Giorgia Meloni, entrò in carica il 22 ottobre 2022 ed era ancora in carica nel 2026.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-25e23019ec73",
+    "category": "storia",
+    "text": "Chi presiedeva il Governo Meloni?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Giulio Andreotti",
+      "Giorgia Meloni",
+      "Giuliano Amato"
+    ],
+    "correct": 2,
+    "explanation": "Il Presidente del Consiglio del Governo Meloni era Giorgia Meloni.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-095a97409ff3",
+    "category": "storia",
+    "text": "Chi ricoprì la Presidenza della Repubblica dal 1985 al 1992?",
+    "answers": [
+      "Oscar Luigi Scalfaro",
+      "Giorgio Napolitano",
+      "Francesco Cossiga",
+      "Carlo Azeglio Ciampi"
+    ],
+    "correct": 2,
+    "explanation": "Francesco Cossiga fu Presidente della Repubblica dal 1985 al 1992.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-334db8591334",
+    "category": "storia",
+    "text": "A chi succedette Francesco Cossiga alla Presidenza della Repubblica?",
+    "answers": [
+      "Sandro Pertini",
+      "Oscar Luigi Scalfaro",
+      "Francesco Cossiga",
+      "Carlo Azeglio Ciampi"
+    ],
+    "correct": 0,
+    "explanation": "Francesco Cossiga succedette a Sandro Pertini.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-fa9e247495f5",
+    "category": "storia",
+    "text": "Chi ricoprì la Presidenza della Repubblica dal 1992 al 1999?",
+    "answers": [
+      "Oscar Luigi Scalfaro",
+      "Carlo Azeglio Ciampi",
+      "Sergio Mattarella",
+      "Giorgio Napolitano"
+    ],
+    "correct": 0,
+    "explanation": "Oscar Luigi Scalfaro fu Presidente della Repubblica dal 1992 al 1999.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-dc7e39903618",
+    "category": "storia",
+    "text": "A chi succedette Oscar Luigi Scalfaro alla Presidenza della Repubblica?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Oscar Luigi Scalfaro",
+      "Francesco Cossiga",
+      "Giorgio Napolitano"
+    ],
+    "correct": 2,
+    "explanation": "Oscar Luigi Scalfaro succedette a Francesco Cossiga.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d1c613e43ec2",
+    "category": "storia",
+    "text": "Chi ricoprì la Presidenza della Repubblica dal 1999 al 2006?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Francesco Cossiga",
+      "Giorgio Napolitano",
+      "Sergio Mattarella"
+    ],
+    "correct": 0,
+    "explanation": "Carlo Azeglio Ciampi fu Presidente della Repubblica dal 1999 al 2006.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b6720813f770",
+    "category": "storia",
+    "text": "A chi succedette Carlo Azeglio Ciampi alla Presidenza della Repubblica?",
+    "answers": [
+      "Giorgio Napolitano",
+      "Oscar Luigi Scalfaro",
+      "Francesco Cossiga",
+      "Carlo Azeglio Ciampi"
+    ],
+    "correct": 1,
+    "explanation": "Carlo Azeglio Ciampi succedette a Oscar Luigi Scalfaro.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-7d3d3772dd17",
+    "category": "storia",
+    "text": "Chi ricoprì la Presidenza della Repubblica dal 2006 al 2015?",
+    "answers": [
+      "Sergio Mattarella",
+      "Francesco Cossiga",
+      "Oscar Luigi Scalfaro",
+      "Giorgio Napolitano"
+    ],
+    "correct": 3,
+    "explanation": "Giorgio Napolitano fu Presidente della Repubblica dal 2006 al 2015.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e2603046d746",
+    "category": "storia",
+    "text": "A chi succedette Giorgio Napolitano alla Presidenza della Repubblica?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Francesco Cossiga",
+      "Oscar Luigi Scalfaro",
+      "Giorgio Napolitano"
+    ],
+    "correct": 0,
+    "explanation": "Giorgio Napolitano succedette a Carlo Azeglio Ciampi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-ea838dbe1300",
+    "category": "storia",
+    "text": "Chi ricopriva la Presidenza della Repubblica dal 2015 ed era ancora in carica nel 2026?",
+    "answers": [
+      "Sergio Mattarella",
+      "Carlo Azeglio Ciampi",
+      "Francesco Cossiga",
+      "Oscar Luigi Scalfaro"
+    ],
+    "correct": 0,
+    "explanation": "Sergio Mattarella iniziò il mandato nel 2015 ed era ancora Presidente della Repubblica nel 2026.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e153a134559e",
+    "category": "storia",
+    "text": "A chi succedette Sergio Mattarella alla Presidenza della Repubblica?",
+    "answers": [
+      "Giorgio Napolitano",
+      "Carlo Azeglio Ciampi",
+      "Oscar Luigi Scalfaro",
+      "Francesco Cossiga"
+    ],
+    "correct": 0,
+    "explanation": "Sergio Mattarella succedette a Giorgio Napolitano.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b73ec84690ee",
+    "category": "storia",
+    "text": "Quale episodio del 17 febbraio 1992 è generalmente associato all'inizio dell'inchiesta Mani pulite?",
+    "answers": [
+      "L'arresto di Mario Chiesa",
+      "La strage di Capaci",
+      "L'arresto di Totò Riina",
+      "Il referendum elettorale"
+    ],
+    "correct": 0,
+    "explanation": "L'arresto di Mario Chiesa a Milano è considerato l'avvio dell'inchiesta Mani pulite.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-ce39b9b6ec01",
+    "category": "storia",
+    "text": "Chi fu arrestato a Palermo il 15 gennaio 1993 dopo una lunga latitanza?",
+    "answers": [
+      "Bernardo Provenzano",
+      "Totò Riina",
+      "Tommaso Buscetta",
+      "Raffaele Cutolo"
+    ],
+    "correct": 1,
+    "explanation": "Il 15 gennaio 1993 venne arrestato Totò Riina, capo di Cosa Nostra.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-bdcc23777442",
+    "category": "storia",
+    "text": "Nel referendum del 1993 sul sistema elettorale del Senato, quale orientamento prevalse?",
+    "answers": [
+      "Il mantenimento del proporzionale puro",
+      "Il passaggio in senso maggioritario",
+      "L'elezione indiretta dei senatori",
+      "L'abolizione del Senato"
+    ],
+    "correct": 1,
+    "explanation": "Gli elettori si espressero a favore di una trasformazione in senso maggioritario.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b88f801c745b",
+    "category": "storia",
+    "text": "Quale coalizione vinse le elezioni politiche del 1996?",
+    "answers": [
+      "L'Ulivo",
+      "Il Polo delle Libertà",
+      "Il Pentapartito",
+      "La Casa delle Libertà"
+    ],
+    "correct": 0,
+    "explanation": "Le elezioni del 21 aprile 1996 furono vinte dall'Ulivo guidato da Romano Prodi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d6d230f539aa",
+    "category": "storia",
+    "text": "Quale valuta rientrò nel Sistema monetario europeo nel novembre 1996?",
+    "answers": [
+      "Il franco francese",
+      "La peseta",
+      "La dracma",
+      "La lira"
+    ],
+    "correct": 3,
+    "explanation": "Il 24 novembre 1996 la lira venne riammessa nel Sistema monetario europeo.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-8b1c30429667",
+    "category": "storia",
+    "text": "Quale autorità fu istituita dalla normativa italiana sulla protezione dei dati personali del 1996?",
+    "answers": [
+      "L'Autorità per le comunicazioni",
+      "L'Autorità nazionale anticorruzione",
+      "Il Difensore civico nazionale",
+      "Il Garante per la protezione dei dati personali"
+    ],
+    "correct": 3,
+    "explanation": "La legge n. 675 del 1996 introdusse la tutela dei dati personali e la figura del Garante.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-90398400288e",
+    "category": "storia",
+    "text": "In quale anno entrò in vigore per l'Italia l'Accordo di Schengen?",
+    "answers": [
+      "1999",
+      "1992",
+      "1995",
+      "1997"
+    ],
+    "correct": 3,
+    "explanation": "Per l'Italia l'Accordo di Schengen entrò in vigore il 25 ottobre 1997.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d7899be9e160",
+    "category": "storia",
+    "text": "Quale città ospitò il vertice del G8 del luglio 2001?",
+    "answers": [
+      "Genova",
+      "Torino",
+      "Roma",
+      "Napoli"
+    ],
+    "correct": 0,
+    "explanation": "Il vertice del G8 del 2001 si svolse a Genova.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d31353b6a1c3",
+    "category": "storia",
+    "text": "In quale città venne firmato nel 2004 il Trattato che adottava una Costituzione per l'Europa?",
+    "answers": [
+      "Lisbona",
+      "Strasburgo",
+      "Bruxelles",
+      "Roma"
+    ],
+    "correct": 3,
+    "explanation": "La firma del Trattato costituzionale europeo avvenne a Roma il 29 ottobre 2004.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-1f89aa122fd3",
+    "category": "storia",
+    "text": "Quale nome pontificale scelse Joseph Ratzinger dopo l'elezione del 2005?",
+    "answers": [
+      "Francesco",
+      "Pio XIII",
+      "Giovanni Paolo III",
+      "Benedetto XVI"
+    ],
+    "correct": 3,
+    "explanation": "Joseph Ratzinger venne eletto nel 2005 e assunse il nome di Benedetto XVI.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-da9db95eb0cd",
+    "category": "storia",
+    "text": "Con quanti voti Giorgio Napolitano fu eletto Presidente della Repubblica nel 2006?",
+    "answers": [
+      "759",
+      "543",
+      "672",
+      "505"
+    ],
+    "correct": 1,
+    "explanation": "Giorgio Napolitano fu eletto al quarto scrutinio con 543 voti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-719fff930004",
+    "category": "storia",
+    "text": "Quale esito ebbe il referendum costituzionale del 25 e 26 giugno 2006?",
+    "answers": [
+      "Prevalse il Sì",
+      "Prevalse il No",
+      "Non fu raggiunto il quorum",
+      "La consultazione fu rinviata"
+    ],
+    "correct": 1,
+    "explanation": "Prevalse il No con il 61,3 per cento dei voti validi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d096b9696f9c",
+    "category": "storia",
+    "text": "Quale Presidente della Repubblica venne rieletto il 29 gennaio 2022?",
+    "answers": [
+      "Carlo Azeglio Ciampi",
+      "Oscar Luigi Scalfaro",
+      "Giorgio Napolitano",
+      "Sergio Mattarella"
+    ],
+    "correct": 3,
+    "explanation": "Sergio Mattarella venne rieletto all'ottavo scrutinio con 759 voti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-8d3f154012c8",
+    "category": "storia",
+    "text": "Quando giurò il Governo guidato da Giorgia Meloni?",
+    "answers": [
+      "25 settembre 2022",
+      "13 febbraio 2021",
+      "22 ottobre 2022",
+      "1 gennaio 2023"
+    ],
+    "correct": 2,
+    "explanation": "Il Governo Meloni giurò al Quirinale il 22 ottobre 2022.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e08f54e349d3",
+    "category": "storia",
+    "text": "In quale data morì Papa Francesco?",
+    "answers": [
+      "8 maggio 2025",
+      "18 maggio 2025",
+      "21 aprile 2025",
+      "31 dicembre 2024"
+    ],
+    "correct": 2,
+    "explanation": "Papa Francesco morì il 21 aprile 2025 a Casa Santa Marta.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-5cd0f5c44a83",
+    "category": "storia",
+    "text": "Quale nome scelse Robert Francis Prevost dopo l'elezione pontificia dell'8 maggio 2025?",
+    "answers": [
+      "Leone XIV",
+      "Giovanni XXIV",
+      "Benedetto XVII",
+      "Francesco II"
+    ],
+    "correct": 0,
+    "explanation": "Robert Francis Prevost scelse il nome di Leone XIV.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-2af887660423",
+    "category": "storia",
+    "text": "In quale periodo si svolsero i Giochi Olimpici Invernali Milano Cortina 2026?",
+    "answers": [
+      "6-22 febbraio 2026",
+      "10-26 febbraio 2026",
+      "6-22 gennaio 2026",
+      "6-15 marzo 2026"
+    ],
+    "correct": 0,
+    "explanation": "I Giochi Olimpici Invernali si svolsero dal 6 al 22 febbraio 2026.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-dcf8ca4f0478",
+    "category": "storia",
+    "text": "Chi era Ministro della Salute nel Governo Conte II durante la prima fase della pandemia di Covid-19?",
+    "answers": [
+      "Orazio Schillaci",
+      "Beatrice Lorenzin",
+      "Roberto Speranza",
+      "Giulia Grillo"
+    ],
+    "correct": 2,
+    "explanation": "Roberto Speranza ricoprì l'incarico di Ministro della Salute nel Governo Conte II.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-11173f66256a",
+    "category": "storia",
+    "text": "Chi divenne Ministra dell'Istruzione nel gennaio 2020?",
+    "answers": [
+      "Lucia Azzolina",
+      "Valeria Fedeli",
+      "Letizia Moratti",
+      "Stefania Giannini"
+    ],
+    "correct": 0,
+    "explanation": "Lucia Azzolina divenne Ministra dell'Istruzione il 10 gennaio 2020.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-51c1b469b695",
+    "category": "storia",
+    "text": "Chi era Ministra dell'Interno nel Governo Conte II?",
+    "answers": [
+      "Annamaria Cancellieri",
+      "Luciana Lamorgese",
+      "Paola De Micheli",
+      "Marta Cartabia"
+    ],
+    "correct": 1,
+    "explanation": "Luciana Lamorgese fu Ministra dell'Interno nel Governo Conte II.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-73e1c529d1da",
+    "category": "storia",
+    "text": "A quale Ministra è comunemente associata la riforma scolastica disciplinata dalla legge n. 53 del 2003?",
+    "answers": [
+      "Lucia Azzolina",
+      "Letizia Moratti",
+      "Stefania Giannini",
+      "Mariastella Gelmini"
+    ],
+    "correct": 1,
+    "explanation": "La legge n. 53 del 2003 è comunemente indicata come riforma Moratti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-671798adc27f",
+    "category": "storia",
+    "text": "Chi era Ministra dell'Istruzione, dell'Università e della Ricerca quando fu approvata la legge n. 107 del 2015?",
+    "answers": [
+      "Mariastella Gelmini",
+      "Lucia Azzolina",
+      "Valeria Fedeli",
+      "Stefania Giannini"
+    ],
+    "correct": 3,
+    "explanation": "Nel 2015 il dicastero dell'Istruzione era guidato da Stefania Giannini.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-bcce4d14a06d",
+    "category": "storia",
+    "text": "A quale Ministra sono associate le riforme scolastiche approvate tra il 2008 e il 2010?",
+    "answers": [
+      "Letizia Moratti",
+      "Tullio De Mauro",
+      "Luigi Berlinguer",
+      "Mariastella Gelmini"
+    ],
+    "correct": 3,
+    "explanation": "Le riforme del periodo 2008-2010 sono comunemente note come riforma Gelmini.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-f4d21459bdb4",
+    "category": "storia",
+    "text": "Chi ricopriva nel 2026 l'incarico di Ministro dell'Istruzione e del Merito nel Governo Meloni?",
+    "answers": [
+      "Patrizio Bianchi",
+      "Giuseppe Valditara",
+      "Marco Bussetti",
+      "Lorenzo Fioramonti"
+    ],
+    "correct": 1,
+    "explanation": "Giuseppe Valditara è Ministro dell'Istruzione e del Merito nel Governo Meloni.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-9686b8cd3e76",
+    "category": "storia",
+    "text": "Chi era Ministro della Giustizia nel Governo Draghi?",
+    "answers": [
+      "Marta Cartabia",
+      "Andrea Orlando",
+      "Alfonso Bonafede",
+      "Carlo Nordio"
+    ],
+    "correct": 0,
+    "explanation": "Marta Cartabia ricoprì l'incarico di Ministra della Giustizia nel Governo Draghi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-3187e2d7d131",
+    "category": "storia",
+    "text": "Chi ricopriva nel 2026 l'incarico di Ministro della Giustizia nel Governo Meloni?",
+    "answers": [
+      "Anna Maria Cancellieri",
+      "Alfonso Bonafede",
+      "Carlo Nordio",
+      "Marta Cartabia"
+    ],
+    "correct": 2,
+    "explanation": "Carlo Nordio è Ministro della Giustizia nel Governo Meloni.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-73ea8e62a4d7",
+    "category": "storia",
+    "text": "Chi era Ministro dell'Economia e delle Finanze nel Governo Meloni nel 2026?",
+    "answers": [
+      "Giulio Tremonti",
+      "Daniele Franco",
+      "Giancarlo Giorgetti",
+      "Roberto Gualtieri"
+    ],
+    "correct": 2,
+    "explanation": "Giancarlo Giorgetti ricopre l'incarico di Ministro dell'Economia e delle Finanze nel Governo Meloni.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-877b1727eee7",
+    "category": "storia",
+    "text": "Quale settore scolastico fu riformato direttamente dalla legge n. 148 del 1990?",
+    "answers": [
+      "La scuola dell'infanzia",
+      "Gli istituti tecnici superiori",
+      "La scuola elementare",
+      "L'università"
+    ],
+    "correct": 2,
+    "explanation": "La legge n. 148 del 1990 recava la riforma dell'ordinamento della scuola elementare.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b232f07262af",
+    "category": "storia",
+    "text": "In quale anno fu approvata la legge n. 148 di riforma della scuola elementare?",
+    "answers": [
+      "2008",
+      "1997",
+      "2003",
+      "1990"
+    ],
+    "correct": 3,
+    "explanation": "La legge n. 148 fu approvata il 5 giugno 1990.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-47183ecddd3c",
+    "category": "storia",
+    "text": "Quale legge riconobbe l'autonomia delle istituzioni scolastiche nell'ambito della riforma della pubblica amministrazione?",
+    "answers": [
+      "Legge n. 148 del 1990",
+      "Legge n. 92 del 2019",
+      "Legge n. 59 del 1997",
+      "Legge n. 53 del 2003"
+    ],
+    "correct": 2,
+    "explanation": "L'articolo 21 della legge n. 59 del 1997 è il riferimento fondamentale per l'autonomia scolastica.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e3de6c8684c5",
+    "category": "storia",
+    "text": "Quale regolamento è considerato il principale atto attuativo dell'autonomia scolastica?",
+    "answers": [
+      "DPR n. 122 del 2009",
+      "DPR n. 80 del 2013",
+      "DPR n. 89 del 2010",
+      "DPR n. 275 del 1999"
+    ],
+    "correct": 3,
+    "explanation": "Il DPR n. 275 del 1999 disciplina l'autonomia delle istituzioni scolastiche.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-93dcf555779c",
+    "category": "storia",
+    "text": "Quale riforma scolastica fu disciplinata dalla legge n. 53 del 2003?",
+    "answers": [
+      "Riforma Berlinguer",
+      "Riforma Gelmini",
+      "Riforma Moratti",
+      "Buona Scuola"
+    ],
+    "correct": 2,
+    "explanation": "La legge n. 53 del 2003 è comunemente chiamata riforma Moratti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-fde5899eff0e",
+    "category": "storia",
+    "text": "Secondo la legge n. 53 del 2003, da quali due sistemi era costituito il secondo ciclo?",
+    "answers": [
+      "Sistema dei licei e sistema dell'istruzione e formazione professionale",
+      "Licei e scuole elementari",
+      "Università e apprendistato",
+      "Scuola media e università"
+    ],
+    "correct": 0,
+    "explanation": "La legge distingueva il sistema dei licei dal sistema dell'istruzione e formazione professionale.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-a2f8cae9c143",
+    "category": "storia",
+    "text": "Quale legge del 2015 è nota come riforma della Buona Scuola?",
+    "answers": [
+      "Legge n. 107",
+      "Legge n. 92",
+      "Legge n. 53",
+      "Legge n. 148"
+    ],
+    "correct": 0,
+    "explanation": "La legge n. 107 del 13 luglio 2015 è nota come Buona Scuola.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-6febe9fdaf5b",
+    "category": "storia",
+    "text": "Quale documento di pianificazione scolastica è divenuto triennale con la legge n. 107 del 2015?",
+    "answers": [
+      "Il Piano triennale dell'offerta formativa",
+      "Il documento di valutazione",
+      "Il registro elettronico",
+      "Il contratto nazionale dei docenti"
+    ],
+    "correct": 0,
+    "explanation": "La legge n. 107 ha previsto il Piano triennale dell'offerta formativa, o PTOF.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-f165be9d752a",
+    "category": "storia",
+    "text": "Quale esperienza formativa fu potenziata nella scuola secondaria di secondo grado dalla legge n. 107 del 2015?",
+    "answers": [
+      "Il tirocinio esclusivamente estivo",
+      "Il semestre universitario obbligatorio",
+      "L'alternanza scuola-lavoro",
+      "Il servizio militare scolastico"
+    ],
+    "correct": 2,
+    "explanation": "La legge n. 107 potenziò l'alternanza scuola-lavoro, successivamente ridenominata PCTO.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d84d20fae73f",
+    "category": "storia",
+    "text": "Nella formulazione originaria della legge n. 107 del 2015, quante ore minime di alternanza erano previste nel triennio dei licei?",
+    "answers": [
+      "200",
+      "400",
+      "100",
+      "300"
+    ],
+    "correct": 0,
+    "explanation": "La legge prevedeva almeno 200 ore nel triennio dei licei.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-02144b7435c1",
+    "category": "storia",
+    "text": "Nella formulazione originaria della legge n. 107 del 2015, quante ore minime di alternanza erano previste per tecnici e professionali?",
+    "answers": [
+      "500",
+      "150",
+      "400",
+      "200"
+    ],
+    "correct": 2,
+    "explanation": "La legge prevedeva almeno 400 ore nel secondo biennio e nell'ultimo anno degli istituti tecnici e professionali.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b23cfb6258cd",
+    "category": "storia",
+    "text": "Quale legge ha introdotto l'insegnamento scolastico dell'educazione civica?",
+    "answers": [
+      "Legge n. 92 del 2019",
+      "Legge n. 107 del 2015",
+      "Legge n. 53 del 2003",
+      "Legge n. 148 del 1990"
+    ],
+    "correct": 0,
+    "explanation": "L'educazione civica è stata introdotta dalla legge n. 92 del 20 agosto 2019.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-bc2f631c31cc",
+    "category": "storia",
+    "text": "Quale tema è espressamente centrale nell'educazione civica introdotta nel 2019?",
+    "answers": [
+      "La pratica sportiva agonistica",
+      "La conoscenza della Costituzione italiana",
+      "La storia militare europea",
+      "La sola educazione finanziaria"
+    ],
+    "correct": 1,
+    "explanation": "La legge n. 92 pone tra i nuclei fondamentali la Costituzione e le istituzioni italiane ed europee.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-c69174d8aa48",
+    "category": "storia",
+    "text": "Da quale anno scolastico è stato avviato il nuovo insegnamento trasversale dell'educazione civica previsto dalla legge n. 92 del 2019?",
+    "answers": [
+      "2018/2019",
+      "2020/2021",
+      "2022/2023",
+      "2019/2020"
+    ],
+    "correct": 1,
+    "explanation": "L'insegnamento è stato avviato dall'anno scolastico 2020/2021.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-b7d0bf8da4a8",
+    "category": "storia",
+    "text": "Quale trattato del 1992 pose le basi dell'Unione economica e monetaria europea?",
+    "answers": [
+      "Trattato di Roma",
+      "Trattato di Nizza",
+      "Trattato di Schengen",
+      "Trattato di Maastricht"
+    ],
+    "correct": 3,
+    "explanation": "Il Trattato di Maastricht definì il percorso verso l'Unione economica e monetaria.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-724c346a683d",
+    "category": "storia",
+    "text": "In quale data l'euro divenne la moneta unica per le operazioni contabili e finanziarie dei primi Paesi partecipanti?",
+    "answers": [
+      "1 gennaio 2000",
+      "1 gennaio 2001",
+      "1 gennaio 1999",
+      "1 gennaio 2002"
+    ],
+    "correct": 2,
+    "explanation": "L'euro fu introdotto come moneta scritturale il 1 gennaio 1999.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-7502440ebdcd",
+    "category": "storia",
+    "text": "In quale data entrarono in circolazione in Italia banconote e monete in euro?",
+    "answers": [
+      "1 gennaio 2001",
+      "1 gennaio 1999",
+      "1 gennaio 2002",
+      "28 febbraio 2002"
+    ],
+    "correct": 2,
+    "explanation": "Il contante in euro entrò in circolazione il 1 gennaio 2002.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d0adb2ee34c0",
+    "category": "storia",
+    "text": "Qual era il cambio irrevocabile tra euro e lira italiana?",
+    "answers": [
+      "1 euro = 1.936,27 lire",
+      "1 euro = 1.000 lire",
+      "1 euro = 1.500 lire",
+      "1 euro = 2.000 lire"
+    ],
+    "correct": 0,
+    "explanation": "Il tasso irrevocabile era fissato a 1.936,27 lire per un euro.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-31fbb210964a",
+    "category": "storia",
+    "text": "Quando cessò il corso legale della lira italiana?",
+    "answers": [
+      "31 dicembre 2002",
+      "31 dicembre 2001",
+      "1 gennaio 1999",
+      "28 febbraio 2002"
+    ],
+    "correct": 3,
+    "explanation": "Il periodo di doppia circolazione terminò il 28 febbraio 2002.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-417809d2c51a",
+    "category": "storia",
+    "text": "Come viene definito il periodo iniziale del 2002 in cui si poteva pagare sia in lire sia in euro?",
+    "answers": [
+      "Cambio flessibile",
+      "Parità monetaria",
+      "Unione bancaria",
+      "Doppia circolazione"
+    ],
+    "correct": 3,
+    "explanation": "Nella fase di doppia circolazione entrambe le valute erano utilizzabili nei pagamenti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-bd3f7e9a1f5c",
+    "category": "storia",
+    "text": "Quale istituzione italiana fa parte dell'Eurosistema insieme alla Banca centrale europea e alle banche centrali dell'area euro?",
+    "answers": [
+      "Corte dei conti",
+      "Banca d'Italia",
+      "CONSOB",
+      "Cassa depositi e prestiti"
+    ],
+    "correct": 1,
+    "explanation": "La Banca d'Italia è la banca centrale nazionale italiana dell'Eurosistema.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-187b96a6a522",
+    "category": "storia",
+    "text": "Dove ha sede la Banca centrale europea?",
+    "answers": [
+      "Strasburgo",
+      "Francoforte sul Meno",
+      "Bruxelles",
+      "Lussemburgo"
+    ],
+    "correct": 1,
+    "explanation": "La Banca centrale europea ha sede a Francoforte sul Meno.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-84051f54e7df",
+    "category": "storia",
+    "text": "Quale simbolo identifica la moneta unica europea?",
+    "answers": [
+      "¥",
+      "$",
+      "£",
+      "€"
+    ],
+    "correct": 3,
+    "explanation": "Il simbolo dell'euro è €.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-1242d8281513",
+    "category": "storia",
+    "text": "Le banconote in euro hanno disegni diversi in ogni Paese?",
+    "answers": [
+      "Sì, ogni Stato sceglie entrambe le facce",
+      "No, il disegno è comune a tutta l'area euro",
+      "Solo le banconote italiane hanno un disegno nazionale",
+      "Solo le banconote da 5 euro sono comuni"
+    ],
+    "correct": 1,
+    "explanation": "Le banconote hanno un disegno comune; le monete presentano invece anche una faccia nazionale.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-6022112c7353",
+    "category": "storia",
+    "text": "Quale caratteristica distingue le monete in euro dalle banconote?",
+    "answers": [
+      "Le monete sono emesse dalla Commissione europea",
+      "Le monete hanno una faccia nazionale",
+      "Le monete non riportano il valore",
+      "Le monete non hanno valore legale fuori dal Paese di emissione"
+    ],
+    "correct": 1,
+    "explanation": "Ogni moneta ha una faccia comune e una faccia nazionale, ma circola in tutta l'area euro.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-5b871b594c86",
+    "category": "storia",
+    "text": "Prima dell'euro, quale moneta aveva corso legale in Italia?",
+    "answers": [
+      "Il marco",
+      "La peseta",
+      "Il franco",
+      "La lira"
+    ],
+    "correct": 3,
+    "explanation": "La moneta nazionale italiana precedente all'euro era la lira.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-98ea23994326",
+    "category": "storia",
+    "text": "Quando furono confermati i primi due casi di Covid-19 in Italia?",
+    "answers": [
+      "11 marzo 2020",
+      "21 febbraio 2020",
+      "9 marzo 2020",
+      "30 gennaio 2020"
+    ],
+    "correct": 3,
+    "explanation": "I primi due casi furono confermati il 30 gennaio 2020 e riguardavano due turisti cinesi.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-144d55c4760f",
+    "category": "storia",
+    "text": "Dove furono ricoverati i primi due pazienti Covid-19 confermati in Italia?",
+    "answers": [
+      "Ospedale Sacco di Milano",
+      "Policlinico di Padova",
+      "Ospedale Cotugno di Napoli",
+      "Istituto Spallanzani di Roma"
+    ],
+    "correct": 3,
+    "explanation": "I primi due pazienti furono ricoverati in isolamento allo Spallanzani di Roma.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-322fb7112d40",
+    "category": "storia",
+    "text": "Quando il Consiglio dei ministri dichiarò lo stato di emergenza sanitaria nazionale per il nuovo coronavirus?",
+    "answers": [
+      "21 febbraio 2020",
+      "11 marzo 2020",
+      "31 gennaio 2020",
+      "8 marzo 2020"
+    ],
+    "correct": 2,
+    "explanation": "Lo stato di emergenza fu dichiarato il 31 gennaio 2020.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-3b0c2a28a7ae",
+    "category": "storia",
+    "text": "Quale numero di pubblica utilità fu attivato dal Ministero della Salute per le informazioni sul nuovo coronavirus?",
+    "answers": [
+      "118",
+      "1522",
+      "112",
+      "1500"
+    ],
+    "correct": 3,
+    "explanation": "Il numero nazionale di pubblica utilità attivato fu il 1500.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-62fee2218a1d",
+    "category": "storia",
+    "text": "Quando fu identificato il primo caso di trasmissione locale di Covid-19 in Italia?",
+    "answers": [
+      "30 gennaio 2020",
+      "27 dicembre 2020",
+      "4 marzo 2020",
+      "20 febbraio 2020"
+    ],
+    "correct": 3,
+    "explanation": "Il primo caso trasmesso sul territorio nazionale fu identificato il 20 febbraio 2020.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-2392a116545f",
+    "category": "storia",
+    "text": "Quale comune lombardo divenne simbolo del primo focolaio italiano di Covid-19?",
+    "answers": [
+      "Vo'",
+      "Codogno",
+      "Alzano Lombardo",
+      "Bergamo"
+    ],
+    "correct": 1,
+    "explanation": "Il caso individuato a Codogno segnò l'emersione del primo grande focolaio italiano.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-d1d79fa4f3fc",
+    "category": "storia",
+    "text": "In quale data l'OMS definì il Covid-19 una pandemia?",
+    "answers": [
+      "9 marzo 2020",
+      "1 aprile 2020",
+      "11 marzo 2020",
+      "30 gennaio 2020"
+    ],
+    "correct": 2,
+    "explanation": "L'OMS qualificò la diffusione del Covid-19 come pandemia l'11 marzo 2020.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-374c5e479d98",
+    "category": "storia",
+    "text": "Quale Presidente del Consiglio guidava il Governo italiano durante il lockdown nazionale del marzo 2020?",
+    "answers": [
+      "Paolo Gentiloni",
+      "Mario Draghi",
+      "Matteo Renzi",
+      "Giuseppe Conte"
+    ],
+    "correct": 3,
+    "explanation": "Nel marzo 2020 il Governo era presieduto da Giuseppe Conte.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-934beb05d579",
+    "category": "storia",
+    "text": "Quale espressione accompagnò le misure nazionali di limitazione degli spostamenti del marzo 2020?",
+    "answers": [
+      "Italia sicura",
+      "Ripartiamo insieme",
+      "Io resto a casa",
+      "Piano rinascita"
+    ],
+    "correct": 2,
+    "explanation": "Il DPCM del 9 marzo 2020 fu associato alla campagna 'Io resto a casa'.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-8523d90e52ba",
+    "category": "storia",
+    "text": "Qual è il nome del virus responsabile della malattia Covid-19?",
+    "answers": [
+      "MERS-CoV",
+      "SARS-CoV-2",
+      "HIV",
+      "H1N1"
+    ],
+    "correct": 1,
+    "explanation": "Il virus è denominato SARS-CoV-2; la malattia è denominata Covid-19.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-7bd9bd3a4ed2",
+    "category": "storia",
+    "text": "Quando si svolse il Vaccine Day che avviò simbolicamente la campagna vaccinale in Italia e in Europa?",
+    "answers": [
+      "1 gennaio 2021",
+      "8 marzo 2021",
+      "31 marzo 2022",
+      "27 dicembre 2020"
+    ],
+    "correct": 3,
+    "explanation": "Il Vaccine Day europeo si svolse il 27 dicembre 2020.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-e8297abba047",
+    "category": "storia",
+    "text": "Quale vaccino fu utilizzato per le prime somministrazioni italiane del Vaccine Day?",
+    "answers": [
+      "Moderna",
+      "Pfizer-BioNTech",
+      "AstraZeneca",
+      "Johnson & Johnson"
+    ],
+    "correct": 1,
+    "explanation": "Le prime dosi somministrate allo Spallanzani erano del vaccino Pfizer-BioNTech.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-3eb900ad3bf7",
+    "category": "storia",
+    "text": "In quale anno fu introdotta in Italia la certificazione verde Covid-19, detta Green Pass?",
+    "answers": [
+      "2022",
+      "2021",
+      "2023",
+      "2020"
+    ],
+    "correct": 1,
+    "explanation": "La certificazione verde Covid-19 fu introdotta nel 2021.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-400fd70f5869",
+    "category": "storia",
+    "text": "Quando terminò lo stato di emergenza nazionale legato al Covid-19?",
+    "answers": [
+      "31 dicembre 2022",
+      "1 maggio 2022",
+      "31 marzo 2022",
+      "31 dicembre 2021"
+    ],
+    "correct": 2,
+    "explanation": "Lo stato di emergenza nazionale terminò il 31 marzo 2022.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-f69010093675",
+    "category": "storia",
+    "text": "In quale data si svolsero i cinque referendum abrogativi sulla giustizia del 2022?",
+    "answers": [
+      "12 giugno 2022",
+      "25 settembre 2022",
+      "4 dicembre 2022",
+      "29 gennaio 2022"
+    ],
+    "correct": 0,
+    "explanation": "I cinque referendum sulla giustizia si svolsero domenica 12 giugno 2022.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-c8fae8bfeeb7",
+    "category": "storia",
+    "text": "Quanti erano i quesiti referendari sulla giustizia sottoposti al voto nel giugno 2022?",
+    "answers": [
+      "Tre",
+      "Quattro",
+      "Sei",
+      "Cinque"
+    ],
+    "correct": 3,
+    "explanation": "Le schede referendarie erano cinque.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-5df59f6257f3",
+    "category": "storia",
+    "text": "Quale requisito era necessario per la validità dei referendum abrogativi del 2022?",
+    "answers": [
+      "La partecipazione di almeno un terzo degli aventi diritto",
+      "L'approvazione del Parlamento",
+      "La partecipazione della maggioranza degli aventi diritto",
+      "La maggioranza dei due terzi dei votanti"
+    ],
+    "correct": 2,
+    "explanation": "Per il referendum abrogativo è richiesto il quorum del 50 per cento più uno degli aventi diritto.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-49978f96cfed",
+    "category": "storia",
+    "text": "Quale dei seguenti temi era oggetto di uno dei referendum sulla giustizia del 2022?",
+    "answers": [
+      "Incandidabilità prevista dalla legge Severino",
+      "Numero dei deputati",
+      "Durata del mandato del Presidente della Repubblica",
+      "Autonomia delle regioni"
+    ],
+    "correct": 0,
+    "explanation": "Il primo quesito riguardava l'incandidabilità e i divieti previsti dalla legge Severino.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-ec48f37d2768",
+    "category": "storia",
+    "text": "Uno dei quesiti del 2022 riguardava il passaggio dei magistrati tra quali funzioni?",
+    "answers": [
+      "Civili e amministrative",
+      "Giudicanti e requirenti",
+      "Onorarie e militari",
+      "Nazionali ed europee"
+    ],
+    "correct": 1,
+    "explanation": "Il quesito riguardava la separazione delle funzioni giudicanti e requirenti.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-288e97c7ca9c",
+    "category": "storia",
+    "text": "Quale organo era interessato dal quesito sulle firme per le candidature dei magistrati?",
+    "answers": [
+      "Consiglio superiore della magistratura",
+      "Corte costituzionale",
+      "Consiglio di Stato",
+      "Corte dei conti"
+    ],
+    "correct": 0,
+    "explanation": "Il quinto quesito riguardava le candidature dei componenti togati del CSM.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-35e425949d54",
+    "category": "storia",
+    "text": "Quale materia riguardava il secondo quesito del referendum sulla giustizia del 2022?",
+    "answers": [
+      "Responsabilità civile dei ministri",
+      "Limitazione delle misure cautelari",
+      "Riforma del processo tributario",
+      "Abolizione dell'ergastolo"
+    ],
+    "correct": 1,
+    "explanation": "Il secondo quesito riguardava la limitazione delle misure cautelari.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-4d5e80bb71a1",
+    "category": "storia",
+    "text": "Chi avrebbe partecipato alle valutazioni dei magistrati secondo il tema del quarto quesito del 2022?",
+    "answers": [
+      "I sindaci dei capoluoghi",
+      "I prefetti",
+      "I parlamentari europei",
+      "I membri laici dei consigli giudiziari"
+    ],
+    "correct": 3,
+    "explanation": "Il quarto quesito riguardava la partecipazione dei membri laici alle deliberazioni dei consigli giudiziari.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-7186a14f0d38",
+    "category": "storia",
+    "text": "Quale colore aveva la scheda del referendum 2022 sulla separazione delle funzioni dei magistrati?",
+    "answers": [
+      "Verde",
+      "Rosso",
+      "Grigio",
+      "Giallo"
+    ],
+    "correct": 3,
+    "explanation": "La scheda relativa alla separazione delle funzioni era gialla.",
+    "image": ""
+  },
+  {
+    "id": "modern-history-1990-2026-9ea60926e51c",
+    "category": "storia",
+    "text": "Che tipo di referendum erano quelli sulla giustizia del 2022?",
+    "answers": [
+      "Consultivi regionali",
+      "Costituzionali confermativi",
+      "Propositivi",
+      "Abrogativi"
+    ],
+    "correct": 3,
+    "explanation": "I cinque referendum del 2022 erano referendum abrogativi ai sensi dell'articolo 75 della Costituzione.",
+    "image": ""
   }
 ]

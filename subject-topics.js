@@ -388,6 +388,7 @@ function computerScienceTopic(question, includeAnswers = false) {
 }
 
 function historyTopic(question, includeAnswers = false) {
+  if (String(question?.id ?? '').startsWith('modern-history-1990-2026-')) return 'repubblica-contemporanea';
   const text = questionCorrectText(question, includeAnswers);
 
   if (/\b(seconda guerra mondiale|secondo conflitto mondiale|campagna di russia|guerra mondiale del 1939|resistenza|resistent[ei]|partigian|liberazione|25 aprile|8 settembre|armistizio|repubblica sociale|repubblica di salo|linea gotica|linea gustav|alleati|sbarco in sicilia|monte cassino|cln |comitato di liberazione|badoglio|deportazion|olocausto|shoah|foss[ae] ardeatine|via rasella|marzabotto|cef[au]lonia)\b/.test(text)) return 'seconda-guerra';

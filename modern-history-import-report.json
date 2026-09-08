@@ -1,0 +1,46 @@
+{
+  "sourceCandidates": 124,
+  "imported": 117,
+  "duplicatesSkipped": 7,
+  "datasetBefore": 14650,
+  "datasetAfter": 14767,
+  "historyBefore": 1446,
+  "historyAfter": 1563,
+  "skipped": [
+    {
+      "question": "Chi presiedeva il Governo Amato II?",
+      "duplicateOf": "modern-history-1990-2026-d36b3bf6d747",
+      "existingQuestion": "Chi presiedeva il Governo Amato I?"
+    },
+    {
+      "question": "Chi presiedeva il Governo Berlusconi II?",
+      "duplicateOf": "modern-history-1990-2026-182c34001a57",
+      "existingQuestion": "Chi presiedeva il Governo Berlusconi I?"
+    },
+    {
+      "question": "Chi presiedeva il Governo Prodi II?",
+      "duplicateOf": "modern-history-1990-2026-30070c841de4",
+      "existingQuestion": "Chi presiedeva il Governo Prodi I?"
+    },
+    {
+      "question": "Chi presiedeva il Governo Conte II?",
+      "duplicateOf": "modern-history-1990-2026-0b9aa72626ce",
+      "existingQuestion": "Chi presiedeva il Governo Conte I?"
+    },
+    {
+      "question": "In quale anno il Partito Comunista Italiano si trasformò nel Partito Democratico della Sinistra?",
+      "duplicateOf": "25289836",
+      "existingQuestion": "Il Partito Comunista in quale partito si trasformò nel 1991?"
+    },
+    {
+      "question": "Quale magistrato fu ucciso nella strage di Capaci del 23 maggio 1992?",
+      "duplicateOf": "25289558",
+      "existingQuestion": "Chi fu il magistrato assassinato a Capaci il 23 maggio 1992?"
+    },
+    {
+      "question": "Quale magistrato fu ucciso nella strage di via D'Amelio del 19 luglio 1992?",
+      "duplicateOf": "25289583",
+      "existingQuestion": "Quale magistrato venne assassinato in via D'Amelio a Palermo nel 1992?"
+    }
+  ]
+}

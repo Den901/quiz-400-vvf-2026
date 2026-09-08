@@ -1,14 +1,14 @@
 {
-  "version": "3.21.4",
+  "version": "3.22.0",
   "showToUsers": false,
-  "title": "Testi di Storia normalizzati",
-  "summary": "Le nuove domande di Storia non vengono più mostrate interamente in maiuscolo.",
+  "title": "Storia contemporanea ampliata",
+  "summary": "La banca dati di Storia include nuovi quesiti sull'Italia dal 1990 al 2026.",
   "items": [
-    "Normalizzate 195 domande di Storia.",
-    "Normalizzate anche 656 relative risposte.",
-    "Sigle, acronimi e numeri romani mantengono le maiuscole corrette."
+    "Aggiunti 117 nuovi quesiti con quattro risposte e una sola soluzione corretta.",
+    "Coperti governi, Presidenti, ministri, scuola, euro, Covid-19 e referendum sulla giustizia.",
+    "Le domande già presenti sono state escluse automaticamente."
   ],
   "actionLabel": "Apri Storia",
   "actionHash": "#categories",
-  "footnote": "Le domande e le risposte corrette non cambiano: viene modificata soltanto la scrittura del testo."
+  "footnote": "L'aggiornamento non modifica progressi, statistiche o sfide già create."
 }
