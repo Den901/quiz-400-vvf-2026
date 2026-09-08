@@ -60,8 +60,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.21.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.21.2"
+        assert runtime.json()["version"] == "3.21.3"
+        assert runtime.json()["releaseNotes"]["version"] == "3.21.3"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -70,6 +70,9 @@ def test_complete_cloud_account_and_statistics_flow():
         app_shell = public_client.get("/")
         assert app_shell.headers["x-frame-options"] == "DENY"
         assert "frame-ancestors 'none'" in app_shell.headers["content-security-policy"]
+        assert 'class="nav-book-icon"' in app_shell.text
+        assert "📖" not in app_shell.text
+        assert ">Materie</a>" in app_shell.text
         assert 'data-route="data"' not in app_shell.text
         study_lesson = public_client.get("/study-content/chimica-generale.json")
         assert study_lesson.status_code == 200
@@ -556,7 +559,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.21.2"
+        assert update_status.json()["currentVersion"] == "3.21.3"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

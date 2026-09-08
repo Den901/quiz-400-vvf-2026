@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.21.3 - 2026-09-08
+
+- Sostituita l’emoji colorata di Materie con un libro vettoriale monocromatico.
+- L’icona segue il colore del menu nei temi chiaro e scuro e nello stato selezionato.
+
 ## 3.21.2 - 2026-09-08
 
 - Corretto per tutti gli utenti il conteggio delle domande completate nelle materie.

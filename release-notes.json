@@ -1,14 +1,14 @@
 {
-  "version": "3.21.2",
+  "version": "3.21.3",
   "showToUsers": false,
-  "title": "Conteggio delle Materie corretto",
-  "summary": "Il completamento ora considera lo stato reale delle domande e non il vecchio contatore dei tentativi.",
+  "title": "Icona Materie uniformata",
+  "summary": "L’icona del libro ora è monocromatica e segue automaticamente il colore del menu.",
   "items": [
-    "Una domanda classificata come La so, Da ripetere o Non la so viene conteggiata correttamente.",
-    "Il 100% appare soltanto quando la materia è davvero completa.",
-    "La sezione Quiz è stata rinominata Materie e ora mostra l’icona del libro."
+    "Rimossa l’emoji colorata dalla voce Materie.",
+    "Nuova icona vettoriale nitida e coerente con le altre icone.",
+    "Colore automatico per tema chiaro, tema scuro e voce selezionata."
   ],
   "actionLabel": "Apri Materie",
   "actionHash": "#categories",
-  "footnote": "I progressi personali non vengono modificati: cambia soltanto il modo in cui sono conteggiati e mostrati."
+  "footnote": "L’aggiornamento è soltanto grafico e non modifica progressi, quiz o statistiche."
 }
