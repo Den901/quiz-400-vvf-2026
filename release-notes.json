@@ -1,14 +1,14 @@
 {
-  "version": "3.21.1",
+  "version": "3.21.2",
   "showToUsers": false,
-  "title": "Banca dati di storia ampliata",
-  "summary": "Aggiunte 356 nuove domande di storia, distribuite nei sottoargomenti esistenti.",
+  "title": "Conteggio delle Materie corretto",
+  "summary": "Il completamento ora considera lo stato reale delle domande e non il vecchio contatore dei tentativi.",
   "items": [
-    "Importate tutte le domande valide presenti nel file fornito.",
-    "Esclusi automaticamente 8 quesiti già presenti nella banca dati.",
-    "Risposte corrette e testi sono stati verificati prima della pubblicazione."
+    "Una domanda classificata come La so, Da ripetere o Non la so viene conteggiata correttamente.",
+    "Il 100% appare soltanto quando la materia è davvero completa.",
+    "La sezione Quiz è stata rinominata Materie e ora mostra l’icona del libro."
   ],
-  "actionLabel": "Apri Storia",
-  "actionHash": "#category/storia",
-  "footnote": "L’aggiornamento non modifica statistiche, classifiche o progressi personali."
+  "actionLabel": "Apri Materie",
+  "actionHash": "#categories",
+  "footnote": "I progressi personali non vengono modificati: cambia soltanto il modo in cui sono conteggiati e mostrati."
 }

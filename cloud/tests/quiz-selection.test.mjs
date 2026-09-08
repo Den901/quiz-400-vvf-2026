@@ -3,15 +3,28 @@ import test from 'node:test';
 
 import {
   applyLearningOutcome,
+  completionPercent,
   ensureGuidedPendingAnswers,
   guidedPendingAnswerAt,
   guidedResultRows,
+  isLearningClassified,
+  normalizeLearningStatus,
   selectAdaptiveQuestions,
   selectOrderedQuestions,
   selectPersonalizedQuestions,
   selectRotatingQuestions,
   setGuidedPendingAnswer
 } from '../../quiz-selection.js';
+
+test('una domanda classificata conta come completata anche nei salvataggi precedenti', () => {
+  assert.equal(isLearningClassified({status: 'known', attempts: 0}), true);
+  assert.equal(isLearningClassified({status: 'review', attempts: 0}), true);
+  assert.equal(isLearningClassified({status: 'unknown', attempts: 0}), true);
+  assert.equal(isLearningClassified({status: 'unanswered', attempts: 4}), false);
+  assert.equal(normalizeLearningStatus(undefined), 'unanswered');
+  assert.equal(completionPercent(1445, 1446), 99);
+  assert.equal(completionPercent(1446, 1446), 100);
+});
 
 const questions = count => Array.from({length: count}, (_, index) => ({id: `q-${index + 1}`}));
 

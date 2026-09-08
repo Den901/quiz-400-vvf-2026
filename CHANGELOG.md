@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.21.2 - 2026-09-08
+
+- Corretto per tutti gli utenti il conteggio delle domande completate nelle materie.
+- Le domande già classificate vengono riconosciute anche quando un vecchio salvataggio non contiene un tentativo numerico.
+- Il 100% viene mostrato soltanto quando tutte le domande sono realmente classificate.
+- La voce di navigazione Quiz è stata rinominata Materie e usa l’icona del libro.
+
 ## 3.21.1 - 2026-09-07
 
 - Aggiunte 356 nuove domande di storia dal file fornito dall’amministratore.

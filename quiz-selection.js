@@ -118,7 +118,17 @@ export function selectOrderedQuestions(source, cursor = {}, include = () => true
   return ordered.filter(include);
 }
 
-const normalizedStatus = status => ['known', 'review', 'unknown'].includes(status) ? status : 'unanswered';
+export const normalizeLearningStatus = status => ['known', 'review', 'unknown'].includes(status) ? status : 'unanswered';
+
+export const isLearningClassified = progress => normalizeLearningStatus(progress?.status) !== 'unanswered';
+
+export const completionPercent = (completed, total) => {
+  const size = Math.max(0, Number(total) || 0);
+  const done = Math.max(0, Number(completed) || 0);
+  if (!size) return 0;
+  if (done >= size) return 100;
+  return Math.min(99, Math.floor(done / size * 100));
+};
 
 export function applyLearningOutcome(progress, {blank = false, correct = false}, countAttempt = true, at = new Date().toISOString()) {
   const result = progress;
@@ -151,7 +161,7 @@ export function selectAdaptiveQuestions(source, count, bucket = {}, knownRotatio
   const target = Math.min(Math.max(0, Math.floor(Number(count) || 0)), questions.length);
   if (!target) return {selected: [], bucket: {...bucket, version: 2, servedWeak: []}, knownRotation};
 
-  const statusOf = question => normalizedStatus(statusFor(question));
+  const statusOf = question => normalizeLearningStatus(statusFor(question));
   const weak = questions.filter(question => statusOf(question) !== 'known');
   const weakIds = new Set(weak.map(idOf));
   let servedWeak = new Set((Array.isArray(bucket?.servedWeak) ? bucket.servedWeak : []).map(String).filter(id => weakIds.has(id)));
@@ -225,7 +235,7 @@ export function selectPersonalizedQuestions(source, count, exposure = {}, seed =
   const used = new Set();
   const selected = [];
   let cycle = Math.max(1, Math.floor(Number(exposure?.cycle) || 1));
-  const statusOf = question => normalizedStatus(statusFor(question));
+  const statusOf = question => normalizeLearningStatus(statusFor(question));
   const prefers = typeof options.prefer === 'function' ? options.prefer : () => false;
 
   const append = (pool, label) => {
