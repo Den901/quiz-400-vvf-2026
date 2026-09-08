@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.23.1 - 2026-09-08
+
+- Include correttamente il modulo delle banche dati aggiuntive nell'immagine del portale cloud.
+
 ## 3.23.0 - 2026-09-08
 
 - Aggiunge in Impostazioni il menu “Banche dati aggiuntive”.
