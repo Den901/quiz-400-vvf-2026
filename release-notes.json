@@ -1,14 +1,14 @@
 {
-  "version": "3.21.3",
+  "version": "3.21.4",
   "showToUsers": false,
-  "title": "Icona Materie uniformata",
-  "summary": "L’icona del libro ora è monocromatica e segue automaticamente il colore del menu.",
+  "title": "Testi di Storia normalizzati",
+  "summary": "Le nuove domande di Storia non vengono più mostrate interamente in maiuscolo.",
   "items": [
-    "Rimossa l’emoji colorata dalla voce Materie.",
-    "Nuova icona vettoriale nitida e coerente con le altre icone.",
-    "Colore automatico per tema chiaro, tema scuro e voce selezionata."
+    "Normalizzate 195 domande di Storia.",
+    "Normalizzate anche 656 relative risposte.",
+    "Sigle, acronimi e numeri romani mantengono le maiuscole corrette."
   ],
-  "actionLabel": "Apri Materie",
+  "actionLabel": "Apri Storia",
   "actionHash": "#categories",
-  "footnote": "L’aggiornamento è soltanto grafico e non modifica progressi, quiz o statistiche."
+  "footnote": "Le domande e le risposte corrette non cambiano: viene modificata soltanto la scrittura del testo."
 }

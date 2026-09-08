@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.21.4 - 2026-09-08
+
+- Normalizzata la scrittura di 195 domande e 656 risposte di Storia importate interamente in maiuscolo.
+- Conservate le maiuscole appropriate per sigle, acronimi e numeri romani.
+- Aggiunto un controllo automatico per impedire la ricomparsa di domande di Storia tutte in maiuscolo.
+
 ## 3.21.3 - 2026-09-08
 
 - Sostituita l’emoji colorata di Materie con un libro vettoriale monocromatico.
