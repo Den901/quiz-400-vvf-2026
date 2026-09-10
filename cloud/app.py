@@ -1082,7 +1082,9 @@ def challenge_logic_topic(question: dict[str, Any]) -> str:
     category = str(question.get("category") or "")
     if category == "insiemi":
         return "insiemi"
-    if category == "brani":
+    text = re.sub(r"\s+", " ", str(question.get("text") or "").lower())
+    passage_prompt = re.search(r"sintetizz\w* (?:il|questo|tale|un) (?:testo|brano)|sintesi (?:del|di questo|di un) (?:testo|brano)|riassum\w* (?:il|questo|tale|un) (?:testo|brano)|(?:leggere|leggi|si legga) (?:il|seguente|il seguente) (?:brano|testo)|(?:secondo|dal|nel) (?:il )?brano", text)
+    if category == "brani" or passage_prompt:
         return "brani"
     topic = str(question.get("logicTopic") or "")
     return topic if topic in CHALLENGE_LOGIC_TOPICS else "mista"

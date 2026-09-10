@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.23.2 - 2026-09-10
+
+- Esclude dalla Sfida del giorno i quesiti di sintesi e comprensione del testo anche quando classificati in altre sottosezioni di Logica.
+- Mantiene le sfide già generate e i risultati esistenti.
+
 ## 3.23.1 - 2026-09-08
 
 - Include correttamente il modulo delle banche dati aggiuntive nell'immagine del portale cloud.

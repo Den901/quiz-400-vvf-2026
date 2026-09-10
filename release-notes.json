@@ -1,12 +1,12 @@
 {
-  "version": "3.23.1",
+  "version": "3.23.2",
   "showToUsers": false,
-  "title": "Banche dati aggiuntive selezionabili",
-  "summary": "L'amministratore può decidere quali raccolte extra usare nelle prove da 40.",
+  "title": "Filtro brani nella Sfida del giorno",
+  "summary": "Esclusi i quesiti di sintesi del testo anche quando classificati in altre sottosezioni di Logica.",
   "items": [
-    "Nuova sezione Banche dati aggiuntive nel pannello Impostazioni.",
-    "Interruttori separati per Nissolino Concorsi e Storia contemporanea 1990–2026.",
-    "Le scelte valgono per Sfida del giorno, Simulazione ufficiale e Prova guidata 40."
+    "Il filtro riconosce dal testo le richieste di sintesi e comprensione dei brani.",
+    "Esclusi dalle nuove sfide anche 50 quesiti di sintesi classificati in altre sottosezioni.",
+    "Le sfide già create e i risultati restano invariati."
   ],
   "actionLabel": "Apri Storia",
   "actionHash": "#categories",
