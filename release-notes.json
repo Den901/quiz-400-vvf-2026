@@ -1,18 +1,16 @@
 {
-  "version": "3.27.0",
+  "version": "3.28.0",
   "showToUsers": false,
-  "title": "Impostazioni più ordinate",
-  "summary": "Le sezioni amministrative sono ora raccolte in menu a tendina.",
+  "title": "Spiegazioni scientifiche e pannelli admin",
+  "summary": "Ripulite le spiegazioni di Fisica e Chimica e semplificata la gestione amministrativa.",
   "items": [
-    "Apri soltanto la sezione che ti serve; le altre restano chiuse per rendere la pagina più leggibile.",
-    "Gestione utenti a tendina, ricerca più evidente e obbligo della Sfida configurabile per singolo account.",
-    "La revisione admin consente di modificare anche tutte le risposte del quesito.",
-    "Testo della domanda modificabile. Salva mantiene lo stato; Salva e riattiva corregge e riattiva insieme.",
-    "La cronologia mostra tutti i risultati salvati; i dettagli restano disponibili per gli ultimi 5 quiz.",
-    "In Impostazioni e nelle segnalazioni l’admin può modificare risposta corretta e spiegazione, indicando il motivo.",
-    "Correzioni persistenti nei backup; le nuove prove le recepiscono senza cambiare sfide già create o classifiche."
+    "Revisionate 800 spiegazioni di Fisica e Chimica con simboli persi o formule illeggibili.",
+    "Le sezioni delle Impostazioni hanno ora nomi chiari e riconoscibili.",
+    "La correzione tramite ID è raccolta dentro Segnalazioni quesiti.",
+    "Creazione utente e riepilogo sono sempre visibili; solo i singoli utenti hanno una scheda richiudibile.",
+    "L’admin può generare una password sicura e copiare negli appunti quella prodotta da un reset."
   ],
   "actionLabel": "Apri Materie",
   "actionHash": "#categories",
-  "footnote": "Nessun popup generale. Nessuna modifica ai dati degli utenti."
+  "footnote": "Nessun popup generale. Nessuna modifica a prove, classifiche o dati degli utenti."
 }

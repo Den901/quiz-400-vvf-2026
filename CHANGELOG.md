@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.28.0 - 2026-09-13
+
+- Revisionate 800 spiegazioni con simboli persi in Fisica e Chimica; rimossi anche i frammenti LaTeX duplicati e illeggibili.
+- Aggiunto un controllo automatico per impedire che ricompaiano “?” o comandi matematici corrotti nelle spiegazioni scientifiche.
+- Le Impostazioni mostrano nomi espliciti al posto di “Sezione 2”, “Sezione 3” e simili.
+- La correzione diretta tramite ID è ora dentro “Segnalazioni quesiti”, con pulsante compatto.
+- In Utenti, ricerca, creazione account e riepilogo restano sempre visibili; solo le schede personali si aprono a tendina.
+- Aggiunti generatore di password sicura e pulsante per copiare la password temporanea dopo un reset.
+
 ## 3.27.0 - 2026-09-13
 
 - Le Impostazioni admin sono divise in sezioni a tendina.

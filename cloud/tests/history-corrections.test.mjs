@@ -22,12 +22,26 @@ test('le impostazioni sono organizzate in sezioni a tendina esclusive',()=>{
  assert.ok(source.includes("if(other!==details)other.open=false"));
  assert.ok(source.includes('organizeSettingsAsAccordion()'));
 });
-test('gestione utenti usa tendine, ricerca evidente e obbligo personale',()=>{
+test('gestione utenti lascia riepilogo e creazione visibili, con schede personali a tendina',()=>{
  assert.ok(source.includes('cloud-user-search-prominent'));
+ assert.ok(source.includes('<form class="card admin-form cloud-create-user"'));
+ assert.ok(source.includes('<section class="cloud-users-summary">'));
  assert.ok(source.includes('data-cloud-user-card'));
  assert.ok(source.includes('bindCloudUserAccordions()'));
+ assert.ok(source.includes('data-generate-password'));
+ assert.ok(source.includes('data-copy-temporary-password'));
  assert.ok(source.includes('data-cloud-challenge-required'));
  assert.ok(source.includes('daily_challenge_required:input.checked'));
+});
+test('correzione diretta è inclusa nelle segnalazioni e usa un pulsante compatto',()=>{
+ assert.ok(source.includes('${directQuestionCorrectionMarkup()}'));
+ assert.ok(source.includes('class="primary compact" type="submit">Apri quesito'));
+ assert.equal((source.match(/<h2>Correzione risposte dei quesiti<\/h2>/g)||[]).length,0);
+});
+test('le tendine impostazioni non mostrano etichette numeriche generiche',()=>{
+ assert.ok(source.includes("['[data-question-moderation-panel]','Segnalazioni quesiti']"));
+ assert.ok(source.includes("['.cloud-settings','Portale, privacy e servizi cloud']"));
+ assert.ok(!source.includes('`Sezione ${index+1}`'));
 });
 test('la cronologia rende tutti i risultati, anche oltre gli ultimi otto',()=>{
  const fn=source.split('\n').find(line=>line.startsWith('function sessionHistoryMarkup('));
