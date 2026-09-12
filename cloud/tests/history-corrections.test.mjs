@@ -13,6 +13,10 @@ test('i quesiti disattivati hanno comandi distinti per correggere e riattivare',
  assert.ok(html.includes('data-enable-question="q123"'));
  assert.ok(html.includes('Modifica risposta corretta'));
 });
+test('la revisione consente di modificare tutte le risposte',()=>{
+ assert.ok(source.includes('name="answer"'));
+ assert.ok(source.includes("answers:values.getAll('answer').map(String)"));
+});
 test('la cronologia rende tutti i risultati, anche oltre gli ultimi otto',()=>{
  const fn=source.split('\n').find(line=>line.startsWith('function sessionHistoryMarkup('));
  const context=vm.createContext({esc:String,sessionTypeLabel:String,catName:String});

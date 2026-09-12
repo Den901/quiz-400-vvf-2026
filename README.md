@@ -10,7 +10,7 @@ Il progetto non rappresenta, non è affiliato e non è approvato dal Ministero d
 
 ### Revisione risposte (admin)
 
-Puoi modificare anche il **testo della domanda**. **Salva** mantiene lo stato corrente del quesito; per un quesito disattivato, **Salva e riattiva** salva la correzione e lo rende disponibile in un’unica operazione. Se i dati non sono validi non viene riattivato.
+Puoi modificare anche il **testo della domanda e tutte le risposte**. **Salva** mantiene lo stato corrente del quesito; per un quesito disattivato, **Salva e riattiva** salva la correzione e lo rende disponibile in un’unica operazione. Risposte vuote o duplicate vengono rifiutate; se i dati non sono validi il quesito non viene riattivato.
 
 In **Impostazioni → Correzione risposte dei quesiti**, cerca il quesito tramite ID e scegli la risposta esatta, la spiegazione e il motivo. Lo stesso comando è disponibile nelle segnalazioni da revisionare. La correzione non chiude automaticamente la segnalazione: rispondi poi all’utente con l’esito della verifica.
 

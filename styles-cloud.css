@@ -195,3 +195,4 @@ html[data-theme="dark"] .question-rating{background:#181719}html[data-theme="dar
 .additional-bank-option input:focus-visible+i{outline:3px solid color-mix(in srgb,var(--red) 35%,transparent);outline-offset:3px}
 .additional-bank-option span{display:grid;gap:.25rem}
 .additional-bank-option small{color:var(--muted);line-height:1.45}
+.correction-answers{border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px}.correction-answers legend{padding:0 8px;font-weight:800}.correction-answers label{display:grid;grid-template-columns:28px 1fr;align-items:center;gap:8px}.correction-answers textarea{min-height:58px}

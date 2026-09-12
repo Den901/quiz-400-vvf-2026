@@ -69,8 +69,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.25.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.25.0"
+        assert runtime.json()["version"] == "3.26.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.26.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -399,13 +399,17 @@ def test_complete_cloud_account_and_statistics_flow():
         correction_url = f"/api/admin/questions/{reported_question_id}/correction"
         original_question = admin_client.get(correction_url).json()["question"]
         changed_index = (original_question["correct"] + 1) % len(original_question["answers"])
-        correction = {"text": "Testo corretto della domanda.", "correct": changed_index, "explanation": "Spiegazione verificata dall’amministratore.", "reason": "Correzione soluzione errata"}
+        corrected_answers = [f"{answer} (revisionata {index + 1})" for index, answer in enumerate(original_question["answers"])]
+        correction = {"text": "Testo corretto della domanda.", "answers": corrected_answers, "correct": changed_index, "explanation": "Spiegazione verificata dall’amministratore.", "reason": "Correzione soluzione errata"}
         assert user_client.put(correction_url, json=correction).status_code == 403
         assert moderator_client.put(correction_url, json=correction).status_code == 403
         assert admin_client.put(correction_url, json={**correction, "correct": 999}).status_code == 422
         assert admin_client.put(correction_url, json={**correction, "correct": True}).status_code == 422
         assert admin_client.put(correction_url, json=correction).status_code == 200
         assert admin_client.get(correction_url).json()["question"]["correct"] == changed_index
+        assert admin_client.get(correction_url).json()["question"]["answers"] == corrected_answers
+        assert admin_client.put(correction_url, json={**correction, "answers": ["Duplicata", " duplicata "]}).status_code == 422
+        assert admin_client.put(correction_url, json={**correction, "answers": ["Valida", " "]}).status_code == 422
         assert user_client.get("/api/questions/availability").json()["corrections"][reported_question_id]["correct"] == changed_index
         with SessionLocal() as db:
             from cloud.app import DailyChallenge, challenge_questions, questions_by_id
@@ -415,10 +419,13 @@ def test_complete_cloud_account_and_statistics_flow():
             assert questions_by_id[reported_question_id]["correct"] == original_question["correct"]
             future_challenge = build_daily_challenge(challenge_today() + timedelta(days=1), db)
             assert len(future_challenge.composition["solutions"]) == 40
+            if reported_question_id in future_challenge.question_ids:
+                assert future_challenge.composition["solutions"][reported_question_id]["answers"] == corrected_answers
         challenge_after_correction = user_client.get("/api/challenges/today").json()
         assert "solutions" not in challenge_after_correction["composition"]
         assert challenge_after_correction["result"]["questions"][0]["correct"] == original_question["correct"]
         assert challenge_after_correction["result"]["questions"][0]["text"] == original_question["text"]
+        assert challenge_after_correction["result"]["questions"][0]["answers"] == original_question["answers"]
         assert admin_client.get(correction_url).json()["question"]["text"] == correction["text"]
         report_payload = {"question_id": reported_question_id, "reason": "answer", "note": "La soluzione indicata sembra errata."}
         reported = user_client.post("/api/question-reports", json=report_payload)
@@ -609,7 +616,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.25.0"
+        assert update_status.json()["currentVersion"] == "3.26.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

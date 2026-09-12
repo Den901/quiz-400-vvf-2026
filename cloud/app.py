@@ -665,6 +665,7 @@ class DailyChallengeAnswersInput(BaseModel):
 
 class QuestionCorrectionInput(BaseModel):
     text: str | None = Field(default=None, min_length=1, max_length=20000)
+    answers: list[str] = Field(min_length=2, max_length=8)
     reactivate: bool = False
     correct: int = Field(ge=0, strict=True)
     explanation: str = Field(max_length=12000)
@@ -963,7 +964,7 @@ def disabled_question_ids(db: Session) -> set[str]:
 def available_question_bank(db: Session) -> list[dict[str, Any]]:
     disabled = disabled_question_ids(db)
     corrections = get_setting(db, "question_corrections") or {}
-    return [{**question, **{key: value for key, value in corrections.get(str(question["id"]), {}).items() if key in {"text", "correct", "explanation"}}} for question in question_bank if str(question["id"]) not in disabled]
+    return [{**question, **{key: value for key, value in corrections.get(str(question["id"]), {}).items() if key in {"text", "answers", "correct", "explanation"}}} for question in question_bank if str(question["id"]) not in disabled]
 
 
 def normalize_additional_question_banks(configured: Any) -> dict[str, bool]:
@@ -992,7 +993,7 @@ def admin_question_payload(question_id: str, db: Session | None = None) -> dict[
         return {"id": str(question_id), "category": "", "text": "Quesito non più presente nella banca dati.", "answers": [], "correct": None, "explanation": "", "image": ""}
     if db is not None:
         correction = (get_setting(db, "question_corrections") or {}).get(str(question_id), {})
-        question = {**question, **{key: value for key, value in correction.items() if key in {"text", "correct", "explanation"}}}
+        question = {**question, **{key: value for key, value in correction.items() if key in {"text", "answers", "correct", "explanation"}}}
     return {
         "id": str(question["id"]),
         "category": str(question.get("category") or ""),
@@ -1182,7 +1183,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
     ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())
     # Freeze solutions when the challenge is created, including future corrections.
-    composition["solutions"] = {str(row["id"]): {"text": row["text"], "correct": row["correct"], "explanation": row.get("explanation", "")} for row in ordered}
+    composition["solutions"] = {str(row["id"]): {"text": row["text"], "answers": list(row["answers"]), "correct": row["correct"], "explanation": row.get("explanation", "")} for row in ordered}
     return DailyChallenge(challenge_date=challenge_date, question_ids=[str(row["id"]) for row in ordered], composition=composition, app_version=APP_VERSION)
 
 
@@ -2050,15 +2051,20 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
     question = questions_by_id.get(question_id)
     if not question:
         raise HTTPException(404, "Quesito non trovato.")
-    if payload.correct >= len(question.get("answers", [])) or len(payload.reason.strip()) < 3:
+    normalized_answers = [answer.strip() for answer in payload.answers]
+    if payload.correct >= len(normalized_answers) or len(payload.reason.strip()) < 3:
         raise HTTPException(422, "Seleziona una risposta valida e indica il motivo della correzione.")
+    if any(not answer for answer in normalized_answers):
+        raise HTTPException(422, "Le risposte non possono essere vuote.")
+    if len({answer.casefold() for answer in normalized_answers}) != len(normalized_answers):
+        raise HTTPException(422, "Le risposte devono essere diverse tra loro.")
     if payload.text is not None and not payload.text.strip():
         raise HTTPException(422, "Il testo della domanda non può essere vuoto.")
     # Serialize edits to the shared settings document across workers/admins.
     db.scalar(select(Setting).where(Setting.key == "question_corrections").with_for_update())
     corrections = dict(get_setting(db, "question_corrections") or {})
-    previous = corrections.get(question_id, {"text": question["text"], "correct": question["correct"], "explanation": question.get("explanation", "")})
-    corrections[question_id] = {**previous, "correct": payload.correct, "explanation": payload.explanation.strip()}
+    previous = corrections.get(question_id, {"text": question["text"], "answers": list(question["answers"]), "correct": question["correct"], "explanation": question.get("explanation", "")})
+    corrections[question_id] = {**previous, "answers": normalized_answers, "correct": payload.correct, "explanation": payload.explanation.strip()}
     if payload.text is not None:
         corrections[question_id]["text"] = payload.text.strip()
     set_setting(db, "question_corrections", corrections)

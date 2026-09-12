@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.26.0 - 2026-09-12
+
+- La revisione admin permette di modificare anche tutte le risposte del quesito.
+- Blocca risposte vuote o duplicate e verifica che la risposta corretta appartenga ancora all’elenco.
+- Le opzioni delle sfide vengono congelate alla creazione insieme a testo, soluzione e spiegazione.
+
 ## 3.25.0 - 2026-09-12
 
 - Revisione admin: testo della domanda modificabile, oltre alla risposta corretta e alla spiegazione.
