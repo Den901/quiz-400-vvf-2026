@@ -17,6 +17,18 @@ test('la revisione consente di modificare tutte le risposte',()=>{
  assert.ok(source.includes('name="answer"'));
  assert.ok(source.includes("answers:values.getAll('answer').map(String)"));
 });
+test('le impostazioni sono organizzate in sezioni a tendina esclusive',()=>{
+ assert.ok(source.includes("details.className='settings-accordion-item'"));
+ assert.ok(source.includes("if(other!==details)other.open=false"));
+ assert.ok(source.includes('organizeSettingsAsAccordion()'));
+});
+test('gestione utenti usa tendine, ricerca evidente e obbligo personale',()=>{
+ assert.ok(source.includes('cloud-user-search-prominent'));
+ assert.ok(source.includes('data-cloud-user-card'));
+ assert.ok(source.includes('bindCloudUserAccordions()'));
+ assert.ok(source.includes('data-cloud-challenge-required'));
+ assert.ok(source.includes('daily_challenge_required:input.checked'));
+});
 test('la cronologia rende tutti i risultati, anche oltre gli ultimi otto',()=>{
  const fn=source.split('\n').find(line=>line.startsWith('function sessionHistoryMarkup('));
  const context=vm.createContext({esc:String,sessionTypeLabel:String,catName:String});

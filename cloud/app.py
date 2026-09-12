@@ -112,6 +112,7 @@ class User(Base):
     role: Mapped[str] = mapped_column(String(10), default="user", index=True)
     active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     approved: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
+    daily_challenge_required: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -520,6 +521,7 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         "role": user.role,
         "active": user.active,
         "approved": user.approved,
+        "dailyChallengeRequired": user.daily_challenge_required,
         "mustChangePassword": user.must_change_password,
         "createdAt": user.created_at.isoformat(),
         "lastLoginAt": user.last_login_at.isoformat() if user.last_login_at else None,
@@ -536,7 +538,7 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
 def daily_challenge_gate_payload(user: User, db: Session) -> dict[str, Any]:
     today = challenge_today()
     enabled = bool(get_setting(db, "daily_challenge_enabled"))
-    required = enabled and bool(get_setting(db, "daily_challenge_required")) and user.role != "admin"
+    required = enabled and bool(get_setting(db, "daily_challenge_required")) and user.daily_challenge_required and user.role != "admin"
     attempt = user_challenge_attempt(db, today, user.id)
     if attempt and not attempt.submitted_at:
         challenge = db.get(DailyChallenge, today)
@@ -689,6 +691,7 @@ class AdminUserPatch(BaseModel):
     active: bool | None = None
     approved: bool | None = None
     role: str | None = None
+    daily_challenge_required: bool | None = None
 
 
 class AdminResetInput(BaseModel):
@@ -2634,6 +2637,8 @@ def admin_patch_user(user_id: str, payload: AdminUserPatch, request: Request, ad
         target.approved = payload.approved
         if not target.approved:
             db.execute(LoginSession.__table__.delete().where(LoginSession.user_id == target.id))
+    if payload.daily_challenge_required is not None:
+        target.daily_challenge_required = payload.daily_challenge_required
     audit(db, "admin.user_updated", request, actor=admin.id, target=target.id, fields=list(payload.model_fields_set))
     db.commit()
     return {"user": serialize_user(target)}
@@ -3070,6 +3075,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
             role=item.get("role", "user"),
             active=bool(item.get("active", True)),
             approved=bool(item.get("approved", True)),
+            daily_challenge_required=bool(item.get("dailyChallengeRequired", True)),
             must_change_password=bool(item.get("mustChangePassword", False)),
             created_at=datetime.fromisoformat(item["createdAt"]),
             last_login_at=datetime.fromisoformat(item["lastLoginAt"]) if item.get("lastLoginAt") else None,

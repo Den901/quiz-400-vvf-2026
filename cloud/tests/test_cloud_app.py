@@ -69,8 +69,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.26.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.26.0"
+        assert runtime.json()["version"] == "3.27.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.27.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -112,6 +112,13 @@ def test_complete_cloud_account_and_statistics_flow():
             set_setting(db, "daily_challenge_required", True)
             db.commit()
         assert moderator_client.get("/api/auth/me").json()["challengeGate"]["required"] is True
+        moderator_id = moderator_login.json()["user"]["id"]
+        exemption = admin_client.patch(f"/api/admin/users/{moderator_id}", json={"daily_challenge_required": False})
+        assert exemption.status_code == 200
+        assert exemption.json()["user"]["dailyChallengeRequired"] is False
+        assert moderator_client.get("/api/auth/me").json()["challengeGate"]["required"] is False
+        assert moderator_client.patch(f"/api/admin/users/{moderator_id}", json={"daily_challenge_required": True}).status_code == 403
+        assert admin_client.patch(f"/api/admin/users/{moderator_id}", json={"daily_challenge_required": True}).status_code == 200
         with SessionLocal() as db:
             set_setting(db, "daily_challenge_required", False)
             db.commit()
@@ -133,6 +140,11 @@ def test_complete_cloud_account_and_statistics_flow():
         )
         assert registration.status_code == 201
         assert "attesa di approvazione" in registration.json()["message"]
+        with SessionLocal() as db:
+            from cloud.app import User
+            from sqlalchemy import select
+            registered = db.scalar(select(User).where(User.username == "mario.rossi"))
+            assert registered.daily_challenge_required is True
         assert public_client.post(
             "/api/auth/register",
             json={
@@ -616,7 +628,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.26.0"
+        assert update_status.json()["currentVersion"] == "3.27.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -744,6 +756,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert len(backup.json()["questionReports"]) == 2
         assert backup.json()["disabledQuestions"][0]["questionId"] == reported_question_id
         assert backup.json()["settings"]["question_corrections"][reported_question_id]["correct"] == changed_index
+        assert all("dailyChallengeRequired" in item for item in backup.json()["users"])
         assert len(backup.json()["questionRatings"]) == 2
         backed_reply = next(r for r in backup.json()['questionReports'] if r['id'] == report_id)
         assert backed_reply['reply'] == reply_text

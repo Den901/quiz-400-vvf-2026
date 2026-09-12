@@ -1,9 +1,11 @@
 {
-  "version": "3.26.0",
+  "version": "3.27.0",
   "showToUsers": false,
-  "title": "Storico completo e correzione risposte",
-  "summary": "Cronologia senza il limite degli ultimi 8 risultati e correzioni della banca dati riservate agli amministratori.",
+  "title": "Impostazioni più ordinate",
+  "summary": "Le sezioni amministrative sono ora raccolte in menu a tendina.",
   "items": [
+    "Apri soltanto la sezione che ti serve; le altre restano chiuse per rendere la pagina più leggibile.",
+    "Gestione utenti a tendina, ricerca più evidente e obbligo della Sfida configurabile per singolo account.",
     "La revisione admin consente di modificare anche tutte le risposte del quesito.",
     "Testo della domanda modificabile. Salva mantiene lo stato; Salva e riattiva corregge e riattiva insieme.",
     "La cronologia mostra tutti i risultati salvati; i dettagli restano disponibili per gli ultimi 5 quiz.",

@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.27.0 - 2026-09-13
+
+- Le Impostazioni admin sono divise in sezioni a tendina.
+- Si apre soltanto la sezione necessaria; aprendone una, quella precedente si richiude.
+- Layout adattato a desktop, tablet, mobile e tema scuro.
+- Anche creazione, riepilogo e schede dei singoli utenti sono organizzati a tendina.
+- La ricerca utenti è più grande, evidenziata e resta visibile durante lo scorrimento.
+- Ogni account ha il flag “Quiz del giorno obbligatorio”, attivo di default e modificabile solo dall’admin.
+
 ## 3.26.0 - 2026-09-12
 
 - La revisione admin permette di modificare anche tutte le risposte del quesito.
