@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.25.0 - 2026-09-12
+
+- Revisione admin: testo della domanda modificabile, oltre alla risposta corretta e alla spiegazione.
+- Due azioni: “Salva” mantiene lo stato; “Salva e riattiva” corregge e rende disponibile il quesito in una sola transazione.
+- Il testo delle nuove sfide e delle revisioni salvate viene conservato per evitare cambiamenti retroattivi.
+
 ## 3.24.1 - 2026-09-12
 
 - Aggiunge “Modifica risposta corretta” direttamente nei quesiti disattivati, accanto al comando separato “Riattiva”. Salvare una correzione non riattiva il quesito.

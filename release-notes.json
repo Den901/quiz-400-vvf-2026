@@ -1,10 +1,10 @@
 {
-  "version": "3.24.1",
+  "version": "3.25.0",
   "showToUsers": false,
   "title": "Storico completo e correzione risposte",
   "summary": "Cronologia senza il limite degli ultimi 8 risultati e correzioni della banca dati riservate agli amministratori.",
   "items": [
-    "Pulsante di correzione anche nell’elenco dei quesiti disattivati; la riattivazione resta un’azione separata.",
+    "Testo della domanda modificabile. Salva mantiene lo stato; Salva e riattiva corregge e riattiva insieme.",
     "La cronologia mostra tutti i risultati salvati; i dettagli restano disponibili per gli ultimi 5 quiz.",
     "In Impostazioni e nelle segnalazioni l’admin può modificare risposta corretta e spiegazione, indicando il motivo.",
     "Correzioni persistenti nei backup; le nuove prove le recepiscono senza cambiare sfide già create o classifiche."

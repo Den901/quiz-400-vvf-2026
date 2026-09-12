@@ -10,6 +10,8 @@ Il progetto non rappresenta, non è affiliato e non è approvato dal Ministero d
 
 ### Revisione risposte (admin)
 
+Puoi modificare anche il **testo della domanda**. **Salva** mantiene lo stato corrente del quesito; per un quesito disattivato, **Salva e riattiva** salva la correzione e lo rende disponibile in un’unica operazione. Se i dati non sono validi non viene riattivato.
+
 In **Impostazioni → Correzione risposte dei quesiti**, cerca il quesito tramite ID e scegli la risposta esatta, la spiegazione e il motivo. Lo stesso comando è disponibile nelle segnalazioni da revisionare. La correzione non chiude automaticamente la segnalazione: rispondi poi all’utente con l’esito della verifica.
 
 Solo l’admin può salvare correzioni. Sono memorizzate in PostgreSQL, incluse nei backup e mantenute negli aggiornamenti. Valgono per le nuove prove; le sfide già generate, i risultati e le classifiche restano invariati. Le sessioni già aperte ricevono le nuove correzioni al successivo caricamento della disponibilità (accesso, ritorno all’app o avvio simulazione).

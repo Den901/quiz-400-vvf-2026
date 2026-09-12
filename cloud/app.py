@@ -664,6 +664,8 @@ class DailyChallengeAnswersInput(BaseModel):
 
 
 class QuestionCorrectionInput(BaseModel):
+    text: str | None = Field(default=None, min_length=1, max_length=20000)
+    reactivate: bool = False
     correct: int = Field(ge=0, strict=True)
     explanation: str = Field(max_length=12000)
     reason: str = Field(min_length=3, max_length=1000)
@@ -961,7 +963,7 @@ def disabled_question_ids(db: Session) -> set[str]:
 def available_question_bank(db: Session) -> list[dict[str, Any]]:
     disabled = disabled_question_ids(db)
     corrections = get_setting(db, "question_corrections") or {}
-    return [{**question, **{key: value for key, value in corrections.get(str(question["id"]), {}).items() if key in {"correct", "explanation"}}} for question in question_bank if str(question["id"]) not in disabled]
+    return [{**question, **{key: value for key, value in corrections.get(str(question["id"]), {}).items() if key in {"text", "correct", "explanation"}}} for question in question_bank if str(question["id"]) not in disabled]
 
 
 def normalize_additional_question_banks(configured: Any) -> dict[str, bool]:
@@ -990,7 +992,7 @@ def admin_question_payload(question_id: str, db: Session | None = None) -> dict[
         return {"id": str(question_id), "category": "", "text": "Quesito non più presente nella banca dati.", "answers": [], "correct": None, "explanation": "", "image": ""}
     if db is not None:
         correction = (get_setting(db, "question_corrections") or {}).get(str(question_id), {})
-        question = {**question, **{key: value for key, value in correction.items() if key in {"correct", "explanation"}}}
+        question = {**question, **{key: value for key, value in correction.items() if key in {"text", "correct", "explanation"}}}
     return {
         "id": str(question["id"]),
         "category": str(question.get("category") or ""),
@@ -1180,7 +1182,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
     ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())
     # Freeze solutions when the challenge is created, including future corrections.
-    composition["solutions"] = {str(row["id"]): {"correct": row["correct"], "explanation": row.get("explanation", "")} for row in ordered}
+    composition["solutions"] = {str(row["id"]): {"text": row["text"], "correct": row["correct"], "explanation": row.get("explanation", "")} for row in ordered}
     return DailyChallenge(challenge_date=challenge_date, question_ids=[str(row["id"]) for row in ordered], composition=composition, app_version=APP_VERSION)
 
 
@@ -1331,6 +1333,8 @@ def record_challenge_in_user_state(user: User, attempt: DailyChallengeAttempt, c
         bucket["blank" if is_blank else "correct" if is_correct else "wrong"] += 1
         review.append({
             "id": question_id,
+            "questionText": question["text"],
+            "questionExplanation": question.get("explanation", ""),
             "category": category,
             "logicTopic": challenge_logic_topic(question) if category == "logica" else None,
             "choiceText": None if is_blank else str(question["answers"][answer]),
@@ -2038,7 +2042,7 @@ def question_availability(_: User = Depends(require_user), db: Session = Depends
 def get_question_correction(question_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
     if question_id not in questions_by_id:
         raise HTTPException(404, "Quesito non trovato. Inserisci il suo ID esatto.")
-    return {"question": admin_question_payload(question_id, db)}
+    return {"question": admin_question_payload(question_id, db), "disabled": db.get(DisabledQuestion, question_id) is not None}
 
 
 @app.put("/api/admin/questions/{question_id}/correction")
@@ -2048,15 +2052,24 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
         raise HTTPException(404, "Quesito non trovato.")
     if payload.correct >= len(question.get("answers", [])) or len(payload.reason.strip()) < 3:
         raise HTTPException(422, "Seleziona una risposta valida e indica il motivo della correzione.")
+    if payload.text is not None and not payload.text.strip():
+        raise HTTPException(422, "Il testo della domanda non può essere vuoto.")
     # Serialize edits to the shared settings document across workers/admins.
     db.scalar(select(Setting).where(Setting.key == "question_corrections").with_for_update())
     corrections = dict(get_setting(db, "question_corrections") or {})
-    previous = corrections.get(question_id, {"correct": question["correct"], "explanation": question.get("explanation", "")})
-    corrections[question_id] = {"correct": payload.correct, "explanation": payload.explanation.strip()}
+    previous = corrections.get(question_id, {"text": question["text"], "correct": question["correct"], "explanation": question.get("explanation", "")})
+    corrections[question_id] = {**previous, "correct": payload.correct, "explanation": payload.explanation.strip()}
+    if payload.text is not None:
+        corrections[question_id]["text"] = payload.text.strip()
     set_setting(db, "question_corrections", corrections)
+    if payload.reactivate:
+        disabled = db.get(DisabledQuestion, question_id)
+        if disabled:
+            db.delete(disabled)
+            audit(db, "admin.question_enabled", request, actor=admin.id, target=admin.id, questionId=question_id)
     audit(db, "admin.question_corrected", request, actor=admin.id, target=admin.id, questionId=question_id, previous=previous, correction=corrections[question_id], reason=payload.reason.strip())
     db.commit()
-    return {"question": admin_question_payload(question_id, db), "message": "Correzione salvata per le nuove prove. Storico e sfide già create restano invariati."}
+    return {"question": admin_question_payload(question_id, db), "message": ("Correzione salvata e quesito riattivato." if payload.reactivate else "Correzione salvata; stato del quesito invariato.") + " Le sfide già create restano invariate."}
 
 
 def question_rating_payload(question_id: str, user_id: str, db: Session) -> dict[str, Any]:
