@@ -264,6 +264,7 @@ SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
 
 
 DEFAULT_SETTINGS: dict[str, Any] = {
+    "question_corrections": {},
     "site_name": "Quiz 400 VVF 2026",
     "registration_enabled": True,
     "daily_challenge_enabled": True,
@@ -662,6 +663,12 @@ class DailyChallengeAnswersInput(BaseModel):
     questionSeconds: list[int] | None = Field(default=None, min_length=40, max_length=40)
 
 
+class QuestionCorrectionInput(BaseModel):
+    correct: int = Field(ge=0, strict=True)
+    explanation: str = Field(max_length=12000)
+    reason: str = Field(min_length=3, max_length=1000)
+
+
 class AdminUserInput(RegistrationInput):
     role: str = "user"
 
@@ -953,7 +960,8 @@ def disabled_question_ids(db: Session) -> set[str]:
 
 def available_question_bank(db: Session) -> list[dict[str, Any]]:
     disabled = disabled_question_ids(db)
-    return [question for question in question_bank if str(question["id"]) not in disabled]
+    corrections = get_setting(db, "question_corrections") or {}
+    return [{**question, **{key: value for key, value in corrections.get(str(question["id"]), {}).items() if key in {"correct", "explanation"}}} for question in question_bank if str(question["id"]) not in disabled]
 
 
 def normalize_additional_question_banks(configured: Any) -> dict[str, bool]:
@@ -976,10 +984,13 @@ def available_forty_question_bank(db: Session) -> list[dict[str, Any]]:
     return [question for question in available_question_bank(db) if not (bank := additional_question_bank_key(question)) or enabled[bank]]
 
 
-def admin_question_payload(question_id: str) -> dict[str, Any]:
+def admin_question_payload(question_id: str, db: Session | None = None) -> dict[str, Any]:
     question = questions_by_id.get(str(question_id))
     if not question:
         return {"id": str(question_id), "category": "", "text": "Quesito non più presente nella banca dati.", "answers": [], "correct": None, "explanation": "", "image": ""}
+    if db is not None:
+        correction = (get_setting(db, "question_corrections") or {}).get(str(question_id), {})
+        question = {**question, **{key: value for key, value in correction.items() if key in {"correct", "explanation"}}}
     return {
         "id": str(question["id"]),
         "category": str(question.get("category") or ""),
@@ -997,7 +1008,7 @@ def serialize_question_report(report: QuestionReport, db: Session) -> dict[str, 
     return {
         "id": report.id,
         "questionId": report.question_id,
-        "question": admin_question_payload(report.question_id),
+        "question": admin_question_payload(report.question_id, db),
         "reporter": reporter.display_name if reporter else "Account non più disponibile",
         "reason": report.reason,
         "reasonLabel": QUESTION_REPORT_REASONS.get(report.reason, report.reason),
@@ -1015,7 +1026,7 @@ def serialize_disabled_question(row: DisabledQuestion, db: Session) -> dict[str,
     admin = db.get(User, row.disabled_by_user_id) if row.disabled_by_user_id else None
     return {
         "questionId": row.question_id,
-        "question": admin_question_payload(row.question_id),
+        "question": admin_question_payload(row.question_id, db),
         "reason": row.reason,
         "disabledAt": aware_utc(row.disabled_at).isoformat(),
         "disabledBy": admin.display_name if admin else None,
@@ -1168,6 +1179,8 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     if len(selected) != 40 or len({str(row["id"]) for row in selected}) != 40:
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "La composizione della sfida non ha prodotto 40 quesiti distinti.")
     ordered = sorted(selected, key=lambda row: hashlib.sha256(f"{seed}|ordine|{row['id']}".encode("utf-8")).digest())
+    # Freeze solutions when the challenge is created, including future corrections.
+    composition["solutions"] = {str(row["id"]): {"correct": row["correct"], "explanation": row.get("explanation", "")} for row in ordered}
     return DailyChallenge(challenge_date=challenge_date, question_ids=[str(row["id"]) for row in ordered], composition=composition, app_version=APP_VERSION)
 
 
@@ -1192,7 +1205,8 @@ def challenge_questions(challenge: DailyChallenge) -> list[dict[str, Any]]:
     questions = [questions_by_id.get(str(question_id)) for question_id in challenge.question_ids]
     if any(question is None for question in questions):
         raise HTTPException(status.HTTP_503_SERVICE_UNAVAILABLE, "Una domanda della sfida non è più disponibile nella banca dati.")
-    return [question for question in questions if question is not None]
+    solutions = (challenge.composition or {}).get("solutions", {})
+    return [{**question, **solutions.get(str(question["id"]), {})} for question in questions if question is not None]
 
 
 def public_challenge_question(question: dict[str, Any]) -> dict[str, Any]:
@@ -1400,7 +1414,7 @@ def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallenge
         "status": status_value,
         "durationSeconds": CHALLENGE_SECONDS,
         "questionCount": len(challenge.question_ids),
-        "composition": challenge.composition,
+        "composition": {key: value for key, value in challenge.composition.items() if key != "solutions"},
         "leaderboard": challenge_leaderboard(db, challenge.challenge_date, user.id, user.role in {"admin", "moderator"}),
     }
     if not attempt:
@@ -2011,10 +2025,38 @@ def save_cloud_state(payload: StateInput, request: Request, user: User = Depends
 def question_availability(_: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
     rows = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at)).all()
     latest = max((aware_utc(row.disabled_at) for row in rows), default=None)
+    corrections = get_setting(db, "question_corrections") or {}
+    correction_revision = hashlib.sha256(json.dumps(corrections, sort_keys=True).encode()).hexdigest()[:16]
     return {
         "disabledQuestionIds": [row.question_id for row in rows],
-        "revision": f"{len(rows)}:{latest.isoformat() if latest else '0'}",
+        "corrections": corrections,
+        "revision": f"{len(rows)}:{latest.isoformat() if latest else '0'}:{correction_revision}",
     }
+
+
+@app.get("/api/admin/questions/{question_id}/correction")
+def get_question_correction(question_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    if question_id not in questions_by_id:
+        raise HTTPException(404, "Quesito non trovato. Inserisci il suo ID esatto.")
+    return {"question": admin_question_payload(question_id, db)}
+
+
+@app.put("/api/admin/questions/{question_id}/correction")
+def correct_question(question_id: str, payload: QuestionCorrectionInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+    question = questions_by_id.get(question_id)
+    if not question:
+        raise HTTPException(404, "Quesito non trovato.")
+    if payload.correct >= len(question.get("answers", [])) or len(payload.reason.strip()) < 3:
+        raise HTTPException(422, "Seleziona una risposta valida e indica il motivo della correzione.")
+    # Serialize edits to the shared settings document across workers/admins.
+    db.scalar(select(Setting).where(Setting.key == "question_corrections").with_for_update())
+    corrections = dict(get_setting(db, "question_corrections") or {})
+    previous = corrections.get(question_id, {"correct": question["correct"], "explanation": question.get("explanation", "")})
+    corrections[question_id] = {"correct": payload.correct, "explanation": payload.explanation.strip()}
+    set_setting(db, "question_corrections", corrections)
+    audit(db, "admin.question_corrected", request, actor=admin.id, target=admin.id, questionId=question_id, previous=previous, correction=corrections[question_id], reason=payload.reason.strip())
+    db.commit()
+    return {"question": admin_question_payload(question_id, db), "message": "Correzione salvata per le nuove prove. Storico e sfide già create restano invariati."}
 
 
 def question_rating_payload(question_id: str, user_id: str, db: Session) -> dict[str, Any]:

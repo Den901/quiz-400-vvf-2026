@@ -8,6 +8,14 @@ Il progetto non rappresenta, non è affiliato e non è approvato dal Ministero d
 
 ## Distribuzione supportata
 
+### Revisione risposte (admin)
+
+In **Impostazioni → Correzione risposte dei quesiti**, cerca il quesito tramite ID e scegli la risposta esatta, la spiegazione e il motivo. Lo stesso comando è disponibile nelle segnalazioni da revisionare. La correzione non chiude automaticamente la segnalazione: rispondi poi all’utente con l’esito della verifica.
+
+Solo l’admin può salvare correzioni. Sono memorizzate in PostgreSQL, incluse nei backup e mantenute negli aggiornamenti. Valgono per le nuove prove; le sfide già generate, i risultati e le classifiche restano invariati. Le sessioni già aperte ricevono le nuove correzioni al successivo caricamento della disponibilità (accesso, ritorno all’app o avvio simulazione).
+
+La cronologia nelle statistiche personali mostra tutti i risultati salvati. Per contenere lo spazio, solo gli ultimi cinque quiz conservano il dettaglio delle domande.
+
 Dalla versione 2.2.0 viene mantenuta una sola linea software:
 
 - portale server Docker per Linux e Windows;

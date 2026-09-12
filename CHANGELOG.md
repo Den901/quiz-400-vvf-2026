@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.24.0 - 2026-09-12
+
+- Cronologia personale: mostra tutti i risultati salvati, non soltanto gli ultimi otto. I dettagli restano conservati per gli ultimi cinque quiz.
+- Impostazioni admin e revisione segnalazioni: modifica della risposta corretta e della spiegazione, con motivo registrato nel log amministrativo.
+- Correzioni conservate nel database e nei backup, applicate alle nuove esercitazioni e sfide. Le soluzioni delle sfide sono congelate alla creazione; nessun ricalcolo retroattivo.
+- Nessun popup generale e nessuna modifica a progressi, tentativi o classifiche esistenti.
+
 ## 3.23.2 - 2026-09-10
 
 - Esclude dalla Sfida del giorno i quesiti di sintesi e comprensione del testo anche quando classificati in altre sottosezioni di Logica.

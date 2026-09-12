@@ -1,14 +1,14 @@
 {
-  "version": "3.23.2",
+  "version": "3.24.0",
   "showToUsers": false,
-  "title": "Filtro brani nella Sfida del giorno",
-  "summary": "Esclusi i quesiti di sintesi del testo anche quando classificati in altre sottosezioni di Logica.",
+  "title": "Storico completo e correzione risposte",
+  "summary": "Cronologia senza il limite degli ultimi 8 risultati e correzioni della banca dati riservate agli amministratori.",
   "items": [
-    "Il filtro riconosce dal testo le richieste di sintesi e comprensione dei brani.",
-    "Esclusi dalle nuove sfide anche 50 quesiti di sintesi classificati in altre sottosezioni.",
-    "Le sfide già create e i risultati restano invariati."
+    "La cronologia mostra tutti i risultati salvati; i dettagli restano disponibili per gli ultimi 5 quiz.",
+    "In Impostazioni e nelle segnalazioni l’admin può modificare risposta corretta e spiegazione, indicando il motivo.",
+    "Correzioni persistenti nei backup; le nuove prove le recepiscono senza cambiare sfide già create o classifiche."
   ],
-  "actionLabel": "Apri Storia",
+  "actionLabel": "Apri Materie",
   "actionHash": "#categories",
-  "footnote": "Le domande restano sempre disponibili in Materie e le sfide già create non vengono modificate."
+  "footnote": "Nessun popup generale. Nessuna modifica ai dati degli utenti."
 }
