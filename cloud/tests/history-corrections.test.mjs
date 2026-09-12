@@ -4,6 +4,15 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 const source=readFileSync(new URL('../../app.js',import.meta.url),'utf8');
+test('i quesiti disattivati hanno comandi distinti per correggere e riattivare',()=>{
+ const fn=source.split('\n').find(line=>line.startsWith('function disabledQuestionCardMarkup('));
+ const context=vm.createContext({esc:String,catName:String});
+ vm.runInContext(fn,context);
+ const html=context.disabledQuestionCardMarkup({questionId:'q123',question:{text:'Domanda',category:'storia'}});
+ assert.ok(html.includes('data-correct-question="q123"'));
+ assert.ok(html.includes('data-enable-question="q123"'));
+ assert.ok(html.includes('Modifica risposta corretta'));
+});
 test('la cronologia rende tutti i risultati, anche oltre gli ultimi otto',()=>{
  const fn=source.split('\n').find(line=>line.startsWith('function sessionHistoryMarkup('));
  const context=vm.createContext({esc:String,sessionTypeLabel:String,catName:String});

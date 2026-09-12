@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.24.1 - 2026-09-12
+
+- Aggiunge “Modifica risposta corretta” direttamente nei quesiti disattivati, accanto al comando separato “Riattiva”. Salvare una correzione non riattiva il quesito.
+
 ## 3.24.0 - 2026-09-12
 
 - Cronologia personale: mostra tutti i risultati salvati, non soltanto gli ultimi otto. I dettagli restano conservati per gli ultimi cinque quiz.
