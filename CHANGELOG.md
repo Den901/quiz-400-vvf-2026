@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.28.1 - 2026-09-13
+
+- La ricerca utenti scorre con la pagina senza coprire i campi della creazione account.
+- Sistemata la disposizione dei campi e del pulsante Genera password nel modulo utenti.
+
 ## 3.28.0 - 2026-09-13
 
 - Revisionate 800 spiegazioni con simboli persi in Fisica e Chimica; rimossi anche i frammenti LaTeX duplicati e illeggibili.

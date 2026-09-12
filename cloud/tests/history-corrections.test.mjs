@@ -4,6 +4,11 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 const source=readFileSync(new URL('../../app.js',import.meta.url),'utf8');
+test('ricerca utenti non copre il modulo e il generatore resta nella sua riga',()=>{
+ const css=readFileSync(new URL('../../styles-cloud.css',import.meta.url),'utf8');
+ assert.ok(css.includes('.cloud-users .cloud-user-search-prominent{position:static;top:auto;z-index:auto}'));
+ assert.ok(css.includes('.cloud-create-user .password-create-row>button{grid-column:auto}'));
+});
 test('i quesiti disattivati hanno comandi distinti per correggere e riattivare',()=>{
  const fn=source.split('\n').find(line=>line.startsWith('function disabledQuestionCardMarkup('));
  const context=vm.createContext({esc:String,catName:String});
