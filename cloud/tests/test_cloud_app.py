@@ -81,8 +81,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.31.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.31.0"
+        assert runtime.json()["version"] == "3.31.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.31.1"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -667,7 +667,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.31.0"
+        assert update_status.json()["currentVersion"] == "3.31.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

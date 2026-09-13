@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.31.1 - 2026-09-13
+
+- Nello studio ordinato delle Materie il numero della domanda è modificabile, con pulsante Vai a e supporto Invio.
+- Il salto mantiene le risposte già date e non segna come saltate le domande attraversate.
+
 ## 3.31.0 - 2026-09-13
 
 - Logica: categoria Ingranaggi per i 50 quesiti sulle ruote dentate, con ID e progressi conservati.
