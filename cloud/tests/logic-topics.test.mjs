@@ -9,8 +9,8 @@ const imported=logicQuestions.filter(question=>String(question.id).startsWith('l
 
 test('all logic questions belong to a selectable subsection',()=>{
  const ids=new Set(logicTopics.map(topic=>topic.id));
- assert.equal(logicTopics.length,10);
- assert.equal(logicQuestions.length,5903);
+ assert.equal(logicTopics.length,12);
+ assert.equal(logicQuestions.length,5953);
  for(const question of logicQuestions){
   const topic=classifyLogicQuestion(question);
   assert.ok(ids.has(topic),`${question.id} has invalid topic ${topic}`);
@@ -22,8 +22,8 @@ test('brani and insiemi are selectable types inside the logic macro subject',()=
  assert.equal(logicQuestions.filter(question=>classifyLogicQuestion(question)==='brani').length,648);
  assert.equal(logicQuestions.filter(question=>classifyLogicQuestion(question)==='insiemi').length,274);
  const figures=logicQuestions.filter(question=>classifyLogicQuestion(question)==='figure');
- assert.equal(figures.length,835);
- assert.equal(figures.filter(question=>question.image).length,815);
+ assert.equal(figures.length,785);
+ assert.equal(figures.filter(question=>question.image).length,765);
 });
 
 test('the imported bank excludes long passages and duplicate questions',()=>{
@@ -48,7 +48,7 @@ test('logic distribution always matches the selected logic total',()=>{
 });
 
 test('a 12-question logic plan draws the exact requested amount from every subsection',()=>{
- const plan={deduzioni:2,serie:1,verbale:1,calcolo:1,figure:2,insiemi:1,relazioni:1,ordinamenti:1,brani:1,mista:1};
+ const plan={ingranaggi:0,'flow-chart':0,deduzioni:2,serie:1,verbale:1,calcolo:1,figure:2,insiemi:1,relazioni:1,ordinamenti:1,brani:1,mista:1};
  const selected=selectLogicQuestionsByPlan(logicQuestions,plan,(source,count)=>source.slice(0,count));
  assert.equal(selected.length,12);
  const counts=Object.fromEntries(logicTopics.map(topic=>[topic.id,selected.filter(question=>classifyLogicQuestion(question)===topic.id).length]));

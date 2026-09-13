@@ -72,7 +72,7 @@ DUCKDNS_RE = re.compile(r"^[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.duckdns\.org
 VERSION_RE = re.compile(r"^v?(\d+)\.(\d+)\.(\d+)(?:[-+][0-9A-Za-z.-]+)?$")
 CHALLENGE_SECONDS = 40 * 60
 CHALLENGE_TIMEZONE = ZoneInfo("Europe/Rome")
-CHALLENGE_LOGIC_TOPICS = ("deduzioni", "serie", "verbale", "calcolo", "figure", "insiemi", "relazioni", "ordinamenti", "brani", "mista")
+CHALLENGE_LOGIC_TOPICS = ("deduzioni", "serie", "verbale", "calcolo", "figure", "insiemi", "relazioni", "ordinamenti", "brani", "mista", "ingranaggi", "flow-chart")
 CHALLENGE_SELECTABLE_LOGIC_TOPICS = tuple(topic for topic in CHALLENGE_LOGIC_TOPICS if topic != "brani")
 
 if not APP_SECRET:
@@ -1174,8 +1174,17 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
         gear_source = [row for row in gear_source if str(row['id']) == 'gear-logic-q41']
         # One-off requested exercise: one gear question within the existing logic quota.
         active_bank = [row for row in active_bank if not str(row['id']).startswith('gear-logic-')]
-        if not gear_source or not logic_plan.get('figure'):
-            raise HTTPException(503, "La sfida del 14 settembre richiede un quesito sulle ruote dentate nella quota Figure.")
+        gear_count = logic_plan.get('ingranaggi', 0)
+        if gear_count == 0:
+            donor = next((topic for topic in ('figure', 'mista', 'calcolo', 'deduzioni', 'serie', 'verbale', 'relazioni', 'ordinamenti', 'flow-chart') if logic_plan.get(topic, 0)), None)
+            if donor is None:
+                raise HTTPException(503, "La sfida del 14 settembre richiede un posto nella quota Logica per Q41.")
+            logic_plan[donor] -= 1
+        elif gear_count > 1:
+            logic_plan['figure'] = logic_plan.get('figure', 0) + gear_count - 1
+        logic_plan['ingranaggi'] = 1
+        if not gear_source:
+            raise HTTPException(503, "Il quesito Q41 non è disponibile per la sfida del 14 settembre.")
     usage = daily_challenge_question_usage(challenge_date, db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
@@ -1188,7 +1197,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
             continue
         logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]
         for topic, topic_count in logic_plan.items():
-            if gear_day and topic == 'figure' and topic_count:
+            if gear_day and topic == 'ingranaggi' and topic_count:
                 selected.extend(rotating_daily_questions(gear_source, 1, f"{seed}|ruote-dentate", usage))
                 topic_count -= 1
             if topic_count:

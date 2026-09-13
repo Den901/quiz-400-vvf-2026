@@ -35,7 +35,7 @@ for i, row in enumerate(rows):
     assert len(set(answers)) == 4
     image = (SOURCE / row['nome_file_immagine']).read_bytes()
     q = {'id': 'gear-logic-' + row['id_quiz'].lower(), 'category': 'logica',
-         'logicTopic': 'figure', 'studyTopic': 'ruote-dentate',
+         'logicTopic': 'ingranaggi', 'studyTopic': 'ruote-dentate',
          'text': row['domanda'], 'answers': answers,
          'correct': 'ABCD'.index(row['risposta_corretta']),
          'explanation': row['spiegazione'],

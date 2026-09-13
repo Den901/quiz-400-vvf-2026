@@ -204128,7 +204128,7 @@
   {
     "id": "gear-logic-q01",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso orario, come le lancette di un orologio. In quale senso gira B?",
     "answers": [
@@ -204144,7 +204144,7 @@
   {
     "id": "gear-logic-q02",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso antiorario. In quale senso gira B?",
     "answers": [
@@ -204160,7 +204160,7 @@
   {
     "id": "gear-logic-q03",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso orario. In quale senso gira C?",
     "answers": [
@@ -204176,7 +204176,7 @@
   {
     "id": "gear-logic-q04",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale altra ruota gira nello stesso verso di A?",
     "answers": [
@@ -204192,7 +204192,7 @@
   {
     "id": "gear-logic-q05",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso orario. In quale senso gira D?",
     "answers": [
@@ -204208,7 +204208,7 @@
   {
     "id": "gear-logic-q06",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A cambia verso, che cosa succede a B?",
     "answers": [
@@ -204224,7 +204224,7 @@
   {
     "id": "gear-logic-q07",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A si ferma e nessuna altra ruota viene azionata. Che cosa fanno B e C?",
     "answers": [
@@ -204240,7 +204240,7 @@
   {
     "id": "gear-logic-q08",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Le due ruote esterne sono a contatto. Possono girare nello stesso verso mentre i denti restano ingranati?",
     "answers": [
@@ -204256,7 +204256,7 @@
   {
     "id": "gear-logic-q09",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale ruota gira nello stesso verso di B?",
     "answers": [
@@ -204272,7 +204272,7 @@
   {
     "id": "gear-logic-q10",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso antiorario. In quale senso gira C? La diversa grandezza delle ruote non cambia la regola del verso.",
     "answers": [
@@ -204288,7 +204288,7 @@
   {
     "id": "gear-logic-q11",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A ha 20 denti e B ne ha 40. Quale ruota fa più giri nello stesso tempo?",
     "answers": [
@@ -204304,7 +204304,7 @@
   {
     "id": "gear-logic-q12",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale ruota gira più lentamente?",
     "answers": [
@@ -204320,7 +204320,7 @@
   {
     "id": "gear-logic-q13",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A e B hanno entrambe 24 denti. Come sono le loro velocità di rotazione?",
     "answers": [
@@ -204336,7 +204336,7 @@
   {
     "id": "gear-logic-q14",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B ha il doppio dei denti di A. Rispetto ad A, B gira...",
     "answers": [
@@ -204352,7 +204352,7 @@
   {
     "id": "gear-logic-q15",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B ha la metà dei denti di A. Rispetto ad A, B gira...",
     "answers": [
@@ -204368,7 +204368,7 @@
   {
     "id": "gear-logic-q16",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A raddoppia la sua velocità, che cosa succede alla velocità di B?",
     "answers": [
@@ -204384,7 +204384,7 @@
   {
     "id": "gear-logic-q17",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A passa dalla sua velocità iniziale alla metà, che cosa succede a B?",
     "answers": [
@@ -204400,7 +204400,7 @@
   {
     "id": "gear-logic-q18",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale ruota compie più giri nello stesso tempo?",
     "answers": [
@@ -204416,7 +204416,7 @@
   {
     "id": "gear-logic-q19",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale ruota compie meno giri nello stesso tempo?",
     "answers": [
@@ -204432,7 +204432,7 @@
   {
     "id": "gear-logic-q20",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A e C hanno lo stesso numero di denti. Come sono le loro velocità?",
     "answers": [
@@ -204448,7 +204448,7 @@
   {
     "id": "gear-logic-q21",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A fa 1 giro completo, quanti giri fa B?",
     "answers": [
@@ -204464,7 +204464,7 @@
   {
     "id": "gear-logic-q22",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A fa 4 giri, quanti giri fa B?",
     "answers": [
@@ -204480,7 +204480,7 @@
   {
     "id": "gear-logic-q23",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Se A fa 3 giri, quanti giri fa B?",
     "answers": [
@@ -204496,7 +204496,7 @@
   {
     "id": "gear-logic-q24",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 6 giri. B ha tre volte i denti di A: quanti giri fa?",
     "answers": [
@@ -204512,7 +204512,7 @@
   {
     "id": "gear-logic-q25",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 2 giri. Quanti giri fa B?",
     "answers": [
@@ -204528,7 +204528,7 @@
   {
     "id": "gear-logic-q26",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 60 giri al minuto. Quanti ne fa B?",
     "answers": [
@@ -204544,7 +204544,7 @@
   {
     "id": "gear-logic-q27",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 30 giri al minuto. Quanti ne fa B?",
     "answers": [
@@ -204560,7 +204560,7 @@
   {
     "id": "gear-logic-q28",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 40 giri al minuto. Quanti ne fa B?",
     "answers": [
@@ -204576,7 +204576,7 @@
   {
     "id": "gear-logic-q29",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa un giro completo. Quanto ruota B?",
     "answers": [
@@ -204592,7 +204592,7 @@
   {
     "id": "gear-logic-q30",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A compie mezzo giro. Quanti giri compie B?",
     "answers": [
@@ -204608,7 +204608,7 @@
   {
     "id": "gear-logic-q31",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 2 giri. Quanti giri fa C?",
     "answers": [
@@ -204624,7 +204624,7 @@
   {
     "id": "gear-logic-q32",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 4 giri. C ha il doppio dei denti di A. Quanti giri fa C?",
     "answers": [
@@ -204640,7 +204640,7 @@
   {
     "id": "gear-logic-q33",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A fa 3 giri. C ha la metà dei denti di A. Quanti giri fa C?",
     "answers": [
@@ -204656,7 +204656,7 @@
   {
     "id": "gear-logic-q34",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Si toglie B e si avvicinano A e C fino a farle ingranare. Che cosa cambia per C, con A sempre uguale?",
     "answers": [
@@ -204672,7 +204672,7 @@
   {
     "id": "gear-logic-q35",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Si cambia solo B con una ruota più grande e si riposizionano gli assi. A mantiene la stessa velocità. Che cosa succede alla velocità di C?",
     "answers": [
@@ -204688,7 +204688,7 @@
   {
     "id": "gear-logic-q36",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Fra A e B si inserisce una terza ruota, riposizionando gli assi. A mantiene il verso indicato. In quale verso girerà B?",
     "answers": [
@@ -204704,7 +204704,7 @@
   {
     "id": "gear-logic-q37",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A gira in senso orario. Quale ruota gira in senso antiorario?",
     "answers": [
@@ -204720,7 +204720,7 @@
   {
     "id": "gear-logic-q38",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B è più grande delle altre. Quale affermazione è corretta?",
     "answers": [
@@ -204736,7 +204736,7 @@
   {
     "id": "gear-logic-q39",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "A passa dal senso orario a quello antiorario. Che cosa succede a B e C?",
     "answers": [
@@ -204752,7 +204752,7 @@
   {
     "id": "gear-logic-q40",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "Quale coppia di ruote gira nello stesso verso?",
     "answers": [
@@ -204768,7 +204768,7 @@
   {
     "id": "gear-logic-q41",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero, come due ruote bloccate su una stessa asta. Se B fa 1 giro, quanti giri fa C?",
     "answers": [
@@ -204784,7 +204784,7 @@
   {
     "id": "gear-logic-q42",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. Se B gira in senso antiorario, come gira C?",
     "answers": [
@@ -204800,7 +204800,7 @@
   {
     "id": "gear-logic-q43",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C hanno un numero diverso di denti, ma sono fissate allo stesso albero. Quale gira più velocemente?",
     "answers": [
@@ -204816,7 +204816,7 @@
   {
     "id": "gear-logic-q44",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. A gira in senso orario. In quale senso gira D?",
     "answers": [
@@ -204832,7 +204832,7 @@
   {
     "id": "gear-logic-q45",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. Se B viene tenuta ferma, C può continuare a girare?",
     "answers": [
@@ -204848,7 +204848,7 @@
   {
     "id": "gear-logic-q46",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. A fa 4 giri; B ha il doppio dei denti di A. Quanti giri fa C?",
     "answers": [
@@ -204864,7 +204864,7 @@
   {
     "id": "gear-logic-q47",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. A fa 4 giri. B ha il doppio dei denti di A e D il doppio di C. Quanti giri fa D?",
     "answers": [
@@ -204880,7 +204880,7 @@
   {
     "id": "gear-logic-q48",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. Ogni coppia a contatto ha ruote uguali. A fa 3 giri: quanti ne fa D?",
     "answers": [
@@ -204896,7 +204896,7 @@
   {
     "id": "gear-logic-q49",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. A fa 2 giri: B ne fa il doppio, poi D fa la metà dei giri di C. Quanti giri fa D?",
     "answers": [
@@ -204912,7 +204912,7 @@
   {
     "id": "gear-logic-q50",
     "category": "logica",
-    "logicTopic": "figure",
+    "logicTopic": "ingranaggi",
     "studyTopic": "ruote-dentate",
     "text": "B e C sono fissate allo stesso albero. Le due coppie a contatto hanno ruote uguali. Come gira D rispetto ad A?",
     "answers": [
@@ -204924,5 +204924,755 @@
     "correct": 0,
     "explanation": "Le ruote uguali mantengono la velocità. I due contatti invertono il verso due volte: D gira come A.",
     "image": "quiz-images/gear-q50.png"
+  },
+  {
+    "id": "flow-logic-q01",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Nora ordina tre attività in una graduatoria completa, senza parità e senza preferenze cicliche. A = Arte; B = Musica; C = Teatro. Il simbolo > significa «è preferito a».\n\nCon i dati C > B > A, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 2",
+      "Casella 3",
+      "Casella 1",
+      "Casella 4"
+    ],
+    "correct": 2,
+    "explanation": "A è preferito a C: No; A è preferito a B: No → casella 1.",
+    "image": "quiz-images/flow-q01.png"
+  },
+  {
+    "id": "flow-logic-q02",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un classificatore smista tessere. Ogni elemento ha un numero intero n da 1 a 12, un colore (rosso o blu) e una forma (tonda o quadrata). Tutte le combinazioni sono ammesse.\n\nCon i dati n=12, rosso, tondo, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 4",
+      "Casella 3",
+      "Casella 2",
+      "Casella 1"
+    ],
+    "correct": 0,
+    "explanation": "Il colore è rosso: Sì; n è pari: Sì → casella 4.",
+    "image": "quiz-images/flow-q02.png"
+  },
+  {
+    "id": "flow-logic-q03",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Una procedura assegna ogni candidatura a una casella. p indica i punti ottenuti (intero da 0 a 12); g indica le giornate di assenza (intero da 0 a 6). Si applicano soltanto le condizioni del diagramma.\n\nCon i dati p=11, g=4, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 2",
+      "Casella 1",
+      "Casella 3",
+      "Casella 4"
+    ],
+    "correct": 1,
+    "explanation": "p > 2 × g: Sì; p + g ≥ 10: Sì → casella 1.",
+    "image": "quiz-images/flow-q03.png"
+  },
+  {
+    "id": "flow-logic-q04",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Il centro assegna un codice di percorso a ogni consegna. d è la distanza in chilometri (intero da 1 a 12) e r il numero di fermate richieste (intero da 0 a 8). Le caselle finali sono codici, non distanze.\n\nCon i dati d=6, r=2, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 2",
+      "Casella 1",
+      "Casella 3",
+      "Casella 4"
+    ],
+    "correct": 0,
+    "explanation": "r è pari: Sì; r ≥ 4: No → casella 2.",
+    "image": "quiz-images/flow-q04.png"
+  },
+  {
+    "id": "flow-logic-q05",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Le schede sono numerate con gli interi da 1 a 24. A contiene i numeri pari; B i multipli di 3; C i numeri da 5 a 17, estremi inclusi. Una scheda può appartenere a più insiemi.\n\nCon i dati 10, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 4",
+      "Casella 2",
+      "Casella 1",
+      "Casella 3"
+    ],
+    "correct": 3,
+    "explanation": "n appartiene ad A: Sì; n appartiene a C: Sì → casella 3.",
+    "image": "quiz-images/flow-q05.png"
+  },
+  {
+    "id": "flow-logic-q06",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Lo sportello usa tre dati: urgenza (Sì/No), giorni di attesa (intero da 0 a 8) e dati verificati (Sì/No). La priorità è stabilita esclusivamente dai controlli incontrati: raggiunta una casella finale, ci si ferma.\n\nCon i dati urgenza No, attesa 0, verificati Sì, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 1",
+      "Casella 3",
+      "Casella 4",
+      "Casella 2"
+    ],
+    "correct": 0,
+    "explanation": "I dati sono verificati: Sì; La richiesta è urgente: No → casella 1.",
+    "image": "quiz-images/flow-q06.png"
+  },
+  {
+    "id": "flow-logic-q07",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Ogni proposta ha un costo c e una qualità q, entrambi espressi con interi da 1 a 10. Il diagramma assegna una categoria; non si devono aggiungere criteri di convenienza diversi da quelli indicati.\n\nCon i dati c=10, q=6, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 2",
+      "Casella 3",
+      "Casella 1",
+      "Casella 4"
+    ],
+    "correct": 1,
+    "explanation": "q ≥ 6: Sì; q è pari: Sì → casella 3.",
+    "image": "quiz-images/flow-q07.png"
+  },
+  {
+    "id": "flow-logic-q08",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un pannello ha quattro spie A, B, C, D. Nelle configurazioni, 1 significa acceso e 0 spento; l’ordine è sempre A-B-C-D. «Oppure» è inclusivo: basta almeno una spia accesa. «Diversi» significa che una è accesa e l’altra spenta.\n\nCon i dati 0-1-1-1, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 4",
+      "Casella 3",
+      "Casella 1",
+      "Casella 2"
+    ],
+    "correct": 3,
+    "explanation": "A e D sono diversi: Sì; D è acceso: Sì → casella 2.",
+    "image": "quiz-images/flow-q08.png"
+  },
+  {
+    "id": "flow-logic-q09",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Tre elementi hanno valori x, y e z, ciascuno intero da 1 a 6. Sono ammesse uguaglianze. I simboli > e ≥ significano rispettivamente «maggiore di» e «maggiore o uguale a».\n\nCon i dati x=6, y=3, z=5, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 4",
+      "Casella 2",
+      "Casella 3",
+      "Casella 1"
+    ],
+    "correct": 0,
+    "explanation": "x + z > 2 × y: Sì; z > x: No → casella 4.",
+    "image": "quiz-images/flow-q09.png"
+  },
+  {
+    "id": "flow-logic-q10",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "La macchina riceve x (intero da 0 a 9) e y (intero da 0 a 6). All’inizio calcola p = 2 × x + y. Il valore di p resta invariato lungo tutto il percorso. Ogni esecuzione riparte dai dati iniziali.\n\nCon i dati x=3, y=0, in quale casella finale si arriva?",
+    "answers": [
+      "Casella 2",
+      "Casella 3",
+      "Casella 1",
+      "Casella 4"
+    ],
+    "correct": 2,
+    "explanation": "p - y > 8: No; p è pari: Sì → casella 1.",
+    "image": "quiz-images/flow-q10.png"
+  },
+  {
+    "id": "flow-logic-q11",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Luca ordina tre mete in una graduatoria completa, senza parità e senza preferenze cicliche. A = Lago; B = Mare; C = Monte. Il simbolo > significa «è preferito a».\n\nQuale delle seguenti configurazioni termina nella casella 4?",
+    "answers": [
+      "B > C > A",
+      "B > A > C",
+      "C > A > B",
+      "C > B > A"
+    ],
+    "correct": 0,
+    "explanation": "B > C > A: B è preferito a C: Sì; A è preferito a C: No → casella 4. Altri esiti: C > B > A → 3; C > A > B → 1; B > A > C → 2.",
+    "image": "quiz-images/flow-q11.png"
+  },
+  {
+    "id": "flow-logic-q12",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un classificatore smista campioni. Ogni elemento ha un numero intero n da 1 a 12, un colore (rosso o blu) e una forma (tonda o quadrata). Tutte le combinazioni sono ammesse.\n\nQuale delle seguenti configurazioni termina nella casella 2?",
+    "answers": [
+      "n=7, blu, quadrato",
+      "n=11, rosso, tondo",
+      "n=2, rosso, tondo",
+      "n=9, rosso, tondo"
+    ],
+    "correct": 2,
+    "explanation": "n=2, rosso, tondo: Il colore è rosso: Sì; n è pari: Sì → casella 2. Altri esiti: n=11, rosso, tondo → 4; n=7, blu, quadrato → 5; n=9, rosso, tondo → 4.",
+    "image": "quiz-images/flow-q12.png"
+  },
+  {
+    "id": "flow-logic-q13",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Una procedura assegna ogni candidatura a una casella. p indica i punti ottenuti (intero da 0 a 12); g indica le giornate di assenza (intero da 0 a 6). Si applicano soltanto le condizioni del diagramma.\n\nQuale delle seguenti configurazioni termina nella casella 1?",
+    "answers": [
+      "p=11, g=3",
+      "p=10, g=6",
+      "p=11, g=2",
+      "p=1, g=3"
+    ],
+    "correct": 3,
+    "explanation": "p=1, g=3: p > 2 × g: No; p ≥ 5: No → casella 1. Altri esiti: p=11, g=3 → 5; p=11, g=2 → 4; p=10, g=6 → 3.",
+    "image": "quiz-images/flow-q13.png"
+  },
+  {
+    "id": "flow-logic-q14",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Il centro assegna un codice di percorso a ogni consegna. d è la distanza in chilometri (intero da 1 a 12) e r il numero di fermate richieste (intero da 0 a 8). Le caselle finali sono codici, non distanze.\n\nQuale delle seguenti configurazioni termina nella casella 2?",
+    "answers": [
+      "d=5, r=2",
+      "d=1, r=8",
+      "d=6, r=7",
+      "d=9, r=7"
+    ],
+    "correct": 0,
+    "explanation": "d=5, r=2: r è pari: Sì; r ≥ 4: No → casella 2. Altri esiti: d=6, r=7 → 4; d=9, r=7 → 4; d=1, r=8 → 3.",
+    "image": "quiz-images/flow-q14.png"
+  },
+  {
+    "id": "flow-logic-q15",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Le schede sono numerate con gli interi da 1 a 24. A contiene i numeri pari; B i multipli di 3; C i numeri da 6 a 18, estremi inclusi. Una scheda può appartenere a più insiemi.\n\nQuale delle seguenti configurazioni termina nella casella 5?",
+    "answers": [
+      "20",
+      "11",
+      "22",
+      "5"
+    ],
+    "correct": 0,
+    "explanation": "20: n appartiene ad A: Sì; n è multiplo di 4: Sì → casella 5. Altri esiti: 5 → 3; 22 → 4; 11 → 1.",
+    "image": "quiz-images/flow-q15.png"
+  },
+  {
+    "id": "flow-logic-q16",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Lo sportello usa tre dati: urgenza (Sì/No), giorni di attesa (intero da 0 a 8) e dati verificati (Sì/No). La priorità è stabilita esclusivamente dai controlli incontrati: raggiunta una casella finale, ci si ferma.\n\nQuale delle seguenti configurazioni termina nella casella 3?",
+    "answers": [
+      "urgenza Sì, attesa 0, verificati Sì",
+      "urgenza Sì, attesa 2, verificati No",
+      "urgenza No, attesa 1, verificati No",
+      "urgenza Sì, attesa 0, verificati No"
+    ],
+    "correct": 0,
+    "explanation": "urgenza Sì, attesa 0, verificati Sì: I dati sono verificati: Sì; La richiesta è urgente: Sì → casella 3. Altri esiti: urgenza No, attesa 1, verificati No → 1; urgenza Sì, attesa 2, verificati No → 5; urgenza Sì, attesa 0, verificati No → 5.",
+    "image": "quiz-images/flow-q16.png"
+  },
+  {
+    "id": "flow-logic-q17",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Ogni proposta ha un costo c e una qualità q, entrambi espressi con interi da 1 a 10. Il diagramma assegna una categoria; non si devono aggiungere criteri di convenienza diversi da quelli indicati.\n\nQuale delle seguenti configurazioni termina nella casella 4?",
+    "answers": [
+      "c=4, q=8",
+      "c=8, q=3",
+      "c=3, q=4",
+      "c=5, q=5"
+    ],
+    "correct": 3,
+    "explanation": "c=5, q=5: c ≤ 5: Sì; q è pari: No → casella 4. Altri esiti: c=3, q=4 → 1; c=4, q=8 → 1; c=8, q=3 → 2.",
+    "image": "quiz-images/flow-q17.png"
+  },
+  {
+    "id": "flow-logic-q18",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un pannello ha quattro spie A, B, C, D. Nelle configurazioni, 1 significa acceso e 0 spento; l’ordine è sempre A-B-C-D. «Oppure» è inclusivo: basta almeno una spia accesa. «Diversi» significa che una è accesa e l’altra spenta.\n\nQuale delle seguenti configurazioni termina nella casella 1?",
+    "answers": [
+      "1-1-1-1",
+      "1-0-1-0",
+      "1-1-0-0",
+      "0-0-1-1"
+    ],
+    "correct": 2,
+    "explanation": "1-1-0-0: C è acceso: No; B e C sono diversi: Sì → casella 1. Altri esiti: 0-0-1-1 → 2; 1-0-1-0 → 5; 1-1-1-1 → 3.",
+    "image": "quiz-images/flow-q18.png"
+  },
+  {
+    "id": "flow-logic-q19",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Tre elementi hanno valori x, y e z, ciascuno intero da 1 a 6. Sono ammesse uguaglianze. I simboli > e ≥ significano rispettivamente «maggiore di» e «maggiore o uguale a».\n\nQuale delle seguenti configurazioni termina nella casella 1?",
+    "answers": [
+      "x=4, y=4, z=5",
+      "x=3, y=1, z=2",
+      "x=2, y=4, z=6",
+      "x=6, y=6, z=5"
+    ],
+    "correct": 2,
+    "explanation": "x=2, y=4, z=6: x + z > 2 × y: No; z > x: Sì → casella 1. Altri esiti: x=6, y=6, z=5 → 5; x=3, y=1, z=2 → 4; x=4, y=4, z=5 → 2.",
+    "image": "quiz-images/flow-q19.png"
+  },
+  {
+    "id": "flow-logic-q20",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "La macchina riceve x (intero da 0 a 9) e y (intero da 0 a 6). All’inizio calcola p = 2 × x + y + 1. Il valore di p resta invariato lungo tutto il percorso. Ogni esecuzione riparte dai dati iniziali.\n\nQuale delle seguenti configurazioni termina nella casella 1?",
+    "answers": [
+      "x=8, y=0",
+      "x=1, y=5",
+      "x=2, y=6",
+      "x=6, y=1"
+    ],
+    "correct": 2,
+    "explanation": "x=2, y=6: p ≥ 12: No; p è pari: No → casella 1. Altri esiti: x=6, y=1 → 2; x=1, y=5 → 4; x=8, y=0 → 3.",
+    "image": "quiz-images/flow-q20.png"
+  },
+  {
+    "id": "flow-logic-q21",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Marta ordina quattro colori in una graduatoria completa, senza parità e senza preferenze cicliche. A = Ambra; B = Blu; C = Corallo; D = Verde. Il simbolo > significa «è preferito a».\n\nQuale configurazione NON può terminare nella casella 3?",
+    "answers": [
+      "D > A > B > C",
+      "D > A > C > B",
+      "A > C > B > D",
+      "A > D > B > C"
+    ],
+    "correct": 2,
+    "explanation": "A > C > B > D: B è preferito a D: Sì; A è preferito a C: Sì; A è preferito a B: Sì → casella 6. Le altre tre configurazioni raggiungono tutte la casella 3.",
+    "image": "quiz-images/flow-q21.png"
+  },
+  {
+    "id": "flow-logic-q22",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un classificatore smista etichette. Ogni elemento ha un numero intero n da 1 a 12, un colore (rosso o blu) e una forma (tonda o quadrata). Tutte le combinazioni sono ammesse.\n\nQuale configurazione NON può terminare nella casella 6?",
+    "answers": [
+      "n=10, rosso, quadrato",
+      "n=12, rosso, tondo",
+      "n=12, rosso, quadrato",
+      "n=1, rosso, quadrato"
+    ],
+    "correct": 3,
+    "explanation": "n=1, rosso, quadrato: n è pari: No; Il colore è rosso: Sì; La forma è tonda: No → casella 5. Le altre tre configurazioni raggiungono tutte la casella 6.",
+    "image": "quiz-images/flow-q22.png"
+  },
+  {
+    "id": "flow-logic-q23",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Una procedura assegna ogni candidatura a una casella. p indica i punti ottenuti (intero da 0 a 12); g indica le giornate di assenza (intero da 0 a 6). Si applicano soltanto le condizioni del diagramma.\n\nQuale configurazione NON può terminare nella casella 2?",
+    "answers": [
+      "p=0, g=2",
+      "p=2, g=2",
+      "p=8, g=0",
+      "p=3, g=5"
+    ],
+    "correct": 2,
+    "explanation": "p=8, g=0: p > 2 × g: Sì; p + g ≥ 10: No; p ≥ 6: Sì → casella 1. Le altre tre configurazioni raggiungono tutte la casella 2.",
+    "image": "quiz-images/flow-q23.png"
+  },
+  {
+    "id": "flow-logic-q24",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Il centro assegna un codice di percorso a ogni consegna. d è la distanza in chilometri (intero da 1 a 12) e r il numero di fermate richieste (intero da 0 a 8). Le caselle finali sono codici, non distanze.\n\nQuale configurazione NON può terminare nella casella 1?",
+    "answers": [
+      "d=5, r=6",
+      "d=9, r=1",
+      "d=2, r=6",
+      "d=5, r=4"
+    ],
+    "correct": 1,
+    "explanation": "d=9, r=1: r è pari: No; r ≥ 4: No → casella 3. Le altre tre configurazioni raggiungono tutte la casella 1.",
+    "image": "quiz-images/flow-q24.png"
+  },
+  {
+    "id": "flow-logic-q25",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Le schede sono numerate con gli interi da 1 a 24. A contiene i numeri pari; B i multipli di 3; C i numeri da 7 a 19, estremi inclusi. Una scheda può appartenere a più insiemi.\n\nQuale configurazione NON può terminare nella casella 4?",
+    "answers": [
+      "18",
+      "19",
+      "15",
+      "9"
+    ],
+    "correct": 0,
+    "explanation": "18: n appartiene ad A: Sì; n appartiene a C: Sì; n > 13: Sì → casella 1. Le altre tre configurazioni raggiungono tutte la casella 4.",
+    "image": "quiz-images/flow-q25.png"
+  },
+  {
+    "id": "flow-logic-q26",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Lo sportello usa tre dati: urgenza (Sì/No), giorni di attesa (intero da 0 a 8) e dati verificati (Sì/No). La priorità è stabilita esclusivamente dai controlli incontrati: raggiunta una casella finale, ci si ferma.\n\nQuale configurazione NON può terminare nella casella 6?",
+    "answers": [
+      "urgenza Sì, attesa 7, verificati No",
+      "urgenza Sì, attesa 1, verificati No",
+      "urgenza Sì, attesa 8, verificati No",
+      "urgenza No, attesa 4, verificati Sì"
+    ],
+    "correct": 3,
+    "explanation": "urgenza No, attesa 4, verificati Sì: La richiesta è urgente: No; I dati sono verificati: Sì; Attesa ≥ 4 giorni: Sì → casella 1. Le altre tre configurazioni raggiungono tutte la casella 6.",
+    "image": "quiz-images/flow-q26.png"
+  },
+  {
+    "id": "flow-logic-q27",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Ogni proposta ha un costo c e una qualità q, entrambi espressi con interi da 1 a 10. Il diagramma assegna una categoria; non si devono aggiungere criteri di convenienza diversi da quelli indicati.\n\nQuale configurazione NON può terminare nella casella 4?",
+    "answers": [
+      "c=9, q=9",
+      "c=8, q=8",
+      "c=10, q=7",
+      "c=3, q=7"
+    ],
+    "correct": 1,
+    "explanation": "c=8, q=8: q ≥ 6: Sì; q è pari: Sì; c + q ≤ 12: No → casella 5. Le altre tre configurazioni raggiungono tutte la casella 4.",
+    "image": "quiz-images/flow-q27.png"
+  },
+  {
+    "id": "flow-logic-q28",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un pannello ha quattro spie A, B, C, D. Nelle configurazioni, 1 significa acceso e 0 spento; l’ordine è sempre A-B-C-D. «Oppure» è inclusivo: basta almeno una spia accesa. «Diversi» significa che una è accesa e l’altra spenta.\n\nQuale configurazione NON può terminare nella casella 3?",
+    "answers": [
+      "1-0-1-0",
+      "1-1-0-1",
+      "0-0-1-1",
+      "0-1-0-1"
+    ],
+    "correct": 1,
+    "explanation": "1-1-0-1: B e C sono diversi: Sì; A e D sono diversi: No → casella 5. Le altre tre configurazioni raggiungono tutte la casella 3.",
+    "image": "quiz-images/flow-q28.png"
+  },
+  {
+    "id": "flow-logic-q29",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Tre elementi hanno valori x, y e z, ciascuno intero da 1 a 6. Sono ammesse uguaglianze. I simboli > e ≥ significano rispettivamente «maggiore di» e «maggiore o uguale a».\n\nQuale configurazione NON può terminare nella casella 1?",
+    "answers": [
+      "x=2, y=4, z=4",
+      "x=1, y=5, z=4",
+      "x=6, y=5, z=1",
+      "x=4, y=4, z=1"
+    ],
+    "correct": 2,
+    "explanation": "x=6, y=5, z=1: x + y + z ≥ 11: Sì; y ≥ z: Sì; z > x: No → casella 5. Le altre tre configurazioni raggiungono tutte la casella 1.",
+    "image": "quiz-images/flow-q29.png"
+  },
+  {
+    "id": "flow-logic-q30",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "La macchina riceve x (intero da 0 a 9) e y (intero da 0 a 6). All’inizio calcola p = 2 × x + y + 2. Il valore di p resta invariato lungo tutto il percorso. Ogni esecuzione riparte dai dati iniziali.\n\nQuale configurazione NON può terminare nella casella 6?",
+    "answers": [
+      "x=9, y=6",
+      "x=9, y=0",
+      "x=4, y=1",
+      "x=8, y=6"
+    ],
+    "correct": 2,
+    "explanation": "x=4, y=1: p è pari: No; p - y > 8: Sì; p è multiplo di 3: No → casella 4. Le altre tre configurazioni raggiungono tutte la casella 6.",
+    "image": "quiz-images/flow-q30.png"
+  },
+  {
+    "id": "flow-logic-q31",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Elia ordina quattro hobby in una graduatoria completa, senza parità e senza preferenze cicliche. A = Foto; B = Lettura; C = Sport; D = Teatro. Il simbolo > significa «è preferito a».\n\nEsegui il diagramma due volte: I = (D > A > B > C); II = (C > D > A > B). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 6; II: casella 7",
+      "I: casella 7; II: casella 7",
+      "I: casella 7; II: casella 6",
+      "I: casella 6; II: casella 6"
+    ],
+    "correct": 2,
+    "explanation": "I: B è preferito a C: Sì; A è preferito a D: No; B è preferito a D: No → casella 7. II: B è preferito a C: No; A è preferito a D: No; C è preferito a D: Sì → casella 6.",
+    "image": "quiz-images/flow-q31.png"
+  },
+  {
+    "id": "flow-logic-q32",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un classificatore smista piastrelle. Ogni elemento ha un numero intero n da 1 a 12, un colore (rosso o blu) e una forma (tonda o quadrata). Tutte le combinazioni sono ammesse.\n\nEsegui il diagramma due volte: I = (n=6, rosso, tondo); II = (n=4, blu, quadrato). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 5; II: casella 3",
+      "I: casella 5; II: casella 5",
+      "I: casella 3; II: casella 3",
+      "I: casella 3; II: casella 5"
+    ],
+    "correct": 3,
+    "explanation": "I: La forma è tonda: Sì; n è pari: Sì; n > 7: No → casella 3. II: La forma è tonda: No; Il colore è rosso: No; n è pari: Sì → casella 5.",
+    "image": "quiz-images/flow-q32.png"
+  },
+  {
+    "id": "flow-logic-q33",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Una procedura assegna ogni candidatura a una casella. p indica i punti ottenuti (intero da 0 a 12); g indica le giornate di assenza (intero da 0 a 6). Si applicano soltanto le condizioni del diagramma.\n\nEsegui il diagramma due volte: I = (p=3, g=2); II = (p=0, g=0). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 6; II: casella 6",
+      "I: casella 5; II: casella 6",
+      "I: casella 5; II: casella 5",
+      "I: casella 6; II: casella 5"
+    ],
+    "correct": 3,
+    "explanation": "I: p + g ≥ 10: No; g ≤ 2: Sì; g = 0: No → casella 6. II: p + g ≥ 10: No; g ≤ 2: Sì; g = 0: Sì → casella 5.",
+    "image": "quiz-images/flow-q33.png"
+  },
+  {
+    "id": "flow-logic-q34",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Il centro assegna un codice di percorso a ogni consegna. d è la distanza in chilometri (intero da 1 a 12) e r il numero di fermate richieste (intero da 0 a 8). Le caselle finali sono codici, non distanze.\n\nEsegui il diagramma due volte: I = (d=6, r=2); II = (d=8, r=7). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 4; II: casella 4",
+      "I: casella 5; II: casella 4",
+      "I: casella 4; II: casella 5",
+      "I: casella 5; II: casella 5"
+    ],
+    "correct": 2,
+    "explanation": "I: d ≤ 6: Sì; r è pari: Sì; r ≥ 4: No → casella 4. II: d ≤ 6: No; r è pari: No; r ≥ 4: Sì → casella 5.",
+    "image": "quiz-images/flow-q34.png"
+  },
+  {
+    "id": "flow-logic-q35",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Le schede sono numerate con gli interi da 1 a 24. A contiene i numeri pari; B i multipli di 3; C i numeri da 8 a 20, estremi inclusi. Una scheda può appartenere a più insiemi.\n\nEsegui il diagramma due volte: I = (7); II = (10). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 3; II: casella 7",
+      "I: casella 3; II: casella 3",
+      "I: casella 7; II: casella 7",
+      "I: casella 7; II: casella 3"
+    ],
+    "correct": 3,
+    "explanation": "I: n appartiene ad A: No; n appartiene a C: No → casella 7. II: n appartiene ad A: Sì; n è multiplo di 4: No; n appartiene a C: Sì → casella 3.",
+    "image": "quiz-images/flow-q35.png"
+  },
+  {
+    "id": "flow-logic-q36",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Lo sportello usa tre dati: urgenza (Sì/No), giorni di attesa (intero da 0 a 8) e dati verificati (Sì/No). La priorità è stabilita esclusivamente dai controlli incontrati: raggiunta una casella finale, ci si ferma.\n\nEsegui il diagramma due volte: I = (urgenza No, attesa 1, verificati Sì); II = (urgenza Sì, attesa 3, verificati Sì). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 7; II: casella 7",
+      "I: casella 7; II: casella 4",
+      "I: casella 4; II: casella 4",
+      "I: casella 4; II: casella 7"
+    ],
+    "correct": 3,
+    "explanation": "I: I dati sono verificati: Sì; La richiesta è urgente: No; Attesa ≥ 5 giorni: No → casella 4. II: I dati sono verificati: Sì; La richiesta è urgente: Sì; Attesa ≥ 5 giorni: No → casella 7.",
+    "image": "quiz-images/flow-q36.png"
+  },
+  {
+    "id": "flow-logic-q37",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Ogni proposta ha un costo c e una qualità q, entrambi espressi con interi da 1 a 10. Il diagramma assegna una categoria; non si devono aggiungere criteri di convenienza diversi da quelli indicati.\n\nEsegui il diagramma due volte: I = (c=8, q=9); II = (c=6, q=10). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 7; II: casella 5",
+      "I: casella 5; II: casella 5",
+      "I: casella 7; II: casella 7",
+      "I: casella 5; II: casella 7"
+    ],
+    "correct": 0,
+    "explanation": "I: q è pari: No; q ≥ 6: Sì → casella 7. II: q è pari: Sì; q > c: Sì; c + q ≤ 12: No → casella 5.",
+    "image": "quiz-images/flow-q37.png"
+  },
+  {
+    "id": "flow-logic-q38",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un pannello ha quattro spie A, B, C, D. Nelle configurazioni, 1 significa acceso e 0 spento; l’ordine è sempre A-B-C-D. «Oppure» è inclusivo: basta almeno una spia accesa. «Diversi» significa che una è accesa e l’altra spenta.\n\nEsegui il diagramma due volte: I = (0-1-0-1); II = (0-1-0-0). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 7; II: casella 7",
+      "I: casella 7; II: casella 4",
+      "I: casella 4; II: casella 4",
+      "I: casella 4; II: casella 7"
+    ],
+    "correct": 1,
+    "explanation": "I: B e C sono diversi: Sì; D è acceso: Sì → casella 7. II: B e C sono diversi: Sì; D è acceso: No; C è acceso: No → casella 4.",
+    "image": "quiz-images/flow-q38.png"
+  },
+  {
+    "id": "flow-logic-q39",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Tre elementi hanno valori x, y e z, ciascuno intero da 1 a 6. Sono ammesse uguaglianze. I simboli > e ≥ significano rispettivamente «maggiore di» e «maggiore o uguale a».\n\nEsegui il diagramma due volte: I = (x=3, y=3, z=1); II = (x=1, y=1, z=2). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 2; II: casella 2",
+      "I: casella 2; II: casella 4",
+      "I: casella 4; II: casella 4",
+      "I: casella 4; II: casella 2"
+    ],
+    "correct": 3,
+    "explanation": "I: x + z > 2 × y: No; x + y + z ≥ 12: No; z > x: No → casella 4. II: x + z > 2 × y: Sì; z > x: Sì → casella 2.",
+    "image": "quiz-images/flow-q39.png"
+  },
+  {
+    "id": "flow-logic-q40",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "La macchina riceve x (intero da 0 a 9) e y (intero da 0 a 6). All’inizio calcola p = 2 × x + y + 3. Il valore di p resta invariato lungo tutto il percorso. Ogni esecuzione riparte dai dati iniziali.\n\nEsegui il diagramma due volte: I = (x=8, y=0); II = (x=5, y=0). Quali caselle raggiungono, nell’ordine, I e II?",
+    "answers": [
+      "I: casella 6; II: casella 5",
+      "I: casella 5; II: casella 6",
+      "I: casella 6; II: casella 6",
+      "I: casella 5; II: casella 5"
+    ],
+    "correct": 0,
+    "explanation": "I: p è pari: No; p ≥ 14: Sì; p è multiplo di 3: No → casella 6. II: p è pari: No; p ≥ 14: No; x > y: Sì → casella 5.",
+    "image": "quiz-images/flow-q40.png"
+  },
+  {
+    "id": "flow-logic-q41",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Irene ordina quattro piatti in una graduatoria completa, senza parità e senza preferenze cicliche. A = Pasta; B = Riso; C = Zuppa; D = Pizza. Il simbolo > significa «è preferito a». Si esaminano cinque casi indipendenti: 1) A > D > B > C; 2) A > B > D > C; 3) A > C > D > B; 4) D > A > B > C; 5) D > C > A > B.\n\nQuanti dei cinque casi elencati terminano nella casella 5?",
+    "answers": [
+      "4",
+      "2",
+      "1",
+      "3"
+    ],
+    "correct": 1,
+    "explanation": "Esiti dei casi 1-5: 5, 5, 3, 8, 4. Raggiungono la casella 5 i casi 1, 2: in totale 2. B è preferito a C: Sì; A è preferito a D: Sì; A è preferito a B: Sì → casella 5.",
+    "image": "quiz-images/flow-q41.png"
+  },
+  {
+    "id": "flow-logic-q42",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un classificatore smista segnalini. Ogni elemento ha un numero intero n da 1 a 12, un colore (rosso o blu) e una forma (tonda o quadrata). Tutte le combinazioni sono ammesse. Si esaminano cinque casi indipendenti: 1) n=6, blu, tondo; 2) n=12, rosso, tondo; 3) n=10, rosso, quadrato; 4) n=4, rosso, tondo; 5) n=9, rosso, tondo.\n\nQuanti dei cinque casi elencati terminano nella casella 3?",
+    "answers": [
+      "4",
+      "1",
+      "2",
+      "3"
+    ],
+    "correct": 2,
+    "explanation": "Esiti dei casi 1-5: 4, 3, 2, 3, 5. Raggiungono la casella 3 i casi 2, 4: in totale 2. La forma è tonda: Sì; Il colore è rosso: Sì; n è pari: Sì → casella 3.",
+    "image": "quiz-images/flow-q42.png"
+  },
+  {
+    "id": "flow-logic-q43",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Una procedura assegna ogni candidatura a una casella. p indica i punti ottenuti (intero da 0 a 12); g indica le giornate di assenza (intero da 0 a 6). Si applicano soltanto le condizioni del diagramma. Si esaminano cinque casi indipendenti: 1) p=2, g=6; 2) p=6, g=5; 3) p=0, g=4; 4) p=2, g=1; 5) p=3, g=3.\n\nQuanti dei cinque casi elencati terminano nella casella 3?",
+    "answers": [
+      "2",
+      "3",
+      "1",
+      "4"
+    ],
+    "correct": 1,
+    "explanation": "Esiti dei casi 1-5: 3, 4, 3, 2, 3. Raggiungono la casella 3 i casi 1, 3, 5: in totale 3. p + g ≥ 10: No; g ≤ 2: No → casella 3.",
+    "image": "quiz-images/flow-q43.png"
+  },
+  {
+    "id": "flow-logic-q44",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Il centro assegna un codice di percorso a ogni consegna. d è la distanza in chilometri (intero da 1 a 12) e r il numero di fermate richieste (intero da 0 a 8). Le caselle finali sono codici, non distanze. Si esaminano cinque casi indipendenti: 1) d=3, r=1; 2) d=9, r=6; 3) d=9, r=4; 4) d=8, r=2; 5) d=7, r=5.\n\nQuanti dei cinque casi elencati terminano nella casella 2?",
+    "answers": [
+      "1",
+      "3",
+      "2",
+      "4"
+    ],
+    "correct": 2,
+    "explanation": "Esiti dei casi 1-5: 1, 2, 2, 4, 8. Raggiungono la casella 2 i casi 2, 3: in totale 2. r ≥ 4: Sì; d + r > 12: Sì; r è pari: Sì → casella 2.",
+    "image": "quiz-images/flow-q44.png"
+  },
+  {
+    "id": "flow-logic-q45",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Le schede sono numerate con gli interi da 1 a 24. A contiene i numeri pari; B i multipli di 3; C i numeri da 9 a 21, estremi inclusi. Una scheda può appartenere a più insiemi. Si esaminano cinque casi indipendenti: 1) 3; 2) 17; 3) 6; 4) 13; 5) 11.\n\nQuanti dei cinque casi elencati terminano nella casella 5?",
+    "answers": [
+      "3",
+      "4",
+      "2",
+      "1"
+    ],
+    "correct": 0,
+    "explanation": "Esiti dei casi 1-5: 2, 5, 1, 5, 5. Raggiungono la casella 5 i casi 2, 4, 5: in totale 3. n appartiene ad A: No; n appartiene a C: Sì; n appartiene a B: No → casella 5.",
+    "image": "quiz-images/flow-q45.png"
+  },
+  {
+    "id": "flow-logic-q46",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Lo sportello usa tre dati: urgenza (Sì/No), giorni di attesa (intero da 0 a 8) e dati verificati (Sì/No). La priorità è stabilita esclusivamente dai controlli incontrati: raggiunta una casella finale, ci si ferma. Si esaminano cinque casi indipendenti: 1) urgenza Sì, attesa 5, verificati No; 2) urgenza No, attesa 7, verificati Sì; 3) urgenza Sì, attesa 0, verificati Sì; 4) urgenza Sì, attesa 8, verificati Sì; 5) urgenza Sì, attesa 6, verificati Sì.\n\nQuanti dei cinque casi elencati terminano nella casella 4?",
+    "answers": [
+      "3",
+      "1",
+      "4",
+      "2"
+    ],
+    "correct": 0,
+    "explanation": "Esiti dei casi 1-5: 1, 5, 4, 4, 4. Raggiungono la casella 4 i casi 3, 4, 5: in totale 3. I dati sono verificati: Sì; La richiesta è urgente: Sì; Attesa è pari: Sì → casella 4.",
+    "image": "quiz-images/flow-q46.png"
+  },
+  {
+    "id": "flow-logic-q47",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Ogni proposta ha un costo c e una qualità q, entrambi espressi con interi da 1 a 10. Il diagramma assegna una categoria; non si devono aggiungere criteri di convenienza diversi da quelli indicati. Si esaminano cinque casi indipendenti: 1) c=3, q=9; 2) c=1, q=5; 3) c=7, q=4; 4) c=7, q=1; 5) c=8, q=9.\n\nQuanti dei cinque casi elencati terminano nella casella 5?",
+    "answers": [
+      "4",
+      "1",
+      "3",
+      "2"
+    ],
+    "correct": 3,
+    "explanation": "Esiti dei casi 1-5: 4, 5, 7, 5, 3. Raggiungono la casella 5 i casi 2, 4: in totale 2. q ≥ 6: No; q è pari: No; c ≤ 8: Sì → casella 5.",
+    "image": "quiz-images/flow-q47.png"
+  },
+  {
+    "id": "flow-logic-q48",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Un pannello ha quattro spie A, B, C, D. Nelle configurazioni, 1 significa acceso e 0 spento; l’ordine è sempre A-B-C-D. «Oppure» è inclusivo: basta almeno una spia accesa. «Diversi» significa che una è accesa e l’altra spenta. Si esaminano cinque casi indipendenti: 1) 0-0-1-1; 2) 1-0-0-1; 3) 0-1-1-1; 4) 1-1-0-0; 5) 1-0-1-0.\n\nQuanti dei cinque casi elencati terminano nella casella 3?",
+    "answers": [
+      "4",
+      "2",
+      "1",
+      "3"
+    ],
+    "correct": 1,
+    "explanation": "Esiti dei casi 1-5: 3, 4, 3, 2, 2. Raggiungono la casella 3 i casi 1, 3: in totale 2. D è acceso: Sì; A e D sono diversi: Sì; C è acceso: Sì → casella 3.",
+    "image": "quiz-images/flow-q48.png"
+  },
+  {
+    "id": "flow-logic-q49",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "Tre elementi hanno valori x, y e z, ciascuno intero da 1 a 6. Sono ammesse uguaglianze. I simboli > e ≥ significano rispettivamente «maggiore di» e «maggiore o uguale a». Si esaminano cinque casi indipendenti: 1) x=2, y=5, z=1; 2) x=3, y=6, z=2; 3) x=1, y=2, z=2; 4) x=3, y=5, z=5; 5) x=5, y=4, z=3.\n\nQuanti dei cinque casi elencati terminano nella casella 3?",
+    "answers": [
+      "1",
+      "4",
+      "2",
+      "3"
+    ],
+    "correct": 3,
+    "explanation": "Esiti dei casi 1-5: 3, 3, 2, 8, 3. Raggiungono la casella 3 i casi 1, 2, 5: in totale 3. x + z > 2 × y: No; z > x: No; x = z: No → casella 3.",
+    "image": "quiz-images/flow-q49.png"
+  },
+  {
+    "id": "flow-logic-q50",
+    "category": "logica",
+    "logicTopic": "flow-chart",
+    "text": "La macchina riceve x (intero da 0 a 9) e y (intero da 0 a 6). All’inizio calcola p = 2 × x + y + 4. Il valore di p resta invariato lungo tutto il percorso. Ogni esecuzione riparte dai dati iniziali. Si esaminano cinque casi indipendenti: 1) x=4, y=4; 2) x=1, y=5; 3) x=9, y=0; 4) x=3, y=5; 5) x=6, y=0.\n\nQuanti dei cinque casi elencati terminano nella casella 4?",
+    "answers": [
+      "3",
+      "1",
+      "4",
+      "2"
+    ],
+    "correct": 0,
+    "explanation": "Esiti dei casi 1-5: 4, 3, 4, 2, 4. Raggiungono la casella 4 i casi 1, 3, 5: in totale 3. p ≥ 15: Sì; p è pari: Sì; p è multiplo di 3: No → casella 4.",
+    "image": "quiz-images/flow-q50.png"
   }
 ]

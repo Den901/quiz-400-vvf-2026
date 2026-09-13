@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.31.0 - 2026-09-13
+
+- Logica: categoria Ingranaggi per i 50 quesiti sulle ruote dentate, con ID e progressi conservati.
+- Aggiunti 50 quesiti Flow chart con scenari, diagrammi, quattro risposte e spiegazioni.
+- Le due categorie sono selezionabili nello studio, nelle simulazioni e nella composizione admin della sfida.
+- Il Q41 resta l’unico quesito Ingranaggi nella sfida del 14 settembre, dentro le 12 domande di logica.
+
 ## 3.30.1 - 2026-09-13
 
 - Il quesito sulle ruote dentate della sfida del 14 settembre è esattamente Q41, su richiesta dell’admin.

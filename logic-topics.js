@@ -1,4 +1,6 @@
 export const logicTopics=[
+ {id:'ingranaggi',name:'Ingranaggi',shortName:'Ingranaggi',description:'Ruote dentate, versi di rotazione e rapporti di trasmissione.'},
+ {id:'flow-chart',name:'Flow chart',shortName:'Flow chart',description:'Diagrammi di flusso, condizioni, percorsi e risultati finali.'},
  {id:'deduzioni',name:'Deduzioni e condizioni',shortName:'Deduzioni',description:'Condizioni, conseguenze, negazioni e conclusioni necessarie.'},
  {id:'serie',name:'Serie e sequenze',shortName:'Serie',description:'Serie numeriche, alfabetiche, simboliche e completamenti.'},
  {id:'verbale',name:'Logica verbale',shortName:'Verbale',description:'Sinonimi, contrari, analogie, lessico e parole da scartare.'},
@@ -49,7 +51,7 @@ export function classifyLogicQuestion(question){
 }
 
 export function defaultLogicPlan(total=0){
- const count=Math.max(0,Math.floor(Number(total)||0)),weights=['deduzioni','serie','verbale','calcolo','figure','insiemi','relazioni','ordinamenti','brani','mista'],plan=Object.fromEntries(weights.map(id=>[id,0]));
+ const count=Math.max(0,Math.floor(Number(total)||0)),weights=['deduzioni','serie','verbale','calcolo','figure','insiemi','relazioni','ordinamenti','brani','mista'],plan=Object.fromEntries(logicTopics.map(topic=>[topic.id,0]));
  for(let index=0;index<count;index++)plan[weights[index%weights.length]]++;
  return plan;
 }
