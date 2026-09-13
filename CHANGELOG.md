@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.32.1 - 2026-09-13
+
+- Figure Ingranaggi più grandi: fino a 760 px su desktop/tablet e tutta la larghezza disponibile su mobile, senza il precedente limite di altezza.
+- Nessuna modifica a domande, progressi o sfide.
+
 ## 3.32.0 - 2026-09-13
 
 - Aggiunti 50 nuovi quesiti illustrati a Ingranaggi, con scenari, quattro opzioni, soluzioni e spiegazioni.

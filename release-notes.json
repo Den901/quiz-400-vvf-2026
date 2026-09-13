@@ -1,8 +1,8 @@
 {
-  "version": "3.32.0",
+  "version": "3.32.1",
   "showToUsers": false,
-  "title": "Nuovi quesiti Ingranaggi",
-  "summary": "50 nuovi quesiti illustrati portano Ingranaggi a 100 domande.",
+  "title": "Figure Ingranaggi più leggibili",
+  "summary": "Diagrammi più grandi su desktop, tablet e mobile, senza alterare domande o progressi.",
   "items": [
     "50 nuovi Ingranaggi con scenari, diagrammi, risposte e spiegazioni.",
     "100 quesiti totali nella categoria, conservando ID e progressi precedenti.",
