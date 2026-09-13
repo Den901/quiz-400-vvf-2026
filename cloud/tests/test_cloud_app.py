@@ -441,27 +441,29 @@ def test_complete_cloud_account_and_statistics_flow():
         assert admin_client.get(correction_url).json()["question"]["text"] == correction["text"]
         # Explicit rescoring changes both directions, without rewriting answers/timing/progress.
         before_rescore = user_client.get("/api/challenges/today").json()["result"]
-        progress_before = user_client.get("/api/auth/me").json()["user"]["state"]["progress"]
-        assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 422
-        rescoring = {**correction, "answers": original_question["answers"], "rescore_today": True}
-        assert moderator_client.put(correction_url, json=rescoring).status_code == 403
-        applied = admin_client.put(correction_url, json=rescoring)
-        assert applied.status_code == 200
-        assert applied.json()["rescoredAttempts"] >= 1
-        after_rescore = user_client.get("/api/challenges/today").json()["result"]
-        rows = after_rescore["questions"]
-        expected_correct = sum(row["isCorrect"] for row in rows)
-        expected_wrong = sum(not row["blank"] and not row["isCorrect"] for row in rows)
-        assert after_rescore["score"] == round(expected_correct - expected_wrong * .33, 2)
-        assert [row["choice"] for row in rows] == [row["choice"] for row in before_rescore["questions"]]
-        assert user_client.get("/api/auth/me").json()["user"]["state"]["progress"] == progress_before
-        assert admin_client.put(correction_url, json=rescoring).status_code == 200
-        assert user_client.get("/api/challenges/today").json()["result"]["score"] == after_rescore["score"]
-        assert admin_client.put(correction_url, json={**rescoring, "correct": original_question["correct"]}).status_code == 200
-        assert user_client.get("/api/challenges/today").json()["result"]["score"] == before_rescore["score"]
-        assert admin_client.put(correction_url, json=correction).status_code == 200
-        report_payload = {"question_id": reported_question_id, "reason": "answer", "note": "La soluzione indicata sembra errata."}
-        reported = user_client.post("/api/question-reports", json=report_payload)
+        assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 409
+        with patch("cloud.app.CHALLENGE_SECONDS", 0):
+            progress_before = user_client.get("/api/auth/me").json()["user"]["state"]["progress"]
+            assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 422
+            rescoring = {**correction, "answers": original_question["answers"], "rescore_today": True}
+            assert moderator_client.put(correction_url, json=rescoring).status_code == 403
+            applied = admin_client.put(correction_url, json=rescoring)
+            assert applied.status_code == 200
+            assert applied.json()["rescoredAttempts"] >= 1
+            after_rescore = user_client.get("/api/challenges/today").json()["result"]
+            rows = after_rescore["questions"]
+            expected_correct = sum(row["isCorrect"] for row in rows)
+            expected_wrong = sum(not row["blank"] and not row["isCorrect"] for row in rows)
+            assert after_rescore["score"] == round(expected_correct - expected_wrong * .33, 2)
+            assert [row["choice"] for row in rows] == [row["choice"] for row in before_rescore["questions"]]
+            assert user_client.get("/api/auth/me").json()["user"]["state"]["progress"] == progress_before
+            assert admin_client.put(correction_url, json=rescoring).status_code == 200
+            assert user_client.get("/api/challenges/today").json()["result"]["score"] == after_rescore["score"]
+            assert admin_client.put(correction_url, json={**rescoring, "correct": original_question["correct"]}).status_code == 200
+            assert user_client.get("/api/challenges/today").json()["result"]["score"] == before_rescore["score"]
+            assert admin_client.put(correction_url, json=correction).status_code == 200
+            report_payload = {"question_id": reported_question_id, "reason": "answer", "note": "La soluzione indicata sembra errata."}
+            reported = user_client.post("/api/question-reports", json=report_payload)
         assert reported.status_code == 201
         assert reported.json()["duplicate"] is False
         report_id = reported.json()["report"]["id"]
