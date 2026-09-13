@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.30.1 - 2026-09-13
+
+- Il quesito sulle ruote dentate della sfida del 14 settembre è esattamente Q41, su richiesta dell’admin.
+
 ## 3.30.0 - 2026-09-13
 
 - Integrati 50 quesiti illustrati sulle ruote dentate in Logica / Figure e simboli, con risposte e spiegazioni fornite dall’utente.

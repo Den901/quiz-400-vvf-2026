@@ -1171,6 +1171,7 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     gear_day = challenge_date == date(2026, 9, 14)
     gear_source = [row for row in active_bank if str(row['id']).startswith('gear-logic-')]
     if gear_day:
+        gear_source = [row for row in gear_source if str(row['id']) == 'gear-logic-q41']
         # One-off requested exercise: one gear question within the existing logic quota.
         active_bank = [row for row in active_bank if not str(row['id']).startswith('gear-logic-')]
         if not gear_source or not logic_plan.get('figure'):
