@@ -4,6 +4,12 @@ import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
 
 const source=readFileSync(new URL('../../app.js',import.meta.url),'utf8');
+test('la revisione seleziona una sola risposta corretta accanto ai testi modificabili',()=>{
+ assert.ok(source.includes('type="radio" name="correct" value="${index}"'));
+ assert.ok(source.includes("index===Number(q.correct)?'checked':''"));
+ assert.ok(!source.includes('<select name="correct">'));
+ assert.ok(source.includes("correct:Number(values.get('correct'))"));
+});
 test('ricerca utenti non copre il modulo e il generatore resta nella sua riga',()=>{
  const css=readFileSync(new URL('../../styles-cloud.css',import.meta.url),'utf8');
  assert.ok(css.includes('.cloud-users .cloud-user-search-prominent{position:static;top:auto;z-index:auto}'));

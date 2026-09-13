@@ -202,3 +202,11 @@ html[data-theme="dark"] .question-rating{background:#181719}html[data-theme="dar
 .cloud-users .cloud-user-search-prominent{position:static;top:auto;z-index:auto}
 .cloud-create-user>label{align-content:start;min-width:0}
 .cloud-create-user .password-create-row>button{grid-column:auto}
+.update-dialog [data-correction-form]{display:grid;gap:18px}
+.update-dialog [data-correction-form]>label,.correction-answer-text{display:grid;gap:8px}
+.correction-answers{min-width:0;margin:0;padding:14px;border:1px solid var(--line);border-radius:14px}
+.correction-answer-row{margin-top:12px;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+.correction-correct-choice{display:flex;align-items:center;gap:10px;min-height:44px;cursor:pointer;font-weight:750}
+.correction-correct-choice input[type=radio]{width:22px;height:22px;flex:0 0 22px;margin:0;accent-color:var(--green);cursor:pointer}
+.correction-answer-row:has(input:checked){border:2px solid var(--green)}
+.correction-answer-text textarea{min-height:76px;resize:vertical}

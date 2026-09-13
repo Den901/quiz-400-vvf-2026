@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.28.2 - 2026-09-13
+
+- Revisione quesiti: risposta corretta selezionabile direttamente accanto a ogni risposta con scelta singola A/B/C/D.
+- Migliorata leggibilità e disposizione dei campi della revisione, anche su mobile e in tema scuro.
+- Nessuna modifica automatica a quesiti, prove o classifiche.
+
 ## 3.28.1 - 2026-09-13
 
 - La ricerca utenti scorre con la pagina senza coprire i campi della creazione account.
