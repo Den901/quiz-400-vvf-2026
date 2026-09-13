@@ -1,8 +1,8 @@
 {
-  "version": "3.32.2",
+  "version": "3.32.3",
   "showToUsers": false,
-  "title": "Flow chart nella sfida del 14 settembre",
-  "summary": "Solo il 14 settembre: un Flow chart e Ingranaggi Q41 nelle 12 domande di Logica. Figure Ingranaggi più grandi.",
+  "title": "Flow chart più leggibili",
+  "summary": "Anche le immagini Flow chart sono ingrandite su desktop, tablet e mobile, senza limite di altezza.",
   "items": [
     "50 nuovi Ingranaggi con scenari, diagrammi, risposte e spiegazioni.",
     "100 quesiti totali nella categoria, conservando ID e progressi precedenti.",

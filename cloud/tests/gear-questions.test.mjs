@@ -2,6 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {classifyLogicQuestion} from '../../logic-topics.js';
+
+test('Flow chart e Ingranaggi non usano il limite compatto delle immagini',()=>{
+ const css=readFileSync(new URL('../../styles-extra.css',import.meta.url),'utf8');
+ assert.match(css,/\.question-image:is\(\[src\*="gear-"\],\[src\*="flow-"\]\):not\(\.mini\)\{width:min\(100%,760px\);max-width:100%;max-height:none;height:auto/);
+});
 test('100 ingranaggi: 50 originali più 50 nuovi con immagini e soluzioni',()=>{
  const dataset=JSON.parse(readFileSync(new URL('../../quiz-dataset.json',import.meta.url)));
  const questions=dataset.filter(q=>q.logicTopic==='ingranaggi');

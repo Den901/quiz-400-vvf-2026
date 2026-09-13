@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.32.3 - 2026-09-14
+
+- Anche i Flow chart vengono mostrati fino a 760 px su desktop/tablet e a tutta larghezza su mobile, senza limite di altezza.
+- Nessuna modifica a quesiti, composizioni delle sfide, risposte o progressi.
+
 ## 3.32.2 - 2026-09-13
 
 - Solo nella sfida del 14 settembre: un Flow chart nelle 12 domande di Logica, insieme a Ingranaggi Q41, mantenendo 40 domande totali e nessun brano.
