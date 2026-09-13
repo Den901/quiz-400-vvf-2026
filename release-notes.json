@@ -1,16 +1,15 @@
 {
-  "version": "3.28.2",
+  "version": "3.29.0",
   "showToUsers": false,
-  "title": "Spiegazioni scientifiche e pannelli admin",
-  "summary": "Ripulite le spiegazioni di Fisica e Chimica e semplificata la gestione amministrativa.",
+  "title": "Revisione quesiti e ricalcolo sfida",
+  "summary": "Scelta della soluzione corretta più chiara e ricalcolo opzionale della sfida di oggi.",
   "items": [
-    "Revisionate 800 spiegazioni di Fisica e Chimica con simboli persi o formule illeggibili.",
-    "Le sezioni delle Impostazioni hanno ora nomi chiari e riconoscibili.",
-    "La correzione tramite ID è raccolta dentro Segnalazioni quesiti.",
-    "Creazione utente e riepilogo sono sempre visibili; solo i singoli utenti hanno una scheda richiudibile.",
-    "L’admin può generare una password sicura e copiare negli appunti quella prodotta da un reset."
+    "Risposta corretta selezionabile accanto a ciascun testo modificabile.",
+    "Opzione admin per ricalcolare punteggi, classifica e statistiche della sfida di oggi.",
+    "Risposte, tempi e progressi conservati; nessun ricalcolo sulle sfide precedenti.",
+    "Operazione bloccata durante sfide attive e registrata nel registro admin."
   ],
   "actionLabel": "Apri Materie",
   "actionHash": "#categories",
-  "footnote": "Nessun popup generale. Nessuna modifica a prove, classifiche o dati degli utenti."
+  "footnote": "Nessun popup generale. Il ricalcolo si esegue soltanto su richiesta esplicita dell’admin."
 }

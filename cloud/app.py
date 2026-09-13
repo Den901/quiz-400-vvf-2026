@@ -669,6 +669,7 @@ class QuestionCorrectionInput(BaseModel):
     text: str | None = Field(default=None, min_length=1, max_length=20000)
     answers: list[str] = Field(min_length=2, max_length=8)
     reactivate: bool = False
+    rescore_today: bool = False
     correct: int = Field(ge=0, strict=True)
     explanation: str = Field(max_length=12000)
     reason: str = Field(min_length=3, max_length=1000)
@@ -1297,6 +1298,47 @@ def challenge_result_details(attempt: DailyChallengeAttempt, challenge: DailyCha
 
 def challenge_score(attempt: DailyChallengeAttempt) -> float | None:
     return round(attempt.score_x100 / 100, 2) if attempt.score_x100 is not None else None
+
+
+def rescore_challenge_result(attempt: DailyChallengeAttempt, challenge: DailyChallenge, db: Session) -> None:
+    """Recompute results only: retain answers, timestamps, timings and learning progress."""
+    details = challenge_result_details(attempt, challenge)
+    attempt.correct = sum(row["isCorrect"] for row in details)
+    attempt.blank = sum(row["blank"] for row in details)
+    attempt.wrong = len(details) - attempt.correct - attempt.blank
+    attempt.score_x100 = attempt.correct * 100 - attempt.wrong * 33
+    state = db.scalar(select(UserState).where(UserState.user_id == attempt.user_id).with_for_update())
+    if not state:
+        return
+    data = dict(state.data or {})
+    sessions = [dict(row) for row in data.get("sessions", [])]
+    changed = False
+    for session in sessions:
+        if session.get("type") != "daily-challenge" or session.get("challengeDate") != challenge.challenge_date.isoformat():
+            continue
+        changed = True
+        per_category = {}
+        for row in details:
+            category = macro_question_category(row["category"])
+            bucket = per_category.setdefault(category, {"correct": 0, "wrong": 0, "blank": 0, "total": 0})
+            bucket["total"] += 1
+            bucket["blank" if row["blank"] else "correct" if row["isCorrect"] else "wrong"] += 1
+        for bucket in per_category.values():
+            answered = bucket["correct"] + bucket["wrong"]
+            bucket["accuracy"] = round(bucket["correct"] / answered * 100) if answered else None
+        session.update(correct=attempt.correct, wrong=attempt.wrong, blank=attempt.blank, score=challenge_score(attempt), accuracy=round(attempt.correct / max(1, attempt.correct + attempt.wrong) * 100), perCategory=per_category)
+        if isinstance(session.get("review"), list):
+            by_id = {row["id"]: row for row in details}
+            reviews = []
+            for old in session["review"]:
+                row = by_id.get(str(old.get("id")))
+                reviews.append({**old, "correct": row["isCorrect"], "correctText": row["answers"][row["correct"]], "questionExplanation": row["explanation"]} if row else dict(old))
+            session["review"] = reviews
+    if changed:
+        data["sessions"] = sessions
+        state.data = data
+        state.revision += 1
+        state.updated_at = utcnow()
 
 
 def record_challenge_in_user_state(user: User, attempt: DailyChallengeAttempt, challenge: DailyChallenge) -> None:
@@ -2063,6 +2105,17 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
         raise HTTPException(422, "Le risposte devono essere diverse tra loro.")
     if payload.text is not None and not payload.text.strip():
         raise HTTPException(422, "Il testo della domanda non può essere vuoto.")
+    challenge = None
+    if payload.rescore_today:
+        challenge = db.scalar(select(DailyChallenge).where(DailyChallenge.challenge_date == challenge_today()).with_for_update())
+        if not challenge or question_id not in challenge.question_ids:
+            raise HTTPException(422, "Il quesito non appartiene alla sfida di oggi.")
+        active = db.scalar(select(func.count()).select_from(DailyChallengeAttempt).where(DailyChallengeAttempt.challenge_date == challenge.challenge_date, DailyChallengeAttempt.submitted_at.is_(None), DailyChallengeAttempt.started_at > utcnow() - timedelta(seconds=CHALLENGE_SECONDS)))
+        if active:
+            raise HTTPException(409, "C’è una sfida in corso: attendi la consegna prima di ricalcolare i risultati.")
+        snapshot = next(row for row in challenge_questions(challenge) if str(row["id"]) == question_id)
+        if normalized_answers != [str(answer).strip() for answer in snapshot["answers"]]:
+            raise HTTPException(422, "Per ricalcolare mantieni invariati i testi e l’ordine delle risposte della sfida: modifica soltanto la soluzione corretta.")
     # Serialize edits to the shared settings document across workers/admins.
     db.scalar(select(Setting).where(Setting.key == "question_corrections").with_for_update())
     corrections = dict(get_setting(db, "question_corrections") or {})
@@ -2071,6 +2124,18 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
     if payload.text is not None:
         corrections[question_id]["text"] = payload.text.strip()
     set_setting(db, "question_corrections", corrections)
+    rescored = 0
+    if challenge:
+        composition = dict(challenge.composition or {})
+        solutions = dict(composition.get("solutions") or {})
+        solutions[question_id] = {**snapshot, "correct": payload.correct, "explanation": payload.explanation.strip()}
+        composition["solutions"] = solutions
+        challenge.composition = composition
+        attempts = db.scalars(select(DailyChallengeAttempt).where(DailyChallengeAttempt.challenge_date == challenge.challenge_date, DailyChallengeAttempt.submitted_at.is_not(None)).with_for_update()).all()
+        for attempt in attempts:
+            rescore_challenge_result(attempt, challenge, db)
+            rescored += 1
+        audit(db, "admin.challenge_rescored", request, actor=admin.id, target=admin.id, questionId=question_id, challengeDate=challenge.challenge_date.isoformat(), attempts=rescored, reason=payload.reason.strip())
     if payload.reactivate:
         disabled = db.get(DisabledQuestion, question_id)
         if disabled:
@@ -2078,7 +2143,7 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
             audit(db, "admin.question_enabled", request, actor=admin.id, target=admin.id, questionId=question_id)
     audit(db, "admin.question_corrected", request, actor=admin.id, target=admin.id, questionId=question_id, previous=previous, correction=corrections[question_id], reason=payload.reason.strip())
     db.commit()
-    return {"question": admin_question_payload(question_id, db), "message": ("Correzione salvata e quesito riattivato." if payload.reactivate else "Correzione salvata; stato del quesito invariato.") + " Le sfide già create restano invariate."}
+    return {"question": admin_question_payload(question_id, db), "rescoredAttempts": rescored, "message": ("Correzione salvata e quesito riattivato." if payload.reactivate else "Correzione salvata; stato del quesito invariato.") + (f" Ricalcolati {rescored} risultati della sfida di oggi." if challenge else " Le sfide già create restano invariate.")}
 
 
 def question_rating_payload(question_id: str, user_id: str, db: Session) -> dict[str, Any]:

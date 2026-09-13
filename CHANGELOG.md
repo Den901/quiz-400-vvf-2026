@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.29.0 - 2026-09-13
+
+- L’admin può ricalcolare esplicitamente i risultati della sfida di oggi dopo la correzione della soluzione di un quesito.
+- Il ricalcolo aggiorna punteggi, classifica, statistiche e riepilogo; conserva risposte, tempi e progressi di studio.
+- Richiesti testi e ordine delle risposte invariati; blocco durante tentativi attivi e registro amministrativo dell’operazione.
+
 ## 3.28.2 - 2026-09-13
 
 - Revisione quesiti: risposta corretta selezionabile direttamente accanto a ogni risposta con scelta singola A/B/C/D.
