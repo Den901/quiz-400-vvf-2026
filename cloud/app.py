@@ -1185,6 +1185,16 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
         logic_plan['ingranaggi'] = 1
         if not gear_source:
             raise HTTPException(503, "Il quesito Q41 non è disponibile per la sfida del 14 settembre.")
+        # Also try exactly one new flow chart, only on the requested day.
+        flow_count = logic_plan.get('flow-chart', 0)
+        if flow_count == 0:
+            donor = next((topic for topic in ('mista', 'calcolo', 'deduzioni', 'serie', 'verbale', 'relazioni', 'ordinamenti', 'figure') if logic_plan.get(topic, 0)), None)
+            if donor is None:
+                raise HTTPException(503, "La sfida del 14 settembre richiede un posto nella quota Logica per Flow chart.")
+            logic_plan[donor] -= 1
+        elif flow_count > 1:
+            logic_plan['figure'] = logic_plan.get('figure', 0) + flow_count - 1
+        logic_plan['flow-chart'] = 1
     usage = daily_challenge_question_usage(challenge_date, db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []

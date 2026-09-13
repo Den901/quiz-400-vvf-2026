@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.32.2 - 2026-09-13
+
+- Solo nella sfida del 14 settembre: un Flow chart nelle 12 domande di Logica, insieme a Ingranaggi Q41, mantenendo 40 domande totali e nessun brano.
+- Include le figure Ingranaggi ingrandite della 3.32.1. Nessuna modifica alle sfide già create.
+
 ## 3.32.1 - 2026-09-13
 
 - Figure Ingranaggi più grandi: fino a 760 px su desktop/tablet e tutta la larghezza disponibile su mobile, senza il precedente limite di altezza.
