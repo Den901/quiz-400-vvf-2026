@@ -1,12 +1,12 @@
 {
-  "version": "3.29.0",
+  "version": "3.29.1",
   "showToUsers": false,
   "title": "Revisione quesiti e ricalcolo sfida",
   "summary": "Scelta della soluzione corretta più chiara e ricalcolo opzionale della sfida di oggi.",
   "items": [
     "Risposta corretta selezionabile accanto a ciascun testo modificabile.",
     "Opzione admin per ricalcolare punteggi, classifica e statistiche della sfida di oggi.",
-    "Risposte, tempi e progressi conservati; nessun ricalcolo sulle sfide precedenti.",
+    "Ricalcolo disponibile anche correggendo i testi; le scelte A/B/C/D e i tempi restano conservati.",
     "Operazione bloccata durante sfide attive e registrata nel registro admin."
   ],
   "actionLabel": "Apri Materie",

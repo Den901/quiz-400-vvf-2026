@@ -1332,7 +1332,7 @@ def rescore_challenge_result(attempt: DailyChallengeAttempt, challenge: DailyCha
             reviews = []
             for old in session["review"]:
                 row = by_id.get(str(old.get("id")))
-                reviews.append({**old, "correct": row["isCorrect"], "correctText": row["answers"][row["correct"]], "questionExplanation": row["explanation"]} if row else dict(old))
+                reviews.append({**old, "questionText": row["text"], "choiceText": None if row["blank"] else row["answers"][row["choice"]], "correct": row["isCorrect"], "correctText": row["answers"][row["correct"]], "questionExplanation": row["explanation"]} if row else dict(old))
             session["review"] = reviews
     if changed:
         data["sessions"] = sessions
@@ -2114,8 +2114,11 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
         if active:
             raise HTTPException(409, "C’è una sfida in corso: attendi la consegna prima di ricalcolare i risultati.")
         snapshot = next(row for row in challenge_questions(challenge) if str(row["id"]) == question_id)
-        if normalized_answers != [str(answer).strip() for answer in snapshot["answers"]]:
-            raise HTTPException(422, "Per ricalcolare mantieni invariati i testi e l’ordine delle risposte della sfida: modifica soltanto la soluzione corretta.")
+        old_answers = [str(answer).strip() for answer in snapshot["answers"]]
+        if len(normalized_answers) != len(old_answers):
+            raise HTTPException(422, "Per ricalcolare mantieni lo stesso numero di risposte della sfida.")
+        if any(answer in old_answers and old_answers.index(answer) != index for index, answer in enumerate(normalized_answers)):
+            raise HTTPException(422, "Non spostare le risposte tra A/B/C/D: le scelte già date devono mantenere lo stesso ordine.")
     # Serialize edits to the shared settings document across workers/admins.
     db.scalar(select(Setting).where(Setting.key == "question_corrections").with_for_update())
     corrections = dict(get_setting(db, "question_corrections") or {})
@@ -2128,7 +2131,7 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
     if challenge:
         composition = dict(challenge.composition or {})
         solutions = dict(composition.get("solutions") or {})
-        solutions[question_id] = {**snapshot, "correct": payload.correct, "explanation": payload.explanation.strip()}
+        solutions[question_id] = {**snapshot, "text": corrections[question_id]["text"], "answers": normalized_answers, "correct": payload.correct, "explanation": payload.explanation.strip()}
         composition["solutions"] = solutions
         challenge.composition = composition
         attempts = db.scalars(select(DailyChallengeAttempt).where(DailyChallengeAttempt.challenge_date == challenge.challenge_date, DailyChallengeAttempt.submitted_at.is_not(None)).with_for_update()).all()

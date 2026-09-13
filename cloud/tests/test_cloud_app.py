@@ -69,8 +69,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.29.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.29.0"
+        assert runtime.json()["version"] == "3.29.1"
+        assert runtime.json()["releaseNotes"]["version"] == "3.29.1"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -444,7 +444,10 @@ def test_complete_cloud_account_and_statistics_flow():
         assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 409
         with patch("cloud.app.CHALLENGE_SECONDS", 0):
             progress_before = user_client.get("/api/auth/me").json()["user"]["state"]["progress"]
-            assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 422
+            reordered_answers = list(reversed(original_question["answers"]))
+            assert admin_client.put(correction_url, json={**correction, "answers": reordered_answers, "rescore_today": True}).status_code == 422
+            assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 200
+            assert user_client.get("/api/challenges/today").json()["result"]["questions"][0]["answers"] == corrected_answers
             rescoring = {**correction, "answers": original_question["answers"], "rescore_today": True}
             assert moderator_client.put(correction_url, json=rescoring).status_code == 403
             applied = admin_client.put(correction_url, json=rescoring)
@@ -461,6 +464,7 @@ def test_complete_cloud_account_and_statistics_flow():
             assert user_client.get("/api/challenges/today").json()["result"]["score"] == after_rescore["score"]
             assert admin_client.put(correction_url, json={**rescoring, "correct": original_question["correct"]}).status_code == 200
             assert user_client.get("/api/challenges/today").json()["result"]["score"] == before_rescore["score"]
+            assert admin_client.put(correction_url, json={**rescoring, "text": original_question["text"], "correct": original_question["correct"]}).status_code == 200
             assert admin_client.put(correction_url, json=correction).status_code == 200
             report_payload = {"question_id": reported_question_id, "reason": "answer", "note": "La soluzione indicata sembra errata."}
             reported = user_client.post("/api/question-reports", json=report_payload)
@@ -651,7 +655,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.29.0"
+        assert update_status.json()["currentVersion"] == "3.29.1"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

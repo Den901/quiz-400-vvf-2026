@@ -210,3 +210,4 @@ html[data-theme="dark"] .question-rating{background:#181719}html[data-theme="dar
 .correction-correct-choice input[type=radio]{width:22px;height:22px;flex:0 0 22px;margin:0;accent-color:var(--green);cursor:pointer}
 .correction-answer-row:has(input:checked){border:2px solid var(--green)}
 .correction-answer-text textarea{min-height:76px;resize:vertical}
+.update-dialog [data-correction-error]:not(:empty){padding:14px;border:2px solid var(--red);border-radius:12px;color:var(--ink);background:var(--card);font-weight:750}

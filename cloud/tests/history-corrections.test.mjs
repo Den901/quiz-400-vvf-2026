@@ -7,7 +7,7 @@ const source=readFileSync(new URL('../../app.js',import.meta.url),'utf8');
 test('il ricalcolo della sfida richiede una scelta admin esplicita',()=>{
  assert.ok(source.includes('name="rescoreToday"'));
  assert.ok(source.includes('rescore_today:rescoreToday'));
- assert.ok(source.includes('ricalcolare i risultati di tutti gli utenti'));
+ assert.ok(source.includes('ricalcolare tutti i risultati'));
 });
 test('la revisione seleziona una sola risposta corretta accanto ai testi modificabili',()=>{
  assert.ok(source.includes('type="radio" name="correct" value="${index}"'));

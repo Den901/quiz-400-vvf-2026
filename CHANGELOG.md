@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.29.1 - 2026-09-13
+
+- Il ricalcolo della sfida consente anche testi domanda e risposte corretti, conservando le scelte A/B/C/D degli utenti.
+- Resta vietato spostare le risposte tra lettere o cambiarne il numero.
+- Gli errori di salvataggio sono evidenziati e portati in vista nel modulo.
+
 ## 3.29.0 - 2026-09-13
 
 - L’admin può ricalcolare esplicitamente i risultati della sfida di oggi dopo la correzione della soluzione di un quesito.
