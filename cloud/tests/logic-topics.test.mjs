@@ -10,7 +10,7 @@ const imported=logicQuestions.filter(question=>String(question.id).startsWith('l
 test('all logic questions belong to a selectable subsection',()=>{
  const ids=new Set(logicTopics.map(topic=>topic.id));
  assert.equal(logicTopics.length,12);
- assert.equal(logicQuestions.length,5953);
+ assert.equal(logicQuestions.length,6003);
  for(const question of logicQuestions){
   const topic=classifyLogicQuestion(question);
   assert.ok(ids.has(topic),`${question.id} has invalid topic ${topic}`);

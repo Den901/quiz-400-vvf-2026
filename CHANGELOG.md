@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.32.0 - 2026-09-13
+
+- Aggiunti 50 nuovi quesiti illustrati a Ingranaggi, con scenari, quattro opzioni, soluzioni e spiegazioni.
+- La categoria contiene 100 quesiti; ID e progressi precedenti conservati.
+- Q41 confermato come unico Ingranaggi nella sfida del 14 settembre.
+
 ## 3.31.1 - 2026-09-13
 
 - Nello studio ordinato delle Materie il numero della domanda è modificabile, con pulsante Vai a e supporto Invio.

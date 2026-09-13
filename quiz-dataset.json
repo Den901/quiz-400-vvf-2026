@@ -205674,5 +205674,755 @@
     "correct": 0,
     "explanation": "Esiti dei casi 1-5: 4, 3, 4, 2, 4. Raggiungono la casella 4 i casi 1, 3, 5: in totale 3. p ≥ 15: Sì; p è pari: Sì; p è multiplo di 3: No → casella 4.",
     "image": "quiz-images/flow-q50.png"
+  },
+  {
+    "id": "gear-school-s01",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira R?",
+    "answers": [
+      "Resta ferma",
+      "Non si può stabilire",
+      "Antiorario",
+      "Orario"
+    ],
+    "correct": 2,
+    "explanation": "S e P1 girano in versi opposti. Il contatto interno tra P1 e R mantiene il verso: R gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s01.png"
+  },
+  {
+    "id": "gear-school-s02",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira R?",
+    "answers": [
+      "Antiorario",
+      "Non si può stabilire",
+      "Orario",
+      "Resta ferma"
+    ],
+    "correct": 2,
+    "explanation": "S e P2 girano in versi opposti. Il contatto interno tra P2 e R mantiene il verso: R gira in senso orario.",
+    "image": "quiz-images/gear-school-s02.png"
+  },
+  {
+    "id": "gear-school-s03",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira R?",
+    "answers": [
+      "Resta ferma",
+      "Orario",
+      "Antiorario",
+      "Non si può stabilire"
+    ],
+    "correct": 2,
+    "explanation": "S e P3 girano in versi opposti. Il contatto interno tra P3 e R mantiene il verso: R gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s03.png"
+  },
+  {
+    "id": "gear-school-s04",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira R?",
+    "answers": [
+      "Orario",
+      "Non si può stabilire",
+      "Antiorario",
+      "Resta ferma"
+    ],
+    "correct": 0,
+    "explanation": "S e P1 girano in versi opposti. Il contatto interno tra P1 e R mantiene il verso: R gira in senso orario.",
+    "image": "quiz-images/gear-school-s04.png"
+  },
+  {
+    "id": "gear-school-s05",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira R?",
+    "answers": [
+      "Orario",
+      "Resta ferma",
+      "Non si può stabilire",
+      "Antiorario"
+    ],
+    "correct": 3,
+    "explanation": "S e P2 girano in versi opposti. Il contatto interno tra P2 e R mantiene il verso: R gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s05.png"
+  },
+  {
+    "id": "gear-school-s06",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira P1?",
+    "answers": [
+      "Cambia verso a ogni giro",
+      "Antiorario",
+      "Resta ferma",
+      "Orario"
+    ],
+    "correct": 1,
+    "explanation": "P1 ingrana esternamente con S, quindi gira nel verso opposto: antiorario. Il suo asse resta fisso.",
+    "image": "quiz-images/gear-school-s06.png"
+  },
+  {
+    "id": "gear-school-s07",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira P2?",
+    "answers": [
+      "Antiorario",
+      "Resta ferma",
+      "Orario",
+      "Cambia verso a ogni giro"
+    ],
+    "correct": 2,
+    "explanation": "P2 ingrana esternamente con S, quindi gira nel verso opposto: orario. Il suo asse resta fisso.",
+    "image": "quiz-images/gear-school-s07.png"
+  },
+  {
+    "id": "gear-school-s08",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira P3?",
+    "answers": [
+      "Cambia verso a ogni giro",
+      "Resta ferma",
+      "Antiorario",
+      "Orario"
+    ],
+    "correct": 2,
+    "explanation": "P3 ingrana esternamente con S, quindi gira nel verso opposto: antiorario. Il suo asse resta fisso.",
+    "image": "quiz-images/gear-school-s08.png"
+  },
+  {
+    "id": "gear-school-s09",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira P1?",
+    "answers": [
+      "Antiorario",
+      "Cambia verso a ogni giro",
+      "Orario",
+      "Resta ferma"
+    ],
+    "correct": 2,
+    "explanation": "P1 ingrana esternamente con S, quindi gira nel verso opposto: orario. Il suo asse resta fisso.",
+    "image": "quiz-images/gear-school-s09.png"
+  },
+  {
+    "id": "gear-school-s10",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira P2?",
+    "answers": [
+      "Cambia verso a ogni giro",
+      "Antiorario",
+      "Resta ferma",
+      "Orario"
+    ],
+    "correct": 1,
+    "explanation": "P2 ingrana esternamente con S, quindi gira nel verso opposto: antiorario. Il suo asse resta fisso.",
+    "image": "quiz-images/gear-school-s10.png"
+  },
+  {
+    "id": "gear-school-s11",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuali sono i versi di P1 e R, nell’ordine?",
+    "answers": [
+      "Orario / antiorario",
+      "Orario / orario",
+      "Antiorario / antiorario",
+      "Antiorario / orario"
+    ],
+    "correct": 2,
+    "explanation": "P1 gira in senso opposto a S. R gira nello stesso verso di P1, perché il contatto è interno. Entrambe girano in senso antiorario.",
+    "image": "quiz-images/gear-school-s11.png"
+  },
+  {
+    "id": "gear-school-s12",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuali sono i versi di P2 e R, nell’ordine?",
+    "answers": [
+      "Antiorario / orario",
+      "Antiorario / antiorario",
+      "Orario / antiorario",
+      "Orario / orario"
+    ],
+    "correct": 3,
+    "explanation": "P2 gira in senso opposto a S. R gira nello stesso verso di P2, perché il contatto è interno. Entrambe girano in senso orario.",
+    "image": "quiz-images/gear-school-s12.png"
+  },
+  {
+    "id": "gear-school-s13",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuali sono i versi di P3 e R, nell’ordine?",
+    "answers": [
+      "Orario / antiorario",
+      "Orario / orario",
+      "Antiorario / orario",
+      "Antiorario / antiorario"
+    ],
+    "correct": 3,
+    "explanation": "P3 gira in senso opposto a S. R gira nello stesso verso di P3, perché il contatto è interno. Entrambe girano in senso antiorario.",
+    "image": "quiz-images/gear-school-s13.png"
+  },
+  {
+    "id": "gear-school-s14",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuali sono i versi di P1 e R, nell’ordine?",
+    "answers": [
+      "Orario / orario",
+      "Orario / antiorario",
+      "Antiorario / orario",
+      "Antiorario / antiorario"
+    ],
+    "correct": 0,
+    "explanation": "P1 gira in senso opposto a S. R gira nello stesso verso di P1, perché il contatto è interno. Entrambe girano in senso orario.",
+    "image": "quiz-images/gear-school-s14.png"
+  },
+  {
+    "id": "gear-school-s15",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuali sono i versi di P2 e R, nell’ordine?",
+    "answers": [
+      "Antiorario / antiorario",
+      "Antiorario / orario",
+      "Orario / antiorario",
+      "Orario / orario"
+    ],
+    "correct": 0,
+    "explanation": "P2 gira in senso opposto a S. R gira nello stesso verso di P2, perché il contatto è interno. Entrambe girano in senso antiorario.",
+    "image": "quiz-images/gear-school-s15.png"
+  },
+  {
+    "id": "gear-school-s16",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuesta volta è R a trascinare le altre ruote. In quale verso gira S?",
+    "answers": [
+      "Antiorario",
+      "Orario",
+      "Il verso dipende dalle dimensioni",
+      "Resta ferma"
+    ],
+    "correct": 0,
+    "explanation": "Da R a P1 il verso resta uguale (contatto interno). Da P1 a S si inverte (contatto esterno). Quindi S gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s16.png"
+  },
+  {
+    "id": "gear-school-s17",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuesta volta è R a trascinare le altre ruote. In quale verso gira S?",
+    "answers": [
+      "Antiorario",
+      "Orario",
+      "Resta ferma",
+      "Il verso dipende dalle dimensioni"
+    ],
+    "correct": 1,
+    "explanation": "Da R a P2 il verso resta uguale (contatto interno). Da P2 a S si inverte (contatto esterno). Quindi S gira in senso orario.",
+    "image": "quiz-images/gear-school-s17.png"
+  },
+  {
+    "id": "gear-school-s18",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuesta volta è R a trascinare le altre ruote. In quale verso gira S?",
+    "answers": [
+      "Il verso dipende dalle dimensioni",
+      "Antiorario",
+      "Resta ferma",
+      "Orario"
+    ],
+    "correct": 1,
+    "explanation": "Da R a P3 il verso resta uguale (contatto interno). Da P3 a S si inverte (contatto esterno). Quindi S gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s18.png"
+  },
+  {
+    "id": "gear-school-s19",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuesta volta è R a trascinare le altre ruote. In quale verso gira S?",
+    "answers": [
+      "Resta ferma",
+      "Orario",
+      "Il verso dipende dalle dimensioni",
+      "Antiorario"
+    ],
+    "correct": 1,
+    "explanation": "Da R a P1 il verso resta uguale (contatto interno). Da P1 a S si inverte (contatto esterno). Quindi S gira in senso orario.",
+    "image": "quiz-images/gear-school-s19.png"
+  },
+  {
+    "id": "gear-school-s20",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuesta volta è R a trascinare le altre ruote. In quale verso gira S?",
+    "answers": [
+      "Orario",
+      "Antiorario",
+      "Resta ferma",
+      "Il verso dipende dalle dimensioni"
+    ],
+    "correct": 1,
+    "explanation": "Da R a P2 il verso resta uguale (contatto interno). Da P2 a S si inverte (contatto esterno). Quindi S gira in senso antiorario.",
+    "image": "quiz-images/gear-school-s20.png"
+  },
+  {
+    "id": "gear-school-s21",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 18 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R in un minuto?",
+    "answers": [
+      "18 giri",
+      "6 giri",
+      "24 giri",
+      "12 giri"
+    ],
+    "correct": 1,
+    "explanation": "R ha 3 volte i denti di S: 72 contro 24. Fa quindi 3 volte meno giri: 18 : 3 = 6 giri in un minuto.",
+    "image": "quiz-images/gear-school-s21.png"
+  },
+  {
+    "id": "gear-school-s22",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 18 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R in un minuto?",
+    "answers": [
+      "9 giri",
+      "36 giri",
+      "18 giri",
+      "27 giri"
+    ],
+    "correct": 0,
+    "explanation": "R ha 2 volte i denti di S: 72 contro 36. Fa quindi 2 volte meno giri: 18 : 2 = 9 giri in un minuto.",
+    "image": "quiz-images/gear-school-s22.png"
+  },
+  {
+    "id": "gear-school-s23",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 36 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R in un minuto?",
+    "answers": [
+      "48 giri",
+      "24 giri",
+      "12 giri",
+      "36 giri"
+    ],
+    "correct": 2,
+    "explanation": "R ha 3 volte i denti di S: 90 contro 30. Fa quindi 3 volte meno giri: 36 : 3 = 12 giri in un minuto.",
+    "image": "quiz-images/gear-school-s23.png"
+  },
+  {
+    "id": "gear-school-s24",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 30 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R in un minuto?",
+    "answers": [
+      "60 giri",
+      "30 giri",
+      "15 giri",
+      "45 giri"
+    ],
+    "correct": 2,
+    "explanation": "R ha 2 volte i denti di S: 80 contro 40. Fa quindi 2 volte meno giri: 30 : 2 = 15 giri in un minuto.",
+    "image": "quiz-images/gear-school-s24.png"
+  },
+  {
+    "id": "gear-school-s25",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 36 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R in un minuto?",
+    "answers": [
+      "18 giri",
+      "54 giri",
+      "72 giri",
+      "36 giri"
+    ],
+    "correct": 0,
+    "explanation": "R ha 2 volte i denti di S: 96 contro 48. Fa quindi 2 volte meno giri: 36 : 2 = 18 giri in un minuto.",
+    "image": "quiz-images/gear-school-s25.png"
+  },
+  {
+    "id": "gear-school-s26",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nConfronta il numero di giri al minuto di S e P1, senza considerare il verso.",
+    "answers": [
+      "Fanno lo stesso numero di giri",
+      "P1 fa il doppio dei giri di S",
+      "P1 resta ferma",
+      "S fa il doppio dei giri di P1"
+    ],
+    "correct": 0,
+    "explanation": "S ha 24 denti e P1 ne ha 24. Con lo stesso numero di denti fanno lo stesso numero di giri, pur girando in versi opposti.",
+    "image": "quiz-images/gear-school-s26.png"
+  },
+  {
+    "id": "gear-school-s27",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nConfronta il numero di giri al minuto di S e P2, senza considerare il verso.",
+    "answers": [
+      "Fanno lo stesso numero di giri",
+      "P2 fa il doppio dei giri di S",
+      "P2 resta ferma",
+      "S fa il doppio dei giri di P2"
+    ],
+    "correct": 1,
+    "explanation": "S ha 36 denti e P2 ne ha 18. P2 ha metà dei denti e compie il doppio dei giri di S.",
+    "image": "quiz-images/gear-school-s27.png"
+  },
+  {
+    "id": "gear-school-s28",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nConfronta il numero di giri al minuto di S e P3, senza considerare il verso.",
+    "answers": [
+      "P3 resta ferma",
+      "Fanno lo stesso numero di giri",
+      "S fa il doppio dei giri di P3",
+      "P3 fa il doppio dei giri di S"
+    ],
+    "correct": 1,
+    "explanation": "S ha 30 denti e P3 ne ha 30. Con lo stesso numero di denti fanno lo stesso numero di giri, pur girando in versi opposti.",
+    "image": "quiz-images/gear-school-s28.png"
+  },
+  {
+    "id": "gear-school-s29",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nConfronta il numero di giri al minuto di S e P1, senza considerare il verso.",
+    "answers": [
+      "S fa il doppio dei giri di P1",
+      "Fanno lo stesso numero di giri",
+      "P1 resta ferma",
+      "P1 fa il doppio dei giri di S"
+    ],
+    "correct": 3,
+    "explanation": "S ha 40 denti e P1 ne ha 20. P1 ha metà dei denti e compie il doppio dei giri di S.",
+    "image": "quiz-images/gear-school-s29.png"
+  },
+  {
+    "id": "gear-school-s30",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nConfronta il numero di giri al minuto di S e P2, senza considerare il verso.",
+    "answers": [
+      "Fanno lo stesso numero di giri",
+      "P2 fa il doppio dei giri di S",
+      "P2 resta ferma",
+      "S fa il doppio dei giri di P2"
+    ],
+    "correct": 1,
+    "explanation": "S ha 48 denti e P2 ne ha 24. P2 ha metà dei denti e compie il doppio dei giri di S.",
+    "image": "quiz-images/gear-school-s30.png"
+  },
+  {
+    "id": "gear-school-s31",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nSi inverte soltanto il verso del motore S, mantenendo invariato il numero di giri al minuto. Che cosa accade a R?",
+    "answers": [
+      "Si ferma",
+      "Inverte il verso e mantiene la velocità",
+      "Mantiene sia il verso sia la velocità",
+      "Inverte il verso e raddoppia la velocità"
+    ],
+    "correct": 1,
+    "explanation": "Invertendo il motore si invertono tutte le ruote collegate. I numeri di denti non cambiano, quindi il numero di giri al minuto di ciascuna ruota rimane lo stesso.",
+    "image": "quiz-images/gear-school-s31.png"
+  },
+  {
+    "id": "gear-school-s32",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nSi inverte soltanto il verso del motore S, mantenendo invariato il numero di giri al minuto. Che cosa accade a R?",
+    "answers": [
+      "Inverte il verso e raddoppia la velocità",
+      "Si ferma",
+      "Inverte il verso e mantiene la velocità",
+      "Mantiene sia il verso sia la velocità"
+    ],
+    "correct": 2,
+    "explanation": "Invertendo il motore si invertono tutte le ruote collegate. I numeri di denti non cambiano, quindi il numero di giri al minuto di ciascuna ruota rimane lo stesso.",
+    "image": "quiz-images/gear-school-s32.png"
+  },
+  {
+    "id": "gear-school-s33",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nSi inverte soltanto il verso del motore S, mantenendo invariato il numero di giri al minuto. Che cosa accade a R?",
+    "answers": [
+      "Si ferma",
+      "Mantiene sia il verso sia la velocità",
+      "Inverte il verso e mantiene la velocità",
+      "Inverte il verso e raddoppia la velocità"
+    ],
+    "correct": 2,
+    "explanation": "Invertendo il motore si invertono tutte le ruote collegate. I numeri di denti non cambiano, quindi il numero di giri al minuto di ciascuna ruota rimane lo stesso.",
+    "image": "quiz-images/gear-school-s33.png"
+  },
+  {
+    "id": "gear-school-s34",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nSi inverte soltanto il verso del motore S, mantenendo invariato il numero di giri al minuto. Che cosa accade a R?",
+    "answers": [
+      "Inverte il verso e raddoppia la velocità",
+      "Inverte il verso e mantiene la velocità",
+      "Mantiene sia il verso sia la velocità",
+      "Si ferma"
+    ],
+    "correct": 1,
+    "explanation": "Invertendo il motore si invertono tutte le ruote collegate. I numeri di denti non cambiano, quindi il numero di giri al minuto di ciascuna ruota rimane lo stesso.",
+    "image": "quiz-images/gear-school-s34.png"
+  },
+  {
+    "id": "gear-school-s35",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nSi inverte soltanto il verso del motore S, mantenendo invariato il numero di giri al minuto. Che cosa accade a R?",
+    "answers": [
+      "Inverte il verso e mantiene la velocità",
+      "Mantiene sia il verso sia la velocità",
+      "Inverte il verso e raddoppia la velocità",
+      "Si ferma"
+    ],
+    "correct": 0,
+    "explanation": "Invertendo il motore si invertono tutte le ruote collegate. I numeri di denti non cambiano, quindi il numero di giri al minuto di ciascuna ruota rimane lo stesso.",
+    "image": "quiz-images/gear-school-s35.png"
+  },
+  {
+    "id": "gear-school-s36",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri al minuto compie S?",
+    "answers": [
+      "180 giri/min",
+      "60 giri/min",
+      "540 giri/min",
+      "360 giri/min"
+    ],
+    "correct": 0,
+    "explanation": "R ha 3 volte i denti di S. La ruota centrale compie quindi 3 volte i giri della corona: 60 × 3 = 180 giri/min.",
+    "image": "quiz-images/gear-school-s36.png"
+  },
+  {
+    "id": "gear-school-s37",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri al minuto compie S?",
+    "answers": [
+      "240 giri/min",
+      "360 giri/min",
+      "120 giri/min",
+      "60 giri/min"
+    ],
+    "correct": 2,
+    "explanation": "R ha 2 volte i denti di S. La ruota centrale compie quindi 2 volte i giri della corona: 60 × 2 = 120 giri/min.",
+    "image": "quiz-images/gear-school-s37.png"
+  },
+  {
+    "id": "gear-school-s38",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri al minuto compie S?",
+    "answers": [
+      "60 giri/min",
+      "180 giri/min",
+      "540 giri/min",
+      "360 giri/min"
+    ],
+    "correct": 1,
+    "explanation": "R ha 3 volte i denti di S. La ruota centrale compie quindi 3 volte i giri della corona: 60 × 3 = 180 giri/min.",
+    "image": "quiz-images/gear-school-s38.png"
+  },
+  {
+    "id": "gear-school-s39",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri al minuto compie S?",
+    "answers": [
+      "60 giri/min",
+      "360 giri/min",
+      "120 giri/min",
+      "240 giri/min"
+    ],
+    "correct": 2,
+    "explanation": "R ha 2 volte i denti di S. La ruota centrale compie quindi 2 volte i giri della corona: 60 × 2 = 120 giri/min.",
+    "image": "quiz-images/gear-school-s39.png"
+  },
+  {
+    "id": "gear-school-s40",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri al minuto compie S?",
+    "answers": [
+      "240 giri/min",
+      "360 giri/min",
+      "60 giri/min",
+      "120 giri/min"
+    ],
+    "correct": 3,
+    "explanation": "R ha 2 volte i denti di S. La ruota centrale compie quindi 2 volte i giri della corona: 60 × 2 = 120 giri/min.",
+    "image": "quiz-images/gear-school-s40.png"
+  },
+  {
+    "id": "gear-school-s41",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R e A sono solidali, cioè girano insieme sullo stesso albero. A ingrana esternamente con B. I due gruppi sono disegnati separati per chiarezza. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira B?",
+    "answers": [
+      "Antiorario",
+      "Il verso non è determinabile",
+      "Resta ferma",
+      "Orario"
+    ],
+    "correct": 3,
+    "explanation": "S inverte il verso passando a P1. Il contatto interno P1-R lo mantiene. R e A sono solidali, quindi hanno lo stesso verso. A-B lo inverte ancora: B gira in senso orario, come S.",
+    "image": "quiz-images/gear-school-s41.png"
+  },
+  {
+    "id": "gear-school-s42",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R e A sono solidali, cioè girano insieme sullo stesso albero. A ingrana esternamente con B. I due gruppi sono disegnati separati per chiarezza. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira B?",
+    "answers": [
+      "Il verso non è determinabile",
+      "Resta ferma",
+      "Antiorario",
+      "Orario"
+    ],
+    "correct": 2,
+    "explanation": "S inverte il verso passando a P1. Il contatto interno P1-R lo mantiene. R e A sono solidali, quindi hanno lo stesso verso. A-B lo inverte ancora: B gira in senso antiorario, come S.",
+    "image": "quiz-images/gear-school-s42.png"
+  },
+  {
+    "id": "gear-school-s43",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R e A sono solidali, cioè girano insieme sullo stesso albero. A ingrana esternamente con B. I due gruppi sono disegnati separati per chiarezza. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira B?",
+    "answers": [
+      "Orario",
+      "Antiorario",
+      "Il verso non è determinabile",
+      "Resta ferma"
+    ],
+    "correct": 0,
+    "explanation": "S inverte il verso passando a P1. Il contatto interno P1-R lo mantiene. R e A sono solidali, quindi hanno lo stesso verso. A-B lo inverte ancora: B gira in senso orario, come S.",
+    "image": "quiz-images/gear-school-s43.png"
+  },
+  {
+    "id": "gear-school-s44",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R e A sono solidali, cioè girano insieme sullo stesso albero. A ingrana esternamente con B. I due gruppi sono disegnati separati per chiarezza. S gira a 60 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira B?",
+    "answers": [
+      "Antiorario",
+      "Resta ferma",
+      "Orario",
+      "Il verso non è determinabile"
+    ],
+    "correct": 0,
+    "explanation": "S inverte il verso passando a P1. Il contatto interno P1-R lo mantiene. R e A sono solidali, quindi hanno lo stesso verso. A-B lo inverte ancora: B gira in senso antiorario, come S.",
+    "image": "quiz-images/gear-school-s44.png"
+  },
+  {
+    "id": "gear-school-s45",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S ingrana esternamente con P1, P2, P3; queste tre ruote ingranano con i denti interni di R. R e A sono solidali, cioè girano insieme sullo stesso albero. A ingrana esternamente con B. I due gruppi sono disegnati separati per chiarezza. S gira a 60 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nIn quale verso gira B?",
+    "answers": [
+      "Antiorario",
+      "Resta ferma",
+      "Il verso non è determinabile",
+      "Orario"
+    ],
+    "correct": 3,
+    "explanation": "S inverte il verso passando a P1. Il contatto interno P1-R lo mantiene. R e A sono solidali, quindi hanno lo stesso verso. A-B lo inverte ancora: B gira in senso orario, come S.",
+    "image": "quiz-images/gear-school-s45.png"
+  },
+  {
+    "id": "gear-school-s46",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S1 ingrana esternamente con P1a, P1b, P1c; queste tre ruote ingranano con i denti interni di R1. R1 e S2 sono solidali. Nel secondo gruppo S2 ingrana esternamente con P2a, P2b, P2c, che ingranano internamente con R2. I gruppi sono mostrati separati. S1 gira a 54 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R2 in un minuto?",
+    "answers": [
+      "24 giri",
+      "12 giri",
+      "6 giri",
+      "18 giri"
+    ],
+    "correct": 2,
+    "explanation": "Nel primo gruppo si divide per 3: 54 : 3 = 18. R1 e S2 fanno gli stessi giri. Nel secondo si divide per 3: 18 : 3 = 6 giri in un minuto.",
+    "image": "quiz-images/gear-school-s46.png"
+  },
+  {
+    "id": "gear-school-s47",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S1 ingrana esternamente con P1a, P1b, P1c; queste tre ruote ingranano con i denti interni di R1. R1 e S2 sono solidali. Nel secondo gruppo S2 ingrana esternamente con P2a, P2b, P2c, che ingranano internamente con R2. I gruppi sono mostrati separati. S1 gira a 36 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R2 in un minuto?",
+    "answers": [
+      "36 giri",
+      "9 giri",
+      "27 giri",
+      "18 giri"
+    ],
+    "correct": 1,
+    "explanation": "Nel primo gruppo si divide per 2: 36 : 2 = 18. R1 e S2 fanno gli stessi giri. Nel secondo si divide per 2: 18 : 2 = 9 giri in un minuto.",
+    "image": "quiz-images/gear-school-s47.png"
+  },
+  {
+    "id": "gear-school-s48",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S1 ingrana esternamente con P1a, P1b, P1c; queste tre ruote ingranano con i denti interni di R1. R1 e S2 sono solidali. Nel secondo gruppo S2 ingrana esternamente con P2a, P2b, P2c, che ingranano internamente con R2. I gruppi sono mostrati separati. S1 gira a 72 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R2 in un minuto?",
+    "answers": [
+      "24 giri",
+      "48 giri",
+      "12 giri",
+      "36 giri"
+    ],
+    "correct": 2,
+    "explanation": "Nel primo gruppo si divide per 3: 72 : 3 = 24. R1 e S2 fanno gli stessi giri. Nel secondo si divide per 2: 24 : 2 = 12 giri in un minuto.",
+    "image": "quiz-images/gear-school-s48.png"
+  },
+  {
+    "id": "gear-school-s49",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S1 ingrana esternamente con P1a, P1b, P1c; queste tre ruote ingranano con i denti interni di R1. R1 e S2 sono solidali. Nel secondo gruppo S2 ingrana esternamente con P2a, P2b, P2c, che ingranano internamente con R2. I gruppi sono mostrati separati. S1 gira a 90 giri/min, antiorario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R2 in un minuto?",
+    "answers": [
+      "15 giri",
+      "60 giri",
+      "30 giri",
+      "45 giri"
+    ],
+    "correct": 0,
+    "explanation": "Nel primo gruppo si divide per 2: 90 : 2 = 45. R1 e S2 fanno gli stessi giri. Nel secondo si divide per 3: 45 : 3 = 15 giri in un minuto.",
+    "image": "quiz-images/gear-school-s49.png"
+  },
+  {
+    "id": "gear-school-s50",
+    "category": "logica",
+    "logicTopic": "ingranaggi",
+    "text": "Tutti gli assi sono fissi: le ruote girano su se stesse e non si spostano attorno alla ruota centrale. S1 ingrana esternamente con P1a, P1b, P1c; queste tre ruote ingranano con i denti interni di R1. R1 e S2 sono solidali. Nel secondo gruppo S2 ingrana esternamente con P2a, P2b, P2c, che ingranano internamente con R2. I gruppi sono mostrati separati. S1 gira a 72 giri/min, orario. Tutti i versi si osservano dal lato del lettore.\n\nQuanti giri compie R2 in un minuto?",
+    "answers": [
+      "72 giri",
+      "18 giri",
+      "54 giri",
+      "36 giri"
+    ],
+    "correct": 1,
+    "explanation": "Nel primo gruppo si divide per 2: 72 : 2 = 36. R1 e S2 fanno gli stessi giri. Nel secondo si divide per 2: 36 : 2 = 18 giri in un minuto.",
+    "image": "quiz-images/gear-school-s50.png"
   }
 ]

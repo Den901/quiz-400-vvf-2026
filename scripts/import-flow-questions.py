@@ -10,10 +10,15 @@ import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = Path(sys.argv[1])
+gears = '--gears' in sys.argv[2:]
+pdf_name = '50_quiz_ingranaggi_scuole_superiori.pdf' if gears else '50_quiz_logica.pdf'
+prefix = 'gear-school-' if gears else 'flow-logic-'
+image_prefix = 'gear-school-' if gears else 'flow-'
+topic = 'ingranaggi' if gears else 'flow-chart'
 def norm(value):
     return re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFKD',value).encode('ascii','ignore').decode().lower())
 rows = json.loads((SOURCE/'quiz.json').read_text(encoding='utf-8'))
-pdf = PdfReader(SOURCE/'50_quiz_logica.pdf')
+pdf = PdfReader(SOURCE/pdf_name)
 assert len(rows)==50 and len(pdf.pages)==57
 solutions = '\n'.join(page.extract_text() for page in pdf.pages[51:])
 dataset_path = ROOT/'quiz-dataset.json'
@@ -27,13 +32,14 @@ for i,row in enumerate(rows):
     assert page.startswith(row['id']+' ')
     assert norm(row['scenario']) in norm(page),row['id']
     assert norm(row['question']) in norm(page),row['id']
-    assert re.search(row['id']+r'\s*•\s*Risposta\s+'+row['answer']+r'\b',solutions)
+    pattern = row['id']+r'\s*·\s*'+row['answer']+r'\b' if gears else row['id']+r'\s*•\s*Risposta\s+'+row['answer']+r'\b'
+    assert re.search(pattern,solutions)
     assert all(norm(a) in norm(page) for a in row['options'])
     assert len(row['options'])==len(set(row['options']))==4
-    q={'id':'flow-logic-'+row['id'].lower(),'category':'logica','logicTopic':'flow-chart',
+    q={'id':prefix+row['id'].lower(),'category':'logica','logicTopic':topic,
        'text':row['scenario']+'\n\n'+row['question'],'answers':row['options'],
        'correct':'ABCD'.index(row['answer']),'explanation':row['explanation'],
-       'image':'quiz-images/flow-'+row['id'].lower()+'.png'}
+       'image':'quiz-images/'+image_prefix+row['id'].lower()+'.png'}
     if any(old['id']==q['id'] for old in dataset):
         continue
     image=(SOURCE/row['image']).read_bytes()
@@ -46,5 +52,5 @@ for i,row in enumerate(rows):
 dataset_path.write_text(json.dumps(dataset,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 path=ROOT/'quiz-images.json'
 images=json.loads(path.read_text(encoding='utf-8'))
-path.write_text(json.dumps(list(dict.fromkeys(images+[q['image'] for q in dataset if q['id'].startswith('flow-logic-')])),ensure_ascii=False)+'\n',encoding='utf-8')
-print(f'PDF/JSON: 50 validated; imported {added}; 50 gear IDs retained in Ingranaggi')
+path.write_text(json.dumps(list(dict.fromkeys(images+[q['image'] for q in dataset if q['id'].startswith(prefix)])),ensure_ascii=False)+'\n',encoding='utf-8')
+print(f'PDF/JSON: 50 validated; imported {added}; topic {topic}')

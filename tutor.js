@@ -1,4 +1,4 @@
-import {classifyLogicQuestion,logicTopics} from './logic-topics.js?v=104';
+import {classifyLogicQuestion,logicTopics} from './logic-topics.js?v=105';
 import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=53';
 
 const categoryNames={chimica:'Chimica',fisica:'Fisica',informatica:'Informatica',inglese:'Lingua inglese',logica:'Logica',storia:'Storia'};

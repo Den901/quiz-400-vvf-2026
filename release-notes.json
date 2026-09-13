@@ -1,11 +1,11 @@
 {
-  "version": "3.31.1",
+  "version": "3.32.0",
   "showToUsers": false,
-  "title": "Categorie Ingranaggi e Flow chart",
-  "summary": "Due categorie distinte per gli esercizi illustrati di Logica.",
+  "title": "Nuovi quesiti Ingranaggi",
+  "summary": "50 nuovi quesiti illustrati portano Ingranaggi a 100 domande.",
   "items": [
-    "50 quesiti sulle ruote dentate spostati in Ingranaggi mantenendo i progressi.",
-    "50 nuovi Flow chart con scenari, diagrammi, risposte e spiegazioni.",
+    "50 nuovi Ingranaggi con scenari, diagrammi, risposte e spiegazioni.",
+    "100 quesiti totali nella categoria, conservando ID e progressi precedenti.",
     "Categorie selezionabili nello studio e nella composizione delle prove.",
     "Solo il 14 settembre: Q41 nella quota logica della sfida, sempre di 40 domande.",
     "Nessuna modifica alle prove già create o ai progressi."

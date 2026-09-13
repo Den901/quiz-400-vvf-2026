@@ -2,6 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {classifyLogicQuestion} from '../../logic-topics.js';
+test('100 ingranaggi: 50 originali più 50 nuovi con immagini e soluzioni',()=>{
+ const dataset=JSON.parse(readFileSync(new URL('../../quiz-dataset.json',import.meta.url)));
+ const questions=dataset.filter(q=>q.logicTopic==='ingranaggi');
+ assert.equal(questions.length,100);
+ assert.equal(questions.filter(q=>q.id.startsWith('gear-school-')).length,50);
+ for(const q of questions){assert.equal(q.answers.length,4);assert.ok(q.correct>=0&&q.correct<4);assert.ok(q.explanation);assert.ok(existsSync(new URL('../../'+q.image,import.meta.url)))}
+});
 test('50 quesiti sulle ruote hanno figure, quattro risposte e soluzioni valide',()=>{
  const dataset=JSON.parse(readFileSync(new URL('../../quiz-dataset.json',import.meta.url)));
  const questions=dataset.filter(q=>q.id.startsWith('gear-logic-'));
