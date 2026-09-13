@@ -1,13 +1,12 @@
 {
-  "version": "3.29.1",
+  "version": "3.30.0",
   "showToUsers": false,
-  "title": "Revisione quesiti e ricalcolo sfida",
-  "summary": "Scelta della soluzione corretta più chiara e ricalcolo opzionale della sfida di oggi.",
+  "title": "Nuovi quesiti sulle ruote dentate",
+  "summary": "50 esercizi illustrati integrati in Logica / Figure e simboli.",
   "items": [
-    "Risposta corretta selezionabile accanto a ciascun testo modificabile.",
-    "Opzione admin per ricalcolare punteggi, classifica e statistiche della sfida di oggi.",
-    "Ricalcolo disponibile anche correggendo i testi; le scelte A/B/C/D e i tempi restano conservati.",
-    "Operazione bloccata durante sfide attive e registrata nel registro admin."
+    "50 quesiti sulle ruote dentate con quattro risposte, figure e spiegazioni.",
+    "Solo il 14 settembre: un quesito sulle ruote dentate nella quota logica della sfida, sempre di 40 domande.",
+    "Nessuna modifica alle prove già create o ai progressi."
   ],
   "actionLabel": "Apri Materie",
   "actionHash": "#categories",

@@ -204124,5 +204124,805 @@
     "correct": 3,
     "explanation": "I cinque referendum del 2022 erano referendum abrogativi ai sensi dell'articolo 75 della Costituzione.",
     "image": ""
+  },
+  {
+    "id": "gear-logic-q01",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso orario, come le lancette di un orologio. In quale senso gira B?",
+    "answers": [
+      "Non determinabile dai dati",
+      "Antiorario",
+      "Resta ferma",
+      "Orario"
+    ],
+    "correct": 1,
+    "explanation": "Ogni contatto inverte il verso. Da A a B ci sono 1 contatti: B gira in senso antiorario.",
+    "image": "quiz-images/gear-q01.png"
+  },
+  {
+    "id": "gear-logic-q02",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso antiorario. In quale senso gira B?",
+    "answers": [
+      "Antiorario",
+      "Orario",
+      "Resta ferma",
+      "Non determinabile dai dati"
+    ],
+    "correct": 1,
+    "explanation": "Ogni contatto inverte il verso. Da A a B ci sono 1 contatti: B gira in senso orario.",
+    "image": "quiz-images/gear-q02.png"
+  },
+  {
+    "id": "gear-logic-q03",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso orario. In quale senso gira C?",
+    "answers": [
+      "Antiorario",
+      "Non determinabile dai dati",
+      "Orario",
+      "Resta ferma"
+    ],
+    "correct": 2,
+    "explanation": "Ogni contatto inverte il verso. Da A a C ci sono 2 contatti: C gira in senso orario.",
+    "image": "quiz-images/gear-q03.png"
+  },
+  {
+    "id": "gear-logic-q04",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale altra ruota gira nello stesso verso di A?",
+    "answers": [
+      "B",
+      "Nessuna",
+      "C",
+      "Sia B sia C"
+    ],
+    "correct": 2,
+    "explanation": "B inverte il verso di A; C lo inverte di nuovo e torna al verso di A.",
+    "image": "quiz-images/gear-q04.png"
+  },
+  {
+    "id": "gear-logic-q05",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso orario. In quale senso gira D?",
+    "answers": [
+      "Antiorario",
+      "Resta ferma",
+      "Orario",
+      "Non determinabile dai dati"
+    ],
+    "correct": 0,
+    "explanation": "Ogni contatto inverte il verso. Da A a D ci sono 3 contatti: D gira in senso antiorario.",
+    "image": "quiz-images/gear-q05.png"
+  },
+  {
+    "id": "gear-logic-q06",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A cambia verso, che cosa succede a B?",
+    "answers": [
+      "Cambia verso anche B",
+      "B rimane ferma",
+      "B mantiene il verso di prima",
+      "B si stacca da A"
+    ],
+    "correct": 0,
+    "explanation": "Le ruote restano ingranate: quando si inverte A, si inverte anche B.",
+    "image": "quiz-images/gear-q06.png"
+  },
+  {
+    "id": "gear-logic-q07",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A si ferma e nessuna altra ruota viene azionata. Che cosa fanno B e C?",
+    "answers": [
+      "Continua a girare solo B",
+      "Continua a girare solo C",
+      "Si fermano entrambe",
+      "Continuano entrambe a girare"
+    ],
+    "correct": 2,
+    "explanation": "Le ruote sono collegate dai denti: se A è ferma, anche B e C devono fermarsi.",
+    "image": "quiz-images/gear-q07.png"
+  },
+  {
+    "id": "gear-logic-q08",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Le due ruote esterne sono a contatto. Possono girare nello stesso verso mentre i denti restano ingranati?",
+    "answers": [
+      "No, girano in versi opposti",
+      "Sì, se A gira piano",
+      "Sì, sempre",
+      "Sì, perché hanno la stessa grandezza"
+    ],
+    "correct": 0,
+    "explanation": "Ogni contatto tra due ruote esterne impone versi opposti, anche con ruote uguali.",
+    "image": "quiz-images/gear-q08.png"
+  },
+  {
+    "id": "gear-logic-q09",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale ruota gira nello stesso verso di B?",
+    "answers": [
+      "D",
+      "Nessuna",
+      "C",
+      "A"
+    ],
+    "correct": 0,
+    "explanation": "B e C hanno versi opposti; C e D hanno versi opposti. Quindi B e D hanno lo stesso verso.",
+    "image": "quiz-images/gear-q09.png"
+  },
+  {
+    "id": "gear-logic-q10",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso antiorario. In quale senso gira C? La diversa grandezza delle ruote non cambia la regola del verso.",
+    "answers": [
+      "Orario",
+      "Antiorario",
+      "Resta ferma",
+      "Non determinabile dai dati"
+    ],
+    "correct": 1,
+    "explanation": "Ogni contatto inverte il verso. Da A a C ci sono 2 contatti: C gira in senso antiorario.",
+    "image": "quiz-images/gear-q10.png"
+  },
+  {
+    "id": "gear-logic-q11",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A ha 20 denti e B ne ha 40. Quale ruota fa più giri nello stesso tempo?",
+    "answers": [
+      "Fanno lo stesso numero di giri",
+      "B",
+      "Non si può sapere",
+      "A"
+    ],
+    "correct": 3,
+    "explanation": "La ruota con metà dei denti fa il doppio dei giri. A gira più velocemente.",
+    "image": "quiz-images/gear-q11.png"
+  },
+  {
+    "id": "gear-logic-q12",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale ruota gira più lentamente?",
+    "answers": [
+      "A",
+      "Dipende dal verso di A",
+      "Hanno la stessa velocità",
+      "B"
+    ],
+    "correct": 0,
+    "explanation": "A ha il doppio dei denti di B e compie la metà dei giri.",
+    "image": "quiz-images/gear-q12.png"
+  },
+  {
+    "id": "gear-logic-q13",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A e B hanno entrambe 24 denti. Come sono le loro velocità di rotazione?",
+    "answers": [
+      "B gira il doppio di A",
+      "A gira il doppio di B",
+      "B rimane ferma",
+      "Uguali"
+    ],
+    "correct": 3,
+    "explanation": "A ogni giro di A corrisponde un giro di B: stesso numero di denti, stesso numero di giri.",
+    "image": "quiz-images/gear-q13.png"
+  },
+  {
+    "id": "gear-logic-q14",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B ha il doppio dei denti di A. Rispetto ad A, B gira...",
+    "answers": [
+      "Alla metà della velocità",
+      "Al doppio della velocità",
+      "Alla stessa velocità",
+      "A quattro volte la velocità"
+    ],
+    "correct": 0,
+    "explanation": "Per completare un giro, B deve far passare il doppio dei denti: impiega il doppio del tempo.",
+    "image": "quiz-images/gear-q14.png"
+  },
+  {
+    "id": "gear-logic-q15",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B ha la metà dei denti di A. Rispetto ad A, B gira...",
+    "answers": [
+      "Alla metà della velocità",
+      "Alla stessa velocità",
+      "Al doppio della velocità",
+      "A un quarto della velocità"
+    ],
+    "correct": 2,
+    "explanation": "B ha metà dei denti e completa due giri mentre A ne completa uno.",
+    "image": "quiz-images/gear-q15.png"
+  },
+  {
+    "id": "gear-logic-q16",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A raddoppia la sua velocità, che cosa succede alla velocità di B?",
+    "answers": [
+      "Resta uguale",
+      "Si dimezza",
+      "Raddoppia anche quella di B",
+      "Diventa quattro volte maggiore"
+    ],
+    "correct": 2,
+    "explanation": "Il rapporto tra le ruote rimane lo stesso. Se A va due volte più veloce, anche B va due volte più veloce.",
+    "image": "quiz-images/gear-q16.png"
+  },
+  {
+    "id": "gear-logic-q17",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A passa dalla sua velocità iniziale alla metà, che cosa succede a B?",
+    "answers": [
+      "B raddoppia la velocità",
+      "Anche B dimezza la velocità",
+      "B cambia soltanto verso",
+      "B mantiene la velocità iniziale"
+    ],
+    "correct": 1,
+    "explanation": "Con gli stessi denti, le velocità cambiano nella stessa proporzione.",
+    "image": "quiz-images/gear-q17.png"
+  },
+  {
+    "id": "gear-logic-q18",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale ruota compie più giri nello stesso tempo?",
+    "answers": [
+      "A",
+      "Tutte uguali",
+      "B",
+      "C"
+    ],
+    "correct": 0,
+    "explanation": "A ha meno denti di tutte: nel treno semplice è la ruota che gira più velocemente.",
+    "image": "quiz-images/gear-q18.png"
+  },
+  {
+    "id": "gear-logic-q19",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale ruota compie meno giri nello stesso tempo?",
+    "answers": [
+      "C",
+      "Tutte uguali",
+      "A",
+      "B"
+    ],
+    "correct": 3,
+    "explanation": "B ha più denti delle altre e quindi gira più lentamente.",
+    "image": "quiz-images/gear-q19.png"
+  },
+  {
+    "id": "gear-logic-q20",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A e C hanno lo stesso numero di denti. Come sono le loro velocità?",
+    "answers": [
+      "C va il doppio di A",
+      "C va alla metà di A",
+      "Uguali",
+      "Dipende dai denti di B"
+    ],
+    "correct": 2,
+    "explanation": "La ruota intermedia cambia due volte il verso, ma il rapporto finale dipende solo da A e C. Con denti uguali, le velocità sono uguali.",
+    "image": "quiz-images/gear-q20.png"
+  },
+  {
+    "id": "gear-logic-q21",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A fa 1 giro completo, quanti giri fa B?",
+    "answers": [
+      "3",
+      "2",
+      "4",
+      "1"
+    ],
+    "correct": 3,
+    "explanation": "Le ruote hanno lo stesso numero di denti: un giro di A corrisponde a un giro di B.",
+    "image": "quiz-images/gear-q21.png"
+  },
+  {
+    "id": "gear-logic-q22",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A fa 4 giri, quanti giri fa B?",
+    "answers": [
+      "8",
+      "4",
+      "1",
+      "2"
+    ],
+    "correct": 3,
+    "explanation": "B ha il doppio dei denti: fa metà dei giri, cioè 4 diviso 2 = 2.",
+    "image": "quiz-images/gear-q22.png"
+  },
+  {
+    "id": "gear-logic-q23",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Se A fa 3 giri, quanti giri fa B?",
+    "answers": [
+      "3",
+      "9",
+      "6",
+      "1"
+    ],
+    "correct": 2,
+    "explanation": "B ha metà dei denti: fa il doppio dei giri, cioè 3 × 2 = 6.",
+    "image": "quiz-images/gear-q23.png"
+  },
+  {
+    "id": "gear-logic-q24",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 6 giri. B ha tre volte i denti di A: quanti giri fa?",
+    "answers": [
+      "18",
+      "6",
+      "2",
+      "3"
+    ],
+    "correct": 2,
+    "explanation": "B fa un terzo dei giri di A: 6 diviso 3 = 2.",
+    "image": "quiz-images/gear-q24.png"
+  },
+  {
+    "id": "gear-logic-q25",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 2 giri. Quanti giri fa B?",
+    "answers": [
+      "3",
+      "4",
+      "2",
+      "6"
+    ],
+    "correct": 3,
+    "explanation": "B ha un terzo dei denti di A: fa tre volte i giri, cioè 2 × 3 = 6.",
+    "image": "quiz-images/gear-q25.png"
+  },
+  {
+    "id": "gear-logic-q26",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 60 giri al minuto. Quanti ne fa B?",
+    "answers": [
+      "90 giri/min",
+      "30 giri/min",
+      "15 giri/min",
+      "60 giri/min"
+    ],
+    "correct": 1,
+    "explanation": "B ha il doppio dei denti di A: fa la metà dei giri. 60 diviso 2 = 30 giri al minuto.",
+    "image": "quiz-images/gear-q26.png"
+  },
+  {
+    "id": "gear-logic-q27",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 30 giri al minuto. Quanti ne fa B?",
+    "answers": [
+      "60 giri/min",
+      "180 giri/min",
+      "30 giri/min",
+      "120 giri/min"
+    ],
+    "correct": 0,
+    "explanation": "B ha metà dei denti di A: fa il doppio dei giri. 30 × 2 = 60 giri al minuto.",
+    "image": "quiz-images/gear-q27.png"
+  },
+  {
+    "id": "gear-logic-q28",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 40 giri al minuto. Quanti ne fa B?",
+    "answers": [
+      "40 giri/min",
+      "80 giri/min",
+      "20 giri/min",
+      "120 giri/min"
+    ],
+    "correct": 0,
+    "explanation": "Le ruote hanno entrambe 20 denti: B fa gli stessi 40 giri al minuto di A.",
+    "image": "quiz-images/gear-q28.png"
+  },
+  {
+    "id": "gear-logic-q29",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa un giro completo. Quanto ruota B?",
+    "answers": [
+      "Un giro",
+      "Tre giri",
+      "Mezzo giro",
+      "Due giri"
+    ],
+    "correct": 2,
+    "explanation": "B ha il doppio dei denti e percorre metà giro quando A ne percorre uno.",
+    "image": "quiz-images/gear-q29.png"
+  },
+  {
+    "id": "gear-logic-q30",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A compie mezzo giro. Quanti giri compie B?",
+    "answers": [
+      "Un giro",
+      "Due giri",
+      "Quattro giri",
+      "Mezzo giro"
+    ],
+    "correct": 0,
+    "explanation": "B gira due volte più velocemente di A. Due volte mezzo giro fa un giro.",
+    "image": "quiz-images/gear-q30.png"
+  },
+  {
+    "id": "gear-logic-q31",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 2 giri. Quanti giri fa C?",
+    "answers": [
+      "2",
+      "4",
+      "1",
+      "6"
+    ],
+    "correct": 0,
+    "explanation": "Tutte le ruote hanno 20 denti: fanno lo stesso numero di giri. Quindi C fa 2 giri.",
+    "image": "quiz-images/gear-q31.png"
+  },
+  {
+    "id": "gear-logic-q32",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 4 giri. C ha il doppio dei denti di A. Quanti giri fa C?",
+    "answers": [
+      "8",
+      "4",
+      "1",
+      "2"
+    ],
+    "correct": 3,
+    "explanation": "Per confrontare prima e ultima ruota basta guardare i loro denti. C ne ha il doppio e fa metà dei giri: 2.",
+    "image": "quiz-images/gear-q32.png"
+  },
+  {
+    "id": "gear-logic-q33",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A fa 3 giri. C ha la metà dei denti di A. Quanti giri fa C?",
+    "answers": [
+      "1",
+      "6",
+      "9",
+      "3"
+    ],
+    "correct": 1,
+    "explanation": "C ha metà dei denti di A e fa il doppio dei giri: 3 × 2 = 6.",
+    "image": "quiz-images/gear-q33.png"
+  },
+  {
+    "id": "gear-logic-q34",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Si toglie B e si avvicinano A e C fino a farle ingranare. Che cosa cambia per C, con A sempre uguale?",
+    "answers": [
+      "C cambia verso, ma non velocità",
+      "C si ferma",
+      "C dimezza la velocità",
+      "C raddoppia la velocità"
+    ],
+    "correct": 0,
+    "explanation": "Prima ci sono due contatti, dopo uno: il verso cambia. A e C restano uguali, quindi mantengono la stessa velocità.",
+    "image": "quiz-images/gear-q34.png"
+  },
+  {
+    "id": "gear-logic-q35",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Si cambia solo B con una ruota più grande e si riposizionano gli assi. A mantiene la stessa velocità. Che cosa succede alla velocità di C?",
+    "answers": [
+      "Resta uguale",
+      "Raddoppia sempre",
+      "Diventa zero",
+      "Si dimezza sempre"
+    ],
+    "correct": 0,
+    "explanation": "La ruota in mezzo trasmette il moto. Il rapporto tra A e C dipende dai denti di A e C, che non sono cambiati.",
+    "image": "quiz-images/gear-q35.png"
+  },
+  {
+    "id": "gear-logic-q36",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Fra A e B si inserisce una terza ruota, riposizionando gli assi. A mantiene il verso indicato. In quale verso girerà B?",
+    "answers": [
+      "Nello stesso verso di A",
+      "Il verso dipenderà dalla velocità",
+      "Nel verso opposto ad A",
+      "B non girerà"
+    ],
+    "correct": 0,
+    "explanation": "Con la ruota aggiunta ci sono due contatti anziché uno: due inversioni riportano al verso di A.",
+    "image": "quiz-images/gear-q36.png"
+  },
+  {
+    "id": "gear-logic-q37",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A gira in senso orario. Quale ruota gira in senso antiorario?",
+    "answers": [
+      "Solo B",
+      "Nessuna",
+      "Solo C",
+      "Sia B sia C"
+    ],
+    "correct": 0,
+    "explanation": "B ha verso opposto ad A; C ha verso opposto a B e quindi torna oraria.",
+    "image": "quiz-images/gear-q37.png"
+  },
+  {
+    "id": "gear-logic-q38",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B è più grande delle altre. Quale affermazione è corretta?",
+    "answers": [
+      "C non gira",
+      "C gira più veloce di A",
+      "A e C hanno la stessa velocità",
+      "C gira più piano di A"
+    ],
+    "correct": 2,
+    "explanation": "A e C hanno gli stessi denti e fanno lo stesso numero di giri. La grandezza di B non modifica questo confronto.",
+    "image": "quiz-images/gear-q38.png"
+  },
+  {
+    "id": "gear-logic-q39",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "A passa dal senso orario a quello antiorario. Che cosa succede a B e C?",
+    "answers": [
+      "Cambiano verso entrambe",
+      "Cambia verso solo C",
+      "Nessuna cambia verso",
+      "Cambia verso solo B"
+    ],
+    "correct": 0,
+    "explanation": "Il cambio di verso si trasmette attraverso tutti i contatti: cambiano verso sia B sia C.",
+    "image": "quiz-images/gear-q39.png"
+  },
+  {
+    "id": "gear-logic-q40",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "Quale coppia di ruote gira nello stesso verso?",
+    "answers": [
+      "A e B",
+      "C e D",
+      "B e C",
+      "A e C"
+    ],
+    "correct": 3,
+    "explanation": "A e C sono separate da due contatti e hanno lo stesso verso. Le altre coppie elencate sono a contatto e hanno versi opposti.",
+    "image": "quiz-images/gear-q40.png"
+  },
+  {
+    "id": "gear-logic-q41",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero, come due ruote bloccate su una stessa asta. Se B fa 1 giro, quanti giri fa C?",
+    "answers": [
+      "1",
+      "3",
+      "4",
+      "2"
+    ],
+    "correct": 0,
+    "explanation": "Essendo fissate alla stessa asta, B e C girano insieme e compiono lo stesso numero di giri.",
+    "image": "quiz-images/gear-q41.png"
+  },
+  {
+    "id": "gear-logic-q42",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. Se B gira in senso antiorario, come gira C?",
+    "answers": [
+      "In senso orario",
+      "In senso antiorario",
+      "Dipende dai denti di C",
+      "C rimane ferma"
+    ],
+    "correct": 1,
+    "explanation": "Due ruote bloccate sulla stessa asta girano nello stesso verso.",
+    "image": "quiz-images/gear-q42.png"
+  },
+  {
+    "id": "gear-logic-q43",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C hanno un numero diverso di denti, ma sono fissate allo stesso albero. Quale gira più velocemente?",
+    "answers": [
+      "Dipende dal verso di A",
+      "Nessuna: hanno la stessa velocità",
+      "B",
+      "C"
+    ],
+    "correct": 1,
+    "explanation": "I denti non cambiano il vincolo dell’asta: B e C fanno sempre lo stesso numero di giri.",
+    "image": "quiz-images/gear-q43.png"
+  },
+  {
+    "id": "gear-logic-q44",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. A gira in senso orario. In quale senso gira D?",
+    "answers": [
+      "Antiorario",
+      "Non si può sapere",
+      "Orario",
+      "D resta ferma"
+    ],
+    "correct": 2,
+    "explanation": "A fa girare B in senso antiorario. C gira insieme a B. C fa girare D in senso orario.",
+    "image": "quiz-images/gear-q44.png"
+  },
+  {
+    "id": "gear-logic-q45",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. Se B viene tenuta ferma, C può continuare a girare?",
+    "answers": [
+      "Sì, ma solo in senso orario",
+      "No, è fissata alla stessa asta",
+      "Sì, ma solo lentamente",
+      "Sì, perché ha meno denti"
+    ],
+    "correct": 1,
+    "explanation": "B e C non possono muoversi una rispetto all’altra: se B è ferma, anche C è ferma.",
+    "image": "quiz-images/gear-q45.png"
+  },
+  {
+    "id": "gear-logic-q46",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. A fa 4 giri; B ha il doppio dei denti di A. Quanti giri fa C?",
+    "answers": [
+      "1",
+      "4",
+      "2",
+      "8"
+    ],
+    "correct": 2,
+    "explanation": "B fa metà dei giri di A: 4 diviso 2 = 2. C è fissata a B, quindi fa gli stessi 2 giri.",
+    "image": "quiz-images/gear-q46.png"
+  },
+  {
+    "id": "gear-logic-q47",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. A fa 4 giri. B ha il doppio dei denti di A e D il doppio di C. Quanti giri fa D?",
+    "answers": [
+      "8",
+      "1",
+      "2",
+      "4"
+    ],
+    "correct": 1,
+    "explanation": "Prima si dimezza: B e C fanno 2 giri. Poi si dimezza ancora: D fa 1 giro.",
+    "image": "quiz-images/gear-q47.png"
+  },
+  {
+    "id": "gear-logic-q48",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. Ogni coppia a contatto ha ruote uguali. A fa 3 giri: quanti ne fa D?",
+    "answers": [
+      "3",
+      "1",
+      "9",
+      "6"
+    ],
+    "correct": 0,
+    "explanation": "Ogni coppia trasmette lo stesso numero di giri. Anche B e C girano insieme: tutte fanno 3 giri.",
+    "image": "quiz-images/gear-q48.png"
+  },
+  {
+    "id": "gear-logic-q49",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. A fa 2 giri: B ne fa il doppio, poi D fa la metà dei giri di C. Quanti giri fa D?",
+    "answers": [
+      "4",
+      "8",
+      "1",
+      "2"
+    ],
+    "correct": 3,
+    "explanation": "B fa 4 giri, C fa gli stessi 4 giri e D ne fa la metà: 2.",
+    "image": "quiz-images/gear-q49.png"
+  },
+  {
+    "id": "gear-logic-q50",
+    "category": "logica",
+    "logicTopic": "figure",
+    "studyTopic": "ruote-dentate",
+    "text": "B e C sono fissate allo stesso albero. Le due coppie a contatto hanno ruote uguali. Come gira D rispetto ad A?",
+    "answers": [
+      "Stessa velocità e stesso verso",
+      "Velocità doppia, stesso verso",
+      "Velocità dimezzata, verso opposto",
+      "Stessa velocità, verso opposto"
+    ],
+    "correct": 0,
+    "explanation": "Le ruote uguali mantengono la velocità. I due contatti invertono il verso due volte: D gira come A.",
+    "image": "quiz-images/gear-q50.png"
   }
 ]

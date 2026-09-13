@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.30.0 - 2026-09-13
+
+- Integrati 50 quesiti illustrati sulle ruote dentate in Logica / Figure e simboli, con risposte e spiegazioni fornite dall’utente.
+- Solo nella sfida del 14 settembre 2026: esattamente un quesito sulle ruote dentate, dentro la quota logica e senza modificare il totale di 40 domande.
+- Sfida già creata, prove e progressi invariati. Nessun popup generale.
+
 ## 3.29.1 - 2026-09-13
 
 - Il ricalcolo della sfida consente anche testi domanda e risposte corretti, conservando le scelte A/B/C/D degli utenti.

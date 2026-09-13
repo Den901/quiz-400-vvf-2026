@@ -32,6 +32,15 @@ from fastapi.testclient import TestClient
 
 from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_forty_question_bank, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
 
+def test_gear_question_one_off_keeps_daily_composition():
+    from datetime import date
+    with TestClient(app):
+        with SessionLocal() as db:
+            challenge = build_daily_challenge(date(2026, 9, 14), db)
+            assert len(challenge.question_ids) == len(set(challenge.question_ids)) == 40
+            assert sum(q.startswith('gear-logic-') for q in challenge.question_ids) == 1
+            assert challenge.composition['examPlan'] == {'storia': 8, 'logica': 12, 'fisica': 6, 'chimica': 6, 'informatica': 4, 'inglese': 4}
+
 
 def login(client: TestClient, username: str, password: str):
     return client.post("/api/auth/login", json={"username": username, "password": password})
@@ -69,8 +78,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.29.1"
-        assert runtime.json()["releaseNotes"]["version"] == "3.29.1"
+        assert runtime.json()["version"] == "3.30.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.30.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -655,7 +664,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.29.1"
+        assert update_status.json()["currentVersion"] == "3.30.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

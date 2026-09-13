@@ -10,7 +10,7 @@ const imported=logicQuestions.filter(question=>String(question.id).startsWith('l
 test('all logic questions belong to a selectable subsection',()=>{
  const ids=new Set(logicTopics.map(topic=>topic.id));
  assert.equal(logicTopics.length,10);
- assert.equal(logicQuestions.length,5853);
+ assert.equal(logicQuestions.length,5903);
  for(const question of logicQuestions){
   const topic=classifyLogicQuestion(question);
   assert.ok(ids.has(topic),`${question.id} has invalid topic ${topic}`);
@@ -22,8 +22,8 @@ test('brani and insiemi are selectable types inside the logic macro subject',()=
  assert.equal(logicQuestions.filter(question=>classifyLogicQuestion(question)==='brani').length,648);
  assert.equal(logicQuestions.filter(question=>classifyLogicQuestion(question)==='insiemi').length,274);
  const figures=logicQuestions.filter(question=>classifyLogicQuestion(question)==='figure');
- assert.equal(figures.length,785);
- assert.equal(figures.filter(question=>question.image).length,765);
+ assert.equal(figures.length,835);
+ assert.equal(figures.filter(question=>question.image).length,815);
 });
 
 test('the imported bank excludes long passages and duplicate questions',()=>{

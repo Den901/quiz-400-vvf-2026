@@ -1168,6 +1168,13 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
     plan = composition["examPlan"]
     logic_plan = composition["logicPlan"]
     active_bank = available_forty_question_bank(db)
+    gear_day = challenge_date == date(2026, 9, 14)
+    gear_source = [row for row in active_bank if str(row['id']).startswith('gear-logic-')]
+    if gear_day:
+        # One-off requested exercise: one gear question within the existing logic quota.
+        active_bank = [row for row in active_bank if not str(row['id']).startswith('gear-logic-')]
+        if not gear_source or not logic_plan.get('figure'):
+            raise HTTPException(503, "La sfida del 14 settembre richiede un quesito sulle ruote dentate nella quota Figure.")
     usage = daily_challenge_question_usage(challenge_date, db)
     seed = f"quiz400-daily|{challenge_date.isoformat()}|{APP_VERSION}"
     selected: list[dict[str, Any]] = []
@@ -1180,6 +1187,9 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
             continue
         logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]
         for topic, topic_count in logic_plan.items():
+            if gear_day and topic == 'figure' and topic_count:
+                selected.extend(rotating_daily_questions(gear_source, 1, f"{seed}|ruote-dentate", usage))
+                topic_count -= 1
             if topic_count:
                 source = [row for row in logic_source if challenge_logic_topic(row) == topic]
                 selected.extend(rotating_daily_questions(source, topic_count, f"{seed}|logica|{topic}", usage))
