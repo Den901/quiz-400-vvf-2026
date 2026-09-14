@@ -1,14 +1,14 @@
 import {categories} from './data.js';
-import {applyLearningOutcome,completionPercent,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,isLearningClassified,normalizeLearningStatus,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=108';
-import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=108';
-import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=108';
-import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=108';
-import {renderNotes} from './notes-ui.js?v=108';
-import {allStudyResources,studyPaths} from './study-paths.js?v=108';
-import {checkpointQuestionPool} from './study-checkpoint.js?v=108';
-import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=108';
-import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=108';
-import {DEFAULT_ADDITIONAL_QUESTION_BANKS,normalizeAdditionalQuestionBanks,questionAllowedInForty} from './additional-banks.js?v=108';
+import {applyLearningOutcome,completionPercent,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,isLearningClassified,normalizeLearningStatus,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=109';
+import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=109';
+import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=109';
+import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=109';
+import {renderNotes} from './notes-ui.js?v=109';
+import {allStudyResources,studyPaths} from './study-paths.js?v=109';
+import {checkpointQuestionPool} from './study-checkpoint.js?v=109';
+import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=109';
+import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=109';
+import {DEFAULT_ADDITIONAL_QUESTION_BANKS,normalizeAdditionalQuestionBanks,questionAllowedInForty} from './additional-banks.js?v=109';
 
 const app=document.querySelector('#app'),toast=document.querySelector('#toast');
 const USERS='fq-users-v2',SESSION='fq-session-v2',DATA='fuocoquiz-data-v1',CONFIG='q400vvf-config-v1',ACTIVE_QUIZZES='q400vvf-active-quizzes-v1';

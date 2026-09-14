@@ -1,8 +1,8 @@
 {
-  "version": "3.33.0",
+  "version": "3.33.1",
   "showToUsers": false,
-  "title": "Nuovi quiz di Logica e Informatica",
-  "summary": "334 nuovi quesiti di Logica e 429 di Informatica, suddivisi per argomento e con immagini apribili con zoom.",
+  "title": "Informatica figure",
+  "summary": "I 12 quesiti illustrati di Informatica sono raccolti nella sottosezione Informatica figure, con zoom e progressi conservati.",
   "items": [
     "8 nuovi Ingranaggi: la categoria contiene 108 quesiti.",
     "12 nuovi quesiti di Informatica con figure, apribili con zoom fino al 300%.",

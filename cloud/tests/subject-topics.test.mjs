@@ -7,7 +7,7 @@ const dataset=JSON.parse(await readFile(new URL('../../quiz-dataset.json',import
 const expectedCounts={
  chimica:{materia:25,atomo:405,legami:360,reazioni:195,'moli-soluzioni':153,'acidi-basi':186,'stati-gas':65,organica:84,'bio-applicata':25,generale:179},
  fisica:{misure:183,cinematica:302,dinamica:333,energia:155,fluidi:179,termologia:316,'onde-ottica':112,elettromagnetismo:183,atomica:64,generale:177},
- informatica:{hardware:314,'sistemi-file':386,word:314,excel:307,'office-dati':246,reti:234,internet:215,sicurezza:133,'software-dati':186,generale:213},
+ informatica:{figure:12,hardware:314,'sistemi-file':386,word:309,excel:301,'office-dati':245,reti:234,internet:215,sicurezza:133,'software-dati':186,generale:213},
  storia:{risorgimento:139,'italia-postunitaria':399,'eta-giolittiana':84,'prima-guerra':95,fascismo:143,'seconda-guerra':85,'repubblica-primi-anni':111,'repubblica-contemporanea':312,'storia-internazionale':32,generale:163},
  inglese:{'tempi-verbali':388,'modali-condizionali':63,pronomi:83,'nomi-articoli':105,'aggettivi-avverbi':64,preposizioni:159,'costruzione-frase':73,'phrasal-idioms':23,vocabolario:79,generale:514}
 };
@@ -15,7 +15,7 @@ const expectedCounts={
 test('every supported subject question belongs to one selectable topic',()=>{
  for(const category of Object.keys(expectedCounts)){
   const questions=dataset.filter(question=>question.category===category),validIds=new Set(subjectTopics[category].map(topic=>topic.id));
-  assert.equal(subjectTopics[category].length,10);
+  assert.equal(subjectTopics[category].length,category==='informatica'?11:10);
   for(const question of questions)assert.ok(validIds.has(classifySubjectQuestion(question)),`${question.id} has no valid ${category} topic`);
  }
 });
@@ -60,6 +60,7 @@ test('representative questions are routed to the requested areas',()=>{
  assert.equal(classifySubjectQuestion({category:'fisica',text:'Un corpo si muove a velocità costante',answers:[]}), 'cinematica');
  assert.equal(classifySubjectQuestion({category:'fisica',text:'La legge di Ohm descrive un circuito elettrico',answers:[]}), 'elettromagnetismo');
  assert.equal(classifySubjectQuestion({category:'informatica',text:'In Microsoft Excel quale formula somma le celle?',answers:[]}), 'excel');
+ assert.equal(classifySubjectQuestion({category:'informatica',text:'In Microsoft Excel quale icona?',image:'quiz-images/example.png',answers:[]}), 'figure');
  assert.equal(classifySubjectQuestion({category:'informatica',text:'Che cosa indica un indirizzo IP in una rete LAN?',answers:[]}), 'reti');
  assert.equal(classifySubjectQuestion({category:'storia',text:'Quale episodio concluse la spedizione dei Mille di Garibaldi?',answers:[]}), 'risorgimento');
  assert.equal(classifySubjectQuestion({category:'storia',text:'Quando avvenne il referendum istituzionale del 2 giugno?',answers:[]}), 'repubblica-primi-anni');

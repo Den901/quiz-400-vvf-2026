@@ -126,6 +126,12 @@ const physicsTopics = [
 
 const computerScienceTopics = [
   {
+    id: 'figure',
+    name: 'Informatica figure',
+    shortName: 'Informatica figure',
+    description: 'Quesiti con immagini: riconoscimento di comandi, icone e interfacce dei programmi.'
+  },
+  {
     id: 'hardware',
     name: 'Hardware, componenti e periferiche',
     shortName: 'Hardware',
@@ -373,6 +379,7 @@ function physicsTopic(question, includeAnswers = false) {
 }
 
 function computerScienceTopic(question, includeAnswers = false) {
+  if (question?.image) return 'figure';
   const text = questionCorrectText(question, includeAnswers);
 
   if (/\b(virus|antivirus|malware|trojan|worm|spyware|ransomware|adware|phishing|spam|firewall|password|credenzial|autenticazion|crittograf|cifratur|firma digitale|certificato digitale|sicurezza informatica|attacco informatico|hacker|backup|back up|copia di sicurezza|protezione dei dati|privacy)\b/.test(text)) return 'sicurezza';

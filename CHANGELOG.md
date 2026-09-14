@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.33.1 - 2026-09-14
+
+- Creata la sottosezione Informatica figure con i 12 quesiti illustrati, separati dagli altri sottoargomenti.
+- Conservati identificativi, risposte, progressi e zoom delle immagini. Nessuna modifica alle sfide già create.
+
 ## 3.33.0 - 2026-09-14
 
 - Importati dai PDF forniti 334 nuovi quesiti di Logica e 429 di Informatica, senza duplicare i quesiti già presenti; risposte e numero di alternative originali conservati.

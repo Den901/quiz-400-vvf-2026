@@ -72,7 +72,8 @@ test('la storia copre Re e Presidenti del Consiglio dal 1861', () => {
 });
 
 test('gli appunti seguono i 30 sottoargomenti effettivi del dataset', () => {
-  assert.deepEqual(computerScienceNotes.map(item => item.id.replace('informatica-', '')), subjectTopics.informatica.map(item => item.id));
+  // Illustrated questions reuse the Word/Excel notes; figure is a presentation group, not a new theory topic.
+  assert.deepEqual(computerScienceNotes.map(item => item.id.replace('informatica-', '')), subjectTopics.informatica.filter(item=>item.id!=='figure').map(item => item.id));
   assert.deepEqual(logicNotes.map(item => item.id.replace('logica-', '')), logicTopics.filter(item=>!['ingranaggi','flow-chart'].includes(item.id)).map(item => item.id));
   assert.deepEqual(englishNotes.map(item => item.id.replace('inglese-', '')), subjectTopics.inglese.map(item => item.id));
   assert.equal(computerScienceNotes.reduce((sum, item) => sum + item.quizCount, 0), 2119);
