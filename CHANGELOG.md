@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.33.3 - 2026-09-14
+
+- Dal 15 settembre ogni nuova Sfida del giorno include un quesito dei 350 Office illustrati, nella quota Informatica: una domanda Office e tre delle altre sottosezioni.
+- Rotazione basata sulle sfide precedenti, privilegiando quesiti mai proposti. Totale invariato di 40 domande; sfide già create intatte.
+
 ## 3.33.2 - 2026-09-14
 
 - Informatica figure rinominata Pacchetto Office, conservando identificativi e progressi.

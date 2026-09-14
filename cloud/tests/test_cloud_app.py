@@ -51,16 +51,18 @@ def login(client: TestClient, username: str, password: str):
     return client.post("/api/auth/login", json={"username": username, "password": password})
 
 
-def test_september_15_has_one_new_illustrated_computer_question():
+def test_every_daily_challenge_has_exactly_one_office_question_from_september_15():
     from datetime import date
     from cloud.app import questions_by_id
     with TestClient(app):
         with SessionLocal() as db:
-            challenge=build_daily_challenge(date(2026,9,15),db)
-            selected=[questions_by_id[q] for q in challenge.question_ids]
-            assert len(selected)==40
-            assert sum(q['category']=='informatica' for q in selected)==4
-            assert sum(q['id'].startswith('info-pdf-') and bool(q['image']) for q in selected)==1
+            for day in [date(2026,9,15),date(2026,9,16),date(2027,1,1)]:
+                challenge=build_daily_challenge(day,db)
+                selected=[questions_by_id[q] for q in challenge.question_ids]
+                assert len(selected)==40
+                assert sum(q['category']=='informatica' for q in selected)==4
+                assert sum(q['id'].startswith('office-mininterno-') for q in selected)==1
+                assert sum(q['category']=='informatica' and bool(q.get('image')) for q in selected)==1
 
 
 def test_daily_challenge_rotation_prefers_unseen_then_oldest_questions():
@@ -95,8 +97,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.33.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.33.2"
+        assert runtime.json()["version"] == "3.33.3"
+        assert runtime.json()["releaseNotes"]["version"] == "3.33.3"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -681,7 +683,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.33.2"
+        assert update_status.json()["currentVersion"] == "3.33.3"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
