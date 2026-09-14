@@ -9,7 +9,7 @@ test('Flow chart e Ingranaggi non usano il limite compatto delle immagini',()=>{
 });
 test('100 ingranaggi: 50 originali più 50 nuovi con immagini e soluzioni',()=>{
  const dataset=JSON.parse(readFileSync(new URL('../../quiz-dataset.json',import.meta.url)));
- const questions=dataset.filter(q=>q.logicTopic==='ingranaggi');
+ const questions=dataset.filter(q=>q.logicTopic==='ingranaggi'&&q.id.startsWith('gear-'));
  assert.equal(questions.length,100);
  assert.equal(questions.filter(q=>q.id.startsWith('gear-school-')).length,50);
  for(const q of questions){assert.equal(q.answers.length,4);assert.ok(q.correct>=0&&q.correct<4);assert.ok(q.explanation);assert.ok(existsSync(new URL('../../'+q.image,import.meta.url)))}

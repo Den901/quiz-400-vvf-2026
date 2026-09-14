@@ -1203,6 +1203,13 @@ def build_daily_challenge(challenge_date: date, db: Session) -> DailyChallenge:
             continue
         if category != "logica":
             source = [row for row in active_bank if macro_question_category(row.get("category")) == category]
+            if challenge_date == date(2026, 9, 15) and category == 'informatica' and count:
+                illustrated = [row for row in source if str(row['id']).startswith('info-pdf-') and row.get('image')]
+                if not illustrated:
+                    raise HTTPException(503, "Quesito Informatica illustrato non disponibile per il 15 settembre.")
+                selected.extend(rotating_daily_questions(illustrated, 1, f"{seed}|informatica-illustrata", usage))
+                source = [row for row in source if row not in illustrated]
+                count -= 1
             selected.extend(rotating_daily_questions(source, count, f"{seed}|{category}", usage))
             continue
         logic_source = [row for row in active_bank if macro_question_category(row.get("category")) == "logica"]

@@ -1,14 +1,14 @@
 import {categories} from './data.js';
-import {applyLearningOutcome,completionPercent,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,isLearningClassified,normalizeLearningStatus,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=107';
-import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=107';
-import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=107';
-import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=107';
-import {renderNotes} from './notes-ui.js?v=107';
-import {allStudyResources,studyPaths} from './study-paths.js?v=107';
-import {checkpointQuestionPool} from './study-checkpoint.js?v=107';
-import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=107';
-import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=107';
-import {DEFAULT_ADDITIONAL_QUESTION_BANKS,normalizeAdditionalQuestionBanks,questionAllowedInForty} from './additional-banks.js?v=107';
+import {applyLearningOutcome,completionPercent,ensureGuidedPendingAnswers,guidedPendingAnswerAt,guidedResultRows,isLearningClassified,normalizeLearningStatus,selectAdaptiveQuestions,selectOrderedQuestions,selectPersonalizedQuestions,selectRotatingQuestions,setGuidedPendingAnswer} from './quiz-selection.js?v=108';
+import {classifyLogicQuestion,defaultLogicPlan,logicPlanTotal,logicTopics,normalizeLogicPlan,selectLogicQuestionsByPlan} from './logic-topics.js?v=108';
+import {classifySubjectQuestion,subjectTopics,topicDefinition} from './subject-topics.js?v=108';
+import {buildTutorAllocation,buildTutorAnalysis,tutorQuestionCount,tutorTrackForQuestion} from './tutor.js?v=108';
+import {renderNotes} from './notes-ui.js?v=108';
+import {allStudyResources,studyPaths} from './study-paths.js?v=108';
+import {checkpointQuestionPool} from './study-checkpoint.js?v=108';
+import {renderStudyPaths,renderStudyResource,studyProgressSummary} from './study-paths-ui.js?v=108';
+import {italyChallengeReminderMoment,normalizeChallengeReminderHistory,shouldShowChallengeReminder} from './challenge-reminders.js?v=108';
+import {DEFAULT_ADDITIONAL_QUESTION_BANKS,normalizeAdditionalQuestionBanks,questionAllowedInForty} from './additional-banks.js?v=108';
 
 const app=document.querySelector('#app'),toast=document.querySelector('#toast');
 const USERS='fq-users-v2',SESSION='fq-session-v2',DATA='fuocoquiz-data-v1',CONFIG='q400vvf-config-v1',ACTIVE_QUIZZES='q400vvf-active-quizzes-v1';
@@ -778,3 +778,22 @@ settingsView=function(){settingsBeforeAccordion();if(currentUser?.role!=='admin'
 app.innerHTML='<div class="card">Caricamento banca dati…</div>';
 async function bootstrapApplication(){try{try{const response=await fetch('./api/runtime',{cache:'no-store'});if(response.ok){runtimeConfig=await response.json();cloudMode=runtimeConfig.mode==='cloud'}}catch{}if(cloudMode){document.documentElement.classList.add('cloud-mode');document.title=runtimeConfig.siteName||document.title;document.querySelector('.brand>span:last-child').textContent=runtimeConfig.siteName||'Quiz 400 VVF 2026';examConfig=normalizeExamConfigValue(runtimeConfig.examConfig||examConfig);localStorage.removeItem(USERS);try{const session=await cloudApi('./api/auth/me');examConfig=normalizeExamConfigValue(session.config||examConfig);users=[session.user];currentUser={id:session.user.id,name:session.user.name,username:session.user.username,email:session.user.email,role:session.user.role,mustChangePassword:Boolean(session.user.mustChangePassword)}}catch{users=[];currentUser=null}}else{try{const response=await fetch('./api/state');if(response.ok){const state=await response.json();if(Array.isArray(state.users)){users=state.users;localStorage.setItem(USERS,JSON.stringify(users))}if(Array.isArray(state.imported)){imported=state.imported;localStorage.setItem(DATA,JSON.stringify(imported))}if(state.config?.examPlan){examConfig=normalizeExamConfigValue(state.config);localStorage.setItem(CONFIG,JSON.stringify(examConfig))}}}catch{}}const dataset=await fetch('./quiz-dataset.json');if(!dataset.ok)throw Error();official=await dataset.json();if(!cloudMode){const id=sessionStorage.getItem(SESSION),u=users.find(x=>x.id===id&&x.active);if(u)currentUser={id:u.id,name:u.name,role:u.role}}else if(currentUser)await loadQuestionAvailability();applyBranding();applyTheme();router();if(currentUser){startAutomaticUpdateChecks();startAdminReportChecks();startDailyChallengeReminderChecks()}}catch{app.innerHTML='<div class="notice">Impossibile caricare la banca dati.</div>'}}
 bootstrapApplication().then(async()=>{if(currentUser){await refreshDailyChallengeGate(true);router();startDailyChallengeGateChecks();setTimeout(maybeShowReleaseNotes,500)}});
+
+const labelZoomImages=()=>document.querySelectorAll('img.question-image:not([data-zoom-ready])').forEach(image=>{image.dataset.zoomReady='';image.tabIndex=0;image.setAttribute('role','button');image.title='Apri immagine con zoom';image.setAttribute('aria-label','Apri immagine del quesito con zoom')});
+new MutationObserver(labelZoomImages).observe(document.body,{childList:true,subtree:true});labelZoomImages();
+document.addEventListener('keydown',event=>{if((event.key==='Enter'||event.key===' ')&&event.target.matches('img.question-image')){event.preventDefault();event.target.click()}});
+document.addEventListener('click',event=>{
+ const source=event.target.closest('img.question-image');
+ if(!source)return;
+ const previousFocus=document.activeElement,dialog=document.createElement('dialog');
+ dialog.className='question-image-zoom';
+ dialog.innerHTML='<div class="image-zoom-toolbar"><strong>Immagine del quesito</strong><button type="button" data-zoom-out aria-label="Riduci zoom">−</button><output>100%</output><button type="button" data-zoom-in aria-label="Aumenta zoom">+</button><button type="button" data-zoom-close>Chiudi</button></div><div class="image-zoom-scroll"><img alt=""></div>';
+ const image=dialog.querySelector('img');image.src=source.src;image.alt=source.alt;
+ let scale=100;
+ const change=delta=>{scale=Math.max(100,Math.min(300,scale+delta));image.style.width=scale+'%';dialog.querySelector('output').value=scale+'%'};
+ dialog.querySelector('[data-zoom-in]').onclick=()=>change(25);
+ dialog.querySelector('[data-zoom-out]').onclick=()=>change(-25);
+ dialog.querySelector('[data-zoom-close]').onclick=()=>dialog.close();
+ dialog.addEventListener('close',()=>{dialog.remove();previousFocus?.focus()});
+ document.body.append(dialog);dialog.showModal();
+});

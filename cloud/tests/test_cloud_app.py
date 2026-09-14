@@ -51,6 +51,18 @@ def login(client: TestClient, username: str, password: str):
     return client.post("/api/auth/login", json={"username": username, "password": password})
 
 
+def test_september_15_has_one_new_illustrated_computer_question():
+    from datetime import date
+    from cloud.app import questions_by_id
+    with TestClient(app):
+        with SessionLocal() as db:
+            challenge=build_daily_challenge(date(2026,9,15),db)
+            selected=[questions_by_id[q] for q in challenge.question_ids]
+            assert len(selected)==40
+            assert sum(q['category']=='informatica' for q in selected)==4
+            assert sum(q['id'].startswith('info-pdf-') and bool(q['image']) for q in selected)==1
+
+
 def test_daily_challenge_rotation_prefers_unseen_then_oldest_questions():
     source = [{"id": question_id} for question_id in ("a", "b", "c", "d")]
     today = challenge_today()
@@ -71,7 +83,7 @@ def test_daily_challenge_excludes_misclassified_summaries():
     from cloud.app import challenge_logic_topic
     dataset = json.loads((Path(__file__).resolve().parents[2] / "quiz-dataset.json").read_text(encoding="utf-8"))
     summaries = [q for q in dataset if q.get("category") == "logica" and "sintetizza il testo" in q.get("text", "").lower()]
-    assert len(summaries) == 50
+    assert len(summaries) == 60
     assert all(challenge_logic_topic(q) == "brani" for q in summaries)
     assert challenge_logic_topic({"category": "logica", "logicTopic": "deduzioni", "text": "Se tutti i gatti sono mammiferi, quale conclusione è corretta?"}) == "deduzioni"
 
@@ -83,8 +95,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.32.3"
-        assert runtime.json()["releaseNotes"]["version"] == "3.32.3"
+        assert runtime.json()["version"] == "3.33.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.33.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
         assert runtime.json()["registrationEnabled"] is True
@@ -669,7 +681,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.32.3"
+        assert update_status.json()["currentVersion"] == "3.33.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

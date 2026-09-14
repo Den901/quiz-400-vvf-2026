@@ -7,7 +7,7 @@ const dataset=JSON.parse(await readFile(new URL('../../quiz-dataset.json',import
 const expectedCounts={
  chimica:{materia:25,atomo:405,legami:360,reazioni:195,'moli-soluzioni':153,'acidi-basi':186,'stati-gas':65,organica:84,'bio-applicata':25,generale:179},
  fisica:{misure:183,cinematica:302,dinamica:333,energia:155,fluidi:179,termologia:316,'onde-ottica':112,elettromagnetismo:183,atomica:64,generale:177},
- informatica:{hardware:274,'sistemi-file':318,word:258,excel:214,'office-dati':201,reti:211,internet:183,sicurezza:122,'software-dati':156,generale:182},
+ informatica:{hardware:314,'sistemi-file':386,word:314,excel:307,'office-dati':246,reti:234,internet:215,sicurezza:133,'software-dati':186,generale:213},
  storia:{risorgimento:139,'italia-postunitaria':399,'eta-giolittiana':84,'prima-guerra':95,fascismo:143,'seconda-guerra':85,'repubblica-primi-anni':111,'repubblica-contemporanea':312,'storia-internazionale':32,generale:163},
  inglese:{'tempi-verbali':388,'modali-condizionali':63,pronomi:83,'nomi-articoli':105,'aggettivi-avverbi':64,preposizioni:159,'costruzione-frase':73,'phrasal-idioms':23,vocabolario:79,generale:514}
 };

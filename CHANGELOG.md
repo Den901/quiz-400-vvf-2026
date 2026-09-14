@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.33.0 - 2026-09-14
+
+- Importati dai PDF forniti 334 nuovi quesiti di Logica e 429 di Informatica, senza duplicare i quesiti già presenti; risposte e numero di alternative originali conservati.
+- Logica suddivisa nelle sottosezioni esistenti, con 8 nuovi Ingranaggi (108 totali). Informatica organizzata per sottoargomenti; 12 nuovi quesiti illustrati.
+- Immagini apribili con zoom dal 100% al 300%, anche da tastiera, con scorrimento e colori coerenti con il tema; nuove figure più grandi senza limite di altezza.
+- Solo il 15 settembre: un nuovo quesito illustrato nella quota di 4 Informatica della Sfida del giorno, sempre 40 quesiti totali.
+- I brani restano fuori dalle sfide. Nessuna modifica alle prove già create o alle soluzioni dei duplicati esistenti.
+
 ## 3.32.3 - 2026-09-14
 
 - Anche i Flow chart vengono mostrati fino a 760 px su desktop/tablet e a tutta larghezza su mobile, senza limite di altezza.

@@ -1,13 +1,13 @@
 {
-  "version": "3.32.3",
+  "version": "3.33.0",
   "showToUsers": false,
-  "title": "Flow chart più leggibili",
-  "summary": "Anche le immagini Flow chart sono ingrandite su desktop, tablet e mobile, senza limite di altezza.",
+  "title": "Nuovi quiz di Logica e Informatica",
+  "summary": "334 nuovi quesiti di Logica e 429 di Informatica, suddivisi per argomento e con immagini apribili con zoom.",
   "items": [
-    "50 nuovi Ingranaggi con scenari, diagrammi, risposte e spiegazioni.",
-    "100 quesiti totali nella categoria, conservando ID e progressi precedenti.",
+    "8 nuovi Ingranaggi: la categoria contiene 108 quesiti.",
+    "12 nuovi quesiti di Informatica con figure, apribili con zoom fino al 300%.",
     "Categorie selezionabili nello studio e nella composizione delle prove.",
-    "Solo il 14 settembre: Q41 nella quota logica della sfida, sempre di 40 domande.",
+    "Solo il 15 settembre: un nuovo quesito illustrato nelle 4 domande di Informatica, sempre 40 totali.",
     "Nessuna modifica alle prove già create o ai progressi."
   ],
   "actionLabel": "Apri Materie",
