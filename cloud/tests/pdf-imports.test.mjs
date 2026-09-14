@@ -4,6 +4,16 @@ import {readFileSync,existsSync} from 'node:fs';
 import {classifyLogicQuestion} from '../../logic-topics.js';
 import {classifySubjectQuestion} from '../../subject-topics.js';
 const bank=JSON.parse(readFileSync(new URL('../../quiz-dataset.json',import.meta.url)));
+
+test('Pacchetto Office: 350 quesiti originali con immagini, alternative e soluzioni',()=>{
+ const office=bank.filter(q=>q.id.startsWith('office-mininterno-'));
+ assert.equal(office.length,350);assert.equal(new Set(office.map(q=>q.id)).size,350);
+ for(const q of office){
+  assert.equal(q.answers.length,4);assert.ok(q.correct>=0&&q.correct<4);
+  assert.equal(classifySubjectQuestion(q),'figure');assert.ok(existsSync(new URL('../../'+q.image,import.meta.url)));
+  assert.doesNotMatch(JSON.stringify(q),/\uFFFD|&(?:\w+|#\d+);/);
+ }
+});
 test('PDF: importati solo nuovi quesiti con risposte e caratteri leggibili',()=>{
  const logic=bank.filter(q=>q.id.startsWith('logic-pdf-')),info=bank.filter(q=>q.id.startsWith('info-pdf-'));
  assert.equal(logic.length,334);assert.equal(info.length,429);

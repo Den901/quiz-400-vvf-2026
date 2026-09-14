@@ -1,13 +1,13 @@
 {
-  "version": "3.33.1",
+  "version": "3.33.2",
   "showToUsers": false,
-  "title": "Informatica figure",
-  "summary": "I 12 quesiti illustrati di Informatica sono raccolti nella sottosezione Informatica figure, con zoom e progressi conservati.",
+  "title": "Pacchetto Office",
+  "summary": "350 quesiti Office 2007 aggiunti nella sezione Pacchetto Office, ora con 362 quesiti illustrati e zoom.",
   "items": [
-    "8 nuovi Ingranaggi: la categoria contiene 108 quesiti.",
-    "12 nuovi quesiti di Informatica con figure, apribili con zoom fino al 300%.",
-    "Categorie selezionabili nello studio e nella composizione delle prove.",
-    "Solo il 15 settembre: un nuovo quesito illustrato nelle 4 domande di Informatica, sempre 40 totali.",
+    "Informatica figure rinominata Pacchetto Office.",
+    "350 quesiti con quattro alternative, soluzione e 20 immagini originali.",
+    "Immagini a larghezza leggibile, apribili con zoom fino al 300%.",
+    "Quesiti disponibili nello studio e nella normale selezione di Informatica.",
     "Nessuna modifica alle prove già create o ai progressi."
   ],
   "actionLabel": "Apri Materie",

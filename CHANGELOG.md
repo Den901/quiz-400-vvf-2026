@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.33.2 - 2026-09-14
+
+- Informatica figure rinominata Pacchetto Office, conservando identificativi e progressi.
+- Integrati 350 quesiti Office 2007 con quattro alternative, risposta corretta e 20 immagini originali, apribili con zoom. La sezione contiene ora 362 quesiti.
+- Nessuna modifica alle sfide già create o alle risposte degli utenti. Nessun popup generale.
+
 ## 3.33.1 - 2026-09-14
 
 - Creata la sottosezione Informatica figure con i 12 quesiti illustrati, separati dagli altri sottoargomenti.

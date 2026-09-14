@@ -69,7 +69,7 @@ main{padding-bottom:calc(106px + env(safe-area-inset-bottom))}
 /* Gear and flow diagrams need readable labels, not the compact generic figure limit. */
 .question-image:is([src*="gear-"],[src*="flow-"]):not(.mini){width:min(100%,760px);max-width:100%;max-height:none;height:auto;padding:6px}
 @media(max-width:699px){.question-image:is([src*="gear-"],[src*="flow-"]):not(.mini){width:100%;padding:3px}}
-.question-image:is([src*="info-illustrated-"],[src*="logic-illustrated-"]):not(.mini){width:min(100%,760px);max-width:100%;height:auto;max-height:none;padding:4px}
+.question-image:is([src*="info-illustrated-"],[src*="logic-illustrated-"],[src*="office-mininterno-"]):not(.mini){width:min(100%,760px);max-width:100%;height:auto;max-height:none;padding:4px}
 .question-image{cursor:zoom-in}
 .question-image-zoom{width:min(96vw,1200px);max-width:96vw;max-height:94dvh;padding:12px;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--ink)}
 .question-image-zoom::backdrop{background:rgba(0,0,0,.8)}

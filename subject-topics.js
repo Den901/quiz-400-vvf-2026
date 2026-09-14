@@ -127,9 +127,9 @@ const physicsTopics = [
 const computerScienceTopics = [
   {
     id: 'figure',
-    name: 'Informatica figure',
-    shortName: 'Informatica figure',
-    description: 'Quesiti con immagini: riconoscimento di comandi, icone e interfacce dei programmi.'
+    name: 'Pacchetto Office',
+    shortName: 'Pacchetto Office',
+    description: 'Quesiti illustrati su Word, Excel e comandi del pacchetto Office.'
   },
   {
     id: 'hardware',
