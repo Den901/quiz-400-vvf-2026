@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.35.1 - 2026-09-16
+
+- Ampliata fino a 1.180 px la pagina della Sfida del giorno su desktop, con colonne più spaziose per partecipanti e controlli.
+- I badge Admin e Moderatore non vengono più troncati: possono disporsi correttamente accanto al nome anche su tablet.
+- Layout mobile e scorrimento della classifica sugli schermi stretti preservati.
+
 ## 3.35.0 - 2026-09-16
 
 - Aggiunto nella Sfida del giorno il pulsante Prove attive per admin e moderatori autorizzati, con contatore, nome, username, risposte selezionate e cronometro residuo aggiornato in tempo reale.

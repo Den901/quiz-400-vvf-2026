@@ -1,4 +1,4 @@
-import {classifyLogicQuestion,normalizedQuestionText} from './logic-topics.js?v=112';
+import {classifyLogicQuestion,normalizedQuestionText} from './logic-topics.js?v=113';
 import {classifySubjectQuestion} from './subject-topics.js?v=57';
 
 const LOGIC_CATEGORIES=new Set(['logica','brani','insiemi']);

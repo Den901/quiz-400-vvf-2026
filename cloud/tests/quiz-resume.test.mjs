@@ -36,6 +36,14 @@ test('admin e moderatori autorizzati vedono il contatore delle prove attive', ()
   assert.match(extraStyles, /\.active-challenge-dialog/);
 });
 
+test('sfida del giorno usa la pagina larga e mantiene visibili i badge', () => {
+  assert.match(source, /classList\.add\('challenge-wide-page'\)/);
+  assert.match(source, /classList\.remove\('notes-wide-page','study-wide-page','challenge-wide-page'\)/);
+  assert.match(cloudStyles, /\.challenge-wide-page\{max-width:1180px\}/);
+  assert.match(cloudStyles, /\.challenge-wide-page \.daily-participant>span\{display:flex/);
+  assert.match(cloudStyles, /minmax\(260px,2\.2fr\)/);
+});
+
 test('daily challenge saves a selected answer immediately', () => {
   const functionBody = source.match(/function dailySelectAnswer\(choice\)\{([^}]+)\}/)?.[1] || '';
   assert.match(functionBody, /dailyCommitCurrent\(\)/);
