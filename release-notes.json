@@ -1,12 +1,14 @@
 {
-  "version": "3.34.0",
+  "version": "3.35.0",
   "showToUsers": false,
-  "title": "Moderazione e statistiche più affidabili",
-  "summary": "I moderatori possono approvare i nuovi account e gestire le segnalazioni; le statistiche generali considerano candidati con almeno cinque Sfide del giorno.",
+  "title": "Moderazione, prove attive e statistiche affidabili",
+  "summary": "Nuovi strumenti per moderatori, controllo delle prove in esecuzione e statistiche generali basate su almeno cinque Sfide del giorno.",
   "items": [
     "Badge Moderatore visibile nel portale, nella classifica e nella dashboard.",
     "Area Modera per approvare gli account in attesa e revisionare le segnalazioni.",
     "Lo storico delle segnalazioni indica chi ha gestito ciascun caso.",
+    "Nella Sfida del giorno admin e moderatori autorizzati vedono il contatore delle prove attive, con nomi e tempo residuo.",
+    "L’admin può disattivare il monitor delle prove attive dalla scheda del singolo admin o moderatore.",
     "Utenti e Impostazioni restano riservati agli amministratori.",
     "Le fasce e le medie generali includono soltanto chi ha concluso almeno cinque Sfide del giorno."
   ],

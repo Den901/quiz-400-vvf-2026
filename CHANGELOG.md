@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.35.0 - 2026-09-16
+
+- Aggiunto nella Sfida del giorno il pulsante Prove attive per admin e moderatori autorizzati, con contatore, nome, username, risposte selezionate e cronometro residuo aggiornato in tempo reale.
+- L’admin può abilitare o disabilitare questa visibilità per ogni account admin o moderatore dalla relativa scheda Utenti.
+- Il monitor non espone quesiti o risposte e ignora automaticamente tentativi consegnati o scaduti.
+- Comprende tutte le novità di moderazione e la soglia minima di 5 Sfide del giorno introdotte nella v3.34.0, non ancora distribuita sul server.
+
 ## 3.34.0 - 2026-09-16
 
 - Aggiunto il badge Moderatore e una sezione Modera dedicata: i moderatori possono approvare gli account in attesa e gestire le segnalazioni, senza accedere alla gestione completa degli utenti o alle impostazioni amministrative.

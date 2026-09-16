@@ -113,6 +113,7 @@ class User(Base):
     active: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     approved: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     daily_challenge_required: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
+    active_challenge_monitor_enabled: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -522,6 +523,7 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
         "active": user.active,
         "approved": user.approved,
         "dailyChallengeRequired": user.daily_challenge_required,
+        "activeChallengeMonitorEnabled": user.active_challenge_monitor_enabled,
         "mustChangePassword": user.must_change_password,
         "createdAt": user.created_at.isoformat(),
         "lastLoginAt": user.last_login_at.isoformat() if user.last_login_at else None,
@@ -604,6 +606,12 @@ def require_dashboard_reader(user: User = Depends(require_user)) -> User:
 def require_moderator(user: User = Depends(require_user)) -> User:
     if user.role not in {"admin", "moderator"}:
         raise HTTPException(status.HTTP_403_FORBIDDEN, "Permessi moderatore richiesti.")
+    return user
+
+
+def require_active_challenge_viewer(user: User = Depends(require_moderator)) -> User:
+    if not user.active_challenge_monitor_enabled:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Visualizzazione delle prove attive disattivata per questo account.")
     return user
 
 
@@ -699,6 +707,7 @@ class AdminUserPatch(BaseModel):
     approved: bool | None = None
     role: str | None = None
     daily_challenge_required: bool | None = None
+    active_challenge_monitor_enabled: bool | None = None
 
 
 class AdminResetInput(BaseModel):
@@ -2373,6 +2382,38 @@ def today_challenge(user: User = Depends(require_user), db: Session = Depends(ge
     return serialize_daily_challenge(challenge, attempt, db, user)
 
 
+@app.get("/api/moderation/active-challenges")
+def moderation_active_challenges(_: User = Depends(require_active_challenge_viewer), db: Session = Depends(get_db)) -> dict[str, Any]:
+    now = utcnow()
+    rows = db.execute(
+        select(DailyChallengeAttempt, User)
+        .join(User, User.id == DailyChallengeAttempt.user_id)
+        .where(
+            DailyChallengeAttempt.submitted_at.is_(None),
+            DailyChallengeAttempt.started_at > now - timedelta(seconds=CHALLENGE_SECONDS),
+        )
+        .order_by(DailyChallengeAttempt.started_at.asc())
+    ).all()
+    attempts = []
+    for attempt, participant in rows:
+        expires_at = challenge_expiry(attempt)
+        remaining = max(0, int((expires_at - now).total_seconds()))
+        if not remaining:
+            continue
+        attempts.append({
+            "id": attempt.id,
+            "challengeDate": attempt.challenge_date.isoformat(),
+            "displayName": participant.display_name,
+            "username": participant.username,
+            "avatarUrl": f"./api/users/{participant.id}/avatar",
+            "startedAt": aware_utc(attempt.started_at).isoformat(),
+            "expiresAt": expires_at.isoformat(),
+            "remainingSeconds": remaining,
+            "answered": sum(1 for answer in (attempt.answers or []) if answer is not None),
+        })
+    return {"count": len(attempts), "attempts": attempts, "generatedAt": now.isoformat()}
+
+
 @app.post("/api/challenges/today/start")
 def start_today_challenge(request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
     if not get_setting(db, "daily_challenge_enabled"):
@@ -2777,6 +2818,8 @@ def admin_patch_user(user_id: str, payload: AdminUserPatch, request: Request, ad
             db.execute(LoginSession.__table__.delete().where(LoginSession.user_id == target.id))
     if payload.daily_challenge_required is not None:
         target.daily_challenge_required = payload.daily_challenge_required
+    if payload.active_challenge_monitor_enabled is not None:
+        target.active_challenge_monitor_enabled = payload.active_challenge_monitor_enabled
     audit(db, "admin.user_updated", request, actor=admin.id, target=target.id, fields=list(payload.model_fields_set))
     db.commit()
     return {"user": serialize_user(target)}
@@ -3214,6 +3257,7 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
             active=bool(item.get("active", True)),
             approved=bool(item.get("approved", True)),
             daily_challenge_required=bool(item.get("dailyChallengeRequired", True)),
+            active_challenge_monitor_enabled=bool(item.get("activeChallengeMonitorEnabled", True)),
             must_change_password=bool(item.get("mustChangePassword", False)),
             created_at=datetime.fromisoformat(item["createdAt"]),
             last_login_at=datetime.fromisoformat(item["lastLoginAt"]) if item.get("lastLoginAt") else None,

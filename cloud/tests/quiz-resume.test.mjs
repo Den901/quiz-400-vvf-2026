@@ -27,6 +27,15 @@ test('moderatore vede dashboard e prove ma non i controlli distruttivi', () => {
   assert.match(themeStyles, /dashboard-candidate-details\[open\]>summary/);
 });
 
+test('admin e moderatori autorizzati vedono il contatore delle prove attive', () => {
+  assert.match(source, /api\/moderation\/active-challenges/);
+  assert.match(source, /data-active-challenge-count/);
+  assert.match(source, /activeChallengeMonitorEnabled===false/);
+  assert.match(source, /data-cloud-active-monitor/);
+  assert.match(source, /active_challenge_monitor_enabled/);
+  assert.match(extraStyles, /\.active-challenge-dialog/);
+});
+
 test('daily challenge saves a selected answer immediately', () => {
   const functionBody = source.match(/function dailySelectAnswer\(choice\)\{([^}]+)\}/)?.[1] || '';
   assert.match(functionBody, /dailyCommitCurrent\(\)/);

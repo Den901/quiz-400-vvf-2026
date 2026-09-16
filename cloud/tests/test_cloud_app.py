@@ -97,8 +97,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.34.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.34.0"
+        assert runtime.json()["version"] == "3.35.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.35.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
@@ -136,6 +136,7 @@ def test_complete_cloud_account_and_statistics_flow():
         moderator_login = login(moderator_client, "moderatore", "Moderatore-2026!")
         assert moderator_login.status_code == 200
         assert moderator_login.json()["user"]["role"] == "moderator"
+        assert moderator_login.json()["user"]["activeChallengeMonitorEnabled"] is True
         with SessionLocal() as db:
             set_setting(db, "daily_challenge_required", True)
             db.commit()
@@ -152,6 +153,12 @@ def test_complete_cloud_account_and_statistics_flow():
             db.commit()
         assert moderator_client.get("/api/admin/dashboard").status_code == 200
         assert moderator_client.get("/api/admin/users").status_code == 403
+        assert moderator_client.get("/api/moderation/active-challenges").status_code == 200
+        monitor_off = admin_client.patch(f"/api/admin/users/{moderator_id}", json={"active_challenge_monitor_enabled": False})
+        assert monitor_off.status_code == 200
+        assert monitor_off.json()["user"]["activeChallengeMonitorEnabled"] is False
+        assert moderator_client.get("/api/moderation/active-challenges").status_code == 403
+        assert admin_client.patch(f"/api/admin/users/{moderator_id}", json={"active_challenge_monitor_enabled": True}).status_code == 200
         assert moderator_client.put("/api/admin/dashboard/settings", json={"theoretical_cutoff": 20}).status_code == 403
         assert moderator_client.delete("/api/admin/dashboard/challenges/inesistente").status_code == 403
 
@@ -363,6 +370,11 @@ def test_complete_cloud_account_and_statistics_flow():
         original_challenge_ids = [item["id"] for item in user_start.json()["questions"]]
         assert all(item["category"] != "brani" for item in user_start.json()["questions"])
         assert all("correct" not in item and "explanation" not in item for item in user_start.json()["questions"])
+        active_monitor = moderator_client.get("/api/moderation/active-challenges")
+        assert active_monitor.status_code == 200
+        assert active_monitor.json()["count"] == 2
+        assert {item["username"] for item in active_monitor.json()["attempts"]} == {"admin", "mario.rossi"}
+        assert all(0 < item["remainingSeconds"] <= 2400 for item in active_monitor.json()["attempts"])
 
         challenge_date = user_start.json()["date"]
         answers = [0] * 40
@@ -693,7 +705,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.34.0"
+        assert update_status.json()["currentVersion"] == "3.35.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -822,6 +834,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert backup.json()["disabledQuestions"][0]["questionId"] == reported_question_id
         assert backup.json()["settings"]["question_corrections"][reported_question_id]["correct"] == changed_index
         assert all("dailyChallengeRequired" in item for item in backup.json()["users"])
+        assert all("activeChallengeMonitorEnabled" in item for item in backup.json()["users"])
         assert len(backup.json()["questionRatings"]) == 2
         backed_reply = next(r for r in backup.json()['questionReports'] if r['id'] == report_id)
         assert backed_reply['reply'] == reply_text
