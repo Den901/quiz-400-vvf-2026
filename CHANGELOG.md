@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.36.0 - 2026-09-17
+
+- Aggiunto un avviso personale e non eludibile per le Sfide del giorno che devono essere ripetute, con accesso diretto alla nuova prova.
+- Il tentativo annullato può essere escluso dalla classifica senza modificare risultati, progressi o prove degli altri candidati.
+- Nessun popup generale: la comunicazione viene mostrata soltanto all’account interessato.
+
 ## 3.35.3 - 2026-09-16
 
 - Corretto su mobile il pulsante Prove attive: ora occupa una riga dedicata dentro la scheda e non oltrepassa più i bordi.

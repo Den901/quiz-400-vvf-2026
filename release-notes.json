@@ -1,17 +1,15 @@
 {
-  "version": "3.35.3",
+  "version": "3.36.0",
   "showToUsers": false,
-  "title": "Prove attive sistemato su mobile",
-  "summary": "Il pulsante Prove attive ora rimane interamente dentro la scheda della Sfida del giorno sugli schermi piccoli.",
+  "title": "Gestione mirata delle Sfide da ripetere",
+  "summary": "Un tentativo anomalo può essere annullato senza coinvolgere le prove o le classifiche degli altri candidati.",
   "items": [
-    "Pulsante Prove attive disposto su una riga dedicata su mobile.",
-    "Larghezza limitata alla scheda, senza fuoriuscite laterali.",
-    "Badge Moderatore compatto come Admin, mantenendo il viola.",
-    "Area della Sfida ampliata e colonna Partecipante più larga.",
-    "Classifica mobile invariata e ancora scorrevole sugli schermi stretti.",
-    "Comprende gli strumenti di moderazione, il monitor Prove attive e la soglia minima di cinque Sfide del giorno."
+    "Avviso personale e non eludibile quando una Sfida deve essere ripetuta.",
+    "Pulsante diretto per ricominciare la Sfida del giorno.",
+    "Il tentativo annullato non entra in classifica e non sblocca il portale.",
+    "Nessun cambiamento per gli altri utenti, le loro prove o i loro progressi."
   ],
   "actionLabel": "Apri Dashboard",
   "actionHash": "#dashboard",
-  "footnote": "Nessun popup generale e nessuna modifica alle prove, alle classifiche o ai progressi esistenti."
+  "footnote": "Nessun popup generale: l’avviso viene mostrato soltanto all’account interessato."
 }
