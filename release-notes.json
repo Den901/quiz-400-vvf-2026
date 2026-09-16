@@ -1,16 +1,16 @@
 {
-  "version": "3.33.3",
+  "version": "3.34.0",
   "showToUsers": false,
-  "title": "Pacchetto Office",
-  "summary": "Dal 15 settembre ogni nuova Sfida del giorno include una domanda del Pacchetto Office, all’interno delle quattro di Informatica.",
+  "title": "Moderazione e statistiche più affidabili",
+  "summary": "I moderatori possono approvare i nuovi account e gestire le segnalazioni; le statistiche generali considerano candidati con almeno cinque Sfide del giorno.",
   "items": [
-    "Una domanda Office al giorno e tre di Informatica non illustrate: sempre 40 quesiti totali.",
-    "350 quesiti con quattro alternative, soluzione e 20 immagini originali.",
-    "Immagini a larghezza leggibile, apribili con zoom fino al 300%.",
-    "Quesiti disponibili nello studio e nella normale selezione di Informatica.",
-    "Nessuna modifica alle prove già create o ai progressi."
+    "Badge Moderatore visibile nel portale, nella classifica e nella dashboard.",
+    "Area Modera per approvare gli account in attesa e revisionare le segnalazioni.",
+    "Lo storico delle segnalazioni indica chi ha gestito ciascun caso.",
+    "Utenti e Impostazioni restano riservati agli amministratori.",
+    "Le fasce e le medie generali includono soltanto chi ha concluso almeno cinque Sfide del giorno."
   ],
-  "actionLabel": "Apri Materie",
-  "actionHash": "#categories",
-  "footnote": "Nessun popup generale. Il ricalcolo si esegue soltanto su richiesta esplicita dell’admin."
+  "actionLabel": "Apri Dashboard",
+  "actionHash": "#dashboard",
+  "footnote": "Nessun popup generale e nessuna modifica alle prove, alle classifiche o ai progressi esistenti."
 }

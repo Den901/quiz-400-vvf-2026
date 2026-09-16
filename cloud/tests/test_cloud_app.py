@@ -97,10 +97,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.33.3"
-        assert runtime.json()["releaseNotes"]["version"] == "3.33.3"
+        assert runtime.json()["version"] == "3.34.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.34.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#categories"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["additionalQuestionBanks"] == {"nissolinoHistory": True, "modernHistory": True}
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
@@ -215,10 +215,15 @@ def test_complete_cloud_account_and_statistics_flow():
         pending_count = admin_client.get("/api/admin/users/pending-count")
         assert pending_count.status_code == 200
         assert pending_count.json() == {"pendingCount": 1}
+        moderator_pending = moderator_client.get("/api/moderation/pending-users")
+        assert moderator_pending.status_code == 200
+        assert moderator_pending.json()["users"][0]["username"] == "mario.rossi"
         assert user_client.get("/api/admin/users/pending-count").status_code == 401
         user_id = pending_mario["id"]
-        approval = admin_client.patch(f"/api/admin/users/{user_id}", json={"approved": True})
+        approval = moderator_client.post(f"/api/moderation/pending-users/{user_id}/approve")
         assert approval.status_code == 200
+        assert approval.json()["approvedBy"] == "Moderatore Test"
+        assert moderator_client.get("/api/moderation/pending-users").json()["pendingCount"] == 0
         assert approval.json()["user"]["approved"] is True
         assert admin_client.get("/api/admin/users/pending-count").json() == {"pendingCount": 0}
 
@@ -378,10 +383,11 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_client.put(f"/api/challenges/{challenge_date}/answers", json={"answers": [1] * 40}).json()["status"] == "completed"
 
         challenge_dashboard = admin_client.get("/api/admin/dashboard").json()
-        assert challenge_dashboard["summary"]["attempts"] == 1
-        assert challenge_dashboard["summary"]["participants"] == 1
-        assert challenge_dashboard["summary"]["averageAttemptScore"] == submitted.json()["result"]["score"]
-        assert challenge_dashboard["types"][0]["count"] == 1
+        assert challenge_dashboard["summary"]["minimumChallenges"] == 5
+        assert challenge_dashboard["summary"]["attempts"] == 0
+        assert challenge_dashboard["summary"]["participants"] == 0
+        assert challenge_dashboard["summary"]["averageAttemptScore"] is None
+        assert challenge_dashboard["types"][0]["count"] == 0
 
         ranking = admin_client.get(f"/api/challenges/{challenge_date}/leaderboard")
         assert ranking.json()["theoreticalCutoff"] == 16.25
@@ -506,6 +512,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_client.get("/api/admin/question-reports").status_code == 403
         moderation = admin_client.get("/api/admin/question-reports")
         assert moderation.status_code == 200
+        assert moderator_client.get("/api/admin/question-reports").status_code == 200
         assert moderation.json()["pendingCount"] == 1
         assert moderation.json()["pending"][0]["question"]["id"] == reported_question_id
         assert "correct" in moderation.json()["pending"][0]["question"]
@@ -529,9 +536,12 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'Non autorizzato'}).status_code == 403
         assert admin_client.post(f'/api/admin/question-reports/{report_id}/dismiss', json={'reply': 'x' * 4001}).status_code == 422
         reply_text = 'Il quesito è corretto: ecco i passaggi della soluzione.\nSecondo passaggio.'
-        dismissed = admin_client.post(f"/api/admin/question-reports/{report_id}/dismiss", json={'reply': reply_text})
+        dismissed = moderator_client.post(f"/api/admin/question-reports/{report_id}/dismiss", json={'reply': reply_text})
         assert dismissed.status_code == 200
         assert dismissed.json()["report"]["status"] == "dismissed"
+        assert dismissed.json()["report"]["reviewedBy"] == "Moderatore Test"
+        history = moderator_client.get("/api/admin/question-reports").json()["history"]
+        assert history[0]["id"] == report_id and history[0]["reviewedBy"] == "Moderatore Test"
         inbox = user_client.get('/api/question-reports/replies').json()['replies']
         assert len(inbox) == 1
         assert inbox[0]['reply'] == reply_text
@@ -683,7 +693,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.33.3"
+        assert update_status.json()["currentVersion"] == "3.34.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

@@ -601,6 +601,12 @@ def require_dashboard_reader(user: User = Depends(require_user)) -> User:
     return user
 
 
+def require_moderator(user: User = Depends(require_user)) -> User:
+    if user.role not in {"admin", "moderator"}:
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Permessi moderatore richiesti.")
+    return user
+
+
 rate_buckets: dict[str, deque[float]] = defaultdict(deque)
 rate_lock = threading.Lock()
 
@@ -1471,6 +1477,7 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
         {
             "rank": index + 1,
             "displayName": user.display_name,
+            "role": user.role,
             "avatarUrl": f"./api/users/{user.id}/avatar",
             "score": challenge_score(attempt),
             "correct": attempt.correct,
@@ -2274,18 +2281,20 @@ def read_question_report_reply(report_id: str, user: User = Depends(require_user
 
 
 @app.get("/api/admin/question-reports")
-def admin_question_reports(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def admin_question_reports(_: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     pending = db.scalars(select(QuestionReport).where(QuestionReport.status == "pending").order_by(QuestionReport.created_at.desc())).all()
+    history = db.scalars(select(QuestionReport).where(QuestionReport.status != "pending").order_by(QuestionReport.reviewed_at.desc()).limit(200)).all()
     disabled = db.scalars(select(DisabledQuestion).order_by(DisabledQuestion.disabled_at.desc())).all()
     return {
         "pendingCount": len(pending),
         "pending": [serialize_question_report(row, db) for row in pending],
+        "history": [serialize_question_report(row, db) for row in history],
         "disabled": [serialize_disabled_question(row, db) for row in disabled],
     }
 
 
 @app.post("/api/admin/question-reports/{report_id}/dismiss")
-def dismiss_question_report(report_id: str, request: Request, payload: QuestionReportReplyInput = QuestionReportReplyInput(), admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def dismiss_question_report(report_id: str, request: Request, payload: QuestionReportReplyInput = QuestionReportReplyInput(), admin: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     report = db.get(QuestionReport, report_id)
     if not report:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Segnalazione non trovata.")
@@ -2301,7 +2310,7 @@ def dismiss_question_report(report_id: str, request: Request, payload: QuestionR
 
 
 @app.post("/api/admin/questions/{question_id}/disable")
-def disable_question(question_id: str, payload: QuestionModerationInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def disable_question(question_id: str, payload: QuestionModerationInput, request: Request, admin: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     question_id = str(question_id).strip()
     if question_id not in questions_by_id:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Quesito non trovato.")
@@ -2330,7 +2339,7 @@ def disable_question(question_id: str, payload: QuestionModerationInput, request
 
 
 @app.delete("/api/admin/questions/{question_id}/disable")
-def enable_question(question_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def enable_question(question_id: str, request: Request, admin: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     row = db.get(DisabledQuestion, str(question_id))
     if not row:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Il quesito è già disponibile.")
@@ -2499,9 +2508,27 @@ def admin_users(_: User = Depends(require_admin), db: Session = Depends(get_db))
 
 
 @app.get("/api/admin/users/pending-count")
-def admin_pending_users_count(_: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, int]:
+def admin_pending_users_count(_: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, int]:
     pending_count = db.scalar(select(func.count()).select_from(User).where(User.approved.is_(False))) or 0
     return {"pendingCount": int(pending_count)}
+
+
+@app.get("/api/moderation/pending-users")
+def moderation_pending_users(_: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
+    rows = db.scalars(select(User).where(User.approved.is_(False)).order_by(User.created_at.asc())).all()
+    return {"pendingCount": len(rows), "users": [serialize_user(row) for row in rows]}
+
+
+@app.post("/api/moderation/pending-users/{user_id}/approve")
+def moderation_approve_user(user_id: str, request: Request, moderator: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
+    target = db.get(User, user_id)
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Utente non trovato.")
+    if not target.approved:
+        target.approved = True
+        audit(db, "moderator.user_approved", request, actor=moderator.id, target=target.id)
+        db.commit()
+    return {"user": serialize_user(target), "approvedBy": moderator.display_name, "message": f"Account di {target.display_name} approvato."}
 
 
 def session_category_rows(session: dict[str, Any]) -> list[tuple[str, float, float, float]]:
@@ -2532,6 +2559,8 @@ def admin_population_dashboard(_: User = Depends(require_dashboard_reader), db: 
         state_data = candidate.state.data if candidate.state and isinstance(candidate.state.data, dict) else {}
         sessions = state_data.get("sessions", []) if isinstance(state_data.get("sessions"), list) else []
         rows: list[dict[str, Any]] = []
+        category_rows: list[list[tuple[str, float, float, float]]] = []
+        row_dates: list[str] = []
         for session in sessions:
             if not isinstance(session, dict) or session.get("type") != "daily-challenge":
                 continue
@@ -2543,21 +2572,24 @@ def admin_population_dashboard(_: User = Depends(require_dashboard_reader), db: 
             blank = numeric_value(session.get("blank")) or max(0, 40 - correct - wrong)
             row = {"score": score, "correct": correct, "wrong": wrong, "blank": blank, "type": str(session.get("type"))}
             rows.append(row)
+            row_dates.append(str(session.get("at") or "")[:10])
+            category_rows.append(session_category_rows(session))
+        if len(rows) < 5:
+            continue
+        for row, at, categories_for_row in zip(rows, row_dates, category_rows, strict=True):
             attempts.append(row)
             by_type[row["type"]].append(row)
-            at = str(session.get("at") or "")[:10]
             if re.fullmatch(r"\d{4}-\d{2}-\d{2}", at):
-                by_day[at].append(score)
-            for category, cat_correct, cat_wrong, cat_blank in session_category_rows(session):
+                by_day[at].append(row["score"])
+            for category, cat_correct, cat_wrong, cat_blank in categories_for_row:
                 item = by_category[category]
                 item["correct"] += cat_correct
                 item["wrong"] += cat_wrong
                 item["blank"] += cat_blank
                 item["attempts"] += 1
-        if rows:
-            candidate_scores.append({"id": candidate.id, "name": candidate.display_name, "username": candidate.username, "role": candidate.role, "avatarUrl": f"./api/users/{candidate.id}/avatar", "attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
+        candidate_scores.append({"id": candidate.id, "name": candidate.display_name, "username": candidate.username, "role": candidate.role, "avatarUrl": f"./api/users/{candidate.id}/avatar", "attempts": len(rows), "average": sum(item["score"] for item in rows) / len(rows)})
 
-    reliable = [item for item in candidate_scores if item["attempts"] >= 3]
+    reliable = candidate_scores
     band_defs = [("Molto preparati · 32–40", 32, 41), ("Buona preparazione · 28–31,99", 28, 32), ("In consolidamento · 24–27,99", 24, 28), ("Da rafforzare · meno di 24", -100, 24)]
     bands = []
     for label, low, high in band_defs:
@@ -2581,7 +2613,7 @@ def admin_population_dashboard(_: User = Depends(require_dashboard_reader), db: 
     avg = lambda key: average([float(item[key]) for item in attempts], 1)
     return {
         "generatedAt": utcnow().isoformat(),
-        "summary": {"eligibleCandidates": len(candidates), "participants": len(candidate_scores), "reliableCandidates": len(reliable), "attempts": len(attempts), "averageAttemptScore": average([item["score"] for item in attempts]), "averageCandidateScore": average([item["average"] for item in candidate_scores]), "reliableAverageScore": average([item["average"] for item in reliable]), "averageCorrect": avg("correct"), "averageWrong": avg("wrong"), "averageBlank": avg("blank"), "confidence": confidence, "theoreticalCutoff": theoretical_cutoff, "candidatesAboveCutoff": sum(1 for item in candidate_scores if item["average"] >= theoretical_cutoff), "candidatesBelowCutoff": sum(1 for item in candidate_scores if item["average"] < theoretical_cutoff)},
+        "summary": {"eligibleCandidates": len(candidates), "minimumChallenges": 5, "participants": len(candidate_scores), "reliableCandidates": len(reliable), "attempts": len(attempts), "averageAttemptScore": average([item["score"] for item in attempts]), "averageCandidateScore": average([item["average"] for item in candidate_scores]), "reliableAverageScore": average([item["average"] for item in reliable]), "averageCorrect": avg("correct"), "averageWrong": avg("wrong"), "averageBlank": avg("blank"), "confidence": confidence, "theoreticalCutoff": theoretical_cutoff, "candidatesAboveCutoff": sum(1 for item in candidate_scores if item["average"] >= theoretical_cutoff), "candidatesBelowCutoff": sum(1 for item in candidate_scores if item["average"] < theoretical_cutoff)},
         "bands": bands,
         "types": type_stats,
         "categories": categories,

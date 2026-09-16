@@ -75,3 +75,8 @@ main{padding-bottom:calc(106px + env(safe-area-inset-bottom))}
 .question-image-zoom::backdrop{background:rgba(0,0,0,.8)}
 .image-zoom-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px}.image-zoom-toolbar strong{margin-right:auto}.image-zoom-toolbar output{min-width:44px;text-align:center}
 .image-zoom-scroll{overflow:auto;max-height:75dvh;background:white;border-radius:8px}.image-zoom-scroll img{display:block;width:100%;max-width:none;height:auto}
+.role-badge{display:inline-flex;align-items:center;border-radius:999px;padding:3px 9px;font-size:.72rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);vertical-align:middle}
+.role-badge.moderator{color:#fff;background:#7b2cbf;border-color:#9d4edd}.role-badge.admin{color:#fff;background:#a4161a;border-color:#d62828}
+.moderation-users{margin-bottom:24px}.moderation-user-row{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}.moderation-user-row>div{display:grid;gap:4px}.moderation-user-row span,.moderation-user-row small{color:var(--muted)}
+.moderation-history-row small{display:block;margin-top:6px}.moderation-history-row p{margin:8px 0 0;white-space:pre-wrap}.moderation-history{margin-top:16px}
+@media(max-width:600px){.moderation-user-row{align-items:flex-start;flex-direction:column}.moderation-user-row button{width:100%}}

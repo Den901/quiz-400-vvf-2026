@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.34.0 - 2026-09-16
+
+- Aggiunto il badge Moderatore e una sezione Modera dedicata: i moderatori possono approvare gli account in attesa e gestire le segnalazioni, senza accedere alla gestione completa degli utenti o alle impostazioni amministrative.
+- Lo storico delle segnalazioni conserva e mostra il moderatore o amministratore che ha gestito ciascun caso.
+- Le statistiche aggregate, le fasce di preparazione e la graduatoria per media includono soltanto i candidati con almeno 5 Sfide del giorno concluse; la classifica della singola giornata resta invariata.
+- Nessuna modifica alle prove, alle classifiche giornaliere o ai progressi esistenti.
+
 ## 3.33.3 - 2026-09-14
 
 - Dal 15 settembre ogni nuova Sfida del giorno include un quesito dei 350 Office illustrati, nella quota Informatica: una domanda Office e tre delle altre sottosezioni.
