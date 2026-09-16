@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.35.3 - 2026-09-16
+
+- Corretto su mobile il pulsante Prove attive: ora occupa una riga dedicata dentro la scheda e non oltrepassa più i bordi.
+- Titolo della classifica e pulsante Ricarica restano allineati nella riga superiore.
+
 ## 3.35.2 - 2026-09-16
 
 - Uniformato il badge Moderatore al badge Admin per dimensioni, spaziatura, forma e carattere, mantenendo il colore viola.

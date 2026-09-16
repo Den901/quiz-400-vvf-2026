@@ -1,11 +1,12 @@
 {
-  "version": "3.35.2",
+  "version": "3.35.3",
   "showToUsers": false,
-  "title": "Badge di ruolo uniformati",
-  "summary": "Il badge Moderatore ora ha le stesse dimensioni e proporzioni del badge Admin, mantenendo il colore viola.",
+  "title": "Prove attive sistemato su mobile",
+  "summary": "Il pulsante Prove attive ora rimane interamente dentro la scheda della Sfida del giorno sugli schermi piccoli.",
   "items": [
-    "Badge Moderatore compatto come Admin nella classifica e nella dashboard.",
-    "Colore viola del ruolo Moderatore conservato.",
+    "Pulsante Prove attive disposto su una riga dedicata su mobile.",
+    "Larghezza limitata alla scheda, senza fuoriuscite laterali.",
+    "Badge Moderatore compatto come Admin, mantenendo il viola.",
     "Area della Sfida ampliata e colonna Partecipante più larga.",
     "Classifica mobile invariata e ancora scorrevole sugli schermi stretti.",
     "Comprende gli strumenti di moderazione, il monitor Prove attive e la soglia minima di cinque Sfide del giorno."

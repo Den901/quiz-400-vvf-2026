@@ -34,6 +34,7 @@ test('admin e moderatori autorizzati vedono il contatore delle prove attive', ()
   assert.match(source, /data-cloud-active-monitor/);
   assert.match(source, /active_challenge_monitor_enabled/);
   assert.match(extraStyles, /\.active-challenge-dialog/);
+  assert.match(extraStyles, /\.daily-leaderboard \.active-challenge-button\{grid-column:1\/-1;width:100%;max-width:100%/);
 });
 
 test('sfida del giorno usa la pagina larga e mantiene visibili i badge', () => {
