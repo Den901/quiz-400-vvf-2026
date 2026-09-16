@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.35.2 - 2026-09-16
+
+- Uniformato il badge Moderatore al badge Admin per dimensioni, spaziatura, forma e carattere, mantenendo il colore viola.
+- Corretto anche il colore del badge nell’intestazione dell’area Moderazione quando vi accede un amministratore.
+
 ## 3.35.1 - 2026-09-16
 
 - Ampliata fino a 1.180 px la pagina della Sfida del giorno su desktop, con colonne più spaziose per partecipanti e controlli.

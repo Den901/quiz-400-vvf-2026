@@ -1,12 +1,12 @@
 {
-  "version": "3.35.1",
+  "version": "3.35.2",
   "showToUsers": false,
-  "title": "Sfida del giorno più ampia",
-  "summary": "La classifica usa più spazio su desktop e tablet, mantenendo visibili i badge di ruolo e i dati delle prove.",
+  "title": "Badge di ruolo uniformati",
+  "summary": "Il badge Moderatore ora ha le stesse dimensioni e proporzioni del badge Admin, mantenendo il colore viola.",
   "items": [
-    "Area della Sfida ampliata fino a 1.180 px sui monitor grandi.",
-    "Colonna Partecipante più larga per nome, avatar e badge Moderatore/Admin.",
-    "Badge disposti su più righe sui tablet senza essere troncati.",
+    "Badge Moderatore compatto come Admin nella classifica e nella dashboard.",
+    "Colore viola del ruolo Moderatore conservato.",
+    "Area della Sfida ampliata e colonna Partecipante più larga.",
     "Classifica mobile invariata e ancora scorrevole sugli schermi stretti.",
     "Comprende gli strumenti di moderazione, il monitor Prove attive e la soglia minima di cinque Sfide del giorno."
   ],

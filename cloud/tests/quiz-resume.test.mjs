@@ -42,6 +42,9 @@ test('sfida del giorno usa la pagina larga e mantiene visibili i badge', () => {
   assert.match(cloudStyles, /\.challenge-wide-page\{max-width:1180px\}/);
   assert.match(cloudStyles, /\.challenge-wide-page \.daily-participant>span\{display:flex/);
   assert.match(cloudStyles, /minmax\(260px,2\.2fr\)/);
+  assert.match(source, /dashboard-admin-badge moderator">Moderatore/);
+  assert.doesNotMatch(source, /candidate\.role==='moderator'\?' <i class="role-badge moderator"/);
+  assert.match(cloudStyles, /\.dashboard-admin-badge\.moderator\{background:#7b2cbf/);
 });
 
 test('daily challenge saves a selected answer immediately', () => {
