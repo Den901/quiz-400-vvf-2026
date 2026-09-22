@@ -1,15 +1,15 @@
 {
-  "version": "3.36.0",
+  "version": "3.37.0",
   "showToUsers": false,
-  "title": "Gestione mirata delle Sfide da ripetere",
-  "summary": "Un tentativo anomalo può essere annullato senza coinvolgere le prove o le classifiche degli altri candidati.",
+  "title": "Moderazione delle prove e dei quesiti",
+  "summary": "Lo staff può correggere la banca dati e imporre la ripetizione completa di una Sfida sospetta.",
   "items": [
-    "Avviso personale e non eludibile quando una Sfida deve essere ripetuta.",
-    "Pulsante diretto per ricominciare la Sfida del giorno.",
-    "Il tentativo annullato non entra in classifica e non sblocca il portale.",
-    "Nessun cambiamento per gli altri utenti, le loro prove o i loro progressi."
+    "I moderatori possono correggere testo, risposte, soluzione e spiegazione dei quesiti.",
+    "Admin e moderatori possono invalidare una Sfida attiva o conclusa e obbligare il candidato a rifarla.",
+    "La ripetizione sblocca il portale solo dopo aver risposto a tutte le 40 domande.",
+    "Motivazione, operatore e completamento sono registrati; il candidato riceve un avviso personale."
   ],
-  "actionLabel": "Apri Dashboard",
-  "actionHash": "#dashboard",
-  "footnote": "Nessun popup generale: l’avviso viene mostrato soltanto all’account interessato."
+  "actionLabel": "Apri Moderazione",
+  "actionHash": "#moderation",
+  "footnote": "Il changelog viene mostrato soltanto ad amministratori e moderatori; agli utenti compare solo l’eventuale avviso personale di invalidazione."
 }

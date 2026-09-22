@@ -114,6 +114,10 @@ class User(Base):
     approved: Mapped[bool] = mapped_column(Boolean, default=True, index=True)
     daily_challenge_required: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
     active_challenge_monitor_enabled: Mapped[bool] = mapped_column(Boolean, default=True, server_default="true")
+    forced_challenge_date: Mapped[date | None] = mapped_column(Date, nullable=True, index=True)
+    forced_challenge_reason: Mapped[str | None] = mapped_column(Text, nullable=True)
+    forced_challenge_requested_by_user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    forced_challenge_requested_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     must_change_password: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=utcnow)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -540,20 +544,30 @@ def serialize_user(user: User, include_state: bool = False) -> dict[str, Any]:
 def daily_challenge_gate_payload(user: User, db: Session) -> dict[str, Any]:
     today = challenge_today()
     enabled = bool(get_setting(db, "daily_challenge_enabled"))
-    required = enabled and bool(get_setting(db, "daily_challenge_required")) and user.daily_challenge_required and user.role != "admin"
+    forced_redo = user.forced_challenge_date == today
+    required = forced_redo or (enabled and bool(get_setting(db, "daily_challenge_required")) and user.daily_challenge_required and user.role != "admin")
     attempt = user_challenge_attempt(db, today, user.id)
     if attempt and not attempt.submitted_at:
         challenge = db.get(DailyChallenge, today)
         if challenge and utcnow() >= challenge_expiry(attempt):
-            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
-            record_challenge_in_user_state(user, attempt, challenge)
+            if forced_redo:
+                db.delete(attempt)
+                attempt = None
+            else:
+                finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+                record_challenge_in_user_state(user, attempt, challenge)
             db.commit()
     status_value = "completed" if attempt and attempt.submitted_at else "active" if attempt else "not_started"
+    requested_by = db.get(User, user.forced_challenge_requested_by_user_id) if forced_redo and user.forced_challenge_requested_by_user_id else None
     return {
         "required": required,
         "completed": not required or status_value == "completed",
         "date": today.isoformat(),
         "status": status_value,
+        "forcedRedo": forced_redo,
+        "forcedReason": user.forced_challenge_reason if forced_redo else None,
+        "forcedBy": requested_by.display_name if requested_by else None,
+        "forcedAt": aware_utc(user.forced_challenge_requested_at).isoformat() if forced_redo and user.forced_challenge_requested_at else None,
     }
 
 
@@ -677,6 +691,10 @@ class StateInput(BaseModel):
 class DailyChallengeAnswersInput(BaseModel):
     answers: list[int | None] = Field(min_length=40, max_length=40)
     questionSeconds: list[int] | None = Field(default=None, min_length=40, max_length=40)
+
+
+class ForceDailyChallengeRedoInput(BaseModel):
+    reason: str = Field(min_length=3, max_length=500)
 
 
 class QuestionCorrectionInput(BaseModel):
@@ -1506,8 +1524,12 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
 def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallengeAttempt | None, db: Session, user: User) -> dict[str, Any]:
     now = utcnow()
     if attempt and not attempt.submitted_at and now >= challenge_expiry(attempt):
-        finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
-        record_challenge_in_user_state(user, attempt, challenge)
+        if forced_challenge_redo(user, challenge.challenge_date):
+            remove_challenge_attempt(db, attempt, user, challenge)
+            attempt = None
+        else:
+            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+            record_challenge_in_user_state(user, attempt, challenge)
         db.commit()
     elif attempt and attempt.submitted_at:
         record_challenge_in_user_state(user, attempt, challenge)
@@ -2139,14 +2161,14 @@ def question_availability(_: User = Depends(require_user), db: Session = Depends
 
 
 @app.get("/api/admin/questions/{question_id}/correction")
-def get_question_correction(question_id: str, _: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def get_question_correction(question_id: str, _: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     if question_id not in questions_by_id:
         raise HTTPException(404, "Quesito non trovato. Inserisci il suo ID esatto.")
     return {"question": admin_question_payload(question_id, db), "disabled": db.get(DisabledQuestion, question_id) is not None}
 
 
 @app.put("/api/admin/questions/{question_id}/correction")
-def correct_question(question_id: str, payload: QuestionCorrectionInput, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> dict[str, Any]:
+def correct_question(question_id: str, payload: QuestionCorrectionInput, request: Request, reviewer: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
     question = questions_by_id.get(question_id)
     if not question:
         raise HTTPException(404, "Quesito non trovato.")
@@ -2192,13 +2214,13 @@ def correct_question(question_id: str, payload: QuestionCorrectionInput, request
         for attempt in attempts:
             rescore_challenge_result(attempt, challenge, db)
             rescored += 1
-        audit(db, "admin.challenge_rescored", request, actor=admin.id, target=admin.id, questionId=question_id, challengeDate=challenge.challenge_date.isoformat(), attempts=rescored, reason=payload.reason.strip())
+        audit(db, "moderation.challenge_rescored", request, actor=reviewer.id, target=reviewer.id, questionId=question_id, challengeDate=challenge.challenge_date.isoformat(), attempts=rescored, reason=payload.reason.strip())
     if payload.reactivate:
         disabled = db.get(DisabledQuestion, question_id)
         if disabled:
             db.delete(disabled)
-            audit(db, "admin.question_enabled", request, actor=admin.id, target=admin.id, questionId=question_id)
-    audit(db, "admin.question_corrected", request, actor=admin.id, target=admin.id, questionId=question_id, previous=previous, correction=corrections[question_id], reason=payload.reason.strip())
+            audit(db, "moderation.question_enabled", request, actor=reviewer.id, target=reviewer.id, questionId=question_id)
+    audit(db, "moderation.question_corrected", request, actor=reviewer.id, target=reviewer.id, questionId=question_id, previous=previous, correction=corrections[question_id], reason=payload.reason.strip())
     db.commit()
     return {"question": admin_question_payload(question_id, db), "rescoredAttempts": rescored, "message": ("Correzione salvata e quesito riattivato." if payload.reactivate else "Correzione salvata; stato del quesito invariato.") + (f" Ricalcolati {rescored} risultati della sfida di oggi." if challenge else " Le sfide già create restano invariate.")}
 
@@ -2372,9 +2394,13 @@ def user_challenge_attempt(db: Session, challenge_date: date, user_id: str, lock
     return db.scalar(query)
 
 
+def forced_challenge_redo(user: User, challenge_date: date) -> bool:
+    return user.forced_challenge_date == challenge_date
+
+
 @app.get("/api/challenges/today")
 def today_challenge(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
-    if not get_setting(db, "daily_challenge_enabled"):
+    if not get_setting(db, "daily_challenge_enabled") and not forced_challenge_redo(user, challenge_today()):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "La Sfida del giorno è disattivata.")
     challenge = get_or_create_daily_challenge(challenge_today(), db)
     db.commit()
@@ -2416,7 +2442,7 @@ def moderation_active_challenges(_: User = Depends(require_active_challenge_view
 
 @app.post("/api/challenges/today/start")
 def start_today_challenge(request: Request, user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
-    if not get_setting(db, "daily_challenge_enabled"):
+    if not get_setting(db, "daily_challenge_enabled") and not forced_challenge_redo(user, challenge_today()):
         raise HTTPException(status.HTTP_404_NOT_FOUND, "La Sfida del giorno è disattivata.")
     challenge = get_or_create_daily_challenge(challenge_today(), db)
     attempt = user_challenge_attempt(db, challenge.challenge_date, user.id)
@@ -2446,6 +2472,10 @@ def save_challenge_answers(challenge_date: str, payload: DailyChallengeAnswersIn
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
     if attempt.submitted_at or utcnow() >= challenge_expiry(attempt):
         if not attempt.submitted_at:
+            if forced_challenge_redo(user, selected_date):
+                remove_challenge_attempt(db, attempt, user, challenge)
+                db.commit()
+                raise HTTPException(status.HTTP_409_CONFLICT, "Tempo scaduto: la prova imposta deve essere rifatta e completata con tutte le 40 risposte.")
             finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
             record_challenge_in_user_state(user, attempt, challenge)
             db.commit()
@@ -2472,15 +2502,36 @@ def submit_challenge(challenge_date: str, payload: DailyChallengeAnswersInput, r
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
     if not attempt.submitted_at:
         now = utcnow()
+        forced_redo = forced_challenge_redo(user, selected_date)
+        submitted_answers = validate_challenge_answers(challenge, payload.answers)
+        if forced_redo and now >= challenge_expiry(attempt):
+            remove_challenge_attempt(db, attempt, user, challenge)
+            audit(db, "moderation.daily_challenge_redo_expired", request, actor=user.id, target=user.id, challengeDate=selected_date.isoformat())
+            db.commit()
+            raise HTTPException(status.HTTP_409_CONFLICT, "Tempo scaduto: devi ricominciare la prova e rispondere a tutte le 40 domande.")
+        if forced_redo and any(answer is None for answer in submitted_answers):
+            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Questa prova è obbligatoria: rispondi a tutte le 40 domande prima di consegnare.")
         question_seconds = validate_challenge_question_seconds(payload.questionSeconds, len(challenge.question_ids))
         if question_seconds is not None:
             attempt.question_seconds = question_seconds
         if now < challenge_expiry(attempt):
-            attempt.answers = validate_challenge_answers(challenge, payload.answers)
+            attempt.answers = submitted_answers
             finalize_challenge_attempt(attempt, challenge, now)
         else:
             finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
         record_challenge_in_user_state(user, attempt, challenge)
+        if forced_redo:
+            user.forced_challenge_date = None
+            user.forced_challenge_reason = None
+            user.forced_challenge_requested_by_user_id = None
+            user.forced_challenge_requested_at = None
+            if user.state and isinstance(user.state.data, dict) and "challengeRetryNotice" in user.state.data:
+                state_data = dict(user.state.data)
+                state_data.pop("challengeRetryNotice", None)
+                user.state.data = state_data
+                user.state.revision += 1
+                user.state.updated_at = now
+            audit(db, "moderation.daily_challenge_redo_completed", request, actor=user.id, target=user.id, challengeDate=selected_date.isoformat(), score=challenge_score(attempt))
         audit(db, "challenge.completed", request, actor=user.id, target=user.id, challengeDate=selected_date.isoformat(), score=challenge_score(attempt))
         db.commit()
     return serialize_daily_challenge(challenge, attempt, db, user)
@@ -2710,6 +2761,84 @@ def admin_candidate_challenges(user_id: str, _: User = Depends(require_dashboard
     }
 
 
+def remove_challenge_attempt(db: Session, attempt: DailyChallengeAttempt, target: User, challenge: DailyChallenge) -> None:
+    """Remove an attempt and undo only the learning/statistics it previously recorded."""
+    state_data = dict(target.state.data if target.state and isinstance(target.state.data, dict) else empty_state())
+    key = attempt.challenge_date.isoformat()
+    state_data["sessions"] = [item for item in list(state_data.get("sessions") or []) if not (isinstance(item, dict) and item.get("type") == "daily-challenge" and item.get("challengeDate") == key)]
+    state_data["dailyChallengeRecordedDates"] = [value for value in list(state_data.get("dailyChallengeRecordedDates") or []) if value != key]
+    if attempt.submitted_at:
+        progress = dict(state_data.get("progress") or {})
+        for answer, question in zip(list(attempt.answers or []), challenge_questions(challenge), strict=False):
+            question_id = str(question["id"])
+            item = dict(progress.get(question_id) or {})
+            if not item:
+                continue
+            if answer is None:
+                item["skipped"] = max(0, int(item.get("skipped", 0) or 0) - 1)
+            else:
+                item["attempts"] = max(0, int(item.get("attempts", 0) or 0) - 1)
+                field = "correct" if answer == int(question["correct"]) else "wrong"
+                item[field] = max(0, int(item.get(field, 0) or 0) - 1)
+            attempts_left = int(item.get("attempts", 0) or 0)
+            item["status"] = "unanswered" if attempts_left == 0 else "review" if int(item.get("wrong", 0) or 0) > 0 else "known"
+            progress[question_id] = item
+        state_data["progress"] = progress
+    if target.state:
+        target.state.data = state_data
+        target.state.revision += 1
+        target.state.updated_at = utcnow()
+    else:
+        target.state = UserState(data=state_data, revision=1)
+    db.delete(attempt)
+
+
+@app.post("/api/moderation/challenges/{attempt_id}/force-redo")
+def force_daily_challenge_redo(attempt_id: str, payload: ForceDailyChallengeRedoInput, request: Request, reviewer: User = Depends(require_moderator), db: Session = Depends(get_db)) -> dict[str, Any]:
+    attempt = db.scalar(select(DailyChallengeAttempt).where(DailyChallengeAttempt.id == attempt_id).with_for_update())
+    if not attempt:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Prova giornaliera non trovata.")
+    if attempt.challenge_date != challenge_today():
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Puoi imporre la ripetizione soltanto della Sfida di oggi.")
+    target = db.get(User, attempt.user_id)
+    challenge = db.get(DailyChallenge, attempt.challenge_date)
+    if not target or not challenge:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Dati della prova non trovati.")
+    if target.id == reviewer.id:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Non puoi imporre la ripetizione al tuo stesso account.")
+    if target.role == "admin" or (reviewer.role == "moderator" and target.role != "user"):
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Un moderatore può imporre la ripetizione soltanto agli utenti ordinari.")
+    reason = payload.reason.strip()
+    if len(reason) < 3:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Indica il motivo dell'invalidazione.")
+    previous_score = challenge_score(attempt)
+    was_submitted = bool(attempt.submitted_at)
+    remove_challenge_attempt(db, attempt, target, challenge)
+    requested_at = utcnow()
+    target.forced_challenge_date = challenge.challenge_date
+    target.forced_challenge_reason = reason
+    target.forced_challenge_requested_by_user_id = reviewer.id
+    target.forced_challenge_requested_at = requested_at
+    state_data = dict(target.state.data if target.state and isinstance(target.state.data, dict) else empty_state())
+    state_data["challengeRetryNotice"] = {
+        "date": challenge.challenge_date.isoformat(),
+        "title": "La tua Sfida del giorno è stata invalidata",
+        "reason": reason,
+        "requestedBy": reviewer.display_name,
+        "requestedAt": requested_at.isoformat(),
+    }
+    target.state.data = state_data
+    target.state.revision += 1
+    target.state.updated_at = requested_at
+    audit(db, "moderation.daily_challenge_redo_forced", request, actor=reviewer.id, target=target.id, attemptId=attempt_id, challengeDate=challenge.challenge_date.isoformat(), reason=reason, wasSubmitted=was_submitted, previousScore=previous_score)
+    db.commit()
+    return {
+        "message": f"Prova di {target.display_name} invalidata. Il portale resterà bloccato finché non completerà tutte le 40 risposte.",
+        "user": {"id": target.id, "name": target.display_name, "username": target.username},
+        "challengeGate": daily_challenge_gate_payload(target, db),
+    }
+
+
 @app.delete("/api/admin/dashboard/challenges/{attempt_id}")
 def delete_candidate_challenge(attempt_id: str, request: Request, admin: User = Depends(require_admin), db: Session = Depends(get_db)) -> Response:
     attempt = db.get(DailyChallengeAttempt, attempt_id)
@@ -2719,32 +2848,10 @@ def delete_candidate_challenge(attempt_id: str, request: Request, admin: User = 
     challenge = db.get(DailyChallenge, attempt.challenge_date)
     if not target or not challenge:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Dati della prova non trovati.")
-    state_data = dict(target.state.data if target.state and isinstance(target.state.data, dict) else empty_state())
+    score = challenge_score(attempt)
     key = attempt.challenge_date.isoformat()
-    state_data["sessions"] = [item for item in list(state_data.get("sessions") or []) if not (isinstance(item, dict) and item.get("type") == "daily-challenge" and item.get("challengeDate") == key)]
-    state_data["dailyChallengeRecordedDates"] = [value for value in list(state_data.get("dailyChallengeRecordedDates") or []) if value != key]
-    progress = dict(state_data.get("progress") or {})
-    for answer, question in zip(list(attempt.answers or []), challenge_questions(challenge), strict=False):
-        question_id = str(question["id"])
-        item = dict(progress.get(question_id) or {})
-        if not item:
-            continue
-        if answer is None:
-            item["skipped"] = max(0, int(item.get("skipped", 0) or 0) - 1)
-        else:
-            item["attempts"] = max(0, int(item.get("attempts", 0) or 0) - 1)
-            field = "correct" if answer == int(question["correct"]) else "wrong"
-            item[field] = max(0, int(item.get(field, 0) or 0) - 1)
-        attempts_left = int(item.get("attempts", 0) or 0)
-        item["status"] = "unanswered" if attempts_left == 0 else "review" if int(item.get("wrong", 0) or 0) > 0 else "known"
-        progress[question_id] = item
-    state_data["progress"] = progress
-    if target.state:
-        target.state.data = state_data
-        target.state.revision += 1
-        target.state.updated_at = utcnow()
-    audit(db, "admin.daily_challenge_deleted", request, actor=admin.id, target=target.id, attemptId=attempt.id, challengeDate=key, score=challenge_score(attempt))
-    db.delete(attempt)
+    remove_challenge_attempt(db, attempt, target, challenge)
+    audit(db, "admin.daily_challenge_deleted", request, actor=admin.id, target=target.id, attemptId=attempt_id, challengeDate=key, score=score)
     db.commit()
     return Response(status_code=204)
 
@@ -3210,10 +3317,14 @@ def download_backup(_: User = Depends(require_admin), db: Session = Depends(get_
         backup_users.append({
             **serialize_user(row, include_state=True),
             "passwordHash": row.password_hash,
+            "forcedChallengeDate": row.forced_challenge_date.isoformat() if row.forced_challenge_date else None,
+            "forcedChallengeReason": row.forced_challenge_reason,
+            "forcedChallengeRequestedByUserId": row.forced_challenge_requested_by_user_id,
+            "forcedChallengeRequestedAt": aware_utc(row.forced_challenge_requested_at).isoformat() if row.forced_challenge_requested_at else None,
             "avatar": ({"data": avatar.data, "mime": avatar.mime, "updatedAt": aware_utc(avatar.updated_at).isoformat()} if avatar else None),
         })
     payload = {
-        "app": "Quiz 400 VVF 2026 Cloud", "version": 5, "createdAt": utcnow().isoformat(),
+        "app": "Quiz 400 VVF 2026 Cloud", "version": 6, "createdAt": utcnow().isoformat(),
         "users": backup_users,
         "settings": {key: (db.get(Setting, key).value if db.get(Setting, key) else DEFAULT_SETTINGS[key]) for key in DEFAULT_SETTINGS},
         "dailyChallenges": [{"date": row.challenge_date.isoformat(), "questionIds": row.question_ids, "composition": row.composition, "appVersion": row.app_version, "createdAt": aware_utc(row.created_at).isoformat()} for row in challenge_rows],
@@ -3279,6 +3390,16 @@ async def restore_backup(request: Request, admin: User = Depends(require_admin),
                     updated_at=datetime.fromisoformat(avatar["updatedAt"]) if avatar.get("updatedAt") else utcnow(),
                 )
         db.add(user)
+    db.flush()
+    for item in data["users"]:
+        restored_user = db.get(User, item["id"])
+        if not restored_user:
+            continue
+        restored_user.forced_challenge_date = date.fromisoformat(item["forcedChallengeDate"]) if item.get("forcedChallengeDate") else None
+        restored_user.forced_challenge_reason = str(item["forcedChallengeReason"])[:500] if item.get("forcedChallengeReason") else None
+        requested_by = item.get("forcedChallengeRequestedByUserId")
+        restored_user.forced_challenge_requested_by_user_id = requested_by if requested_by and db.get(User, requested_by) else None
+        restored_user.forced_challenge_requested_at = datetime.fromisoformat(item["forcedChallengeRequestedAt"]) if item.get("forcedChallengeRequestedAt") else None
     db.flush()
     for item in data.get("dailyChallenges", []):
         if not isinstance(item, dict):

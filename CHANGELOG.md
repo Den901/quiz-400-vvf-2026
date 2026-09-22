@@ -825,3 +825,10 @@
 - Quiz ordinati per materia e simulazione 40/40.
 - Account amministratore e utenti, progressi e statistiche locali.
 - Avvio Windows/macOS e persistenza nella cartella portatile.
+# 3.37.0
+
+- I moderatori possono correggere testo, risposte, soluzione e spiegazione dei quesiti, continuando a non accedere a Utenti e Impostazioni.
+- Admin e moderatori possono invalidare una Sfida del giorno attiva o conclusa con una motivazione tracciata.
+- La prova invalidata viene rimossa da classifica, storico, statistiche e progresso; il candidato riceve un popup personale.
+- Il portale resta bloccato finché la ripetizione non viene completata con tutte le 40 risposte; consegna incompleta e scadenza non aggirano il blocco.
+- Changelog dedicato esclusivamente ad amministratori e moderatori.

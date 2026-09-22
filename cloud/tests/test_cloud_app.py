@@ -97,10 +97,10 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.36.0"
-        assert runtime.json()["releaseNotes"]["version"] == "3.36.0"
+        assert runtime.json()["version"] == "3.37.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.37.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
-        assert runtime.json()["releaseNotes"]["actionHash"] == "#dashboard"
+        assert runtime.json()["releaseNotes"]["actionHash"] == "#moderation"
         assert runtime.json()["registrationEnabled"] is True
         assert runtime.json()["additionalQuestionBanks"] == {"nissolinoHistory": True, "modernHistory": True}
         assert runtime.json()["privacy"]["controllerName"] == "Titolare della demo"
@@ -358,6 +358,10 @@ def test_complete_cloud_account_and_statistics_flow():
             "completed": False,
             "date": challenge_today().isoformat(),
             "status": "not_started",
+            "forcedRedo": False,
+            "forcedReason": None,
+            "forcedBy": None,
+            "forcedAt": None,
         }
         assert admin_client.get("/api/auth/me").json()["challengeGate"]["required"] is False
 
@@ -460,7 +464,8 @@ def test_complete_cloud_account_and_statistics_flow():
         corrected_answers = [f"{answer} (revisionata {index + 1})" for index, answer in enumerate(original_question["answers"])]
         correction = {"text": "Testo corretto della domanda.", "answers": corrected_answers, "correct": changed_index, "explanation": "Spiegazione verificata dall’amministratore.", "reason": "Correzione soluzione errata"}
         assert user_client.put(correction_url, json=correction).status_code == 403
-        assert moderator_client.put(correction_url, json=correction).status_code == 403
+        assert moderator_client.get(correction_url).status_code == 200
+        assert moderator_client.put(correction_url, json=correction).status_code == 200
         assert admin_client.put(correction_url, json={**correction, "correct": 999}).status_code == 422
         assert admin_client.put(correction_url, json={**correction, "correct": True}).status_code == 422
         assert admin_client.put(correction_url, json=correction).status_code == 200
@@ -495,7 +500,7 @@ def test_complete_cloud_account_and_statistics_flow():
             assert admin_client.put(correction_url, json={**correction, "rescore_today": True}).status_code == 200
             assert user_client.get("/api/challenges/today").json()["result"]["questions"][0]["answers"] == corrected_answers
             rescoring = {**correction, "answers": original_question["answers"], "rescore_today": True}
-            assert moderator_client.put(correction_url, json=rescoring).status_code == 403
+            assert moderator_client.put(correction_url, json=rescoring).status_code == 200
             applied = admin_client.put(correction_url, json=rescoring)
             assert applied.status_code == 200
             assert applied.json()["rescoredAttempts"] >= 1
@@ -705,7 +710,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.36.0"
+        assert update_status.json()["currentVersion"] == "3.37.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403
@@ -824,7 +829,7 @@ def test_complete_cloud_account_and_statistics_flow():
         backup = admin_client.get("/api/admin/backup")
         assert backup.status_code == 200
         assert backup.json()["app"] == "Quiz 400 VVF 2026 Cloud"
-        assert backup.json()["version"] == 5
+        assert backup.json()["version"] == 6
         assert len(backup.json()["users"]) == 3
         backup_mario = next(item for item in backup.json()["users"] if item["id"] == user_id)
         assert backup_mario["avatar"]["mime"] == "image/png"
@@ -835,6 +840,7 @@ def test_complete_cloud_account_and_statistics_flow():
         assert backup.json()["settings"]["question_corrections"][reported_question_id]["correct"] == changed_index
         assert all("dailyChallengeRequired" in item for item in backup.json()["users"])
         assert all("activeChallengeMonitorEnabled" in item for item in backup.json()["users"])
+        assert all("forcedChallengeDate" in item for item in backup.json()["users"])
         assert len(backup.json()["questionRatings"]) == 2
         backed_reply = next(r for r in backup.json()['questionReports'] if r['id'] == report_id)
         assert backed_reply['reply'] == reply_text
@@ -885,7 +891,49 @@ def test_complete_cloud_account_and_statistics_flow():
         assert saved_attempt["date"] == challenge_date
         assert saved_attempt["score"] == submitted.json()["result"]["score"]
         assert restored_user.get(f"/api/admin/dashboard/candidates/{user_id}/challenges").status_code == 403
-        assert restored_admin.delete(f"/api/admin/dashboard/challenges/{saved_attempt['id']}").status_code == 204
+        forced = restored_admin.post(
+            f"/api/moderation/challenges/{saved_attempt['id']}/force-redo",
+            json={"reason": "Prova consegnata senza partecipazione effettiva."},
+        )
+        assert forced.status_code == 200
+        assert forced.json()["challengeGate"]["forcedRedo"] is True
+        assert forced.json()["challengeGate"]["completed"] is False
         assert restored_admin.get(f"/api/admin/dashboard/candidates/{user_id}/challenges").json()["attempts"] == []
+        forced_me = restored_user.get("/api/auth/me").json()
+        assert forced_me["challengeGate"]["required"] is True
+        assert forced_me["challengeGate"]["forcedReason"] == "Prova consegnata senza partecipazione effettiva."
+        assert forced_me["challengeGate"]["forcedBy"] == "Amministratore Test"
+        assert forced_me["user"]["state"]["challengeRetryNotice"]["title"] == "La tua Sfida del giorno è stata invalidata"
+        assert challenge_date not in forced_me["user"]["state"]["dailyChallengeRecordedDates"]
+
+        forced_start = restored_user.post("/api/challenges/today/start", json={})
+        assert forced_start.status_code == 200
+        forced_attempt_id = next(
+            item["id"] for item in restored_admin.get("/api/moderation/active-challenges").json()["attempts"]
+            if item["username"] == "mario.rossi"
+        )
+        restored_moderator = TestClient(app)
+        assert login(restored_moderator, "moderatore", "Moderatore-2026!").status_code == 200
+        forced_again = restored_moderator.post(
+            f"/api/moderation/challenges/{forced_attempt_id}/force-redo",
+            json={"reason": "Avanzamento anomalo delle domande."},
+        )
+        assert forced_again.status_code == 200
+        assert restored_user.post("/api/moderation/challenges/inesistente/force-redo", json={"reason": "No"}).status_code == 403
+        forced_start = restored_user.post("/api/challenges/today/start", json={})
+        incomplete = restored_user.post(
+            f"/api/challenges/{challenge_date}/submit",
+            json={"answers": [0] * 39 + [None], "questionSeconds": [1] * 40},
+        )
+        assert incomplete.status_code == 422
+        assert restored_user.get("/api/auth/me").json()["challengeGate"]["forcedRedo"] is True
+        completed_redo = restored_user.post(
+            f"/api/challenges/{challenge_date}/submit",
+            json={"answers": [0] * 40, "questionSeconds": [1] * 40},
+        )
+        assert completed_redo.status_code == 200
+        assert completed_redo.json()["status"] == "completed"
+        completed_gate = restored_user.get("/api/auth/me").json()["challengeGate"]
+        assert completed_gate["forcedRedo"] is False
+        assert completed_gate["completed"] is True
         assert restored_admin.get("/api/admin/dashboard").json()["summary"]["attempts"] == 0
-        assert challenge_date not in restored_user.get("/api/auth/me").json()["user"]["state"]["dailyChallengeRecordedDates"]
