@@ -1,12 +1,12 @@
 {
-  "version": "3.37.0",
+  "version": "3.37.1",
   "showToUsers": false,
   "title": "Moderazione delle prove e dei quesiti",
   "summary": "Lo staff può correggere la banca dati e imporre la ripetizione completa di una Sfida sospetta.",
   "items": [
     "I moderatori possono correggere testo, risposte, soluzione e spiegazione dei quesiti.",
     "Admin e moderatori possono invalidare una Sfida attiva o conclusa e obbligare il candidato a rifarla.",
-    "La ripetizione sblocca il portale solo dopo aver risposto a tutte le 40 domande.",
+    "La nuova prova consente risposte in bianco, che valgono 0 punti. Eventuali abusi vengono valutati dallo staff, non automaticamente.",
     "Motivazione, operatore e completamento sono registrati; il candidato riceve un avviso personale."
   ],
   "actionLabel": "Apri Moderazione",

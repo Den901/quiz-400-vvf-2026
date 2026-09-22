@@ -550,14 +550,11 @@ def daily_challenge_gate_payload(user: User, db: Session) -> dict[str, Any]:
     if attempt and not attempt.submitted_at:
         challenge = db.get(DailyChallenge, today)
         if challenge and utcnow() >= challenge_expiry(attempt):
-            if forced_redo:
-                db.delete(attempt)
-                attempt = None
-            else:
-                finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
-                record_challenge_in_user_state(user, attempt, challenge)
+            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+            record_challenge_in_user_state(user, attempt, challenge)
             db.commit()
     status_value = "completed" if attempt and attempt.submitted_at else "active" if attempt else "not_started"
+    forced_redo = user.forced_challenge_date == today
     requested_by = db.get(User, user.forced_challenge_requested_by_user_id) if forced_redo and user.forced_challenge_requested_by_user_id else None
     return {
         "required": required,
@@ -1416,6 +1413,12 @@ def record_challenge_in_user_state(user: User, attempt: DailyChallengeAttempt, c
     if not attempt.submitted_at:
         return
     state_data = dict(user.state.data if user.state and isinstance(user.state.data, dict) else empty_state())
+    if user.forced_challenge_date == challenge.challenge_date:
+        user.forced_challenge_date = None
+        user.forced_challenge_reason = None
+        user.forced_challenge_requested_by_user_id = None
+        user.forced_challenge_requested_at = None
+        state_data.pop("challengeRetryNotice", None)
     recorded = list(state_data.get("dailyChallengeRecordedDates") or [])
     key = challenge.challenge_date.isoformat()
     if key in recorded:
@@ -1524,12 +1527,8 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
 def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallengeAttempt | None, db: Session, user: User) -> dict[str, Any]:
     now = utcnow()
     if attempt and not attempt.submitted_at and now >= challenge_expiry(attempt):
-        if forced_challenge_redo(user, challenge.challenge_date):
-            remove_challenge_attempt(db, attempt, user, challenge)
-            attempt = None
-        else:
-            finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
-            record_challenge_in_user_state(user, attempt, challenge)
+        finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
+        record_challenge_in_user_state(user, attempt, challenge)
         db.commit()
     elif attempt and attempt.submitted_at:
         record_challenge_in_user_state(user, attempt, challenge)
@@ -2472,10 +2471,6 @@ def save_challenge_answers(challenge_date: str, payload: DailyChallengeAnswersIn
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Sfida non trovata o non ancora iniziata.")
     if attempt.submitted_at or utcnow() >= challenge_expiry(attempt):
         if not attempt.submitted_at:
-            if forced_challenge_redo(user, selected_date):
-                remove_challenge_attempt(db, attempt, user, challenge)
-                db.commit()
-                raise HTTPException(status.HTTP_409_CONFLICT, "Tempo scaduto: la prova imposta deve essere rifatta e completata con tutte le 40 risposte.")
             finalize_challenge_attempt(attempt, challenge, challenge_expiry(attempt))
             record_challenge_in_user_state(user, attempt, challenge)
             db.commit()
@@ -2504,13 +2499,6 @@ def submit_challenge(challenge_date: str, payload: DailyChallengeAnswersInput, r
         now = utcnow()
         forced_redo = forced_challenge_redo(user, selected_date)
         submitted_answers = validate_challenge_answers(challenge, payload.answers)
-        if forced_redo and now >= challenge_expiry(attempt):
-            remove_challenge_attempt(db, attempt, user, challenge)
-            audit(db, "moderation.daily_challenge_redo_expired", request, actor=user.id, target=user.id, challengeDate=selected_date.isoformat())
-            db.commit()
-            raise HTTPException(status.HTTP_409_CONFLICT, "Tempo scaduto: devi ricominciare la prova e rispondere a tutte le 40 domande.")
-        if forced_redo and any(answer is None for answer in submitted_answers):
-            raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Questa prova è obbligatoria: rispondi a tutte le 40 domande prima di consegnare.")
         question_seconds = validate_challenge_question_seconds(payload.questionSeconds, len(challenge.question_ids))
         if question_seconds is not None:
             attempt.question_seconds = question_seconds
@@ -2833,7 +2821,7 @@ def force_daily_challenge_redo(attempt_id: str, payload: ForceDailyChallengeRedo
     audit(db, "moderation.daily_challenge_redo_forced", request, actor=reviewer.id, target=target.id, attemptId=attempt_id, challengeDate=challenge.challenge_date.isoformat(), reason=reason, wasSubmitted=was_submitted, previousScore=previous_score)
     db.commit()
     return {
-        "message": f"Prova di {target.display_name} invalidata. Il portale resterà bloccato finché non completerà tutte le 40 risposte.",
+        "message": f"Prova di {target.display_name} invalidata. Il portale resterà bloccato fino alla conclusione della nuova prova. Le risposte in bianco sono consentite.",
         "user": {"id": target.id, "name": target.display_name, "username": target.username},
         "challengeGate": daily_challenge_gate_payload(target, db),
     }

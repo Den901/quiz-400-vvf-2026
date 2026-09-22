@@ -88,11 +88,12 @@ test('moderatori possono correggere i quesiti senza ottenere i menu amministrati
  assert.ok(source.includes("function usersView(){if(currentUser?.role!=='admin')return home();"));
 });
 
-test('la ripetizione imposta richiede 40 risposte e avvisa candidato e staff',()=>{
+test('la ripetizione imposta consente risposte in bianco e avvisa candidato e staff',()=>{
  assert.ok(source.includes('data-force-challenge-redo'));
  assert.ok(source.includes('Invalida e obbliga a rifare'));
- assert.ok(source.includes('dailyChallengeGate.forcedRedo&&missing'));
+ assert.ok(!source.includes('dailyChallengeGate.forcedRedo&&missing'));
+ assert.ok(source.includes('Le risposte in bianco sono consentite e valgono 0 punti'));
  assert.ok(source.includes('La tua Sfida del giorno è stata invalidata'));
- assert.ok(source.includes("const STAFF_CHANGELOG_VERSION='3.37.0'"));
+ assert.ok(source.includes("const STAFF_CHANGELOG_VERSION='3.37.1'"));
  assert.ok(source.includes("['admin','moderator'].includes(currentUser?.role)"));
 });

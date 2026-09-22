@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.37.1 - 2026-09-22
+
+- Moderatori abilitati alla correzione dei quesiti; lo staff può invalidare una Sfida e richiederne la ripetizione con motivazione e avviso personale.
+- Le risposte in bianco sono consentite anche nelle ripetizioni imposte e valgono zero punti. Consegna e scadenza seguono le regole normali, senza ripetizioni automatiche.
+- La valutazione di eventuali abusi resta ad amministratori e moderatori. Changelog riservato allo staff.
+
 ## 3.36.0 - 2026-09-17
 
 - Aggiunto un avviso personale e non eludibile per le Sfide del giorno che devono essere ripetute, con accesso diretto alla nuova prova.
