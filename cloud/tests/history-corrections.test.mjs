@@ -89,7 +89,8 @@ test('moderatori possono correggere i quesiti senza ottenere i menu amministrati
 });
 
 test('la ripetizione imposta consente risposte in bianco e avvisa candidato e staff',()=>{
- assert.ok(source.includes('data-force-challenge-redo'));
+ assert.ok(!source.includes('data-force-challenge-redo'));
+ assert.ok(source.includes('data-force-completed-redo'));
  assert.ok(source.includes('Invalida e obbliga a rifare'));
  assert.ok(!source.includes('dailyChallengeGate.forcedRedo&&missing'));
  assert.ok(source.includes('Le risposte in bianco sono consentite e valgono 0 punti'));

@@ -1,11 +1,11 @@
 {
-  "version": "3.37.1",
+  "version": "3.37.2",
   "showToUsers": false,
   "title": "Moderazione delle prove e dei quesiti",
   "summary": "Lo staff può correggere la banca dati e imporre la ripetizione completa di una Sfida sospetta.",
   "items": [
     "I moderatori possono correggere testo, risposte, soluzione e spiegazione dei quesiti.",
-    "Admin e moderatori possono invalidare una Sfida attiva o conclusa e obbligare il candidato a rifarla.",
+    "Il popup Prove attive mostra solo partecipanti, avanzamento e tempo residuo. Il comando Obbliga a rifare resta nel dettaglio della prova.",
     "La nuova prova consente risposte in bianco, che valgono 0 punti. Eventuali abusi vengono valutati dallo staff, non automaticamente.",
     "Motivazione, operatore e completamento sono registrati; il candidato riceve un avviso personale."
   ],

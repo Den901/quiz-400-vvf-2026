@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.37.2 - 2026-09-25
+
+- Rimosso il comando Obbliga a rifare dal popup Prove attive; resta disponibile nel dettaglio della prova.
+- Aggiornata la cache della PWA, senza modificare dati o risultati e senza nuovi popup generali.
+
 ## 3.37.1 - 2026-09-22
 
 - Moderatori abilitati alla correzione dei quesiti; lo staff può invalidare una Sfida e richiederne la ripetizione con motivazione e avviso personale.
