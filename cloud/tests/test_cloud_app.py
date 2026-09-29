@@ -32,6 +32,33 @@ from fastapi.testclient import TestClient
 
 from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_forty_question_bank, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
 
+def test_daily_leaderboard_returns_every_participant():
+    from datetime import datetime, timezone
+    from types import SimpleNamespace
+    from cloud.app import challenge_leaderboard
+
+    submitted = datetime(2026, 9, 29, tzinfo=timezone.utc)
+    rows = []
+    for index in range(75):
+        user = SimpleNamespace(id=f"u{index}", display_name=f"Candidato {index}", role="user")
+        attempt = SimpleNamespace(id=f"a{index}", user_id=user.id, score_x100=4000-index,
+                                  correct=30, wrong=5, blank=5, duration_seconds=1000, submitted_at=submitted)
+        rows.append((attempt, user))
+    db = MagicMock()
+    db.execute.return_value.all.return_value = list(reversed(rows))
+    with patch("cloud.app.get_setting", return_value=14.71):
+        for staff in (False, True):
+            board = challenge_leaderboard(db, submitted.date(), "u74", include_attempt_ids=staff)
+            assert board["participants"] == len(board["entries"]) == 75
+            assert [entry["rank"] for entry in board["entries"]] == list(range(1, 76))
+            assert board["entries"][0]["displayName"] == "Candidato 0"
+            assert board["currentUser"] == board["entries"][-1]
+            assert all(("attemptId" in entry) == staff for entry in board["entries"])
+        db.execute.return_value.all.return_value = []
+        empty = challenge_leaderboard(db, submitted.date(), "u74")
+        assert empty["participants"] == 0 and empty["entries"] == [] and empty["currentUser"] is None
+
+
 def test_gear_question_one_off_keeps_daily_composition():
     from datetime import date
     with TestClient(app):
@@ -97,8 +124,8 @@ def test_complete_cloud_account_and_statistics_flow():
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.37.2"
-        assert runtime.json()["releaseNotes"]["version"] == "3.37.2"
+        assert runtime.json()["version"] == "3.37.3"
+        assert runtime.json()["releaseNotes"]["version"] == "3.37.3"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#moderation"
         assert runtime.json()["registrationEnabled"] is True
@@ -710,7 +737,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.37.2"
+        assert update_status.json()["currentVersion"] == "3.37.3"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

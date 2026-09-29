@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.37.3 - 2026-09-29
+
+- Rimossa la limitazione ai primi 50 risultati nella classifica della Sfida del giorno.
+- Tutti i partecipanti sono visibili mantenendo ordine, posizione personale e permessi di accesso ai dettagli.
+- Aggiunto un test con 75 candidati. Nessuna modifica a punteggi, tentativi o progressi; nessun popup generale.
+
 ## 3.37.2 - 2026-09-25
 
 - Rimosso il comando Obbliga a rifare dal popup Prove attive; resta disponibile nel dettaglio della prova.
