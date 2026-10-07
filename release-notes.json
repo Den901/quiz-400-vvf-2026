@@ -1,11 +1,11 @@
 {
-  "version": "3.37.3",
+  "version": "3.38.0",
   "showToUsers": false,
-  "title": "Classifica completa della Sfida del giorno",
-  "summary": "La classifica mostra tutti i partecipanti, anche oltre il cinquantesimo posto.",
+  "title": "Classifica globale",
+  "summary": "Confronta la tua media con i candidati che hanno concluso almeno 10 Sfide del giorno.",
   "items": [
-    "Rimosso il limite che mostrava soltanto i primi 50 risultati.",
-    "Ordine, punteggi e posizione personale restano invariati. Nessuna modifica ai tentativi o ai progressi."
+    "Nuovo pulsante Visualizza classifica globale nella Sfida del giorno.",
+    "Posizione personale, media punti, foto, numero di prove, fasce di preparazione e sbarramento teorico. Nessuna modifica a tentativi o progressi."
   ],
   "actionLabel": "Apri Moderazione",
   "actionHash": "#moderation",

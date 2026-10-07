@@ -1524,6 +1524,30 @@ def challenge_leaderboard(db: Session, challenge_date: date, current_user_id: st
     return {"date": challenge_date.isoformat(), "participants": len(entries), "entries": entries, "currentUser": current, "theoreticalCutoff": round(float(get_setting(db, "theoretical_cutoff")), 2)}
 
 
+def global_challenge_board(db: Session, current_user_id: str) -> dict[str, Any]:
+    rows = db.execute(select(User.id, User.display_name, User.username, User.role,
+                             func.count(DailyChallengeAttempt.id), func.avg(DailyChallengeAttempt.score_x100))
+        .join(DailyChallengeAttempt, DailyChallengeAttempt.user_id == User.id)
+        .where(DailyChallengeAttempt.submitted_at.is_not(None))
+        .group_by(User.id, User.display_name, User.username, User.role)).all()
+    eligible = sorted((row for row in rows if row[4] >= 10), key=lambda row: (-row[5], row[2].casefold(), row[0]))
+    entries = []
+    previous = None
+    rank = 0
+    for index, (user_id, name, username, role, count, average) in enumerate(eligible):
+        if average != previous:
+            rank = index + 1
+        previous = average
+        band = 'excellent' if average >= 3200 else 'good' if average >= 2800 else 'consolidating' if average >= 2400 else 'improving'
+        entries.append(dict(rank=rank, displayName=name, username=username, role=role,
+                            avatarUrl=f'./api/users/{user_id}/avatar', averageScore=round(float(average)/100, 2),
+                            attempts=count, band=band, isCurrentUser=user_id == current_user_id))
+    return dict(entries=entries, participants=len(entries), minimumChallenges=10,
+                currentUser=next((entry for entry in entries if entry['isCurrentUser']), None),
+                currentUserAttempts=next((row[4] for row in rows if row[0] == current_user_id), 0),
+                theoreticalCutoff=round(float(get_setting(db, 'theoretical_cutoff')), 2))
+
+
 def serialize_daily_challenge(challenge: DailyChallenge, attempt: DailyChallengeAttempt | None, db: Session, user: User) -> dict[str, Any]:
     now = utcnow()
     if attempt and not attempt.submitted_at and now >= challenge_expiry(attempt):
@@ -2699,6 +2723,11 @@ def admin_population_dashboard(_: User = Depends(require_dashboard_reader), db: 
         "categories": categories,
         "trend": trend,
     }
+
+
+@app.get('/api/global-challenge-leaderboard')
+def global_challenge_leaderboard(user: User = Depends(require_user), db: Session = Depends(get_db)) -> dict[str, Any]:
+    return global_challenge_board(db, user.id)
 
 
 @app.put("/api/admin/dashboard/settings")

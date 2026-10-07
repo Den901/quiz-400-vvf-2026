@@ -32,6 +32,30 @@ from fastapi.testclient import TestClient
 
 from cloud.app import DEFAULT_AVATAR_BYTES, SessionLocal, app, available_forty_question_bank, available_question_bank, build_daily_challenge, challenge_today, rotating_daily_questions, set_setting
 
+def test_global_leaderboard_threshold_ties_and_safe_fields():
+    from cloud.app import global_challenge_board
+    db = MagicMock()
+    db.execute.return_value.all.return_value = [
+        ('nine', 'Nine', 'nine', 'user', 9, 4000),
+        ('ten', 'Ten', 'ten', 'user', 10, 2800),
+        ('staff', 'Staff', 'staff', 'admin', 12, 3200),
+        ('mod', 'Mod', 'mod', 'moderator', 15, 2800),
+        ('low', 'Low', 'low', 'user', 11, -100),
+    ]
+    with patch('cloud.app.get_setting', return_value=14.71):
+        board = global_challenge_board(db, 'nine')
+        assert board['participants'] == 4
+        assert board['minimumChallenges'] == 10
+        assert board['currentUser'] is None and board['currentUserAttempts'] == 9
+        assert [e['rank'] for e in board['entries']] == [1, 2, 2, 4]
+        assert [e['band'] for e in board['entries']] == ['excellent', 'good', 'good', 'improving']
+        assert board['theoreticalCutoff'] == 14.71
+        assert all('email' not in e and 'attemptId' not in e and 'answers' not in e for e in board['entries'])
+        assert global_challenge_board(db, 'ten')['currentUser']['rank'] == 2
+        db.execute.return_value.all.return_value = []
+        assert global_challenge_board(db, 'none')['currentUserAttempts'] == 0
+
+
 def test_daily_leaderboard_returns_every_participant():
     from datetime import datetime, timezone
     from types import SimpleNamespace
@@ -121,11 +145,12 @@ def test_complete_cloud_account_and_statistics_flow():
     with TestClient(app) as public_client:
         admin_client = TestClient(app)
         user_client = TestClient(app)
+        assert public_client.get('/api/global-challenge-leaderboard').status_code == 401
         runtime = public_client.get("/api/runtime")
         assert runtime.status_code == 200
         assert runtime.json()["mode"] == "cloud"
-        assert runtime.json()["version"] == "3.37.3"
-        assert runtime.json()["releaseNotes"]["version"] == "3.37.3"
+        assert runtime.json()["version"] == "3.38.0"
+        assert runtime.json()["releaseNotes"]["version"] == "3.38.0"
         assert runtime.json()["releaseNotes"]["showToUsers"] is False
         assert runtime.json()["releaseNotes"]["actionHash"] == "#moderation"
         assert runtime.json()["registrationEnabled"] is True
@@ -266,6 +291,10 @@ def test_complete_cloud_account_and_statistics_flow():
         assert user_login.json()["user"]["id"] == user_id
         assert user_login.json()["user"]["privacyPolicyVersion"] == policy_version
         assert user_login.json()["user"]["privacyAcknowledgedAt"]
+        global_board = user_client.get('/api/global-challenge-leaderboard')
+        assert global_board.status_code == 200
+        assert global_board.json()['entries'] == []
+        assert global_board.json()['minimumChallenges'] == 10
 
         assert user_client.get("/api/admin/users").status_code == 403
         state = {
@@ -737,7 +766,7 @@ def test_complete_cloud_account_and_statistics_flow():
 
         update_status = admin_client.get("/api/admin/update/status")
         assert update_status.status_code == 200
-        assert update_status.json()["currentVersion"] == "3.37.3"
+        assert update_status.json()["currentVersion"] == "3.38.0"
         assert update_status.json()["database"] == "PostgreSQL"
         assert update_status.json()["control"]["available"] is True
         assert user_client.get("/api/admin/update/status").status_code == 403

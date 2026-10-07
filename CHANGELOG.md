@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.38.0 - 2026-10-07
+
+- Classifica globale accessibile dalla Sfida del giorno, per candidati con almeno 10 sfide concluse, ordinata per media punti.
+- Posizione personale, foto, numero di prove, fasce di preparazione e sbarramento teorico configurato dall'admin.
+- Nessun nuovo permesso amministrativo, nessuna modifica ai tentativi e nessun popup generale.
+
 ## 3.37.3 - 2026-09-29
 
 - Rimossa la limitazione ai primi 50 risultati nella classifica della Sfida del giorno.

@@ -221,4 +221,17 @@ html[data-theme="dark"] .question-rating{background:#181719}html[data-theme="dar
 .force-redo-dialog form,.force-redo-dialog label{display:grid;gap:.65rem}
 .force-redo-dialog textarea{min-height:7rem;resize:vertical}
 .force-redo-actions{justify-content:flex-end;margin:.25rem 0 1rem}
+.daily-leaderboard .challenge-card-head{flex-wrap:wrap;gap:.75rem}
+.global-ranking-dialog{width:min(960px,calc(100vw - 24px));max-height:90dvh;overflow-y:auto;box-sizing:border-box}
+.global-ranking-dialog header{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.global-ranking-dialog header h2{margin:0}
+.global-ranking-band{border-bottom:2px solid currentColor;padding:.8rem 0 .5rem;margin:1.4rem 0 .4rem;font-size:1rem}
+.global-ranking-row{display:grid;grid-template-columns:2.5rem 44px minmax(0,1fr) auto;align-items:center;gap:.7rem;padding:.8rem .4rem;border-bottom:1px solid #8885}
+.global-ranking-row small{display:block;opacity:.75;margin-top:.2rem}
+.global-ranking-row>div{min-width:0;overflow-wrap:anywhere}
+.global-ranking-row.current{outline:2px solid #cc3546;outline-offset:-2px;border-radius:10px}
+.global-ranking-score{text-align:right}
+.global-ranking-personal{padding:.8rem;border:1px solid #8886;border-radius:10px}
+.global-ranking-cutoff{border-top:2px dashed #dba638;padding:.8rem 0;margin:.8rem 0;font-weight:700}
+@media(max-width:600px){.daily-leaderboard [data-global-ranking]{width:100%;white-space:normal}.global-ranking-dialog{padding:1rem}.global-ranking-row{grid-template-columns:2rem 32px minmax(0,1fr);gap:.5rem}.global-ranking-row .daily-avatar{width:32px;height:32px}.global-ranking-score{grid-column:3;text-align:left}.global-ranking-dialog header h2{font-size:1.3rem}}
 @media(max-width:700px){.active-challenge-row{grid-template-columns:auto 1fr}.active-challenge-row>strong{grid-column:2}.active-challenge-row [data-force-challenge-redo]{grid-column:1/-1;width:100%}}
